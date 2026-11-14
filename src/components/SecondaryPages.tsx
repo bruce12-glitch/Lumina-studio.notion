@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -108,8 +109,11 @@ export const TemplateDetailPage: React.FC<{
 
             {/* Primary CTA Button */}
             <div className="space-y-3 pt-2">
-              <button
+              <motion.button
                 type="button"
+                whileHover={{ y: -2, scale: 1.012 }}
+                whileTap={{ scale: 0.978 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={() =>
                   onOpenCheckout({
                     name: template.name,
@@ -120,7 +124,7 @@ export const TemplateDetailPage: React.FC<{
                     whatsInside: template.whatsInside,
                   })
                 }
-                className="w-full h-12 px-6 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] active:translate-y-[1px] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 transition-all cursor-pointer"
+                className="btn-motion-primary w-full h-12 px-6 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>
                   {isOwned
@@ -129,8 +133,8 @@ export const TemplateDetailPage: React.FC<{
                     ? 'Get Template ($0 — Instant Duplicate)'
                     : `Get Template (${formatPrice(template.price)})`}
                 </span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+              </motion.button>
 
               <div className="flex items-center justify-between text-[12px] text-[#737373] pt-1">
                 <span className="inline-flex items-center gap-1.5">
@@ -257,8 +261,11 @@ export const FlagshipProductPage: React.FC<{
           </p>
 
           <div className="pt-3 flex flex-wrap items-center justify-center gap-4">
-            <button
+            <motion.button
               type="button"
+              whileHover={{ y: -2, scale: 1.015 }}
+              whileTap={{ scale: 0.975 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() =>
                 onOpenCheckout({
                   name: template.name,
@@ -269,7 +276,7 @@ export const FlagshipProductPage: React.FC<{
                   whatsInside: template.whatsInside,
                 })
               }
-              className="h-12 px-6 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[15px] font-semibold inline-flex items-center gap-2 transition-colors cursor-pointer"
+              className="btn-motion-primary h-12 px-6 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[15px] font-semibold inline-flex items-center gap-2 cursor-pointer"
             >
               <span>Get {template.name} —</span>
               {template.compareAt && (
@@ -278,16 +285,19 @@ export const FlagshipProductPage: React.FC<{
                 </span>
               )}
               <span className="tabular-nums">{formatPrice(template.price)}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
+              whileHover={{ y: -2, scale: 1.015 }}
+              whileTap={{ scale: 0.978 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() => onNavigate(`/templates/${template.slug}`)}
-              className="h-12 px-5 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[14px] font-semibold cursor-pointer"
+              className="btn-motion-secondary h-12 px-5 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[14px] font-semibold cursor-pointer"
             >
               Inspect Specifications
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -338,8 +348,11 @@ export const AllAccessPage: React.FC<{
             One purchase, every PRO template. Unlock all {stats.proCount} premium Notion systems (${stats.individualTotal} individual value) plus lifetime updates for {formatPrice(ALL_ACCESS_PRICE)}.
           </p>
           <div className="pt-3 flex flex-wrap items-center gap-4">
-            <button
+            <motion.button
               type="button"
+              whileHover={{ y: -2, scale: 1.015 }}
+              whileTap={{ scale: 0.975 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() =>
                 onOpenCheckout({
                   name: 'All Access Bundle (All 17 PRO Templates)',
@@ -354,11 +367,11 @@ export const AllAccessPage: React.FC<{
                   ],
                 })
               }
-              className="h-12 px-6 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[15px] font-semibold inline-flex items-center gap-2 transition-colors cursor-pointer"
+              className="btn-motion-primary h-12 px-6 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[15px] font-semibold inline-flex items-center gap-2 cursor-pointer"
             >
               <span>Get All Access — {formatPrice(ALL_ACCESS_PRICE)}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+            </motion.button>
             <span className="text-[14px] text-[#737373] tabular-nums">
               Save ${stats.savings} vs buying individually
             </span>
@@ -435,14 +448,17 @@ export const AppsPage: React.FC<{
               </div>
             </div>
             <div className="pt-2 flex items-center gap-3">
-              <button
+              <motion.button
                 type="button"
+                whileHover={{ y: -2, scale: 1.015 }}
+                whileTap={{ scale: 0.975 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={() => onNavigate('/sign-up')}
-                className="h-11 px-5 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center gap-2 cursor-pointer"
+                className="btn-motion-primary h-11 px-5 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center gap-2 cursor-pointer"
               >
                 <span>Launch {app.name} Web App</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </button>
+                <ArrowUpRight className="w-4 h-4 btn-arrow-diagonal" />
+              </motion.button>
             </div>
           </div>
 
@@ -900,17 +916,20 @@ export const AuthPage: React.FC<{
                 )}
               </div>
 
-              <button
+              <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full h-10 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] disabled:opacity-40 text-white text-[14px] font-semibold inline-flex items-center justify-center cursor-pointer"
+                whileHover={{ y: -1.5, scale: 1.01 }}
+                whileTap={{ scale: 0.975 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                className="btn-motion-primary w-full h-10 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] disabled:opacity-40 text-white text-[14px] font-semibold inline-flex items-center justify-center cursor-pointer"
               >
                 {loading
                   ? 'Authenticating...'
                   : isSignUp
                   ? 'Create a free account'
                   : 'Sign In'}
-              </button>
+              </motion.button>
             </form>
 
             <p className="text-[13px] text-[#737373] text-center pt-2 border-t border-[#EAEAEA]">
