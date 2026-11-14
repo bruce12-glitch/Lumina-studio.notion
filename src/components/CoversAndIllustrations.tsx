@@ -6,16 +6,30 @@ import {
   TemplateCategory,
 } from '../data/catalog';
 
-const ASSETS_WITH_CORNER_BADGE = new Set<string>([
-  BLUSH_ASSETS.digitalStorefront,
-  BLUSH_ASSETS.financeCharts,
-  BLUSH_ASSETS.calmStudyDesk,
-  BLUSH_ASSETS.notionLineArtCreator,
-  BLUSH_ASSETS.minimalistLivingRoom,
-  BLUSH_ASSETS.magnifyingGlassResearcher,
-  BLUSH_ASSETS.remoteCallSofa,
-  BLUSH_ASSETS.purpleWindowCreator,
-]);
+export const UltraHdSvgFilter: React.FC = () => (
+  <svg
+    width="0"
+    height="0"
+    aria-hidden="true"
+    className="fixed top-0 left-0 pointer-events-none opacity-0"
+  >
+    <defs>
+      <filter id="easlo-ultra-hd" colorInterpolationFilters="sRGB">
+        <feConvolveMatrix
+          order="3 3"
+          preserveAlpha="true"
+          kernelMatrix="0 -0.16 0 -0.16 1.64 -0.16 0 -0.16 0"
+          result="sharpened"
+        />
+        <feComponentTransfer in="sharpened">
+          <feFuncR type="linear" slope="1.03" intercept="-0.015" />
+          <feFuncG type="linear" slope="1.03" intercept="-0.015" />
+          <feFuncB type="linear" slope="1.03" intercept="-0.015" />
+        </feComponentTransfer>
+      </filter>
+    </defs>
+  </svg>
+);
 
 export const BlushAssetImage: React.FC<{
   src: string;
@@ -30,7 +44,6 @@ export const BlushAssetImage: React.FC<{
   alt,
   className = '',
   imgClassName = 'max-w-full max-h-full w-auto h-auto object-contain',
-  maskCorner = true,
   floatDelay = 0,
   disableFloat = false,
 }) => {
@@ -46,10 +59,6 @@ export const BlushAssetImage: React.FC<{
     );
   }
 
-  const isBanner = src === BLUSH_ASSETS.communityBanner;
-  const shouldClipCorner =
-    maskCorner && ASSETS_WITH_CORNER_BADGE.has(src);
-
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -2 }}
@@ -61,6 +70,7 @@ export const BlushAssetImage: React.FC<{
         alt={alt}
         referrerPolicy="no-referrer"
         loading="eager"
+        decoding="async"
         onError={() => setFailed(true)}
         animate={
           disableFloat
@@ -79,16 +89,7 @@ export const BlushAssetImage: React.FC<{
                 delay: floatDelay,
               }
         }
-        style={
-          isBanner
-            ? undefined
-            : {
-                clipPath: shouldClipCorner
-                  ? 'polygon(3.5% 3.5%, 76% 3.5%, 76% 17%, 96.5% 17%, 96.5% 96.5%, 3.5% 96.5%)'
-                  : 'inset(3.5% 3.5% 3.5% 3.5%)',
-              }
-        }
-        className={`${isBanner ? 'blush-banner' : 'blush-illustration'} ${imgClassName}`}
+        className={`blush-illustration ${imgClassName}`}
       />
     </motion.div>
   );
@@ -330,8 +331,8 @@ export const HeroWorkspaceShowcase: React.FC<{
       badge: 'PARA SYSTEM · $39 (50% OFF)',
       title: 'Second Brain 5.0 — Command Center',
       subtitle: 'Organize your tasks, projects, goals, and notes inside one calm PARA system.',
-      primaryIllus: BLUSH_ASSETS.magnifyingGlassResearcher,
-      secondaryIllus: BLUSH_ASSETS.remoteCallSofa,
+      primaryIllus: BLUSH_ASSETS.secondBrainPuzzleHead,
+      secondaryIllus: BLUSH_ASSETS.mentalGardenWatering,
       primaryCaption: 'PARA Knowledge Capture',
       secondaryCaption: 'Deep Work Rituals',
       surfaceTint: '#F8F5E8',
@@ -355,8 +356,8 @@ export const HeroWorkspaceShowcase: React.FC<{
       badge: 'FINANCE OS · $39',
       title: 'All-In-One Finance Dashboard',
       subtitle: 'Bring your income, expenses, budgets, and net-worth rollups into one clear view.',
-      primaryIllus: BLUSH_ASSETS.donutLineChartAnalyst,
-      secondaryIllus: BLUSH_ASSETS.dataBubblesJuggler,
+      primaryIllus: BLUSH_ASSETS.laptopFinanceLedger,
+      secondaryIllus: BLUSH_ASSETS.savingsJarsCalendar,
       primaryCaption: 'Cash-Flow & Budget Charts',
       secondaryCaption: 'Net-Worth Analytics',
       surfaceTint: '#EDF5FD',
@@ -380,8 +381,8 @@ export const HeroWorkspaceShowcase: React.FC<{
       badge: 'BUSINESS OS · $79',
       title: 'Freelance & Content OS',
       subtitle: 'Client CRM, active retainers, invoice tracking, and multi-channel content queue.',
-      primaryIllus: BLUSH_ASSETS.laptopAnalyticsCall,
-      secondaryIllus: BLUSH_ASSETS.founderBriefcaseAnalytics,
+      primaryIllus: BLUSH_ASSETS.clientDealHandshake,
+      secondaryIllus: BLUSH_ASSETS.videoStudioCreator,
       primaryCaption: 'Creator Studio Desk',
       secondaryCaption: 'Client & KPI Pipeline',
       surfaceTint: '#FFF0E3',
@@ -405,8 +406,8 @@ export const HeroWorkspaceShowcase: React.FC<{
       badge: 'FREE TEMPLATE · $0',
       title: 'Minimalist Habit & Rituals OS',
       subtitle: 'Daily keystone routines, streak tracking, and calm evening reflection.',
-      primaryIllus: BLUSH_ASSETS.monochromeTouchWorkflow,
-      secondaryIllus: BLUSH_ASSETS.pinkStudioDesk,
+      primaryIllus: BLUSH_ASSETS.bloomingMindGarden,
+      secondaryIllus: BLUSH_ASSETS.mindfulMeditationClock,
       primaryCaption: 'Calm Environment',
       secondaryCaption: 'Evening Reflection',
       surfaceTint: '#EBF8EF',
@@ -729,8 +730,8 @@ export const FeatureMedia: React.FC<{
               <span className="font-mono text-[#111110]">Second Brain 5.0</span>
             </div>
             <BlushAssetImage
-              src={BLUSH_ASSETS.creatorDesktop}
-              alt="Second Brain PARA creator studio illustration"
+              src={BLUSH_ASSETS.strategicMazeThinker}
+              alt="Second Brain PARA strategic labyrinth thinker illustration"
               floatDelay={0.1}
               className="w-full h-44 sm:h-48"
             />
@@ -746,8 +747,8 @@ export const FeatureMedia: React.FC<{
                 Focused Deep Work
               </span>
               <BlushAssetImage
-                src={BLUSH_ASSETS.focusedCreator}
-                alt="Focused deep work creator illustration"
+                src={BLUSH_ASSETS.developerCodeDesk}
+                alt="Focused deep work dual monitor creator illustration"
                 floatDelay={0.4}
                 className="w-full h-32"
               />
@@ -758,8 +759,8 @@ export const FeatureMedia: React.FC<{
 
             <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-3.5 flex items-center gap-3">
               <BlushAssetImage
-                src={BLUSH_ASSETS.modernWorkspace}
-                alt="Modern workspace weekly review illustration"
+                src={BLUSH_ASSETS.clockCalendarPlanner}
+                alt="Weekly review calendar and clock planner illustration"
                 floatDelay={0.7}
                 className="w-16 h-16 shrink-0"
               />
@@ -830,8 +831,8 @@ export const FeatureMedia: React.FC<{
               <span className="font-mono text-[#111110]">$148,920 Net Worth</span>
             </div>
             <BlushAssetImage
-              src={BLUSH_ASSETS.dataBubblesJuggler}
-              alt="Finance data bubbles and charts illustration"
+              src={BLUSH_ASSETS.savingsJarsCalendar}
+              alt="Savings jars and monthly calendar allocation illustration"
               floatDelay={0.15}
               className="w-full h-44 sm:h-48"
             />
@@ -847,8 +848,8 @@ export const FeatureMedia: React.FC<{
                 Automated Rollups
               </span>
               <BlushAssetImage
-                src={BLUSH_ASSETS.financialAnalyst}
-                alt="Financial analyst dashboard illustration"
+                src={BLUSH_ASSETS.boardroomPieChart}
+                alt="Financial pie chart and budget analytics illustration"
                 floatDelay={0.5}
                 className="w-full h-32"
               />
@@ -859,8 +860,8 @@ export const FeatureMedia: React.FC<{
 
             <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-3.5 flex items-center gap-3">
               <BlushAssetImage
-                src={BLUSH_ASSETS.teamAnalytics}
-                alt="Team financial analytics illustration"
+                src={BLUSH_ASSETS.expenseReceiptAlert}
+                alt="Subscription receipt and expense audit illustration"
                 floatDelay={0.8}
                 className="w-16 h-16 shrink-0"
               />
@@ -949,7 +950,7 @@ export const FeatureMedia: React.FC<{
 
   return (
     <div className="w-full rounded-[20px] border border-[#E5E3DF] bg-[#EBF8EF] p-5 sm:p-7 space-y-5 shadow-[0_12px_32px_-8px_rgba(15,15,15,0.06)]">
-      {/* Top Digital Minimalism Blush Illustrations */}
+      {/* Top Digital Minimalism Illustrations */}
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
         <div className="sm:col-span-6 rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between text-[11px] font-semibold text-[#787671] mb-2">
@@ -957,8 +958,8 @@ export const FeatureMedia: React.FC<{
             <span className="font-mono text-[#111110]">Calm Environment</span>
           </div>
           <BlushAssetImage
-            src={BLUSH_ASSETS.pinkStudioDesk}
-            alt="Minimalist studio desk space illustration"
+            src={BLUSH_ASSETS.dualDeskStudio}
+            alt="Minimalist dual desk studio workspace illustration"
             floatDelay={0.2}
             className="w-full h-44 sm:h-48"
           />
@@ -973,8 +974,8 @@ export const FeatureMedia: React.FC<{
             <span className="font-mono text-[#111110]">Deep Work</span>
           </div>
           <BlushAssetImage
-            src={BLUSH_ASSETS.calmStudyDesk}
-            alt="Calm study desk illustration"
+            src={BLUSH_ASSETS.onlineCourseLecture}
+            alt="Focused online study and note capture illustration"
             floatDelay={0.5}
             className="w-full h-44 sm:h-48"
           />
@@ -984,12 +985,12 @@ export const FeatureMedia: React.FC<{
         </div>
       </div>
 
-      {/* Secondary Pair: Evening Unwind & Mobile Minimalism */}
+      {/* Secondary Pair: Evening Reading & Study Checklists */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex items-center gap-4">
           <BlushAssetImage
-            src={BLUSH_ASSETS.relaxedLaptopCreator}
-            alt="Relaxed evening journaling creator illustration"
+            src={BLUSH_ASSETS.bookStackReader}
+            alt="Evening reading atop stacked books illustration"
             floatDelay={0.35}
             className="w-24 h-20 shrink-0"
           />
@@ -998,24 +999,24 @@ export const FeatureMedia: React.FC<{
               Evening Digital Sunset
             </p>
             <p className="text-[12px] text-[#37352F] leading-snug mt-0.5">
-              Unwind with guided journaling and zero notifications.
+              Unwind with guided reading and zero notifications.
             </p>
           </div>
         </div>
 
         <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex items-center gap-4">
           <BlushAssetImage
-            src={BLUSH_ASSETS.mobileTravelApp}
-            alt="Minimalist mobile launcher setup illustration"
+            src={BLUSH_ASSETS.mathStudyChecklist}
+            alt="Minimalist study desk and checklist setup illustration"
             floatDelay={0.75}
             className="w-24 h-20 shrink-0"
           />
           <div className="min-w-0">
             <p className="text-[13px] font-bold text-[#111110]">
-              Minimalist Mobile Setup
+              Minimalist Study Checklists
             </p>
             <p className="text-[12px] text-[#37352F] leading-snug mt-0.5">
-              4 essential utility apps on your dock and home screen.
+              Structured daily learning queues and spaced repetition.
             </p>
           </div>
         </div>
