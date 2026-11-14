@@ -134,8 +134,10 @@ test('validateAuthForm and getProTemplatesTotalValue', () => {
 });
 
 test('testimonials include 4 attributable reviews linked to valid catalog templates', async () => {
-  const { TESTIMONIALS } = await import('../data/catalog');
+  const { TESTIMONIALS, BLUSH_ASSETS } = await import('../data/catalog');
   assert.equal(TESTIMONIALS.length, 4);
+  const testimonialAssets = new Set(TESTIMONIALS.map((r) => r.illustrationUrl));
+  assert.equal(testimonialAssets.size, 4, 'All 4 testimonials must use distinct Blush assets');
   for (const rev of TESTIMONIALS) {
     assert.ok(rev.author.length > 0);
     assert.ok(rev.role.length > 0);
@@ -145,5 +147,22 @@ test('testimonials include 4 attributable reviews linked to valid catalog templa
     const linkedTemplate = TEMPLATES.find((t) => t.slug === rev.templateSlug);
     assert.ok(linkedTemplate, `Testimonial should link to valid template ${rev.templateSlug}`);
   }
+
+  // Verify all 24 Blush assets exist and have unique paths
+  const assetUrls = Object.values(BLUSH_ASSETS);
+  assert.equal(assetUrls.length, 24);
+  assert.equal(new Set(assetUrls).size, 24, 'All 24 BLUSH_ASSETS URLs must be unique');
+
+  // Verify the first 23 templates use 23 completely unique illustrations and no two adjacent templates share an asset
+  const first23Assets = new Set(TEMPLATES.slice(0, 23).map((t) => t.illustrationUrl));
+  assert.equal(first23Assets.size, 23, 'First 23 templates must use 23 distinct Blush illustrations');
+  for (let i = 1; i < TEMPLATES.length; i++) {
+    assert.notEqual(
+      TEMPLATES[i].illustrationUrl,
+      TEMPLATES[i - 1].illustrationUrl,
+      `Adjacent templates ${TEMPLATES[i - 1].name} and ${TEMPLATES[i].name} must not share the same asset`
+    );
+  }
 });
+
 
