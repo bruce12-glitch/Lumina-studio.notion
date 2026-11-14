@@ -431,39 +431,37 @@ export const Footer: React.FC<{
               )}
             </div>
 
-            {/* Right Floating Blush Illustration Duo */}
-            <div className="lg:col-span-5 flex items-center justify-start lg:justify-end gap-4">
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="w-44 sm:w-48 h-36 rounded-[14px] border border-[#E5E3DF] bg-white p-3 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.06)] flex flex-col justify-between"
-              >
-                <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.07em] text-[#787671]">
-                  <span>22 Free Setups</span>
-                  <span className="font-mono text-[#111110]">$0</span>
+            {/* Right Notion System Specification Duo */}
+            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-3">
+                <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
+                  <span>Free Collection</span>
+                  <span className="font-bold text-[#15803D]">$0</span>
                 </div>
-                <BlushAssetImage
-                  src={BLUSH_ASSETS.notionLineArtCreator}
-                  alt="Notion template creator illustration"
-                  floatDelay={0.2}
-                  className="w-full h-24"
-                />
-              </motion.div>
+                <div>
+                  <p className="font-display text-[26px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
+                    22 Setups
+                  </p>
+                  <p className="mt-1.5 text-[12.5px] text-[#37352F] leading-snug">
+                    Ready-to-duplicate Notion trackers for habits, reading, and tasks.
+                  </p>
+                </div>
+              </div>
 
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="w-44 sm:w-48 h-36 rounded-[14px] border border-[#E5E3DF] bg-white p-3 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.06)] flex flex-col justify-between"
-              >
-                <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.07em] text-[#787671]">
-                  <span>17 Pro Systems</span>
-                  <span className="font-mono text-[#111110]">PARA</span>
+              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-3">
+                <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
+                  <span>PRO Systems</span>
+                  <span className="font-bold text-[#111110]">PARA</span>
                 </div>
-                <BlushAssetImage
-                  src={BLUSH_ASSETS.minimalistLivingRoom}
-                  alt="Minimalist study space illustration"
-                  floatDelay={0.85}
-                  className="w-full h-24"
-                />
-              </motion.div>
+                <div>
+                  <p className="font-display text-[26px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
+                    17 OS Kits
+                  </p>
+                  <p className="mt-1.5 text-[12.5px] text-[#37352F] leading-snug">
+                    Complete Second Brain, Finance, and Creator operating systems.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -1209,35 +1207,35 @@ export const TestimonialsSection: React.FC<{
 
         <motion.div
           whileHover={{ y: -2 }}
-          className="group lg:col-span-5 rounded-[16px] border border-[#E5E3DF] bg-[#FFF0E3] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
+          className="group lg:col-span-5 rounded-[16px] border border-[#E5E3DF] bg-[#FFF0E3] p-6 sm:p-7 flex flex-col justify-between gap-5 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
         >
           <div className="space-y-2.5">
             <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#787671]">
               Instant Digital Delivery
             </p>
-            <h3 className="text-[18px] font-bold tracking-[-0.02em] text-[#111110] leading-snug">
+            <h3 className="text-[19px] font-bold tracking-[-0.02em] text-[#111110] leading-snug">
               Automated Stripe & Lemon Squeezy Fulfillment
             </h3>
+            <p className="text-[13.5px] text-[#37352F] leading-relaxed">
+              Receive your one-click Notion duplicate link, verified license key, and downloadable receipt seconds after checkout.
+            </p>
+          </div>
+          <div className="pt-3 border-t border-black/[0.08] flex items-center justify-between gap-3">
+            <span className="text-[12px] font-mono font-semibold text-[#111110]">
+              100% Instant Provisioning
+            </span>
             <a
               href="/templates"
               onClick={(e) => {
                 e.preventDefault();
                 onNavigate('/templates');
               }}
-              className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#111110] hover:underline underline-offset-4 pt-1"
+              className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#111110] hover:underline underline-offset-4"
             >
               <span>Browse 17 PRO templates</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
-          <BlushAssetImage
-            src={BLUSH_ASSETS.digitalStorefront}
-            alt="Automated digital storefront delivery illustration"
-            maskCorner
-            floatDelay={0.75}
-            className="w-full sm:w-[195px] h-[160px] rounded-[12px] bg-white border border-[#E5E3DF] p-2 shrink-0"
-            imgClassName="max-h-full max-w-full object-contain"
-          />
         </motion.div>
       </div>
     </section>
