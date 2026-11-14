@@ -17,7 +17,6 @@ import {
 import {
   APPS,
   BLUSH_ASSETS,
-  BLUSH_WORKFLOW_CARDS,
   CATEGORIES,
   Category,
   TEMPLATES,
@@ -25,7 +24,6 @@ import {
 import {
   DigitalDeliveryPackage,
   filterTemplates,
-  formatPrice,
   getCategoryCounts,
 } from './utils/storeLogic';
 import {
@@ -246,16 +244,16 @@ export default function App() {
                 className="pointer-events-none absolute inset-x-4 top-2 h-[560px] rounded-[28px] bg-editorial-grid opacity-55 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_82%)]"
               />
 
-              {/* Top Editorial Hero Stage: Framed by Large Floating Blush.design Character Vignettes */}
+              {/* Top Editorial Hero Stage: Framed by 4 Unique Floating Blush.design Character Vignettes */}
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Left Floating Blush Character Stack (Desktop) */}
-                <div className="hidden lg:flex lg:col-span-3 flex-col gap-4 items-end pr-2">
+                {/* Left Floating Blush Character Stack */}
+                <div className="order-2 lg:order-1 lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col gap-4 items-stretch lg:items-end lg:pr-2">
                   <motion.div
                     initial={{ opacity: 0, x: -16, rotate: -2 }}
                     animate={{ opacity: 1, x: 0, rotate: -2 }}
                     transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => navigate('/templates/second-brain')}
-                    className="w-full max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    className="w-full lg:max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
                     style={{ backgroundColor: '#F8F5E8' }}
                   >
                     <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
@@ -264,10 +262,10 @@ export default function App() {
                     </div>
                     <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.notionLineArtCreator}
-                        alt="Second Brain Notion line art creator illustration"
+                        src={BLUSH_ASSETS.monochromeSystemsArchitect}
+                        alt="Second Brain Notion systems architect illustration"
                         floatDelay={0.1}
-                        className="w-full h-32"
+                        className="w-full h-28 sm:h-32"
                       />
                     </div>
                     <p className="mt-2 text-[12px] font-semibold text-[#111110] flex items-center justify-between">
@@ -281,17 +279,17 @@ export default function App() {
                     animate={{ opacity: 1, x: 0, rotate: 1.5 }}
                     transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => navigate('/templates/content-os')}
-                    className="w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
-                    style={{ backgroundColor: '#FFF0E3' }}
+                    className="w-full lg:w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    style={{ backgroundColor: '#F2EEFA' }}
                   >
                     <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
-                      <span>02 · Creator Desk</span>
+                      <span>02 · Creator OS</span>
                       <span className="font-bold text-[#111110]">PRO</span>
                     </div>
                     <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.creatorDesktop}
-                        alt="Creator desktop studio Blush illustration"
+                        src={BLUSH_ASSETS.purpleWindowCreator}
+                        alt="Content OS creator window Blush illustration"
                         floatDelay={0.35}
                         className="w-full h-24"
                       />
@@ -300,7 +298,7 @@ export default function App() {
                 </div>
 
                 {/* Center Editorial Headline, Sub-Headline, Primary CTA & Trust Strip */}
-                <div className="lg:col-span-6 text-center space-y-6">
+                <div className="order-1 lg:order-2 lg:col-span-6 text-center space-y-6">
                   <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-[8px] border border-[#E6E5E3] bg-[#F6F5F4] text-[12px] font-medium text-[#52504C]">
                     <span className="font-semibold text-[#111110]">Easlo Notion Store</span>
                     <span aria-hidden="true" className="text-[#C7C5C0]">·</span>
@@ -345,58 +343,6 @@ export default function App() {
                     </button>
                   </div>
 
-                  {/* Mobile / Tablet Blush Character Trio (Visible below lg) */}
-                  <div className="grid grid-cols-3 gap-3 pt-2 lg:hidden max-w-[520px] mx-auto">
-                    <div
-                      onClick={() => navigate('/templates/second-brain')}
-                      className="rounded-[14px] border border-[#E6E5E3] p-2.5 cursor-pointer"
-                      style={{ backgroundColor: '#F8F5E8' }}
-                    >
-                      <div className="rounded-[10px] bg-white p-1.5">
-                        <BlushAssetImage
-                          src={BLUSH_ASSETS.notionLineArtCreator}
-                          alt="Second Brain illustration"
-                          className="w-full h-20"
-                        />
-                      </div>
-                      <p className="mt-1.5 text-[11px] font-semibold text-[#111110] truncate">
-                        Second Brain
-                      </p>
-                    </div>
-                    <div
-                      onClick={() => navigate('/templates/finance-tracker')}
-                      className="rounded-[14px] border border-[#E6E5E3] p-2.5 cursor-pointer"
-                      style={{ backgroundColor: '#EDF5FD' }}
-                    >
-                      <div className="rounded-[10px] bg-white p-1.5">
-                        <BlushAssetImage
-                          src={BLUSH_ASSETS.financeCharts}
-                          alt="Finance Tracker illustration"
-                          className="w-full h-20"
-                        />
-                      </div>
-                      <p className="mt-1.5 text-[11px] font-semibold text-[#111110] truncate">
-                        Finance Tracker
-                      </p>
-                    </div>
-                    <div
-                      onClick={() => navigate('/templates/habit-tracker')}
-                      className="rounded-[14px] border border-[#E6E5E3] p-2.5 cursor-pointer"
-                      style={{ backgroundColor: '#EBF8EF' }}
-                    >
-                      <div className="rounded-[10px] bg-white p-1.5">
-                        <BlushAssetImage
-                          src={BLUSH_ASSETS.calmStudyDesk}
-                          alt="Habit Tracker illustration"
-                          className="w-full h-20"
-                        />
-                      </div>
-                      <p className="mt-1.5 text-[11px] font-semibold text-[#111110] truncate">
-                        Habit Tracker
-                      </p>
-                    </div>
-                  </div>
-
                   {/* Quiet Automated Delivery & Payment Trust Bar */}
                   <div className="pt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12.5px] text-[#78756F]">
                     <span className="inline-flex items-center gap-1.5">
@@ -416,14 +362,14 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Right Floating Blush Character Stack (Desktop) */}
-                <div className="hidden lg:flex lg:col-span-3 flex-col gap-4 items-start pl-2">
+                {/* Right Floating Blush Character Stack */}
+                <div className="order-3 lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col gap-4 items-stretch lg:items-start lg:pl-2">
                   <motion.div
                     initial={{ opacity: 0, x: 16, rotate: 2 }}
                     animate={{ opacity: 1, x: 0, rotate: 2 }}
                     transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => navigate('/templates/finance-tracker')}
-                    className="w-full max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    className="w-full lg:max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
                     style={{ backgroundColor: '#EDF5FD' }}
                   >
                     <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
@@ -432,10 +378,10 @@ export default function App() {
                     </div>
                     <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.financeCharts}
-                        alt="Finance Tracker charts Blush illustration"
+                        src={BLUSH_ASSETS.donutLineChartAnalyst}
+                        alt="Finance Tracker analytics Blush illustration"
                         floatDelay={0.2}
-                        className="w-full h-32"
+                        className="w-full h-28 sm:h-32"
                       />
                     </div>
                     <p className="mt-2 text-[12px] font-semibold text-[#111110] flex items-center justify-between">
@@ -449,7 +395,7 @@ export default function App() {
                     animate={{ opacity: 1, x: 0, rotate: -1.5 }}
                     transition={{ duration: 0.55, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => navigate('/templates/habit-tracker')}
-                    className="w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    className="w-full lg:w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
                     style={{ backgroundColor: '#EBF8EF' }}
                   >
                     <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
@@ -458,8 +404,8 @@ export default function App() {
                     </div>
                     <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.calmStudyDesk}
-                        alt="Calm study desk Blush illustration"
+                        src={BLUSH_ASSETS.monochromeTouchWorkflow}
+                        alt="Minimalist daily workflow Blush illustration"
                         floatDelay={0.45}
                         className="w-full h-24"
                       />
@@ -678,98 +624,10 @@ export default function App() {
               </div>
             </section>
 
-            {/* 5. BUILT FOR EVERY WORKFLOW — FULL BLUSH.DESIGN VISUAL BENTO GALLERY */}
-            <section className="py-16 sm:py-24 bg-[#F6F5F4] border-t border-[#E6E5E3]">
-              <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                  <div className="space-y-2.5 max-w-[640px]">
-                    <span className="inline-flex items-center gap-2 text-[11.5px] font-mono uppercase tracking-[0.08em] text-[#52504C]">
-                      <span>Visual System Architecture · Blush.design × Notion</span>
-                    </span>
-                    <h2 className="font-display text-[clamp(28px,3.6vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
-                      Designed for every corner of your work and life
-                    </h2>
-                    <p className="text-[16px] text-[#52504C] leading-[1.6]">
-                      Every template pairs Notion’s relational databases with calm, illustrated visual workspaces—click any workflow below to inspect or duplicate it immediately.
-                    </p>
-                  </div>
-
-                  <a
-                    href="/templates"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigate('/templates');
-                    }}
-                    className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[13.5px] font-semibold inline-flex items-center gap-2 self-start md:self-auto shrink-0"
-                  >
-                    <span>Browse All 39 Templates</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-
-                {/* 6-Card Blush Workflow Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {BLUSH_WORKFLOW_CARDS.map((card, idx) => (
-                    <motion.div
-                      key={card.id}
-                      initial={{ opacity: 0, y: 14 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: '-40px' }}
-                      transition={{ duration: 0.4, delay: idx * 0.05 }}
-                      onClick={() => navigate(`/templates/${card.templateSlug}`)}
-                      className="group rounded-[18px] border border-[#E6E5E3] p-5 flex flex-col justify-between gap-4 hover:-translate-y-1 hover:shadow-[0_14px_34px_-10px_rgba(17,17,16,0.09)] transition-all cursor-pointer"
-                      style={{ backgroundColor: card.tint }}
-                    >
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="px-2.5 py-1 rounded-[6px] bg-white/90 border border-[#E6E5E3] text-[10.5px] font-mono uppercase tracking-[0.07em] font-semibold text-[#111110]">
-                            {card.category}
-                          </span>
-                          <span className="text-[12px] font-mono font-bold text-[#111110] bg-white/90 px-2.5 py-0.5 rounded-[6px] border border-[#E6E5E3]">
-                            {card.priceLabel}
-                          </span>
-                        </div>
-
-                        {/* Large Crisp White Blush Illustration Stage */}
-                        <div className="rounded-[14px] bg-white border border-[#EAE8E1] p-4 flex items-center justify-center overflow-hidden shadow-[0_2px_8px_rgba(17,17,16,0.03)]">
-                          <BlushAssetImage
-                            src={card.assetUrl}
-                            alt={card.title}
-                            floatDelay={idx * 0.12}
-                            className="w-full h-44 sm:h-48 group-hover:scale-[1.03] transition-transform duration-300"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2 pt-1">
-                        <div className="flex items-center justify-between gap-2">
-                          <h3 className="font-display text-[19px] font-bold tracking-[-0.02em] text-[#111110]">
-                            {card.title}
-                          </h3>
-                          <ArrowUpRight className="w-4 h-4 text-[#52504C] group-hover:text-[#111110] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
-                        </div>
-                        <p className="text-[13.5px] text-[#52504C] leading-[1.55]">
-                          {card.subtitle}
-                        </p>
-                        <div className="pt-2 border-t border-black/[0.06] flex items-center justify-between text-[11.5px] font-medium text-[#111110]">
-                          <span className="font-mono text-[#52504C]">
-                            {card.templateName}
-                          </span>
-                          <span className="underline underline-offset-4">
-                            Inspect Template →
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* 6. TESTIMONIALS SECTION BENEATH FEATURE SPLITS */}
+            {/* 5. TESTIMONIALS SECTION BENEATH FEATURE SPLITS */}
             <TestimonialsSection onNavigate={navigate} />
 
-            {/* 7. APPS BY EASLO */}
+            {/* 6. APPS BY EASLO */}
             <section className="py-16 sm:py-24 bg-[#F6F5F4] border-t border-[#E6E5E3]">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -833,51 +691,18 @@ export default function App() {
               dangerouslySetInnerHTML={{ __html: templatesJsonLd }}
             />
 
-            {/* 1. Page Head with Blush Illustration Banner */}
+            {/* 1. Page Head */}
             <section className="pt-12 pb-10 sm:pt-16 sm:pb-12 max-w-[1200px] mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-7 space-y-3">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#F6F5F4] border border-[#E6E5E3] text-[11px] font-mono uppercase tracking-[0.08em] text-[#52504C]">
-                    39 Minimalist Systems · 22 Free + 17 PRO
-                  </span>
-                  <h1 className="font-display text-[clamp(34px,4.5vw,48px)] font-bold tracking-[-0.035em] leading-[1.08] text-[#111110]">
-                    Notion Templates
-                  </h1>
-                  <p className="text-[18px] text-[#52504C] leading-[1.55] max-w-[560px]">
-                    Get started with ready-made Notion setups to organize your work and life.
-                  </p>
-                </div>
-
-                {/* Right: Blush Studio Illustration Trio Card */}
-                <div className="lg:col-span-5 grid grid-cols-3 gap-3">
-                  <div className="rounded-[14px] border border-[#E6E5E3] bg-[#F8F5E8] p-2.5">
-                    <div className="rounded-[10px] bg-white p-1.5">
-                      <BlushAssetImage
-                        src={BLUSH_ASSETS.notionLineArtCreator}
-                        alt="Productivity Notion system illustration"
-                        className="w-full h-20"
-                      />
-                    </div>
-                  </div>
-                  <div className="rounded-[14px] border border-[#E6E5E3] bg-[#EDF5FD] p-2.5">
-                    <div className="rounded-[10px] bg-white p-1.5">
-                      <BlushAssetImage
-                        src={BLUSH_ASSETS.financeCharts}
-                        alt="Finance Notion system illustration"
-                        className="w-full h-20"
-                      />
-                    </div>
-                  </div>
-                  <div className="rounded-[14px] border border-[#E6E5E3] bg-[#EBF8EF] p-2.5">
-                    <div className="rounded-[10px] bg-white p-1.5">
-                      <BlushAssetImage
-                        src={BLUSH_ASSETS.focusedCreator}
-                        alt="Creator Notion system illustration"
-                        className="w-full h-20"
-                      />
-                    </div>
-                  </div>
-                </div>
+              <div className="max-w-[640px] space-y-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#F6F5F4] border border-[#E6E5E3] text-[11px] font-mono uppercase tracking-[0.08em] text-[#52504C]">
+                  39 Minimalist Systems · 22 Free + 17 PRO
+                </span>
+                <h1 className="font-display text-[clamp(34px,4.5vw,48px)] font-bold tracking-[-0.035em] leading-[1.08] text-[#111110]">
+                  Notion Templates
+                </h1>
+                <p className="text-[18px] text-[#52504C] leading-[1.55]">
+                  Get started with ready-made Notion setups to organize your work and life.
+                </p>
               </div>
             </section>
 
