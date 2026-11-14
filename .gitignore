@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+.playwright-cli/
+public/assets/aistudio/Paste_*
+public/assets/aistudio/image_ab62c3e5.png
+public/assets/aistudio/image_a1e79edb.png
+
