@@ -198,6 +198,7 @@ function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean
 }
 
 export const BLUSH_ASSETS = {
+  // Batch 1 (12 assets)
   communityBanner: '/assets/aistudio/image_c28b94df.png',
   digitalStorefront: '/assets/aistudio/image_a84eeadd.png',
   financeCharts: '/assets/aistudio/image_5d91597f.png',
@@ -210,88 +211,79 @@ export const BLUSH_ASSETS = {
   focusedCreator: '/assets/aistudio/image_e18206f5.png',
   financialAnalyst: '/assets/aistudio/image_28f39d0d.png',
   relaxedLaptopCreator: '/assets/aistudio/image_c26ace4c.png',
+  // Batch 2 (12 new assets)
+  purpleWindowCreator: '/assets/aistudio/image_c1c2c2f7.png',
+  laptopAnalyticsCall: '/assets/aistudio/image_cb175577.png',
+  founderBriefcaseAnalytics: '/assets/aistudio/image_9e53c1ce.png',
+  mobileTravelApp: '/assets/aistudio/image_c9579ca3.png',
+  donutLineChartAnalyst: '/assets/aistudio/image_7458120e.png',
+  dataBubblesJuggler: '/assets/aistudio/image_cfaf236f.png',
+  magnifyingGlassResearcher: '/assets/aistudio/image_74288ce6.png',
+  monochromeSystemsArchitect: '/assets/aistudio/image_377fe483.png',
+  socialCreatorsPhone: '/assets/aistudio/image_7aa4a560.png',
+  pinkStudioDesk: '/assets/aistudio/image_1e0e10b5.png',
+  monochromeTouchWorkflow: '/assets/aistudio/image_fe6f7de7.png',
+  remoteCallSofa: '/assets/aistudio/image_a482c404.png',
 } as const;
 
 export const CATEGORY_BLUSH_ASSET: Record<TemplateCategory, string> = {
   'Personal Productivity': BLUSH_ASSETS.notionLineArtCreator,
-  'Health & Fitness': BLUSH_ASSETS.relaxedLaptopCreator,
-  Business: BLUSH_ASSETS.teamAnalytics,
-  School: BLUSH_ASSETS.calmStudyDesk,
+  'Health & Fitness': BLUSH_ASSETS.minimalistLivingRoom,
+  Business: BLUSH_ASSETS.creatorDesktop,
+  School: BLUSH_ASSETS.magnifyingGlassResearcher,
   Finance: BLUSH_ASSETS.financeCharts,
-  Travel: BLUSH_ASSETS.minimalistLivingRoom,
+  Travel: BLUSH_ASSETS.mobileTravelApp,
 };
 
-const TEMPLATE_ASSET_ROTATION: Record<TemplateCategory, string[]> = {
-  'Personal Productivity': [
-    BLUSH_ASSETS.notionLineArtCreator,
-    BLUSH_ASSETS.creatorDesktop,
-    BLUSH_ASSETS.focusedCreator,
-    BLUSH_ASSETS.modernWorkspace,
-    BLUSH_ASSETS.relaxedLaptopCreator,
-  ],
-  'Health & Fitness': [
-    BLUSH_ASSETS.minimalistLivingRoom,
-    BLUSH_ASSETS.relaxedLaptopCreator,
-    BLUSH_ASSETS.calmStudyDesk,
-    BLUSH_ASSETS.focusedCreator,
-  ],
-  Business: [
-    BLUSH_ASSETS.creatorDesktop,
-    BLUSH_ASSETS.teamAnalytics,
-    BLUSH_ASSETS.modernWorkspace,
-    BLUSH_ASSETS.digitalStorefront,
-  ],
-  School: [
-    BLUSH_ASSETS.calmStudyDesk,
-    BLUSH_ASSETS.notionLineArtCreator,
-    BLUSH_ASSETS.focusedCreator,
-    BLUSH_ASSETS.relaxedLaptopCreator,
-  ],
-  Finance: [
-    BLUSH_ASSETS.financeCharts,
-    BLUSH_ASSETS.financialAnalyst,
-    BLUSH_ASSETS.teamAnalytics,
-    BLUSH_ASSETS.digitalStorefront,
-  ],
-  Travel: [
-    BLUSH_ASSETS.minimalistLivingRoom,
-    BLUSH_ASSETS.digitalStorefront,
-  ],
-};
+const ALL_23_TEMPLATE_ILLUSTRATIONS: string[] = [
+  BLUSH_ASSETS.monochromeSystemsArchitect, // 0: Task Tracker
+  BLUSH_ASSETS.relaxedLaptopCreator, // 1: Dopamine Menu
+  BLUSH_ASSETS.mobileTravelApp, // 2: Travel Planner
+  BLUSH_ASSETS.digitalStorefront, // 3: Travel Dashboard
+  BLUSH_ASSETS.purpleWindowCreator, // 4: Project Tracker
+  BLUSH_ASSETS.monochromeTouchWorkflow, // 5: 12 Week Year Planner
+  BLUSH_ASSETS.financialAnalyst, // 6: Savings Tracker
+  BLUSH_ASSETS.donutLineChartAnalyst, // 7: Payday Budget
+  BLUSH_ASSETS.magnifyingGlassResearcher, // 8: Prompts Library
+  BLUSH_ASSETS.remoteCallSofa, // 9: Knowledge Base
+  BLUSH_ASSETS.notionLineArtCreator, // 10: Second Brain
+  BLUSH_ASSETS.minimalistLivingRoom, // 11: Habit Tracker
+  BLUSH_ASSETS.pinkStudioDesk, // 12: Wheel of Life Template
+  BLUSH_ASSETS.calmStudyDesk, // 13: Habit Journal
+  BLUSH_ASSETS.socialCreatorsPhone, // 14: Symptom Tracker
+  BLUSH_ASSETS.creatorDesktop, // 15: Freelance OS
+  BLUSH_ASSETS.laptopAnalyticsCall, // 16: Book Tracker
+  BLUSH_ASSETS.teamAnalytics, // 17: OKRs Tracker
+  BLUSH_ASSETS.focusedCreator, // 18: GTD Dashboard
+  BLUSH_ASSETS.founderBriefcaseAnalytics, // 19: Grocery List
+  BLUSH_ASSETS.dataBubblesJuggler, // 20: All-In-One Meal Planner
+  BLUSH_ASSETS.modernWorkspace, // 21: Expense Tracker
+  BLUSH_ASSETS.financeCharts, // 22: Budget Tracker
+];
 
-const CATEGORY_TINTS: Record<TemplateCategory, string[]> = {
-  'Personal Productivity': ['#F8F5E8', '#F2EEFA', '#FEF9E6', '#F4F3F1'],
-  'Health & Fitness': ['#EBF8EF', '#F8F5E8', '#FDF0F5', '#FFF0E3'],
-  Business: ['#FFF0E3', '#EDF5FD', '#F2EEFA', '#F8F5E8'],
-  School: ['#FEF9E6', '#EDF5FD', '#F2EEFA', '#F8F5E8'],
-  Finance: ['#EDF5FD', '#EBF8EF', '#FEF9E6', '#F8F5E8'],
-  Travel: ['#FFF0E3', '#EDF5FD'],
-};
+const ALL_CARD_TINTS: string[] = [
+  '#F8F5E8',
+  '#EDF5FD',
+  '#FFF0E3',
+  '#EBF8EF',
+  '#F2EEFA',
+  '#FEF9E6',
+  '#FDF0F5',
+];
 
-function resolveTemplateAsset(slug: string, category: TemplateCategory, idx: number): string {
-  if (slug === 'second-brain') return BLUSH_ASSETS.notionLineArtCreator;
+function resolveTemplateAsset(slug: string, _category: TemplateCategory, idx: number): string {
   if (slug === 'finance-tracker') return BLUSH_ASSETS.financeCharts;
-  if (slug === 'habit-tracker') return BLUSH_ASSETS.minimalistLivingRoom;
-  if (slug === 'freelance-os') return BLUSH_ASSETS.creatorDesktop;
   if (slug === 'content-os') return BLUSH_ASSETS.modernWorkspace;
-  if (slug === 'gtd-dashboard') return BLUSH_ASSETS.focusedCreator;
-  if (slug === 'student-dashboard' || slug === 'book-tracker') return BLUSH_ASSETS.calmStudyDesk;
-  if (slug === 'savings-tracker' || slug === 'payday-budget') return BLUSH_ASSETS.financialAnalyst;
-  if (slug === 'okrs-tracker' || slug === 'crm-template') return BLUSH_ASSETS.teamAnalytics;
-  if (slug === 'travel-dashboard' || slug === 'all-in-one-meal-planner') return BLUSH_ASSETS.digitalStorefront;
-  if (slug === 'dopamine-menu' || slug === 'habit-journal') return BLUSH_ASSETS.relaxedLaptopCreator;
-  const pool = TEMPLATE_ASSET_ROTATION[category];
-  return pool[idx % pool.length];
+  return ALL_23_TEMPLATE_ILLUSTRATIONS[idx % ALL_23_TEMPLATE_ILLUSTRATIONS.length];
 }
 
-function resolveTemplateTint(slug: string, category: TemplateCategory, idx: number): string {
+function resolveTemplateTint(slug: string, _category: TemplateCategory, idx: number): string {
   if (slug === 'second-brain') return '#F8F5E8';
   if (slug === 'finance-tracker') return '#EDF5FD';
   if (slug === 'habit-tracker') return '#EBF8EF';
   if (slug === 'freelance-os') return '#FFF0E3';
   if (slug === 'content-os') return '#F2EEFA';
-  const pool = CATEGORY_TINTS[category];
-  return pool[idx % pool.length];
+  return ALL_CARD_TINTS[idx % ALL_CARD_TINTS.length];
 }
 
 export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
@@ -762,7 +754,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: 'second-brain',
     surfaceTint: '#F8F7F3',
     accentInk: '#37352F',
-    illustrationUrl: BLUSH_ASSETS.notionLineArtCreator,
+    illustrationUrl: BLUSH_ASSETS.laptopAnalyticsCall,
   },
   {
     id: 'rev-2',
@@ -776,7 +768,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: 'finance-tracker',
     surfaceTint: '#F4F6F8',
     accentInk: '#1A2A52',
-    illustrationUrl: BLUSH_ASSETS.financeCharts,
+    illustrationUrl: BLUSH_ASSETS.founderBriefcaseAnalytics,
   },
   {
     id: 'rev-3',
@@ -790,7 +782,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: 'freelance-os',
     surfaceTint: '#F4F7F4',
     accentInk: '#254232',
-    illustrationUrl: BLUSH_ASSETS.creatorDesktop,
+    illustrationUrl: BLUSH_ASSETS.socialCreatorsPhone,
   },
   {
     id: 'rev-4',
@@ -804,7 +796,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: '12-week-year-planner',
     surfaceTint: '#F7F5F8',
     accentInk: '#391C57',
-    illustrationUrl: BLUSH_ASSETS.relaxedLaptopCreator,
+    illustrationUrl: BLUSH_ASSETS.digitalStorefront,
   },
 ];
 
