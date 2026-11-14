@@ -23,6 +23,8 @@ export interface Template {
   databaseCount: number;
   viewsCount: number;
   version: string;
+  illustrationUrl: string;
+  cardTint: string;
 }
 
 export interface AppItem {
@@ -195,6 +197,103 @@ function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean
   return items;
 }
 
+export const BLUSH_ASSETS = {
+  communityBanner: '/assets/aistudio/image_c28b94df.png',
+  digitalStorefront: '/assets/aistudio/image_a84eeadd.png',
+  financeCharts: '/assets/aistudio/image_5d91597f.png',
+  calmStudyDesk: '/assets/aistudio/image_f7e50191.png',
+  creatorDesktop: '/assets/aistudio/image_68fd0787.png',
+  notionLineArtCreator: '/assets/aistudio/image_db731ad5.png',
+  minimalistLivingRoom: '/assets/aistudio/image_73137508.png',
+  teamAnalytics: '/assets/aistudio/image_0f583a0f.png',
+  modernWorkspace: '/assets/aistudio/image_97100f05.png',
+  focusedCreator: '/assets/aistudio/image_e18206f5.png',
+  financialAnalyst: '/assets/aistudio/image_28f39d0d.png',
+  relaxedLaptopCreator: '/assets/aistudio/image_c26ace4c.png',
+} as const;
+
+export const CATEGORY_BLUSH_ASSET: Record<TemplateCategory, string> = {
+  'Personal Productivity': BLUSH_ASSETS.notionLineArtCreator,
+  'Health & Fitness': BLUSH_ASSETS.relaxedLaptopCreator,
+  Business: BLUSH_ASSETS.teamAnalytics,
+  School: BLUSH_ASSETS.calmStudyDesk,
+  Finance: BLUSH_ASSETS.financeCharts,
+  Travel: BLUSH_ASSETS.minimalistLivingRoom,
+};
+
+const TEMPLATE_ASSET_ROTATION: Record<TemplateCategory, string[]> = {
+  'Personal Productivity': [
+    BLUSH_ASSETS.notionLineArtCreator,
+    BLUSH_ASSETS.creatorDesktop,
+    BLUSH_ASSETS.focusedCreator,
+    BLUSH_ASSETS.modernWorkspace,
+    BLUSH_ASSETS.relaxedLaptopCreator,
+  ],
+  'Health & Fitness': [
+    BLUSH_ASSETS.minimalistLivingRoom,
+    BLUSH_ASSETS.relaxedLaptopCreator,
+    BLUSH_ASSETS.calmStudyDesk,
+    BLUSH_ASSETS.focusedCreator,
+  ],
+  Business: [
+    BLUSH_ASSETS.creatorDesktop,
+    BLUSH_ASSETS.teamAnalytics,
+    BLUSH_ASSETS.modernWorkspace,
+    BLUSH_ASSETS.digitalStorefront,
+  ],
+  School: [
+    BLUSH_ASSETS.calmStudyDesk,
+    BLUSH_ASSETS.notionLineArtCreator,
+    BLUSH_ASSETS.focusedCreator,
+    BLUSH_ASSETS.relaxedLaptopCreator,
+  ],
+  Finance: [
+    BLUSH_ASSETS.financeCharts,
+    BLUSH_ASSETS.financialAnalyst,
+    BLUSH_ASSETS.teamAnalytics,
+    BLUSH_ASSETS.digitalStorefront,
+  ],
+  Travel: [
+    BLUSH_ASSETS.minimalistLivingRoom,
+    BLUSH_ASSETS.digitalStorefront,
+  ],
+};
+
+const CATEGORY_TINTS: Record<TemplateCategory, string[]> = {
+  'Personal Productivity': ['#F8F5E8', '#F2EEFA', '#FEF9E6', '#F4F3F1'],
+  'Health & Fitness': ['#EBF8EF', '#F8F5E8', '#FDF0F5', '#FFF0E3'],
+  Business: ['#FFF0E3', '#EDF5FD', '#F2EEFA', '#F8F5E8'],
+  School: ['#FEF9E6', '#EDF5FD', '#F2EEFA', '#F8F5E8'],
+  Finance: ['#EDF5FD', '#EBF8EF', '#FEF9E6', '#F8F5E8'],
+  Travel: ['#FFF0E3', '#EDF5FD'],
+};
+
+function resolveTemplateAsset(slug: string, category: TemplateCategory, idx: number): string {
+  if (slug === 'second-brain') return BLUSH_ASSETS.notionLineArtCreator;
+  if (slug === 'finance-tracker') return BLUSH_ASSETS.financeCharts;
+  if (slug === 'habit-tracker') return BLUSH_ASSETS.minimalistLivingRoom;
+  if (slug === 'freelance-os') return BLUSH_ASSETS.creatorDesktop;
+  if (slug === 'content-os') return BLUSH_ASSETS.modernWorkspace;
+  if (slug === 'gtd-dashboard') return BLUSH_ASSETS.focusedCreator;
+  if (slug === 'student-dashboard' || slug === 'book-tracker') return BLUSH_ASSETS.calmStudyDesk;
+  if (slug === 'savings-tracker' || slug === 'payday-budget') return BLUSH_ASSETS.financialAnalyst;
+  if (slug === 'okrs-tracker' || slug === 'crm-template') return BLUSH_ASSETS.teamAnalytics;
+  if (slug === 'travel-dashboard' || slug === 'all-in-one-meal-planner') return BLUSH_ASSETS.digitalStorefront;
+  if (slug === 'dopamine-menu' || slug === 'habit-journal') return BLUSH_ASSETS.relaxedLaptopCreator;
+  const pool = TEMPLATE_ASSET_ROTATION[category];
+  return pool[idx % pool.length];
+}
+
+function resolveTemplateTint(slug: string, category: TemplateCategory, idx: number): string {
+  if (slug === 'second-brain') return '#F8F5E8';
+  if (slug === 'finance-tracker') return '#EDF5FD';
+  if (slug === 'habit-tracker') return '#EBF8EF';
+  if (slug === 'freelance-os') return '#FFF0E3';
+  if (slug === 'content-os') return '#F2EEFA';
+  const pool = CATEGORY_TINTS[category];
+  return pool[idx % pool.length];
+}
+
 export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
   const pro = item.price > 0;
   const slug = toSlug(item.name);
@@ -222,6 +321,8 @@ export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
     databaseCount: pro ? (item.price >= 39 ? 8 : 4) : 2,
     viewsCount: pro ? (item.price >= 39 ? 18 : 9) : 4,
     version: pro ? 'v4.2 (2026 Edition)' : 'v2.4',
+    illustrationUrl: resolveTemplateAsset(slug, item.category, idx),
+    cardTint: resolveTemplateTint(slug, item.category, idx),
   };
 });
 
@@ -501,29 +602,152 @@ export const AI_TOOLS_LIST: AiTool[] = [
   },
 ];
 
-export const BLUSH_ASSETS = {
-  communityBanner: '/assets/aistudio/image_c28b94df.png',
-  digitalStorefront: '/assets/aistudio/image_a84eeadd.png',
-  financeCharts: '/assets/aistudio/image_5d91597f.png',
-  calmStudyDesk: '/assets/aistudio/image_f7e50191.png',
-  creatorDesktop: '/assets/aistudio/image_68fd0787.png',
-  notionLineArtCreator: '/assets/aistudio/image_db731ad5.png',
-  minimalistLivingRoom: '/assets/aistudio/image_73137508.png',
-  teamAnalytics: '/assets/aistudio/image_0f583a0f.png',
-  modernWorkspace: '/assets/aistudio/image_97100f05.png',
-  focusedCreator: '/assets/aistudio/image_e18206f5.png',
-  financialAnalyst: '/assets/aistudio/image_28f39d0d.png',
-  relaxedLaptopCreator: '/assets/aistudio/image_c26ace4c.png',
-} as const;
+export interface BlushShowcaseCard {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: TemplateCategory;
+  templateSlug: string;
+  templateName: string;
+  priceLabel: string;
+  tint: string;
+  assetUrl: string;
+}
 
-export const CATEGORY_BLUSH_ASSET: Record<TemplateCategory, string> = {
-  'Personal Productivity': BLUSH_ASSETS.notionLineArtCreator,
-  'Health & Fitness': BLUSH_ASSETS.relaxedLaptopCreator,
-  Business: BLUSH_ASSETS.teamAnalytics,
-  School: BLUSH_ASSETS.calmStudyDesk,
-  Finance: BLUSH_ASSETS.financeCharts,
-  Travel: BLUSH_ASSETS.minimalistLivingRoom,
-};
+export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
+  {
+    id: 'wf-second-brain',
+    title: 'Second Brain Architecture',
+    subtitle: 'Capture notes, projects, and PARA resources in one unified workspace.',
+    category: 'Personal Productivity',
+    templateSlug: 'second-brain',
+    templateName: 'Second Brain',
+    priceLabel: '$39',
+    tint: '#F8F5E8',
+    assetUrl: BLUSH_ASSETS.notionLineArtCreator,
+  },
+  {
+    id: 'wf-finance',
+    title: 'Visual Cash-Flow & Budgets',
+    subtitle: 'Track monthly income, expenses, and savings targets with automated rollups.',
+    category: 'Finance',
+    templateSlug: 'finance-tracker',
+    templateName: 'Finance Tracker',
+    priceLabel: '$39',
+    tint: '#EDF5FD',
+    assetUrl: BLUSH_ASSETS.financeCharts,
+  },
+  {
+    id: 'wf-freelance',
+    title: 'Solo Creator & Studio OS',
+    subtitle: 'Manage client pipelines, deliverables, and content calendars without chaos.',
+    category: 'Business',
+    templateSlug: 'freelance-os',
+    templateName: 'Freelance OS',
+    priceLabel: '$79',
+    tint: '#FFF0E3',
+    assetUrl: BLUSH_ASSETS.creatorDesktop,
+  },
+  {
+    id: 'wf-study',
+    title: 'Academic & Reading Hub',
+    subtitle: 'Spaced-repetition study notes, book trackers, and semester planners.',
+    category: 'School',
+    templateSlug: 'student-dashboard',
+    templateName: 'Student Dashboard',
+    priceLabel: '$0',
+    tint: '#FEF9E6',
+    assetUrl: BLUSH_ASSETS.calmStudyDesk,
+  },
+  {
+    id: 'wf-minimalism',
+    title: 'Calm Daily Rituals & Habits',
+    subtitle: 'Build sustainable daily routines and distraction-free digital environments.',
+    category: 'Health & Fitness',
+    templateSlug: 'habit-tracker',
+    templateName: 'Habit Tracker',
+    priceLabel: '$0',
+    tint: '#EBF8EF',
+    assetUrl: BLUSH_ASSETS.minimalistLivingRoom,
+  },
+  {
+    id: 'wf-team-okrs',
+    title: 'Executive OKRs & CRM',
+    subtitle: 'Align quarterly company goals and sales pipelines on a single dashboard.',
+    category: 'Business',
+    templateSlug: 'okrs-tracker',
+    templateName: 'OKRs Tracker',
+    priceLabel: '$9',
+    tint: '#FDF0F5',
+    assetUrl: BLUSH_ASSETS.teamAnalytics,
+  },
+  {
+    id: 'wf-content-os',
+    title: 'Multi-Channel Content OS',
+    subtitle: 'Plan, draft, and schedule essays, newsletters, and videos from one queue.',
+    category: 'Business',
+    templateSlug: 'content-os',
+    templateName: 'Content OS',
+    priceLabel: '$79',
+    tint: '#F2EEFA',
+    assetUrl: BLUSH_ASSETS.modernWorkspace,
+  },
+  {
+    id: 'wf-deep-work',
+    title: 'GTD & Deep Focus Sprint',
+    subtitle: 'Zero-inbox task capture and 12-week execution sprints for high output.',
+    category: 'Personal Productivity',
+    templateSlug: 'gtd-dashboard',
+    templateName: 'GTD Dashboard',
+    priceLabel: '$39',
+    tint: '#FFF0E3',
+    assetUrl: BLUSH_ASSETS.focusedCreator,
+  },
+  {
+    id: 'wf-net-worth',
+    title: 'Net-Worth & Savings Ledger',
+    subtitle: 'Audit subscriptions, paycheck allocations, and long-term investment growth.',
+    category: 'Finance',
+    templateSlug: 'savings-tracker',
+    templateName: 'Savings Tracker',
+    priceLabel: '$5',
+    tint: '#EDF5FD',
+    assetUrl: BLUSH_ASSETS.financialAnalyst,
+  },
+  {
+    id: 'wf-mindful-journal',
+    title: 'Evening Reflection & Menu',
+    subtitle: 'Unwind with guided daily journaling and intentional dopamine menus.',
+    category: 'Personal Productivity',
+    templateSlug: 'dopamine-menu',
+    templateName: 'Dopamine Menu',
+    priceLabel: '$0',
+    tint: '#EBF8EF',
+    assetUrl: BLUSH_ASSETS.relaxedLaptopCreator,
+  },
+  {
+    id: 'wf-storefront',
+    title: 'Instant Digital Delivery',
+    subtitle: 'One-click Notion duplication + license keys fulfilled via Stripe & Lemon Squeezy.',
+    category: 'Travel',
+    templateSlug: 'travel-dashboard',
+    templateName: 'Travel Dashboard',
+    priceLabel: '$9',
+    tint: '#FEF9E6',
+    assetUrl: BLUSH_ASSETS.digitalStorefront,
+  },
+  {
+    id: 'wf-community',
+    title: '12-Week Execution & Circle',
+    subtitle: 'Compress annual goals into 12-week sprints alongside 300,000+ Notion creators.',
+    category: 'Personal Productivity',
+    templateSlug: '12-week-year-planner',
+    templateName: '12 Week Year Planner',
+    priceLabel: '$9',
+    tint: '#F2EEFA',
+    assetUrl: BLUSH_ASSETS.communityBanner,
+  },
+];
 
 export const TESTIMONIALS: Testimonial[] = [
   {
