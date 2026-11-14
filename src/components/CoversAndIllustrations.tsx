@@ -6,6 +6,14 @@ import {
   TemplateCategory,
 } from '../data/catalog';
 
+const ASSETS_WITH_CORNER_BADGE = new Set<string>([
+  BLUSH_ASSETS.digitalStorefront,
+  BLUSH_ASSETS.financeCharts,
+  BLUSH_ASSETS.calmStudyDesk,
+  BLUSH_ASSETS.notionLineArtCreator,
+  BLUSH_ASSETS.minimalistLivingRoom,
+]);
+
 export const BlushAssetImage: React.FC<{
   src: string;
   alt: string;
@@ -13,70 +21,70 @@ export const BlushAssetImage: React.FC<{
   imgClassName?: string;
   maskCorner?: boolean;
   floatDelay?: number;
+  disableFloat?: boolean;
 }> = ({
   src,
   alt,
   className = '',
-  imgClassName = 'w-full h-full object-contain',
+  imgClassName = 'max-w-full max-h-full w-auto h-auto object-contain',
   maskCorner = true,
   floatDelay = 0,
+  disableFloat = false,
 }) => {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
     return (
       <div
-        className={`flex items-center justify-center bg-[#F7F6F3] text-[#78756F] text-xs font-medium p-4 ${className}`}
+        className={`flex items-center justify-center bg-[#F7F6F4] text-[#787671] text-xs font-medium p-4 ${className}`}
       >
         <span>{alt}</span>
       </div>
     );
   }
 
+  const isBanner = src === BLUSH_ASSETS.communityBanner;
   const shouldClipCorner =
-    maskCorner && src !== BLUSH_ASSETS.communityBanner;
+    maskCorner && ASSETS_WITH_CORNER_BADGE.has(src);
 
   return (
     <motion.div
-      whileHover={{ scale: 1.025, y: -2 }}
-      transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+      whileHover={{ scale: 1.02, y: -2 }}
+      transition={{ type: 'spring', stiffness: 280, damping: 24 }}
       className={`group/asset relative flex items-center justify-center overflow-hidden select-none ${className}`}
     >
-      {/* Subtle Ambient Orbital Micro-Nodes inside the Asset Frame */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute top-2.5 left-2.5 w-1.5 h-1.5 rounded-full bg-[#111110]/15 animate-pulse-soft"
-      />
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-2.5 right-3 w-1 h-1 rounded-full bg-[#111110]/20 animate-pulse-soft"
-      />
-
       <motion.img
         src={src}
         alt={alt}
         referrerPolicy="no-referrer"
         loading="lazy"
         onError={() => setFailed(true)}
-        animate={{
-          y: [0, -3.5, 0],
-          rotate: [0, 0.4, 0, -0.4, 0],
-        }}
-        transition={{
-          duration: 5.6,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: floatDelay,
-        }}
+        animate={
+          disableFloat
+            ? undefined
+            : {
+                y: [0, -3, 0],
+              }
+        }
+        transition={
+          disableFloat
+            ? undefined
+            : {
+                duration: 5.2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: floatDelay,
+              }
+        }
         style={
           shouldClipCorner
             ? {
                 clipPath:
-                  'polygon(0 0, 86% 0, 86% 11%, 100% 11%, 100% 100%, 0 100%)',
+                  'polygon(0 0, 78% 0, 78% 16%, 100% 16%, 100% 100%, 0 100%)',
               }
             : undefined
         }
-        className={`blush-editorial-tone ${imgClassName}`}
+        className={`${isBanner ? 'blush-banner' : 'blush-illustration'} ${imgClassName}`}
       />
     </motion.div>
   );
@@ -95,613 +103,192 @@ export const TemplateCover: React.FC<{
   slug: string;
   category: TemplateCategory;
   pro?: boolean;
+  illustrationUrl?: string;
+  cardTint?: string;
   className?: string;
-}> = ({ name, slug, category, pro, className = '' }) => {
+}> = ({
+  name,
+  slug,
+  category,
+  pro,
+  illustrationUrl,
+  cardTint = '#F8F5E8',
+  className = '',
+}) => {
   const seed = slugSeed(slug);
-  const bar1 = 35 + (seed % 40);
-  const bar2 = 50 + ((seed * 3) % 35);
-  const bar3 = 28 + ((seed * 7) % 45);
-  const bar4 = 60 + ((seed * 11) % 30);
+  const resolvedAsset = illustrationUrl || CATEGORY_BLUSH_ASSET[category];
+  const bar1 = 35 + (seed % 35);
+  const bar2 = 48 + ((seed * 3) % 32);
+  const bar3 = 30 + ((seed * 7) % 40);
+  const bar4 = 58 + ((seed * 11) % 28);
 
   return (
     <div
-      className={`relative aspect-[16/10] w-full bg-[#F7F6F3] border-b border-[#E8E6E1] overflow-hidden select-none ${className}`}
+      style={{ backgroundColor: cardTint }}
+      className={`relative aspect-[16/10] w-full border-b border-[#E5E3DF] p-3 sm:p-4 overflow-hidden select-none ${className}`}
     >
-      <svg
-        viewBox="0 0 640 400"
-        className="w-full h-full block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.025]"
-        role="img"
-        aria-label={`${name} — Notion template preview`}
-      >
-        {/* Subtle warm editorial paper background */}
-        <rect width="640" height="400" fill="#F7F6F3" />
-
-        {/* Notion Window Frame */}
-        <g transform="translate(36, 28)">
-          <rect
-            width="568"
-            height="344"
-            rx="10"
-            fill="#FDFCFB"
-            stroke="#E5E3DF"
-            strokeWidth="1.25"
-          />
-
-          {/* Top Window Bar */}
-          <line x1="0" y1="28" x2="568" y2="28" stroke="#EAEAEA" strokeWidth="1" />
-          <circle cx="16" cy="14" r="3.5" fill="#D4D4D4" />
-          <circle cx="28" cy="14" r="3.5" fill="#E5E5E5" />
-          <circle cx="40" cy="14" r="3.5" fill="#E5E5E5" />
-          <text
-            x="60"
-            y="18"
-            fill="#737373"
-            fontSize="9.5"
-            fontWeight="500"
-            fontFamily="Inter, -apple-system, sans-serif"
-          >
-            Easlo Workspace / {category} / {name}
-          </text>
-          {pro && (
-            <g transform="translate(516, 7)">
-              <rect width="38" height="14" rx="7" fill="#0A0A0A" />
-              <text
-                x="19"
-                y="10"
-                textAnchor="middle"
-                fill="#FFFFFF"
-                fontSize="7.5"
-                fontWeight="700"
-                letterSpacing="0.08em"
-              >
-                PRO
-              </text>
-            </g>
+      {/* Notion Window Frame */}
+      <div className="w-full h-full rounded-[12px] bg-white border border-[#E5E3DF] shadow-[0_4px_16px_rgba(15,15,15,0.05)] overflow-hidden flex flex-col transition-transform duration-300 ease-out group-hover:scale-[1.015]">
+        {/* Top Window Chrome Bar */}
+        <div className="h-7 px-3 bg-[#FAF9F7] border-b border-[#E5E3DF] flex items-center justify-between gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="w-2 h-2 rounded-full bg-[#D4D4D4]" />
+            <span className="w-2 h-2 rounded-full bg-[#E5E5E5]" />
+            <span className="w-2 h-2 rounded-full bg-[#E5E5E5]" />
+            <span className="text-[10px] font-medium text-[#787671] truncate pl-1">
+              Easlo / {category} / {name}
+            </span>
+          </div>
+          {pro ? (
+            <span className="px-1.5 py-0.5 rounded-[4px] bg-[#111110] text-white text-[8.5px] font-bold uppercase tracking-[0.06em] leading-none shrink-0">
+              PRO
+            </span>
+          ) : (
+            <span className="text-[9px] font-medium text-[#787671] shrink-0">
+              Free Setup
+            </span>
           )}
+        </div>
 
-          {/* Left Faux Notion Sidebar */}
-          <rect x="1" y="29" width="124" height="314" fill="#FAFAFA" />
-          <line x1="125" y1="28" x2="125" y2="344" stroke="#EAEAEA" strokeWidth="1" />
+        {/* Main Split Workspace: Left Notion Database Structure + Right Prominent Blush Illustration */}
+        <div className="flex-1 grid grid-cols-12 min-h-0">
+          {/* Left 7 Columns: Notion Page Header & Category Database UI */}
+          <div className="col-span-7 p-3 sm:p-3.5 flex flex-col justify-between border-r border-[#F0EEEC] min-w-0">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-1.5">
+                <span className="w-4 h-4 rounded-[4px] bg-[#111110] text-white text-[9px] font-bold inline-flex items-center justify-center shrink-0">
+                  e
+                </span>
+                <span className="text-[9.5px] font-medium text-[#787671] truncate">
+                  {category}
+                </span>
+              </div>
+              <p className="text-[13px] sm:text-[14px] font-bold tracking-[-0.02em] text-[#111110] truncate leading-tight">
+                {name}
+              </p>
+            </div>
 
-          {/* Sidebar Workspace Header */}
-          <rect x="14" y="42" width="14" height="14" rx="3" fill="#0A0A0A" />
-          <text
-            x="21"
-            y="52"
-            textAnchor="middle"
-            fill="#FFFFFF"
-            fontSize="8.5"
-            fontWeight="700"
-          >
-            e
-          </text>
-          <rect x="34" y="45" width="56" height="7" rx="3.5" fill="#262626" />
-
-          {/* Sidebar Navigation Lines */}
-          {[0, 1, 2, 3, 4].map((idx) => {
-            const isActive = idx === seed % 3;
-            const width = 52 + ((seed + idx * 19) % 36);
-            return (
-              <g key={idx} transform={`translate(12, ${72 + idx * 22})`}>
-                {isActive && (
-                  <rect x="-4" y="-4" width="104" height="16" rx="4" fill="#EAEAEA" />
-                )}
-                <circle
-                  cx="5"
-                  cy="4"
-                  r="2.5"
-                  fill={isActive ? '#0A0A0A' : '#A3A3A3'}
-                />
-                <rect
-                  x="14"
-                  y="1"
-                  width={width}
-                  height="6"
-                  rx="3"
-                  fill={isActive ? '#0A0A0A' : '#A3A3A3'}
-                />
-              </g>
-            );
-          })}
-
-          {/* Sidebar Bottom Minimalist Blush-Style Character Doodle */}
-          <g transform="translate(22, 265)" opacity="0.78">
-            <rect
-              x="0"
-              y="0"
-              width="82"
-              height="60"
-              rx="6"
-              fill="#FFFFFF"
-              stroke="#EAEAEA"
-            />
-            {/* Minimal Notion/Blush line-art character sketch */}
-            <circle
-              cx="41"
-              cy="22"
-              r="9"
-              fill="none"
-              stroke="#0A0A0A"
-              strokeWidth="1.4"
-            />
-            <path
-              d="M34 20 C36 14, 46 14, 48 20"
-              fill="#0A0A0A"
-            />
-            <circle cx="38" cy="22" r="1" fill="#0A0A0A" />
-            <circle cx="44" cy="22" r="1" fill="#0A0A0A" />
-            <path
-              d="M39 25 Q41 27 43 25"
-              fill="none"
-              stroke="#0A0A0A"
-              strokeWidth="1.1"
-              strokeLinecap="round"
-            />
-            <path
-              d="M27 48 C29 36, 53 36, 55 48"
-              fill="none"
-              stroke="#0A0A0A"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-            />
-          </g>
-
-          {/* Main Notion Canvas Area */}
-          <g transform="translate(148, 46)">
-            {/* Page Icon Box + Template Title */}
-            <rect
-              x="0"
-              y="0"
-              width="26"
-              height="26"
-              rx="6"
-              fill="#F5F5F5"
-              stroke="#D4D4D4"
-              strokeWidth="1"
-            />
-            <rect x="7" y="7" width="12" height="12" rx="2" fill="#0A0A0A" />
-
-            <text
-              x="36"
-              y="19"
-              fill="#0A0A0A"
-              fontSize="15.5"
-              fontWeight="700"
-              fontFamily="Inter, -apple-system, sans-serif"
-            >
-              {name}
-            </text>
-
-            {/* View Tabs Row */}
-            <g transform="translate(0, 38)">
-              <rect x="0" y="0" width="54" height="16" rx="4" fill="#0A0A0A" />
-              <text
-                x="27"
-                y="11"
-                textAnchor="middle"
-                fill="#FFFFFF"
-                fontSize="8"
-                fontWeight="600"
-              >
-                Overview
-              </text>
-              <rect x="60" y="0" width="48" height="16" rx="4" fill="#F5F5F5" />
-              <rect x="70" y="6" width="28" height="4" rx="2" fill="#737373" />
-              <rect x="114" y="0" width="48" height="16" rx="4" fill="#F5F5F5" />
-              <rect x="124" y="6" width="28" height="4" rx="2" fill="#A3A3A3" />
-              <line x1="0" y1="22" x2="396" y2="22" stroke="#EAEAEA" strokeWidth="1" />
-            </g>
-
-            {/* Category-Specific Notion Database Content */}
-            <g transform="translate(0, 72)">
-              {category === 'Personal Productivity' && (
-                /* Kanban Board Columns */
-                <g>
-                  {[0, 1, 2].map((col) => (
-                    <g key={col} transform={`translate(${col * 134}, 0)`}>
-                      <rect
-                        width="124"
-                        height="198"
-                        rx="6"
-                        fill="#FAFAFA"
-                        stroke="#EAEAEA"
-                      />
-                      <circle
-                        cx="14"
-                        cy="15"
-                        r="3"
-                        fill={col === 0 ? '#A3A3A3' : col === 1 ? '#525252' : '#0A0A0A'}
-                      />
-                      <rect
-                        x="22"
-                        y="12"
-                        width={42 + col * 10}
-                        height="6"
-                        rx="3"
-                        fill="#262626"
-                      />
-                      {[0, 1, 2].map((card) => (
-                        <g key={card} transform={`translate(8, ${30 + card * 52})`}>
-                          <rect
-                            width="108"
-                            height="44"
-                            rx="5"
-                            fill="#FFFFFF"
-                            stroke="#E5E5E5"
-                          />
-                          <rect
-                            x="9"
-                            y="10"
-                            width={50 + ((seed + card * 13 + col * 7) % 38)}
-                            height="6"
-                            rx="3"
-                            fill="#0A0A0A"
-                          />
-                          <rect
-                            x="9"
-                            y="22"
-                            width="34"
-                            height="5"
-                            rx="2.5"
-                            fill="#A3A3A3"
-                          />
-                          <rect
-                            x="76"
-                            y="21"
-                            width="22"
-                            height="10"
-                            rx="5"
-                            fill={card === 0 && col === 1 ? '#0A0A0A' : '#F5F5F5'}
-                          />
-                        </g>
-                      ))}
-                    </g>
-                  ))}
-                </g>
-              )}
-
-              {category === 'Health & Fitness' && (
-                /* Checklist Rows + Streak Dots Matrix */
-                <g>
-                  <rect
-                    width="396"
-                    height="198"
-                    rx="6"
-                    fill="#FAFAFA"
-                    stroke="#EAEAEA"
-                  />
-                  {[0, 1, 2, 3, 4].map((row) => {
-                    const checked = (seed + row) % 2 === 0;
+            {/* Category-Specific Mini Notion Database Preview */}
+            <div className="my-auto pt-2">
+              {category === 'Finance' ? (
+                <svg viewBox="0 0 200 76" className="w-full h-auto block" aria-hidden="true">
+                  <rect width="94" height="28" rx="4" fill="#FAF9F7" stroke="#E5E3DF" />
+                  <text x="7" y="11" fill="#787671" fontSize="6.5" fontWeight="600">NET BALANCE</text>
+                  <text x="7" y="22" fill="#111110" fontSize="9.5" fontWeight="700">$24,850</text>
+                  <rect x="102" y="0" width="94" height="28" rx="4" fill="#FAF9F7" stroke="#E5E3DF" />
+                  <text x="109" y="11" fill="#787671" fontSize="6.5" fontWeight="600">SAVINGS</text>
+                  <text x="109" y="22" fill="#111110" fontSize="9.5" fontWeight="700">42.5%</text>
+                  {[bar1, bar2, bar3, bar4, bar1 + 10, bar2 - 8, bar4].map((h, i) => {
+                    const scaled = Math.max(10, Math.min(36, Math.round(h * 0.42)));
                     return (
-                      <g key={row} transform={`translate(14, ${16 + row * 35})`}>
-                        <rect
-                          width="368"
-                          height="28"
-                          rx="5"
-                          fill="#FFFFFF"
-                          stroke="#EAEAEA"
-                        />
-                        <rect
-                          x="10"
-                          y="7"
-                          width="14"
-                          height="14"
-                          rx="3.5"
-                          fill={checked ? '#0A0A0A' : '#FFFFFF'}
-                          stroke="#0A0A0A"
-                          strokeWidth="1.2"
-                        />
-                        {checked && (
-                          <path
-                            d="M13.5 14 L16 16.5 L20.5 11.5"
-                            fill="none"
-                            stroke="#FFFFFF"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                        )}
-                        <rect
-                          x="34"
-                          y="11"
-                          width={95 + ((seed + row * 23) % 70)}
-                          height="6"
-                          rx="3"
-                          fill={checked ? '#737373' : '#0A0A0A'}
-                        />
-                        {/* 7-day habit streak dots */}
-                        {[0, 1, 2, 3, 4, 5, 6].map((day) => {
-                          const activeDot = (seed + row + day) % 3 !== 0;
-                          return (
-                            <circle
-                              key={day}
-                              cx={256 + day * 15}
-                              cy="14"
-                              r="4"
-                              fill={activeDot ? '#0A0A0A' : '#E5E5E5'}
-                            />
-                          );
-                        })}
-                      </g>
+                      <rect
+                        key={i}
+                        x={6 + i * 27}
+                        y={72 - scaled}
+                        width="16"
+                        height={scaled}
+                        rx="2.5"
+                        fill={i === 6 ? '#111110' : i % 2 === 0 ? '#52504C' : '#D4D4D4'}
+                      />
                     );
                   })}
-                </g>
-              )}
-
-              {category === 'Finance' && (
-                /* Stat Cards + Monochrome Bar Chart + Totals Row */
-                <g>
-                  {[
-                    { label: 'NET BALANCE', val: '$24,850' },
-                    { label: 'MONTHLY INFLOW', val: '$6,400' },
-                    { label: 'SAVINGS RATE', val: '42%' },
-                  ].map((stat, idx) => (
-                    <g key={idx} transform={`translate(${idx * 134}, 0)`}>
-                      <rect
-                        width="124"
-                        height="54"
-                        rx="6"
-                        fill="#FAFAFA"
-                        stroke="#EAEAEA"
-                      />
-                      <text
-                        x="12"
-                        y="20"
-                        fill="#737373"
-                        fontSize="7.5"
-                        fontWeight="700"
-                        letterSpacing="0.06em"
+                </svg>
+              ) : category === 'Health & Fitness' ? (
+                <div className="space-y-1.5">
+                  {[0, 1, 2].map((row) => {
+                    const checked = (seed + row) % 2 === 0;
+                    return (
+                      <div
+                        key={row}
+                        className="px-2 py-1 rounded-[5px] bg-[#FAF9F7] border border-[#E5E3DF] flex items-center justify-between gap-2"
                       >
-                        {stat.label}
-                      </text>
-                      <text
-                        x="12"
-                        y="40"
-                        fill="#0A0A0A"
-                        fontSize="14"
-                        fontWeight="700"
-                      >
-                        {stat.val}
-                      </text>
-                    </g>
-                  ))}
-
-                  {/* Bar chart panel */}
-                  <g transform="translate(0, 66)">
-                    <rect
-                      width="396"
-                      height="132"
-                      rx="6"
-                      fill="#FAFAFA"
-                      stroke="#EAEAEA"
-                    />
-                    <line
-                      x1="20"
-                      y1="104"
-                      x2="376"
-                      y2="104"
-                      stroke="#D4D4D4"
-                      strokeWidth="1"
-                    />
-                    {[bar1, bar2, bar3, bar4, bar1 + 15, bar2 - 10, bar4 + 8, bar3 + 20].map(
-                      (h, i) => (
-                        <g key={i} transform={`translate(${34 + i * 42}, 0)`}>
-                          <rect
-                            x="0"
-                            y={104 - h}
-                            width="22"
-                            height={h}
-                            rx="3"
-                            fill={i === 6 ? '#0A0A0A' : i % 2 === 0 ? '#525252' : '#A3A3A3'}
-                          />
-                          <rect
-                            x="3"
-                            y="112"
-                            width="16"
-                            height="4"
-                            rx="2"
-                            fill="#A3A3A3"
-                          />
-                        </g>
-                      )
-                    )}
-                  </g>
-                </g>
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span
+                            className={`w-3 h-3 rounded-[3px] border flex items-center justify-center shrink-0 ${
+                              checked
+                                ? 'bg-[#111110] border-[#111110] text-white'
+                                : 'bg-white border-[#C8C4BE]'
+                            }`}
+                          >
+                            {checked && (
+                              <svg width="7" height="7" viewBox="0 0 12 12" fill="none">
+                                <path d="M2.5 6.5L5 9L9.5 3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                              </svg>
+                            )}
+                          </span>
+                          <span className="h-1.5 w-16 rounded-full bg-[#37352F]/80" />
+                        </div>
+                        <div className="flex items-center gap-0.5 shrink-0">
+                          {[0, 1, 2, 3].map((d) => (
+                            <span
+                              key={d}
+                              className={`w-1.5 h-1.5 rounded-full ${
+                                (seed + row + d) % 3 !== 0 ? 'bg-[#111110]' : 'bg-[#E5E3DF]'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="space-y-1.5">
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <div className="p-1.5 rounded-[5px] bg-[#FAF9F7] border border-[#E5E3DF] space-y-1">
+                      <span className="block text-[7.5px] font-semibold uppercase tracking-[0.05em] text-[#787671]">
+                        In Progress
+                      </span>
+                      <span className="block h-1.5 w-4/5 rounded-full bg-[#111110]" />
+                      <span className="block h-1.5 w-3/5 rounded-full bg-[#C8C4BE]" />
+                    </div>
+                    <div className="p-1.5 rounded-[5px] bg-[#FAF9F7] border border-[#E5E3DF] space-y-1">
+                      <span className="block text-[7.5px] font-semibold uppercase tracking-[0.05em] text-[#787671]">
+                        Completed
+                      </span>
+                      <span className="block h-1.5 w-3/4 rounded-full bg-[#37352F]" />
+                      <span className="block h-1.5 w-1/2 rounded-full bg-[#C8C4BE]" />
+                    </div>
+                  </div>
+                  <div className="px-2 py-1 rounded-[5px] bg-[#FAF9F7] border border-[#E5E3DF] flex items-center justify-between">
+                    <span className="text-[8.5px] font-medium text-[#37352F]">
+                      Linked Databases
+                    </span>
+                    <span className="text-[8.5px] font-mono font-semibold text-[#111110]">
+                      {pro ? '8 Views' : '4 Views'}
+                    </span>
+                  </div>
+                </div>
               )}
+            </div>
 
-              {category === 'Business' && (
-                /* Structured Notion Database Table Rows */
-                <g>
-                  <rect
-                    width="396"
-                    height="198"
-                    rx="6"
-                    fill="#FFFFFF"
-                    stroke="#EAEAEA"
-                  />
-                  <rect width="396" height="28" rx="6" fill="#FAFAFA" />
-                  <line x1="0" y1="28" x2="396" y2="28" stroke="#EAEAEA" />
-                  <rect x="14" y="11" width="54" height="6" rx="3" fill="#525252" />
-                  <rect x="176" y="11" width="44" height="6" rx="3" fill="#525252" />
-                  <rect x="280" y="11" width="48" height="6" rx="3" fill="#525252" />
-                  {[0, 1, 2, 3, 4].map((r) => (
-                    <g key={r} transform={`translate(0, ${28 + r * 34})`}>
-                      <line x1="0" y1="34" x2="396" y2="34" stroke="#F0F0F0" />
-                      <rect
-                        x="14"
-                        y="13"
-                        width={85 + ((seed + r * 19) % 55)}
-                        height="7"
-                        rx="3.5"
-                        fill="#0A0A0A"
-                      />
-                      <rect
-                        x="176"
-                        y="10"
-                        width="58"
-                        height="14"
-                        rx="7"
-                        fill={r % 2 === 0 ? '#0A0A0A' : '#F5F5F5'}
-                      />
-                      <rect
-                        x="280"
-                        y="13"
-                        width="64"
-                        height="6"
-                        rx="3"
-                        fill="#737373"
-                      />
-                    </g>
-                  ))}
-                </g>
-              )}
+            {/* Bottom Notion Status Footer */}
+            <div className="pt-1.5 border-t border-[#F0EEEC] flex items-center justify-between text-[9px] text-[#787671]">
+              <span>One-click duplicate</span>
+              <span className="font-mono text-[#111110] font-semibold">Notion 2026</span>
+            </div>
+          </div>
 
-              {category === 'School' && (
-                /* Lined Note Blocks & Callout Box */
-                <g>
-                  <rect
-                    width="244"
-                    height="198"
-                    rx="6"
-                    fill="#FAFAFA"
-                    stroke="#EAEAEA"
-                  />
-                  {[0, 1, 2, 3, 4, 5].map((l) => (
-                    <g key={l} transform={`translate(16, ${18 + l * 28})`}>
-                      <circle cx="4" cy="4" r="2" fill="#0A0A0A" />
-                      <rect
-                        x="14"
-                        y="1"
-                        width={130 + ((seed + l * 17) % 70)}
-                        height="6"
-                        rx="3"
-                        fill={l === 0 ? '#0A0A0A' : '#525252'}
-                      />
-                      <line
-                        x1="0"
-                        y1="16"
-                        x2="212"
-                        y2="16"
-                        stroke="#EAEAEA"
-                        strokeWidth="1"
-                      />
-                    </g>
-                  ))}
-                  <g transform="translate(256, 0)">
-                    <rect
-                      width="140"
-                      height="198"
-                      rx="6"
-                      fill="#FFFFFF"
-                      stroke="#EAEAEA"
-                    />
-                    <rect x="12" y="14" width="60" height="7" rx="3.5" fill="#0A0A0A" />
-                    {[0, 1, 2, 3].map((c) => (
-                      <g key={c} transform={`translate(12, ${34 + c * 38})`}>
-                        <rect
-                          width="116"
-                          height="30"
-                          rx="4"
-                          fill="#FAFAFA"
-                          stroke="#EAEAEA"
-                        />
-                        <rect x="8" y="8" width="76" height="5" rx="2.5" fill="#262626" />
-                        <rect x="8" y="17" width="44" height="4" rx="2" fill="#A3A3A3" />
-                      </g>
-                    ))}
-                  </g>
-                </g>
-              )}
-
-              {category === 'Travel' && (
-                /* Itinerary Timeline + Map Pin Card */
-                <g>
-                  <rect
-                    width="248"
-                    height="198"
-                    rx="6"
-                    fill="#FAFAFA"
-                    stroke="#EAEAEA"
-                  />
-                  <line
-                    x1="26"
-                    y1="22"
-                    x2="26"
-                    y2="176"
-                    stroke="#D4D4D4"
-                    strokeWidth="1.5"
-                  />
-                  {[0, 1, 2, 3].map((step) => (
-                    <g key={step} transform={`translate(18, ${18 + step * 44})`}>
-                      <circle
-                        cx="8"
-                        cy="8"
-                        r="5"
-                        fill={step === 0 ? '#0A0A0A' : '#FFFFFF'}
-                        stroke="#0A0A0A"
-                        strokeWidth="1.5"
-                      />
-                      <rect
-                        x="24"
-                        y="0"
-                        width="190"
-                        height="30"
-                        rx="5"
-                        fill="#FFFFFF"
-                        stroke="#EAEAEA"
-                      />
-                      <rect x="34" y="8" width="110" height="6" rx="3" fill="#0A0A0A" />
-                      <rect x="34" y="18" width="64" height="4" rx="2" fill="#A3A3A3" />
-                    </g>
-                  ))}
-
-                  {/* Map Pin Panel */}
-                  <g transform="translate(260, 0)">
-                    <rect
-                      width="136"
-                      height="198"
-                      rx="6"
-                      fill="#FAFAFA"
-                      stroke="#EAEAEA"
-                    />
-                    <path
-                      d="M12 50 Q68 25 124 65 T124 140"
-                      fill="none"
-                      stroke="#E5E5E5"
-                      strokeWidth="2"
-                      strokeDasharray="4 4"
-                    />
-                    {/* Map Pin */}
-                    <g transform="translate(52, 62)">
-                      <path
-                        d="M16 0 C7.2 0 0 7.2 0 16 C0 28 16 42 16 42 C16 42 32 28 32 16 C32 7.2 24.8 0 16 0 Z"
-                        fill="#0A0A0A"
-                      />
-                      <circle cx="16" cy="16" r="6" fill="#FFFFFF" />
-                    </g>
-                    <rect x="28" y="152" width="80" height="7" rx="3.5" fill="#0A0A0A" />
-                    <rect x="40" y="166" width="56" height="5" rx="2.5" fill="#737373" />
-                  </g>
-                </g>
-              )}
-            </g>
-          </g>
-        </g>
-      </svg>
-
-      {/* Floating Miniature Blush Category Illustration Vignette inside Template Cover */}
-      <div className="pointer-events-none absolute bottom-3 right-3.5 w-14 h-11 rounded-[9px] bg-white/95 backdrop-blur-xs border border-[#E8E6E1] shadow-[0_4px_12px_rgba(17,17,16,0.05)] p-1 transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-105">
-        <BlushAssetImage
-          src={CATEGORY_BLUSH_ASSET[category]}
-          alt={`${category} illustration`}
-          floatDelay={(seed % 5) * 0.35}
-          className="w-full h-full"
-        />
+          {/* Right 5 Columns: Prominent Blush.design Illustration Showcase */}
+          <div
+            style={{ backgroundColor: `${cardTint}99` }}
+            className="col-span-5 p-2 sm:p-2.5 flex flex-col items-center justify-center relative overflow-hidden"
+          >
+            <BlushAssetImage
+              src={resolvedAsset}
+              alt={`${name} — Notion template preview`}
+              disableFloat
+              className="w-full h-full"
+              imgClassName="w-full h-full object-contain scale-[1.04] transition-transform duration-500 group-hover:scale-[1.1]"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export type HeroWorkspaceMode = 'second-brain' | 'finance' | 'habit';
+export type HeroWorkspaceMode = 'second-brain' | 'finance' | 'freelance' | 'habit';
 
 export const HeroWorkspaceShowcase: React.FC<{
   activeMode: HeroWorkspaceMode;
@@ -718,6 +305,10 @@ export const HeroWorkspaceShowcase: React.FC<{
     'fin-2': true,
     'fin-3': true,
     'fin-4': false,
+    'fr-1': true,
+    'fr-2': false,
+    'fr-3': true,
+    'fr-4': false,
     'hab-1': true,
     'hab-2': true,
     'hab-3': false,
@@ -732,20 +323,23 @@ export const HeroWorkspaceShowcase: React.FC<{
     'second-brain': {
       slug: 'second-brain',
       breadcrumb: 'Easlo Workspace / Personal Productivity / Second Brain 5.0',
-      badge: 'PARA SYSTEM · $39',
-      title: 'Second Brain 5.0',
-      subtitle: 'Unified PARA command center for tasks, projects, areas & notes.',
+      badge: 'PARA SYSTEM · $39 (50% OFF)',
+      title: 'Second Brain 5.0 — Command Center',
+      subtitle: 'Organize your tasks, projects, goals, and notes inside one calm PARA system.',
       primaryIllus: BLUSH_ASSETS.notionLineArtCreator,
       secondaryIllus: BLUSH_ASSETS.calmStudyDesk,
-      illusCaption: 'PARA Architecture',
+      primaryCaption: 'PARA Knowledge Capture',
+      secondaryCaption: 'Deep Work Rituals',
+      surfaceTint: '#F8F5E8',
+      secondaryTint: '#FEF9E6',
       metrics: [
         { label: 'ACTIVE PROJECTS', value: '6 Sprints', sub: '2 shipping this week' },
         { label: 'EVERGREEN NOTES', value: '142 Notes', sub: 'Linked across 8 areas' },
         { label: 'WEEKLY CLARITY', value: '4.5 hrs', sub: 'Saved on planning' },
       ],
-      tasksTitle: 'Today’s Interactive Focus Queue (Click to complete)',
+      tasksTitle: 'Today’s Focus Queue — Click any task to check off',
       tasks: [
-        { id: 'sb-1', text: 'Finalize Q4 product launch roadmap in Projects', tag: 'Project' },
+        { id: 'sb-1', text: 'Finalize Q4 product launch roadmap in Projects', tag: 'Projects' },
         { id: 'sb-2', text: 'Synthesize 3 book notes into Evergreen Zettelkasten', tag: 'Resources' },
         { id: 'sb-3', text: 'Run 10-minute Sunday zero-inbox weekly review', tag: 'Ritual' },
         { id: 'sb-4', text: 'Align quarterly OKR milestones with active tasks', tag: 'Goals' },
@@ -753,19 +347,22 @@ export const HeroWorkspaceShowcase: React.FC<{
     },
     finance: {
       slug: 'finance-tracker',
-      breadcrumb: 'Easlo Workspace / Finance / All-In-One Finance Ledger',
+      breadcrumb: 'Easlo Workspace / Finance / All-In-One Finance Dashboard',
       badge: 'FINANCE OS · $39',
-      title: 'Finance Tracker 2026',
-      subtitle: 'Real-time cash flow, net-worth rollups, and subscription audit.',
+      title: 'All-In-One Finance Dashboard',
+      subtitle: 'Bring your income, expenses, budgets, and net-worth rollups into one clear view.',
       primaryIllus: BLUSH_ASSETS.financeCharts,
       secondaryIllus: BLUSH_ASSETS.financialAnalyst,
-      illusCaption: 'Automated Rollups',
+      primaryCaption: 'Cash-Flow & Budget Charts',
+      secondaryCaption: 'Net-Worth Analytics',
+      surfaceTint: '#EDF5FD',
+      secondaryTint: '#EBF8EF',
       metrics: [
         { label: 'NET WORTH', value: '$148,920', sub: '+14.2% YTD growth' },
         { label: 'MONTHLY SAVINGS', value: '66.0%', sub: '$7,560 saved this month' },
-        { label: 'RECURRING AUDIT', value: '$340/mo', sub: 'Unused subs flagged' },
+        { label: 'SUBSCRIPTION AUDIT', value: '$340/mo', sub: 'Unused charges flagged' },
       ],
-      tasksTitle: 'Monthly Financial Checklist (Click to complete)',
+      tasksTitle: 'Monthly Financial Checklist — Click any item to complete',
       tasks: [
         { id: 'fin-1', text: 'Reconcile checking & high-yield savings balances', tag: 'Ledger' },
         { id: 'fin-2', text: 'Audit recurring SaaS & streaming subscriptions', tag: 'Audit' },
@@ -773,21 +370,49 @@ export const HeroWorkspaceShowcase: React.FC<{
         { id: 'fin-4', text: 'Review Q4 tax reserve & deductible business expenses', tag: 'Tax' },
       ],
     },
+    freelance: {
+      slug: 'freelance-os',
+      breadcrumb: 'Easlo Workspace / Business / Freelance & Creator Studio OS',
+      badge: 'BUSINESS OS · $79',
+      title: 'Freelance & Content OS',
+      subtitle: 'Client CRM, active retainers, invoice tracking, and multi-channel content queue.',
+      primaryIllus: BLUSH_ASSETS.creatorDesktop,
+      secondaryIllus: BLUSH_ASSETS.teamAnalytics,
+      primaryCaption: 'Creator Studio Desk',
+      secondaryCaption: 'Client & KPI Pipeline',
+      surfaceTint: '#FFF0E3',
+      secondaryTint: '#FDF0F5',
+      metrics: [
+        { label: 'ACTIVE RETAINERS', value: '$28,400', sub: '6 active client portals' },
+        { label: 'CONTENT PIPELINE', value: '18 Drafts', sub: 'Scheduled for next 30d' },
+        { label: 'INVOICE STATUS', value: '100% Paid', sub: 'Zero overdue invoices' },
+      ],
+      tasksTitle: 'Studio Deliverables Queue — Click any item to complete',
+      tasks: [
+        { id: 'fr-1', text: 'Send design system handoff package to Atelier client', tag: 'Client' },
+        { id: 'fr-2', text: 'Publish Sunday minimalist productivity essay & newsletter', tag: 'Content' },
+        { id: 'fr-3', text: 'Update Q4 CRM pipeline and retainer renewal proposals', tag: 'CRM' },
+        { id: 'fr-4', text: 'Archive completed sprint assets into client vault', tag: 'SOP' },
+      ],
+    },
     habit: {
       slug: 'habit-tracker',
-      breadcrumb: 'Easlo Workspace / Health & Rituals / Minimalist Habit OS',
+      breadcrumb: 'Easlo Workspace / Health & Fitness / Minimalist Habit Tracker',
       badge: 'FREE TEMPLATE · $0',
-      title: 'Minimalist Habit Tracker',
-      subtitle: 'Daily keystone habits, streak heatmaps, and evening reflection.',
+      title: 'Minimalist Habit & Rituals OS',
+      subtitle: 'Daily keystone routines, streak tracking, and calm evening reflection.',
       primaryIllus: BLUSH_ASSETS.minimalistLivingRoom,
-      secondaryIllus: BLUSH_ASSETS.modernWorkspace,
-      illusCaption: 'Daily Consistency',
+      secondaryIllus: BLUSH_ASSETS.relaxedLaptopCreator,
+      primaryCaption: 'Calm Environment',
+      secondaryCaption: 'Evening Reflection',
+      surfaceTint: '#EBF8EF',
+      secondaryTint: '#F2EEFA',
       metrics: [
-        { label: 'CURRENT STREAK', value: '28 Days', sub: '94% monthly completion' },
-        { label: 'DEEP WORK BLOCKS', value: '3.5 hrs/day', sub: 'Distraction-free focus' },
+        { label: 'CURRENT STREAK', value: '28 Days', sub: '94% monthly consistency' },
+        { label: 'DEEP WORK BLOCKS', value: '3.5 hrs/day', sub: 'Zero phone distractions' },
         { label: 'EVENING SHUTDOWN', value: '100%', sub: '7-day calm streak' },
       ],
-      tasksTitle: 'Today’s Keystone Rituals (Click to complete)',
+      tasksTitle: 'Today’s Keystone Rituals — Click any habit to log',
       tasks: [
         { id: 'hab-1', text: '90 minutes of deep work before checking messages', tag: 'Focus' },
         { id: 'hab-2', text: '30 minutes of non-fiction reading & note capture', tag: 'Mind' },
@@ -802,142 +427,207 @@ export const HeroWorkspaceShowcase: React.FC<{
 
   return (
     <div className="relative w-full">
-      {/* Outer Warm Alabaster Architectural Stage */}
-      <div className="relative rounded-[22px] border border-[#E8E6E1] bg-[#F7F6F2] p-3.5 sm:p-5 shadow-[0_24px_60px_-15px_rgba(17,17,16,0.08)]">
-        {/* Top Mode Switcher Pills + Live Status Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pb-3.5 mb-3.5 border-b border-[#E8E6E1]">
-          <div
-            role="tablist"
-            aria-label="Interactive Notion workspace preview modes"
-            className="inline-flex items-center gap-1 p-1 rounded-[10px] bg-[#EFECE6] border border-[#E8E6E1]"
-          >
-            {[
-              { id: 'second-brain' as const, label: '01 · Second Brain' },
-              { id: 'finance' as const, label: '02 · Finance OS' },
-              { id: 'habit' as const, label: '03 · Habit Tracker' },
-            ].map((tab) => {
-              const active = activeMode === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => onSelectMode(tab.id)}
-                  className={`px-2.5 py-1.5 rounded-[7px] text-[11.5px] font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                    active
-                      ? 'bg-[#111110] text-[#FDFCFB] shadow-[0_1px_3px_rgba(17,17,16,0.16)]'
-                      : 'text-[#52504C] hover:text-[#111110]'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
+      {/* Interactive Mode Selector Bar Above the Notion Window */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div
+          role="tablist"
+          aria-label="Interactive Notion workspace preview modes"
+          className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-[12px] bg-[#F7F6F4] border border-[#E5E3DF]"
+        >
+          {[
+            { id: 'second-brain' as const, label: '01. Second Brain ($39)' },
+            { id: 'finance' as const, label: '02. Finance Tracker ($39)' },
+            { id: 'freelance' as const, label: '03. Freelance OS ($79)' },
+            { id: 'habit' as const, label: '04. Habit Tracker ($0)' },
+          ].map((tab) => {
+            const active = activeMode === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => onSelectMode(tab.id)}
+                className={`px-3.5 py-2 rounded-[8px] text-[12.5px] font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  active
+                    ? 'bg-[#111110] text-white shadow-[0_2px_6px_rgba(17,17,16,0.18)]'
+                    : 'text-[#37352F] hover:text-[#111110] hover:bg-white/70'
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="hidden md:flex items-center gap-3 text-[12.5px] text-[#787671]">
+          <span>Interactive Notion Workspace</span>
+          <span aria-hidden="true">·</span>
+          <span className="font-medium text-[#111110]">Click tasks & tabs to test live</span>
+        </div>
+      </div>
+
+      {/* Main Notion Desktop Window Card (Matches Notion design.md workspace-mockup-card) */}
+      <div className="rounded-[16px] border border-[#E5E3DF] bg-white overflow-hidden shadow-[0_24px_48px_-12px_rgba(15,15,15,0.14)]">
+        {/* Top macOS / Notion Window Title Bar */}
+        <div className="px-4 py-3 bg-[#FAF9F7] border-b border-[#E5E3DF] flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="flex items-center gap-1.5 shrink-0">
+              <span className="w-3 h-3 rounded-full bg-[#E5E3DF]" />
+              <span className="w-3 h-3 rounded-full bg-[#E5E3DF]" />
+              <span className="w-3 h-3 rounded-full bg-[#E5E3DF]" />
+            </div>
+            <span className="text-[12px] font-medium text-[#787671] truncate pl-1">
+              {modeConfig.breadcrumb}
+            </span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-2 text-[11px] font-medium text-[#78756F]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#15803D] animate-pulse-soft" />
-            <span>Interactive Notion Preview</span>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => onOpenTemplate(modeConfig.slug)}
+              className="h-8 px-3 rounded-[8px] border border-[#C8C4BE] bg-white hover:bg-[#F7F6F4] text-[12px] font-semibold text-[#111110] transition-colors cursor-pointer whitespace-nowrap"
+            >
+              Inspect Details
+            </button>
+            <button
+              type="button"
+              onClick={() => onQuickCheckout(modeConfig.slug)}
+              className="h-8 px-3.5 rounded-[8px] bg-[#111110] hover:bg-[#262523] text-white text-[12px] font-semibold transition-colors cursor-pointer whitespace-nowrap"
+            >
+              Duplicate Template
+            </button>
           </div>
         </div>
 
-        {/* Main Interactive Notion Window */}
-        <div className="rounded-[16px] border border-[#D5D2CB] bg-[#FDFCFB] overflow-hidden shadow-[0_8px_28px_-6px_rgba(17,17,16,0.06)]">
-          {/* Notion Window Chrome Bar */}
-          <div className="px-3.5 py-2.5 bg-[#F7F6F3] border-b border-[#E8E6E1] flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="flex items-center gap-1.5 shrink-0">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#111110]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D5D2CB]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D5D2CB]" />
-              </div>
-              <span className="text-[11px] font-medium text-[#78756F] truncate pl-1">
-                {modeConfig.breadcrumb}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                type="button"
-                onClick={() => onOpenTemplate(modeConfig.slug)}
-                className="px-2.5 py-1 rounded-[6px] border border-[#D5D2CB] bg-[#FDFCFB] hover:bg-[#F7F6F3] text-[10.5px] font-semibold text-[#111110] transition-colors cursor-pointer"
-              >
-                Inspect Details
-              </button>
-              <button
-                type="button"
-                onClick={() => onQuickCheckout(modeConfig.slug)}
-                className="px-2.5 py-1 rounded-[6px] bg-[#111110] hover:bg-[#262523] text-[#FDFCFB] text-[10.5px] font-semibold transition-colors cursor-pointer"
-              >
-                Duplicate Template
-              </button>
-            </div>
-          </div>
-
-          {/* Notion Workspace Body */}
-          <div className="p-4 sm:p-5 space-y-4">
-            {/* Workspace Header + Floating Blush Illustration Card */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3.5 border-b border-[#E8E6E1]">
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-[5px] bg-[#111110] text-[#FDFCFB] text-[11px] font-bold inline-flex items-center justify-center">
-                    e
-                  </span>
-                  <span className="text-[10.5px] font-bold uppercase tracking-[0.08em] text-[#78756F]">
-                    {modeConfig.badge}
-                  </span>
+        {/* Workspace Split: Left Notion Sidebar (3 Cols) + Right Active Page Canvas (9 Cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12">
+          {/* Left Notion Sidebar */}
+          <aside className="hidden lg:flex lg:col-span-3 bg-[#FAF9F7] border-r border-[#E5E3DF] p-4 flex-col justify-between gap-6">
+            <div className="space-y-5">
+              {/* Workspace Identity */}
+              <div className="flex items-center gap-2.5 px-2 py-1.5 rounded-[8px] bg-white border border-[#E5E3DF]">
+                <span className="w-6 h-6 rounded-[6px] bg-[#111110] text-white text-[12px] font-bold inline-flex items-center justify-center shrink-0">
+                  e
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[12.5px] font-bold text-[#111110] truncate">
+                    Easlo Studio OS
+                  </p>
+                  <p className="text-[10.5px] text-[#787671] truncate">
+                    Notion Free & Plus Ready
+                  </p>
                 </div>
-                <h2 className="text-[19px] sm:text-[21px] font-bold tracking-[-0.025em] text-[#111110]">
+              </div>
+
+              {/* Sidebar Navigation Tree */}
+              <div className="space-y-1">
+                <p className="px-2 text-[10px] font-bold uppercase tracking-[0.08em] text-[#787671] mb-1.5">
+                  Core Workspaces
+                </p>
+                {[
+                  { id: 'second-brain' as const, name: 'Second Brain 5.0', meta: 'PARA' },
+                  { id: 'finance' as const, name: 'Finance Tracker', meta: 'Ledger' },
+                  { id: 'freelance' as const, name: 'Freelance & Studio', meta: 'CRM' },
+                  { id: 'habit' as const, name: 'Habit & Rituals', meta: 'Daily' },
+                ].map((item) => {
+                  const isCurrent = activeMode === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => onSelectMode(item.id)}
+                      className={`w-full px-2.5 py-2 rounded-[8px] text-left flex items-center justify-between text-[12.5px] transition-colors cursor-pointer ${
+                        isCurrent
+                          ? 'bg-[#EAE8E3] font-semibold text-[#111110]'
+                          : 'text-[#37352F] hover:bg-[#F0EEEC]'
+                      }`}
+                    >
+                      <span className="truncate">{item.name}</span>
+                      <span className="text-[10.5px] font-mono text-[#787671]">
+                        {item.meta}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Sidebar Featured Blush Illustration Callout */}
+            <div
+              style={{ backgroundColor: modeConfig.secondaryTint }}
+              className="rounded-[12px] border border-[#E5E3DF] p-3 space-y-2"
+            >
+              <div className="flex items-center justify-between text-[10px] font-semibold text-[#37352F]">
+                <span>{modeConfig.secondaryCaption}</span>
+                <span>2026</span>
+              </div>
+              <BlushAssetImage
+                src={modeConfig.secondaryIllus}
+                alt={modeConfig.secondaryCaption}
+                floatDelay={0.3}
+                className="w-full h-28"
+              />
+            </div>
+          </aside>
+
+          {/* Right Main Notion Canvas */}
+          <div className="lg:col-span-9 p-5 sm:p-7 space-y-6">
+            {/* Top Page Header + Large Prominent Blush Illustration Stage */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pb-6 border-b border-[#E5E3DF]">
+              <div className="md:col-span-6 space-y-2.5 text-left">
+                <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[#787671]">
+                  <span>{modeConfig.badge}</span>
+                </div>
+                <h2 className="text-[24px] sm:text-[28px] font-bold tracking-[-0.03em] text-[#111110] leading-[1.15]">
                   {modeConfig.title}
                 </h2>
-                <p className="text-[12.5px] text-[#52504C]">
+                <p className="text-[14.5px] text-[#37352F] leading-[1.55]">
                   {modeConfig.subtitle}
                 </p>
               </div>
 
-              {/* Dual Floating Blush Illustration Cards */}
-              <div className="flex items-center gap-2.5 shrink-0">
-                <div className="w-24 h-20 rounded-[12px] border border-[#E8E6E1] bg-[#F7F6F2] p-1.5 flex flex-col justify-between">
-                  <span className="text-[8.5px] font-semibold uppercase tracking-[0.06em] text-[#78756F] px-1 truncate">
-                    {modeConfig.illusCaption}
-                  </span>
+              {/* Large Heroic Blush Illustration Showcase Card */}
+              <div className="md:col-span-6">
+                <div
+                  style={{ backgroundColor: modeConfig.surfaceTint }}
+                  className="rounded-[14px] border border-[#E5E3DF] p-4 flex items-center justify-between gap-4"
+                >
+                  <div className="space-y-1 text-left max-w-[150px]">
+                    <p className="text-[10.5px] font-bold uppercase tracking-[0.07em] text-[#787671]">
+                      Visual Blueprint
+                    </p>
+                    <p className="text-[14px] font-bold text-[#111110] leading-snug">
+                      {modeConfig.primaryCaption}
+                    </p>
+                    <p className="text-[11.5px] text-[#37352F] leading-snug">
+                      Pre-built databases, relations & views ready in 1 click.
+                    </p>
+                  </div>
                   <BlushAssetImage
                     src={modeConfig.primaryIllus}
-                    alt={`${modeConfig.title} primary illustration`}
-                    floatDelay={0.15}
-                    className="w-full h-14"
-                  />
-                </div>
-                <div className="w-24 h-20 rounded-[12px] border border-[#E8E6E1] bg-[#F5F2EB] p-1.5 flex flex-col justify-between">
-                  <span className="text-[8.5px] font-semibold uppercase tracking-[0.06em] text-[#78756F] px-1 truncate">
-                    Calm Setup
-                  </span>
-                  <BlushAssetImage
-                    src={modeConfig.secondaryIllus}
-                    alt={`${modeConfig.title} secondary illustration`}
-                    floatDelay={0.65}
-                    maskCorner={modeConfig.secondaryIllus !== BLUSH_ASSETS.financialAnalyst && modeConfig.secondaryIllus !== BLUSH_ASSETS.modernWorkspace}
-                    className="w-full h-14"
+                    alt={`${modeConfig.title} illustration`}
+                    floatDelay={0.1}
+                    className="w-40 sm:w-48 h-32 sm:h-36 shrink-0"
                   />
                 </div>
               </div>
             </div>
 
             {/* 3 Live KPI Metric Blocks */}
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
               {modeConfig.metrics.map((m) => (
                 <div
                   key={m.label}
-                  className="rounded-[10px] border border-[#E8E6E1] bg-[#F7F6F3] p-2.5 sm:p-3"
+                  className="rounded-[12px] border border-[#E5E3DF] bg-[#FAF9F7] p-3.5 text-left"
                 >
-                  <p className="text-[9.5px] font-bold uppercase tracking-[0.07em] text-[#78756F] truncate">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.07em] text-[#787671]">
                     {m.label}
                   </p>
-                  <p className="mt-1 text-[16px] sm:text-[18px] font-bold tracking-[-0.02em] text-[#111110] tabular-nums">
+                  <p className="mt-1 text-[20px] font-bold tracking-[-0.02em] text-[#111110] tabular-nums">
                     {m.value}
                   </p>
-                  <p className="mt-0.5 text-[10.5px] text-[#52504C] truncate">
+                  <p className="mt-0.5 text-[12px] text-[#37352F]">
                     {m.sub}
                   </p>
                 </div>
@@ -945,27 +635,27 @@ export const HeroWorkspaceShowcase: React.FC<{
             </div>
 
             {/* Interactive Checkable Notion Database Rows + Animated Progress Bar */}
-            <div className="rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB] p-3.5 space-y-2.5">
+            <div className="rounded-[12px] border border-[#E5E3DF] bg-white p-4 space-y-3">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-[11.5px] font-semibold text-[#111110]">
+                <span className="text-[13px] font-semibold text-[#111110]">
                   {modeConfig.tasksTitle}
                 </span>
-                <span className="text-[11px] font-bold text-[#111110] tabular-nums">
-                  {completedCount}/{modeConfig.tasks.length} Done ({completionPct}%)
+                <span className="text-[12px] font-mono font-semibold text-[#111110] tabular-nums">
+                  {completedCount}/{modeConfig.tasks.length} Completed ({completionPct}%)
                 </span>
               </div>
 
               {/* Animated Progress Bar */}
-              <div className="w-full h-1.5 rounded-full bg-[#E8E6E1] overflow-hidden">
+              <div className="w-full h-2 rounded-full bg-[#F0EEEC] overflow-hidden">
                 <motion.div
                   initial={false}
                   animate={{ width: `${completionPct}%` }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className="h-full rounded-full bg-[#111110]"
                 />
               </div>
 
-              <div className="space-y-1.5 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 {modeConfig.tasks.map((task) => {
                   const isDone = Boolean(checkedTasks[task.id]);
                   return (
@@ -973,14 +663,14 @@ export const HeroWorkspaceShowcase: React.FC<{
                       key={task.id}
                       type="button"
                       onClick={() => toggleTask(task.id)}
-                      className="w-full px-2.5 py-2 rounded-[8px] border border-[#E8E6E1] bg-[#F7F6F3]/70 hover:bg-[#F1EFEA] flex items-center justify-between gap-3 text-left transition-colors cursor-pointer"
+                      className="w-full px-3 py-2.5 rounded-[8px] border border-[#E5E3DF] bg-[#FAF9F7] hover:bg-[#F0EEEC] flex items-center justify-between gap-2.5 text-left transition-colors cursor-pointer"
                     >
                       <span className="flex items-center gap-2.5 min-w-0">
                         <span
                           className={`w-4 h-4 rounded-[4px] border flex items-center justify-center shrink-0 transition-colors ${
                             isDone
-                              ? 'bg-[#111110] border-[#111110] text-[#FDFCFB]'
-                              : 'bg-[#FDFCFB] border-[#111110]'
+                              ? 'bg-[#111110] border-[#111110] text-white'
+                              : 'bg-white border-[#111110]'
                           }`}
                         >
                           {isDone && (
@@ -996,14 +686,14 @@ export const HeroWorkspaceShowcase: React.FC<{
                           )}
                         </span>
                         <span
-                          className={`text-[12px] font-medium truncate transition-colors ${
-                            isDone ? 'line-through text-[#78756F]' : 'text-[#111110]'
+                          className={`text-[12.5px] font-medium truncate transition-colors ${
+                            isDone ? 'line-through text-[#787671]' : 'text-[#111110]'
                           }`}
                         >
                           {task.text}
                         </span>
                       </span>
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-[5px] bg-[#FDFCFB] border border-[#E8E6E1] text-[#52504C] shrink-0">
+                      <span className="text-[10.5px] font-medium text-[#787671] shrink-0">
                         {task.tag}
                       </span>
                     </button>
@@ -1019,283 +709,107 @@ export const HeroWorkspaceShowcase: React.FC<{
 };
 
 /**
- * Blush.design-inspired Notion-style character & workspace illustration showcase
- * with SOTA minimalist motion & architectural connector line
- */
-export const BlushNotionIllustration: React.FC<{
-  variant?: 'hero' | 'workspace' | 'minimalist';
-  className?: string;
-}> = ({ variant = 'hero', className = '' }) => {
-  if (variant === 'hero') {
-    return (
-      <div
-        className={`relative flex items-center justify-center gap-3 sm:gap-5 py-2 ${className}`}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative z-20 flex items-center gap-3 rounded-[14px] border border-[#E8E6E1] bg-[#FDFCFB] px-3.5 py-2 shadow-[0_6px_20px_rgba(17,17,16,0.04)]"
-        >
-          <BlushAssetImage
-            src={BLUSH_ASSETS.notionLineArtCreator}
-            alt="Notion template creator illustration"
-            floatDelay={0.2}
-            className="w-12 h-10"
-          />
-          <div className="text-left">
-            <p className="text-[11px] font-semibold text-[#111110]">
-              Crafted by Easlo Studio
-            </p>
-            <p className="text-[10px] text-[#78756F]">
-              300,000+ Notion workspaces duplicated
-            </p>
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
-  return null;
-};
-
-/**
- * 3 Home Feature Split SVG Mockups (960x720 aspect ratio)
+ * 3 Home Feature Split Editorial Showcases (combining Large Blush Illustrations + Live Notion UI)
  */
 export const FeatureMedia: React.FC<{
   kind: 'second-brain' | 'finance' | 'minimalism';
 }> = ({ kind }) => {
   if (kind === 'second-brain') {
     return (
-      <div className="w-full rounded-[16px] border border-[#EAEAEA] bg-[#FAFAFA] p-4 sm:p-6 shadow-[0_1px_2px_rgba(10,10,10,0.04)]">
-        <svg
-          viewBox="0 0 800 560"
-          className="w-full h-auto block rounded-[12px] border border-[#EAEAEA] bg-white"
-          role="img"
-          aria-label="Second Brain Notion system dashboard preview"
-        >
-          <rect width="800" height="560" rx="12" fill="#FFFFFF" />
-          {/* Header bar */}
-          <rect width="800" height="40" rx="12" fill="#FAFAFA" />
-          <line x1="0" y1="40" x2="800" y2="40" stroke="#EAEAEA" />
-          <circle cx="20" cy="20" r="4.5" fill="#0A0A0A" />
-          <circle cx="35" cy="20" r="4.5" fill="#D4D4D4" />
-          <circle cx="50" cy="20" r="4.5" fill="#D4D4D4" />
-          <text x="74" y="24" fill="#0A0A0A" fontSize="12" fontWeight="600">
-            Second Brain 5.0 — PARA Workspace
-          </text>
-          <rect x="698" y="11" width="84" height="18" rx="9" fill="#0A0A0A" />
-          <text x="740" y="23" textAnchor="middle" fill="#FFFFFF" fontSize="9.5" fontWeight="700">
-            PARA SYSTEM
-          </text>
-
-          {/* Left Quick Capture + Navigation */}
-          <rect x="0" y="41" width="180" height="519" fill="#FAFAFA" />
-          <line x1="180" y1="40" x2="180" y2="560" stroke="#EAEAEA" />
-          <text x="20" y="72" fill="#737373" fontSize="10" fontWeight="700" letterSpacing="0.08em">
-            QUICK CAPTURE
-          </text>
-          <rect x="16" y="84" width="148" height="32" rx="6" fill="#0A0A0A" />
-          <text x="90" y="104" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="600">
-            + New Task or Note
-          </text>
-
-          <text x="20" y="146" fill="#737373" fontSize="10" fontWeight="700" letterSpacing="0.08em">
-            PARA HUB
-          </text>
-          {['01 · Projects (6)', '02 · Areas (8)', '03 · Resources (24)', '04 · Archive'].map(
-            (label, i) => (
-              <g key={label} transform={`translate(16, ${160 + i * 32})`}>
-                <rect
-                  width="148"
-                  height="26"
-                  rx="5"
-                  fill={i === 0 ? '#EAEAEA' : 'transparent'}
-                />
-                <text
-                  x="10"
-                  y="17"
-                  fill={i === 0 ? '#0A0A0A' : '#525252'}
-                  fontSize="11.5"
-                  fontWeight={i === 0 ? '600' : '500'}
-                >
-                  {label}
-                </text>
-              </g>
-            )
-          )}
-
-          {/* Main Dashboard Collage: Tasks + Projects + Goals + Notes */}
-          <g transform="translate(204, 64)">
-            <text x="0" y="20" fill="#0A0A0A" fontSize="22" fontWeight="700" letterSpacing="-0.02em">
-              Command Center
-            </text>
-            <text x="0" y="42" fill="#737373" fontSize="12">
-              Tasks, active projects, quarterly goals, and evergreen notes in one unified view.
-            </text>
-
-            {/* 4 PARA Metric Cards */}
-            {[
-              { title: 'Projects', count: '6 Active', sub: '2 due this week' },
-              { title: 'Areas', count: '8 Pillars', sub: 'Health, Career, Finance' },
-              { title: 'Goals', count: '4 Q4 OKRs', sub: '78% avg progress' },
-              { title: 'Notes Inbox', count: '14 Notes', sub: 'Synced today' },
-            ].map((box, idx) => (
-              <g key={box.title} transform={`translate(${idx * 144}, 62)`}>
-                <rect
-                  width="134"
-                  height="78"
-                  rx="8"
-                  fill="#FAFAFA"
-                  stroke="#EAEAEA"
-                />
-                <text x="14" y="24" fill="#737373" fontSize="10.5" fontWeight="600">
-                  {box.title}
-                </text>
-                <text x="14" y="48" fill="#0A0A0A" fontSize="16" fontWeight="700">
-                  {box.count}
-                </text>
-                <text x="14" y="66" fill="#737373" fontSize="10">
-                  {box.sub}
-                </text>
-              </g>
-            ))}
-
-            {/* Split Bottom Panels: Today's Tasks (Left) + Active Projects & Goals (Right) */}
-            <g transform="translate(0, 160)">
-              <rect width="278" height="310" rx="10" fill="#FFFFFF" stroke="#EAEAEA" />
-              <text x="18" y="28" fill="#0A0A0A" fontSize="13" fontWeight="700">
-                Today’s Focus Tasks
-              </text>
-              <line x1="0" y1="42" x2="278" y2="42" stroke="#EAEAEA" />
-              {[
-                { t: 'Finalize Q4 product launch roadmap', done: true, tag: 'Product' },
-                { t: 'Review weekly cash flow & budget ledger', done: true, tag: 'Finance' },
-                { t: 'Draft newsletter issue #142 in Notion', done: false, tag: 'Writing' },
-                { t: '30-minute evening reading & synthesis', done: false, tag: 'Growth' },
-                { t: 'Clear inbox & archive completed sprints', done: false, tag: 'System' },
-              ].map((task, idx) => (
-                <g key={task.t} transform={`translate(16, ${56 + idx * 48})`}>
-                  <rect
-                    width="246"
-                    height="38"
-                    rx="6"
-                    fill="#FAFAFA"
-                    stroke="#EAEAEA"
-                  />
-                  <rect
-                    x="10"
-                    y="11"
-                    width="15"
-                    height="15"
-                    rx="3.5"
-                    fill={task.done ? '#0A0A0A' : '#FFFFFF'}
-                    stroke="#0A0A0A"
-                    strokeWidth="1.3"
-                  />
-                  {task.done && (
-                    <path
-                      d="M13.5 18.5 L16.5 21.5 L21.5 15.5"
-                      fill="none"
-                      stroke="#FFFFFF"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  )}
-                  <text
-                    x="34"
-                    y="23"
-                    fill={task.done ? '#737373' : '#0A0A0A'}
-                    fontSize="10.5"
-                    fontWeight="500"
-                    textDecoration={task.done ? 'line-through' : 'none'}
-                  >
-                    {task.t}
-                  </text>
-                </g>
-              ))}
-            </g>
-
-            <g transform="translate(294, 160)">
-              <rect width="278" height="310" rx="10" fill="#FFFFFF" stroke="#EAEAEA" />
-              <text x="18" y="28" fill="#0A0A0A" fontSize="13" fontWeight="700">
-                Quarterly Goals & Milestones
-              </text>
-              <line x1="0" y1="42" x2="278" y2="42" stroke="#EAEAEA" />
-              {[
-                { name: 'Ship 5 Minimalist Templates', pct: 85 },
-                { name: 'Maintain 90% Daily Habit Streak', pct: 92 },
-                { name: 'Read 24 Non-Fiction Books', pct: 68 },
-                { name: 'Zero Inbox Every Sunday', pct: 100 },
-              ].map((goal, idx) => (
-                <g key={goal.name} transform={`translate(18, ${60 + idx * 58})`}>
-                  <text x="0" y="14" fill="#111110" fontSize="11.5" fontWeight="600">
-                    {goal.name}
-                  </text>
-                  <text x="242" y="14" textAnchor="end" fill="#111110" fontSize="11" fontWeight="700">
-                    {goal.pct}%
-                  </text>
-                  <rect x="0" y="24" width="242" height="8" rx="4" fill="#E8E6E1" />
-                  <motion.rect
-                    x="0"
-                    y="24"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: Math.round((242 * goal.pct) / 100) }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{
-                      duration: 0.9,
-                      delay: idx * 0.12,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    height="8"
-                    rx="4"
-                    fill="#111110"
-                  />
-                </g>
-              ))}
-            </g>
-          </g>
-        </svg>
-
-        {/* Companion Blush.design Illustration Strip for Second Brain */}
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          <motion.div
-            whileHover={{ y: -2 }}
-            className="group rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 flex items-center gap-3 transition-shadow hover:shadow-[0_6px_18px_rgba(17,17,16,0.04)]"
-          >
+      <div className="w-full rounded-[20px] border border-[#E5E3DF] bg-[#F8F5E8] p-5 sm:p-7 space-y-5 shadow-[0_12px_32px_-8px_rgba(15,15,15,0.06)]">
+        {/* Top Heroic Blush Illustration Pair */}
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
+          <div className="sm:col-span-7 rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex flex-col justify-between">
+            <div className="flex items-center justify-between text-[11px] font-semibold text-[#787671] mb-2">
+              <span>PARA Command Center</span>
+              <span className="font-mono text-[#111110]">Second Brain 5.0</span>
+            </div>
             <BlushAssetImage
               src={BLUSH_ASSETS.notionLineArtCreator}
-              alt="PARA note capture illustration"
-              floatDelay={0.2}
-              className="w-16 h-14 rounded-[8px] bg-[#F7F6F3] p-1 shrink-0"
+              alt="Second Brain PARA creator illustration"
+              floatDelay={0.1}
+              className="w-full h-44 sm:h-48"
             />
-            <div className="min-w-0">
-              <p className="text-[12.5px] font-semibold text-[#111110] truncate">
-                Capture & Synthesize
-              </p>
-              <p className="text-[11.5px] text-[#78756F] leading-snug">
-                Connect fleeting ideas to active projects.
+            <div className="pt-3 border-t border-[#F0EEEC] flex items-center justify-between text-[12px]">
+              <span className="font-semibold text-[#111110]">Projects · Areas · Resources · Archive</span>
+              <span className="text-[#787671]">8 Linked Databases</span>
+            </div>
+          </div>
+
+          <div className="sm:col-span-5 flex flex-col gap-4">
+            <div className="flex-1 rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex flex-col justify-between">
+              <span className="text-[11px] font-semibold text-[#787671]">
+                Creative Studio Setup
+              </span>
+              <BlushAssetImage
+                src={BLUSH_ASSETS.creatorDesktop}
+                alt="Creator studio desktop illustration"
+                floatDelay={0.4}
+                className="w-full h-32"
+              />
+              <p className="text-[12px] font-medium text-[#37352F]">
+                Capture fleeting ideas & connect them to quarterly goals.
               </p>
             </div>
-          </motion.div>
-          <motion.div
-            whileHover={{ y: -2 }}
-            className="group rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 flex items-center gap-3 transition-shadow hover:shadow-[0_6px_18px_rgba(17,17,16,0.04)]"
-          >
-            <BlushAssetImage
-              src={BLUSH_ASSETS.calmStudyDesk}
-              alt="Deep work desk illustration"
-              floatDelay={0.8}
-              className="w-16 h-14 rounded-[8px] bg-[#F7F6F3] p-1 shrink-0"
-            />
-            <div className="min-w-0">
-              <p className="text-[12.5px] font-semibold text-[#111110] truncate">
-                Calm Weekly Reviews
-              </p>
-              <p className="text-[11.5px] text-[#78756F] leading-snug">
-                Zero-inbox ritual built for clarity.
-              </p>
+
+            <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-3.5 flex items-center gap-3">
+              <BlushAssetImage
+                src={BLUSH_ASSETS.focusedCreator}
+                alt="Focused deep work creator illustration"
+                floatDelay={0.7}
+                className="w-16 h-16 shrink-0"
+              />
+              <div className="min-w-0">
+                <p className="text-[12.5px] font-bold text-[#111110]">
+                  Zero-Inbox Weekly Review
+                </p>
+                <p className="text-[11.5px] text-[#787671] leading-snug">
+                  15-minute guided Sunday reset ritual.
+                </p>
+              </div>
             </div>
-          </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom Live Notion Goal & Project Rollup Card */}
+        <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-4 sm:p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[13px] font-bold text-[#111110]">
+              Quarterly OKRs & Active Project Rollups
+            </span>
+            <span className="text-[11.5px] font-mono text-[#787671]">
+              Auto-calculated in Notion
+            </span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { name: 'Ship 5 Minimalist Templates', pct: 85 },
+              { name: 'Maintain 90% Daily Habit Streak', pct: 92 },
+              { name: 'Read 24 Non-Fiction Books', pct: 68 },
+              { name: 'Zero Inbox Every Sunday', pct: 100 },
+            ].map((goal, idx) => (
+              <div
+                key={goal.name}
+                className="p-3 rounded-[10px] bg-[#FAF9F7] border border-[#E5E3DF] space-y-1.5"
+              >
+                <div className="flex items-center justify-between text-[12px]">
+                  <span className="font-semibold text-[#111110] truncate">{goal.name}</span>
+                  <span className="font-mono font-bold text-[#111110] tabular-nums">
+                    {goal.pct}%
+                  </span>
+                </div>
+                <div className="w-full h-1.5 rounded-full bg-[#E5E3DF] overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${goal.pct}%` }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.8, delay: idx * 0.1 }}
+                    className="h-full rounded-full bg-[#111110]"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -1303,386 +817,204 @@ export const FeatureMedia: React.FC<{
 
   if (kind === 'finance') {
     return (
-      <div className="w-full rounded-[16px] border border-[#E8E6E1] bg-[#F7F6F3] p-4 sm:p-6 shadow-[0_1px_2px_rgba(17,17,16,0.035)]">
-        <svg
-          viewBox="0 0 800 560"
-          className="w-full h-auto block rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB]"
-          role="img"
-          aria-label="All-In-One Finance Dashboard Notion preview with grayscale charts"
-        >
-          <rect width="800" height="560" rx="12" fill="#FDFCFB" />
-          <rect width="800" height="40" rx="12" fill="#F7F6F3" />
-          <line x1="0" y1="40" x2="800" y2="40" stroke="#E8E6E1" />
-          <circle cx="20" cy="20" r="4.5" fill="#111110" />
-          <circle cx="35" cy="20" r="4.5" fill="#D5D2CB" />
-          <circle cx="50" cy="20" r="4.5" fill="#D5D2CB" />
-          <text x="74" y="24" fill="#111110" fontSize="12" fontWeight="600">
-            All-In-One Finance Dashboard — 2026 Ledger
-          </text>
+      <div className="w-full rounded-[20px] border border-[#E5E3DF] bg-[#EDF5FD] p-5 sm:p-7 space-y-5 shadow-[0_12px_32px_-8px_rgba(15,15,15,0.06)]">
+        {/* Top Heroic Finance Illustrations */}
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
+          <div className="sm:col-span-7 rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex flex-col justify-between">
+            <div className="flex items-center justify-between text-[11px] font-semibold text-[#787671] mb-2">
+              <span>All-In-One Finance Ledger</span>
+              <span className="font-mono text-[#111110]">$148,920 Net Worth</span>
+            </div>
+            <BlushAssetImage
+              src={BLUSH_ASSETS.financeCharts}
+              alt="Finance dashboard charts illustration"
+              floatDelay={0.15}
+              className="w-full h-44 sm:h-48"
+            />
+            <div className="pt-3 border-t border-[#F0EEEC] flex items-center justify-between text-[12px]">
+              <span className="font-semibold text-[#111110]">Income · Expenses · Subscriptions</span>
+              <span className="text-[#15803D] font-semibold">66% Savings Rate</span>
+            </div>
+          </div>
 
-          {/* Top 4 KPI Stat Cards */}
-          <g transform="translate(32, 64)">
-            {[
-              { label: 'NET WORTH', val: '$148,920.00', delta: '+14.2% YTD' },
-              { label: 'MONTHLY INCOME', val: '$11,450.00', delta: 'On target' },
-              { label: 'MONTHLY EXPENSES', val: '$3,890.00', delta: '-8.4% vs avg' },
-              { label: 'SAVINGS RATE', val: '66.0%', delta: '$7,560 saved' },
-            ].map((card, i) => (
-              <g key={card.label} transform={`translate(${i * 188}, 0)`}>
-                <rect width="172" height="92" rx="10" fill="#F7F6F3" stroke="#E8E6E1" />
-                <text x="16" y="28" fill="#78756F" fontSize="10" fontWeight="700" letterSpacing="0.08em">
-                  {card.label}
-                </text>
-                <text x="16" y="56" fill="#111110" fontSize="20" fontWeight="700">
-                  {card.val}
-                </text>
-                <text x="16" y="76" fill="#52504C" fontSize="11" fontWeight="500">
-                  {card.delta}
-                </text>
-              </g>
-            ))}
-          </g>
+          <div className="sm:col-span-5 flex flex-col gap-4">
+            <div className="flex-1 rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex flex-col justify-between">
+              <span className="text-[11px] font-semibold text-[#787671]">
+                Automated Rollups
+              </span>
+              <BlushAssetImage
+                src={BLUSH_ASSETS.financialAnalyst}
+                alt="Financial analyst dashboard illustration"
+                floatDelay={0.5}
+                className="w-full h-32"
+              />
+              <p className="text-[12px] font-medium text-[#37352F]">
+                Real-time monthly cash-flow and savings target tracking.
+              </p>
+            </div>
 
-          {/* Labeled Grayscale Bar & Line Chart Panel */}
-          <g transform="translate(32, 180)">
-            <rect width="736" height="344" rx="10" fill="#F7F6F3" stroke="#E8E6E1" />
-            <text x="24" y="34" fill="#111110" fontSize="14" fontWeight="700">
-              Monthly Cash Flow & Net Savings Trajectory (Jan – Dec 2026)
-            </text>
-            <g transform="translate(530, 20)">
-              <rect x="0" y="4" width="10" height="10" rx="2" fill="#111110" />
-              <text x="16" y="13" fill="#52504C" fontSize="11" fontWeight="500">
+            <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-3.5 flex items-center gap-3">
+              <BlushAssetImage
+                src={BLUSH_ASSETS.teamAnalytics}
+                alt="Team financial analytics illustration"
+                floatDelay={0.8}
+                className="w-16 h-16 shrink-0"
+              />
+              <div className="min-w-0">
+                <p className="text-[12.5px] font-bold text-[#111110]">
+                  Subscription Renewal Radar
+                </p>
+                <p className="text-[11.5px] text-[#787671] leading-snug">
+                  Spot recurring charges before they renew.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Cash Flow Bar Chart Card */}
+        <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-4 sm:p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[13px] font-bold text-[#111110]">
+              2026 Monthly Cash Flow & Savings Trajectory
+            </span>
+            <div className="flex items-center gap-3 text-[11px] font-medium text-[#37352F]">
+              <span className="inline-flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-[2px] bg-[#111110]" />
                 Income
-              </text>
-              <rect x="74" y="4" width="10" height="10" rx="2" fill="#A39F98" />
-              <text x="90" y="13" fill="#52504C" fontSize="11" fontWeight="500">
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-[2px] bg-[#C8C4BE]" />
                 Expenses
-              </text>
-            </g>
-
-            {/* Horizontal Grid Lines + Y-Axis Labels */}
+              </span>
+            </div>
+          </div>
+          <svg viewBox="0 0 680 120" className="w-full h-auto block" role="img" aria-label="Monthly cash flow bar chart">
+            <line x1="0" y1="98" x2="680" y2="98" stroke="#E5E3DF" strokeWidth="1" />
             {[
-              { y: 74, label: '$12k' },
-              { y: 134, label: '$9k' },
-              { y: 194, label: '$6k' },
-              { y: 254, label: '$3k' },
-              { y: 298, label: '$0' },
-            ].map((row) => (
-              <g key={row.label}>
-                <text x="24" y={row.y + 4} fill="#78756F" fontSize="10" fontWeight="500">
-                  {row.label}
-                </text>
-                <line
-                  x1="64"
-                  y1={row.y}
-                  x2="708"
-                  y2={row.y}
-                  stroke="#E8E6E1"
-                  strokeWidth="1"
-                />
-              </g>
-            ))}
-
-            {/* 12 Animated Monthly Bars */}
-            {[
-              { m: 'Jan', inc: 150, exp: 75 },
-              { m: 'Feb', inc: 162, exp: 70 },
-              { m: 'Mar', inc: 158, exp: 82 },
-              { m: 'Apr', inc: 175, exp: 68 },
-              { m: 'May', inc: 184, exp: 74 },
-              { m: 'Jun', inc: 179, exp: 65 },
-              { m: 'Jul', inc: 192, exp: 72 },
-              { m: 'Aug', inc: 198, exp: 69 },
-              { m: 'Sep', inc: 205, exp: 71 },
-              { m: 'Oct', inc: 212, exp: 66 },
-              { m: 'Nov', inc: 220, exp: 64 },
-              { m: 'Dec', inc: 228, exp: 68 },
+              { m: 'Jan', inc: 52, exp: 26 },
+              { m: 'Feb', inc: 58, exp: 24 },
+              { m: 'Mar', inc: 55, exp: 28 },
+              { m: 'Apr', inc: 64, exp: 22 },
+              { m: 'May', inc: 68, exp: 25 },
+              { m: 'Jun', inc: 66, exp: 21 },
+              { m: 'Jul', inc: 72, exp: 24 },
+              { m: 'Aug', inc: 75, exp: 23 },
+              { m: 'Sep', inc: 78, exp: 24 },
+              { m: 'Oct', inc: 82, exp: 22 },
+              { m: 'Nov', inc: 85, exp: 21 },
+              { m: 'Dec', inc: 88, exp: 23 },
             ].map((bar, idx) => {
-              const x = 82 + idx * 52;
+              const x = 12 + idx * 55;
               return (
                 <g key={bar.m}>
-                  <motion.rect
+                  <rect
                     x={x}
-                    initial={{ y: 298, height: 0 }}
-                    whileInView={{ y: 298 - bar.inc, height: bar.inc }}
-                    viewport={{ once: false, amount: 0.25 }}
-                    transition={{
-                      duration: 0.7,
-                      delay: idx * 0.04,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    width="16"
+                    y={98 - bar.inc}
+                    width="15"
+                    height={bar.inc}
                     rx="3"
                     fill="#111110"
                   />
-                  <motion.rect
-                    x={x + 19}
-                    initial={{ y: 298, height: 0 }}
-                    whileInView={{ y: 298 - bar.exp, height: bar.exp }}
-                    viewport={{ once: false, amount: 0.25 }}
-                    transition={{
-                      duration: 0.7,
-                      delay: idx * 0.04 + 0.08,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    width="14"
+                  <rect
+                    x={x + 18}
+                    y={98 - bar.exp}
+                    width="13"
+                    height={bar.exp}
                     rx="3"
-                    fill="#A39F98"
+                    fill="#C8C4BE"
                   />
                   <text
-                    x={x + 16}
-                    y="320"
+                    x={x + 15}
+                    y="114"
                     textAnchor="middle"
-                    fill="#52504C"
-                    fontSize="10.5"
-                    fontWeight="500"
+                    fill="#787671"
+                    fontSize="10"
+                    fontWeight="600"
                   >
                     {bar.m}
                   </text>
                 </g>
               );
             })}
-
-            {/* Animated Cumulative Trajectory Line Overlay */}
-            <polyline
-              fill="none"
-              stroke="#52504C"
-              strokeWidth="2"
-              strokeDasharray="4 4"
-              className="animate-dash-flow"
-              points="90,175 142,162 194,168 246,148 298,136 350,130 402,118 454,112 506,104 558,95 610,88 662,80"
-            />
-          </g>
-        </svg>
-
-        {/* Companion Blush.design Illustration Strip for Finance Dashboard */}
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          <motion.div
-            whileHover={{ y: -2 }}
-            className="group rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 flex items-center gap-3 transition-shadow hover:shadow-[0_6px_18px_rgba(17,17,16,0.04)]"
-          >
-            <BlushAssetImage
-              src={BLUSH_ASSETS.financeCharts}
-              alt="Visual budget & chart tracking illustration"
-              floatDelay={0.3}
-              className="w-16 h-14 rounded-[8px] bg-[#F7F6F3] p-1 shrink-0"
-            />
-            <div className="min-w-0">
-              <p className="text-[12.5px] font-semibold text-[#111110] truncate">
-                Visual Budget Breakdown
-              </p>
-              <p className="text-[11.5px] text-[#78756F] leading-snug">
-                Spot cash-flow trends in seconds.
-              </p>
-            </div>
-          </motion.div>
-          <motion.div
-            whileHover={{ y: -2 }}
-            className="group rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 flex items-center gap-3 transition-shadow hover:shadow-[0_6px_18px_rgba(17,17,16,0.04)]"
-          >
-            <BlushAssetImage
-              src={BLUSH_ASSETS.financialAnalyst}
-              alt="Net worth and savings analytics illustration"
-              floatDelay={0.9}
-              className="w-16 h-14 rounded-[8px] bg-[#F7F6F3] p-1 shrink-0"
-              maskCorner={false}
-            />
-            <div className="min-w-0">
-              <p className="text-[12.5px] font-semibold text-[#111110] truncate">
-                Net-Worth Rollups
-              </p>
-              <p className="text-[11.5px] text-[#78756F] leading-snug">
-                Track every account in one ledger.
-              </p>
-            </div>
-          </motion.div>
+          </svg>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full rounded-[16px] border border-[#E8E6E1] bg-[#F7F6F3] p-4 sm:p-6 shadow-[0_1px_2px_rgba(17,17,16,0.035)]">
-      <svg
-        viewBox="0 0 800 560"
-        className="w-full h-auto block rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB]"
-        role="img"
-        aria-label="Digital Minimalism desktop and mobile setup preview"
-      >
-        <rect width="800" height="560" rx="12" fill="#FDFCFB" />
-
-        {/* Minimalist Desktop Frame */}
-        <g transform="translate(56, 62)">
-          <rect
-            width="470"
-            height="310"
-            rx="14"
-            fill="#111110"
-          />
-          <rect
-            x="12"
-            y="12"
-            width="446"
-            height="286"
-            rx="8"
-            fill="#F7F6F3"
-          />
-          {/* Minimalist Quote / Clock on Desktop Wallpaper */}
-          <text
-            x="235"
-            y="138"
-            textAnchor="middle"
-            fill="#111110"
-            fontSize="36"
-            fontWeight="700"
-            letterSpacing="-0.04em"
-          >
-            09:41
-          </text>
-          <text
-            x="235"
-            y="166"
-            textAnchor="middle"
-            fill="#78756F"
-            fontSize="13"
-            fontWeight="500"
-          >
-            Less, but better.
-          </text>
-          {/* Minimalist dock */}
-          <rect
-            x="165"
-            y="258"
-            width="140"
-            height="24"
-            rx="12"
-            fill="#FDFCFB"
-            stroke="#E8E6E1"
-          />
-          {[0, 1, 2, 3, 4].map((d) => (
-            <rect
-              key={d}
-              x={179 + d * 24}
-              y="264"
-              width="12"
-              height="12"
-              rx="3"
-              fill="#111110"
-            />
-          ))}
-          {/* Monitor Stand */}
-          <rect x="205" y="310" width="60" height="36" fill="#D5D2CB" />
-          <rect x="165" y="346" width="140" height="8" rx="4" fill="#A39F98" />
-        </g>
-
-        {/* Minimalist Phone Frame Overlapping Right */}
-        <g transform="translate(510, 110)">
-          <rect
-            width="224"
-            height="396"
-            rx="32"
-            fill="#111110"
-          />
-          <rect
-            x="10"
-            y="10"
-            width="204"
-            height="376"
-            rx="24"
-            fill="#FDFCFB"
-          />
-          {/* Dynamic Island */}
-          <rect x="78" y="22" width="68" height="16" rx="8" fill="#111110" />
-
-          <text
-            x="112"
-            y="92"
-            textAnchor="middle"
-            fill="#111110"
-            fontSize="30"
-            fontWeight="700"
-            letterSpacing="-0.03em"
-          >
-            Saturday
-          </text>
-          <text
-            x="112"
-            y="114"
-            textAnchor="middle"
-            fill="#78756F"
-            fontSize="12"
-            fontWeight="500"
-          >
-            4 Essential Tools Only
-          </text>
-
-          {/* 4 Minimalist Text-List Launcher Rows */}
-          {['01 · Calendar', '02 · Notion', '03 · SyncTasks', '04 · Journal'].map(
-            (app, idx) => (
-              <g key={app} transform={`translate(28, ${148 + idx * 44})`}>
-                <rect
-                  width="168"
-                  height="34"
-                  rx="8"
-                  fill={idx === 1 ? '#F1EFEA' : '#F7F6F3'}
-                  stroke="#E8E6E1"
-                />
-                <text x="14" y="21" fill="#111110" fontSize="12" fontWeight="600">
-                  {app}
-                </text>
-                {idx === 1 && (
-                  <circle cx="152" cy="17" r="3" fill="#111110" className="animate-pulse-soft" />
-                )}
-              </g>
-            )
-          )}
-
-          {/* Home Indicator */}
-          <rect x="76" y="368" width="72" height="4" rx="2" fill="#111110" />
-        </g>
-      </svg>
-
-      {/* Companion Blush.design Illustration Strip for Digital Minimalism */}
-      <div className="mt-4 grid grid-cols-2 gap-3">
-        <motion.div
-          whileHover={{ y: -2 }}
-          className="group rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 flex items-center gap-3 transition-shadow hover:shadow-[0_6px_18px_rgba(17,17,16,0.04)]"
-        >
+    <div className="w-full rounded-[20px] border border-[#E5E3DF] bg-[#EBF8EF] p-5 sm:p-7 space-y-5 shadow-[0_12px_32px_-8px_rgba(15,15,15,0.06)]">
+      {/* Top Digital Minimalism Blush Illustrations */}
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
+        <div className="sm:col-span-6 rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-[11px] font-semibold text-[#787671] mb-2">
+            <span>Intentional Living Space</span>
+            <span className="font-mono text-[#111110]">Calm Environment</span>
+          </div>
           <BlushAssetImage
             src={BLUSH_ASSETS.minimalistLivingRoom}
-            alt="Calm minimalist environment illustration"
-            floatDelay={0.4}
-            className="w-16 h-14 rounded-[8px] bg-[#F7F6F3] p-1 shrink-0"
+            alt="Minimalist living space illustration"
+            floatDelay={0.2}
+            className="w-full h-44 sm:h-48"
           />
-          <div className="min-w-0">
-            <p className="text-[12.5px] font-semibold text-[#111110] truncate">
-              Intentional Environment
-            </p>
-            <p className="text-[11.5px] text-[#78756F] leading-snug">
-              Quiet setups for distraction-free focus.
-            </p>
+          <p className="pt-3 border-t border-[#F0EEEC] text-[12px] font-medium text-[#37352F]">
+            Replace algorithmic noise with quiet daily reading & reflection rituals.
+          </p>
+        </div>
+
+        <div className="sm:col-span-6 rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-[11px] font-semibold text-[#787671] mb-2">
+            <span>Focused Study & Desk Setup</span>
+            <span className="font-mono text-[#111110]">Deep Work</span>
           </div>
-        </motion.div>
-        <motion.div
-          whileHover={{ y: -2 }}
-          className="group rounded-[12px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 flex items-center gap-3 transition-shadow hover:shadow-[0_6px_18px_rgba(17,17,16,0.04)]"
-        >
+          <BlushAssetImage
+            src={BLUSH_ASSETS.calmStudyDesk}
+            alt="Calm study desk illustration"
+            floatDelay={0.5}
+            className="w-full h-44 sm:h-48"
+          />
+          <p className="pt-3 border-t border-[#F0EEEC] text-[12px] font-medium text-[#37352F]">
+            Curated monochrome wallpapers, launcher menus, and distraction-free tools.
+          </p>
+        </div>
+      </div>
+
+      {/* Secondary Pair: Modern Workspace & Evening Unwind */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex items-center gap-4">
           <BlushAssetImage
             src={BLUSH_ASSETS.modernWorkspace}
-            alt="Minimalist digital workspace illustration"
-            floatDelay={1.0}
-            className="w-16 h-14 rounded-[8px] bg-[#F7F6F3] p-1 shrink-0"
-            maskCorner={false}
+            alt="Modern desktop workspace illustration"
+            floatDelay={0.35}
+            className="w-24 h-20 shrink-0"
           />
           <div className="min-w-0">
-            <p className="text-[12.5px] font-semibold text-[#111110] truncate">
-              Curated Toolstack
+            <p className="text-[13px] font-bold text-[#111110]">
+              Minimalist Desktop Setup
             </p>
-            <p className="text-[11.5px] text-[#78756F] leading-snug">
-              Wallpapers, workflows & focused apps.
+            <p className="text-[12px] text-[#37352F] leading-snug mt-0.5">
+              4 essential utility apps on your dock and home screen.
             </p>
           </div>
-        </motion.div>
+        </div>
+
+        <div className="rounded-[14px] bg-white border border-[#E5E3DF] p-4 flex items-center gap-4">
+          <BlushAssetImage
+            src={BLUSH_ASSETS.relaxedLaptopCreator}
+            alt="Relaxed evening journaling creator illustration"
+            floatDelay={0.75}
+            className="w-24 h-20 shrink-0"
+          />
+          <div className="min-w-0">
+            <p className="text-[13px] font-bold text-[#111110]">
+              Evening Digital Sunset
+            </p>
+            <p className="text-[12px] text-[#37352F] leading-snug mt-0.5">
+              Unwind with guided journaling and zero notifications.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -1692,7 +1024,7 @@ export const AppIconGlyph: React.FC<{
   icon: 'grid' | 'book' | 'flask' | 'check-circle';
 }> = ({ icon }) => {
   return (
-    <div className="w-10 h-10 rounded-[8px] border border-[#E8E6E1] bg-[#F7F6F3] flex items-center justify-center text-[#111110] shrink-0 transition-transform duration-300 group-hover:scale-105">
+    <div className="w-10 h-10 rounded-[8px] border border-[#E5E3DF] bg-[#FAF9F7] flex items-center justify-center text-[#111110] shrink-0 transition-transform duration-300 group-hover:scale-105">
       {icon === 'grid' && (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <rect x="3" y="3" width="7" height="7" rx="1.5" />
