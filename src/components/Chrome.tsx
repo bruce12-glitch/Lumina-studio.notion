@@ -117,54 +117,65 @@ export const Header: React.FC<NavigationProps> = ({
           </div>
 
           {/* Zone 3: Right Actions */}
-          <div className="hidden md:flex items-center gap-2 shrink-0">
+          <div className="hidden md:flex items-center gap-2.5 shrink-0">
             {purchasesCount > 0 && (
-              <button
+              <motion.button
                 type="button"
+                whileHover={{ y: -1.5, scale: 1.015 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={onOpenLibrary}
-                className="h-10 px-3.5 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[13px] font-semibold inline-flex items-center gap-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                className="btn-motion-secondary h-10 px-3.5 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[13px] font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>My Downloads ({purchasesCount})</span>
-              </button>
+              </motion.button>
             )}
-            <a
+            <motion.a
               href="/sign-in"
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 28 }}
               onClick={(e) => handleLink(e, '/sign-in')}
-              className="h-10 px-4 rounded-[10px] text-[14px] font-medium text-[#525252] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] inline-flex items-center justify-center transition-colors whitespace-nowrap shrink-0"
+              className="btn-motion-ghost h-10 px-4 rounded-[10px] text-[14px] font-medium text-[#525252] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] inline-flex items-center justify-center whitespace-nowrap shrink-0"
             >
               Sign In
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="/sign-up"
+              whileHover={{ y: -1.5, scale: 1.015 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={(e) => handleLink(e, '/sign-up')}
-              className="h-10 px-[18px] rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] active:translate-y-[1px] text-white text-[14px] font-semibold inline-flex items-center justify-center transition-all whitespace-nowrap shrink-0"
+              className="btn-motion-primary h-10 px-[18px] rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center justify-center whitespace-nowrap shrink-0"
             >
               Create a free account
-            </a>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Trigger (<768px) */}
           <div className="flex md:hidden items-center gap-2">
             {purchasesCount > 0 && (
-              <button
+              <motion.button
                 type="button"
+                whileTap={{ scale: 0.95 }}
                 onClick={onOpenLibrary}
                 aria-label={`My Downloads (${purchasesCount})`}
                 className="h-11 px-3 rounded-[10px] border border-[#EAEAEA] bg-[#FAFAFA] text-[#0A0A0A] text-xs font-semibold inline-flex items-center gap-1.5"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>{purchasesCount}</span>
-              </button>
+              </motion.button>
             )}
-            <button
+            <motion.button
               type="button"
+              whileTap={{ scale: 0.94 }}
               onClick={onOpenMenu}
               aria-label="Open menu"
               className="w-11 h-11 rounded-[10px] inline-flex items-center justify-center text-[#0A0A0A] hover:bg-[#F5F5F5] transition-colors cursor-pointer"
             >
               <MenuIcon className="w-5 h-5 stroke-[1.5]" />
-            </button>
+            </motion.button>
           </div>
         </div>
       </header>
@@ -420,13 +431,16 @@ export const Footer: React.FC<{
                     aria-label="Email address for newsletter"
                     className="h-11 flex-1 px-3.5 rounded-[8px] bg-white border border-[#C8C4BE] text-[14px] text-[#111110] placeholder:text-[#A4A097] focus:outline-none focus:border-[#111110] transition-colors"
                   />
-                  <button
+                  <motion.button
                     type="submit"
-                    className="h-11 px-5 rounded-[8px] bg-[#111110] hover:bg-[#262523] active:translate-y-[1px] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 transition-all whitespace-nowrap shrink-0 cursor-pointer"
+                    whileHover={{ y: -1.5, scale: 1.015 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                    className="btn-motion-primary h-11 px-5 rounded-[8px] bg-[#111110] hover:bg-[#262523] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
                   >
                     <span>Subscribe Free</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                    <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
+                  </motion.button>
                 </form>
               )}
             </div>
@@ -671,14 +685,16 @@ export const Footer: React.FC<{
               ·
             </span>
 
-            <button
+            <motion.button
               type="button"
+              whileHover={{ y: -1.5 }}
+              whileTap={{ scale: 0.96 }}
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1 text-[12px] font-medium text-[#52504C] hover:text-[#111110] transition-colors cursor-pointer"
+              className="btn-motion-ghost inline-flex items-center gap-1 text-[12px] font-medium text-[#52504C] hover:text-[#111110] cursor-pointer"
             >
               <span>Back to top</span>
-              <ArrowUp className="w-3.5 h-3.5" />
-            </button>
+              <ArrowUp className="w-3.5 h-3.5 transition-transform duration-180 group-hover:-translate-y-0.5" />
+            </motion.button>
           </div>
         </div>
       </div>
@@ -701,7 +717,7 @@ export const TemplateCard: React.FC<{
     <a
       href={`/templates/${template.slug}`}
       onClick={handleClick}
-      className="group block rounded-[16px] border border-[#E5E3DF] bg-white overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-[3px] hover:border-[#C8C4BE] hover:shadow-[0_14px_30px_-8px_rgba(15,15,15,0.08)]"
+      className="group card-editorial-surface block rounded-[16px] border border-[#E5E3DF] bg-white overflow-hidden"
     >
       <TemplateCover
         name={template.name}
@@ -714,35 +730,39 @@ export const TemplateCard: React.FC<{
       <div className="p-4 flex flex-col gap-2">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
-            <p className="text-[11px] font-medium text-[#787671] truncate">
+            <p className="text-[11.5px] font-medium text-[#787671] truncate">
               {template.category}
             </p>
-            <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#111110] truncate mt-0.5">
+            <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#111110] truncate mt-0.5 group-hover:text-[#0A0A0A]">
               {template.name}
             </h3>
           </div>
           {isPurchased && (
-            <span className="text-[11px] font-medium text-[#15803D] shrink-0">
+            <span className="text-[11px] font-semibold text-[#15803D] shrink-0">
               Owned
             </span>
           )}
         </div>
 
-        <div className="flex items-center justify-between pt-0.5">
-          <div className="flex items-center gap-1.5 tabular-nums text-[14px] font-semibold leading-none">
+        <div className="flex items-center justify-between pt-1 border-t border-[#F3F2EE]">
+          <div className="flex items-center gap-1.5 tabular-nums text-[14.5px] font-semibold leading-none">
             {template.compareAt !== undefined && (
               <span className="text-[#A4A097] line-through">
                 {formatPrice(template.compareAt)}
               </span>
             )}
             <span className="text-[#111110]">{formatPrice(template.price)}</span>
+            {template.pro && (
+              <span className="ml-1 text-[10px] font-mono font-bold uppercase tracking-[0.07em] text-[#787671]">
+                · PRO
+              </span>
+            )}
           </div>
 
-          {template.pro && (
-            <span className="rounded-full bg-[#111110] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-[7px] py-[3px] leading-none">
-              PRO
-            </span>
-          )}
+          <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#52504C] group-hover:text-[#111110] transition-colors">
+            <span>Inspect</span>
+            <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
+          </span>
         </div>
       </div>
     </a>
@@ -1070,49 +1090,57 @@ export const TestimonialsSection: React.FC<{
             aria-label="Testimonial layout mode"
             className="inline-flex items-center p-1 rounded-[10px] bg-[#F5F5F5] border border-[#EAEAEA]"
           >
-            <button
+            <motion.button
               type="button"
+              whileTap={{ scale: 0.96 }}
               onClick={() => setLayoutMode('grid')}
               aria-pressed={layoutMode === 'grid'}
-              className={`px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 layoutMode === 'grid'
                   ? 'bg-white text-[#0A0A0A] shadow-[0_1px_2px_rgba(10,10,10,0.06)]'
                   : 'text-[#525252] hover:text-[#0A0A0A]'
               }`}
             >
               Grid View
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               type="button"
+              whileTap={{ scale: 0.96 }}
               onClick={() => setLayoutMode('swipe')}
               aria-pressed={layoutMode === 'swipe'}
-              className={`px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 layoutMode === 'swipe'
                   ? 'bg-white text-[#0A0A0A] shadow-[0_1px_2px_rgba(10,10,10,0.06)]'
                   : 'text-[#525252] hover:text-[#0A0A0A]'
               }`}
             >
               Swipe View
-            </button>
+            </motion.button>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <button
+            <motion.button
               type="button"
+              whileHover={{ y: -1.5, scale: 1.04 }}
+              whileTap={{ scale: 0.94 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() => scrollToCard(activeIndex - 1)}
               aria-label="Previous customer review"
-              className="w-10 h-10 rounded-[10px] border border-[#EAEAEA] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] inline-flex items-center justify-center transition-colors cursor-pointer"
+              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#EAEAEA] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] inline-flex items-center justify-center cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               type="button"
+              whileHover={{ y: -1.5, scale: 1.04 }}
+              whileTap={{ scale: 0.94 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() => scrollToCard(activeIndex + 1)}
               aria-label="Next customer review"
-              className="w-10 h-10 rounded-[10px] border border-[#EAEAEA] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] inline-flex items-center justify-center transition-colors cursor-pointer"
+              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#EAEAEA] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] inline-flex items-center justify-center cursor-pointer"
             >
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
