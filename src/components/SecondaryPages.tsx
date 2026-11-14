@@ -24,6 +24,7 @@ import { CheckoutTarget } from './CheckoutModal';
 import { FaqAccordion, PromoBanner, TemplateCard } from './Chrome';
 import {
   AppIconGlyph,
+  BlushAssetImage,
   FeatureMedia,
   TemplateCover,
 } from './CoversAndIllustrations';
@@ -406,7 +407,12 @@ export const AppsPage: React.FC<{
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-5">
-            <AppIconGlyph icon={app.icon} />
+            <div className="flex items-center gap-3">
+              <AppIconGlyph icon={app.icon} />
+              <span className="text-[12.5px] font-mono text-[#737373]">
+                {app.platform} · {app.priceLabel}
+              </span>
+            </div>
             <div className="space-y-2">
               <h1 className="text-[clamp(32px,4.5vw,48px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#0A0A0A]">
                 {app.name}
@@ -416,10 +422,17 @@ export const AppsPage: React.FC<{
             <p className="text-[16px] text-[#525252] leading-[1.6]">
               {app.description}
             </p>
-            <div className="text-[13px] text-[#737373]">
-              <span>{app.platform}</span>
-              <span className="mx-2">·</span>
-              <span>{app.priceLabel}</span>
+            <div
+              style={{ backgroundColor: app.cardTint }}
+              className="rounded-[16px] border border-[#E5E3DF] p-4 max-w-[380px]"
+            >
+              <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-3 h-44 flex items-center justify-center">
+                <BlushAssetImage
+                  src={app.illustrationUrl}
+                  alt={`${app.name} workspace illustration`}
+                  className="w-full h-full"
+                />
+              </div>
             </div>
             <div className="pt-2 flex items-center gap-3">
               <button
@@ -516,7 +529,7 @@ export const AppsPage: React.FC<{
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {APPS.map((app) => (
+        {APPS.map((app, idx) => (
           <a
             key={app.slug}
             href={`/apps/${app.slug}`}
@@ -524,14 +537,30 @@ export const AppsPage: React.FC<{
               e.preventDefault();
               onNavigate(`/apps/${app.slug}`);
             }}
-            className="group p-6 rounded-[16px] border border-[#EAEAEA] bg-white hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(10,10,10,0.08)] transition-all flex flex-col justify-between gap-6"
+            className="group p-5 rounded-[18px] border border-[#EAEAEA] bg-white hover:-translate-y-[3px] hover:shadow-[0_12px_28px_rgba(10,10,10,0.08)] transition-all flex flex-col justify-between gap-4"
           >
-            <div className="flex items-start justify-between">
+            <div className="flex items-center justify-between">
               <AppIconGlyph icon={app.icon} />
               <ArrowUpRight className="w-4 h-4 text-[#737373] group-hover:text-[#0A0A0A] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </div>
-            <div className="space-y-1.5">
-              <h2 className="text-[16px] font-semibold text-[#0A0A0A]">{app.name}</h2>
+            <div
+              style={{ backgroundColor: app.cardTint }}
+              className="rounded-[12px] border border-[#EAE8E1] p-2.5"
+            >
+              <div className="w-full h-36 rounded-[9px] bg-white border border-[#F0EFEA] p-2 flex items-center justify-center">
+                <BlushAssetImage
+                  src={app.illustrationUrl}
+                  alt={`${app.name} illustration`}
+                  floatDelay={idx * 0.2}
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <div className="flex items-center justify-between gap-2">
+                <h2 className="text-[16px] font-semibold text-[#0A0A0A]">{app.name}</h2>
+                <span className="text-[11px] font-mono text-[#737373]">{app.priceLabel}</span>
+              </div>
               <p className="text-[14px] text-[#525252]">{app.tagline}</p>
             </div>
           </a>

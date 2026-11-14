@@ -43,6 +43,7 @@ import {
   FeatureMedia,
   HeroWorkspaceMode,
   HeroWorkspaceShowcase,
+  UltraHdSvgFilter,
 } from './components/CoversAndIllustrations';
 import {
   AllAccessPage,
@@ -219,6 +220,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#1D1D1F]">
+      <UltraHdSvgFilter />
       <Header
         currentPath={pathname}
         onNavigate={navigate}
@@ -236,7 +238,7 @@ export default function App() {
       <main id="main-content" className="flex-1">
         {pathname === '/' && (
           <div>
-            {/* 1. HERO SECTION — Notion × Blush.design Editorial Hero + Live Interactive Workspace */}
+            {/* 1. HERO SECTION — Editorial Hero + Live Interactive Workspace */}
             <section className="relative pt-10 pb-20 sm:pt-14 sm:pb-24 max-w-[1200px] mx-auto px-4 sm:px-6 overflow-hidden">
               {/* Subtle Architectural Dot-Matrix Backdrop */}
               <div
@@ -244,9 +246,9 @@ export default function App() {
                 className="pointer-events-none absolute inset-x-4 top-2 h-[560px] rounded-[28px] bg-editorial-grid opacity-55 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_82%)]"
               />
 
-              {/* Top Editorial Hero Stage: Framed by 4 Unique Floating Blush.design Character Vignettes */}
+              {/* Top Editorial Hero Stage: Framed by 4 Unique Floating Ultra-HD Character Vignettes */}
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Left Floating Blush Character Stack */}
+                {/* Left Floating Character Stack */}
                 <div className="order-2 lg:order-1 lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col gap-4 items-stretch lg:items-end lg:pr-2">
                   <motion.div
                     initial={{ opacity: 0, x: -16, rotate: -2 }}
@@ -262,8 +264,8 @@ export default function App() {
                     </div>
                     <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.monochromeSystemsArchitect}
-                        alt="Second Brain Notion systems architect illustration"
+                        src={BLUSH_ASSETS.secondBrainMazeBulb}
+                        alt="Second Brain Notion PARA system illustration"
                         floatDelay={0.1}
                         className="w-full h-28 sm:h-32"
                       />
@@ -288,8 +290,8 @@ export default function App() {
                     </div>
                     <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.purpleWindowCreator}
-                        alt="Content OS creator window Blush illustration"
+                        src={BLUSH_ASSETS.videoStudioCreator}
+                        alt="Content OS creator studio illustration"
                         floatDelay={0.35}
                         className="w-full h-24"
                       />
@@ -362,7 +364,7 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Right Floating Blush Character Stack */}
+                {/* Right Floating Character Stack */}
                 <div className="order-3 lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col gap-4 items-stretch lg:items-start lg:pl-2">
                   <motion.div
                     initial={{ opacity: 0, x: 16, rotate: 2 }}
@@ -378,8 +380,8 @@ export default function App() {
                     </div>
                     <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.donutLineChartAnalyst}
-                        alt="Finance Tracker analytics Blush illustration"
+                        src={BLUSH_ASSETS.mobilePiggyPortfolio}
+                        alt="Finance Tracker mobile portfolio illustration"
                         floatDelay={0.2}
                         className="w-full h-28 sm:h-32"
                       />
@@ -404,8 +406,8 @@ export default function App() {
                     </div>
                     <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
                       <BlushAssetImage
-                        src={BLUSH_ASSETS.monochromeTouchWorkflow}
-                        alt="Minimalist daily workflow Blush illustration"
+                        src={BLUSH_ASSETS.mindfulMeditationClock}
+                        alt="Minimalist daily meditation and habits illustration"
                         floatDelay={0.45}
                         className="w-full h-24"
                       />
@@ -654,7 +656,7 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {APPS.map((app) => (
+                  {APPS.map((app, idx) => (
                     <a
                       key={app.slug}
                       href={`/apps/${app.slug}`}
@@ -662,17 +664,42 @@ export default function App() {
                         e.preventDefault();
                         navigate(`/apps/${app.slug}`);
                       }}
-                      className="group p-6 rounded-[16px] border border-[#E6E5E3] bg-white hover:-translate-y-[2px] hover:border-[#D5D2CB] hover:shadow-[0_10px_24px_-6px_rgba(17,17,16,0.06)] transition-all duration-200 flex flex-col justify-between gap-6"
+                      className="group p-5 rounded-[18px] border border-[#E6E5E3] bg-white hover:-translate-y-[3px] hover:border-[#D5D2CB] hover:shadow-[0_14px_30px_-8px_rgba(17,17,16,0.08)] transition-all duration-200 flex flex-col justify-between gap-4"
                     >
-                      <div className="flex items-start justify-between">
-                        <AppIconGlyph icon={app.icon} />
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2.5">
+                          <AppIconGlyph icon={app.icon} />
+                          <span className="text-[11px] font-mono text-[#78756F]">
+                            {app.platform.split('·')[0].trim()}
+                          </span>
+                        </div>
                         <ArrowUpRight className="w-4 h-4 text-[#737373] group-hover:text-[#0A0A0A] transition-transform duration-180 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
-                      <div className="space-y-1">
-                        <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#0A0A0A]">
-                          {app.name}
-                        </h3>
-                        <p className="text-[14px] text-[#525252] leading-[1.5]">
+
+                      <div
+                        style={{ backgroundColor: app.cardTint }}
+                        className="rounded-[12px] border border-[#EAE8E1] p-2.5 flex items-center justify-center"
+                      >
+                        <div className="w-full h-36 rounded-[9px] bg-white border border-[#F0EFEA] p-2 flex items-center justify-center">
+                          <BlushAssetImage
+                            src={app.illustrationUrl}
+                            alt={`${app.name} — ${app.tagline} illustration`}
+                            floatDelay={idx * 0.25}
+                            className="w-full h-full"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 pt-0.5">
+                        <div className="flex items-center justify-between gap-2">
+                          <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#0A0A0A]">
+                            {app.name}
+                          </h3>
+                          <span className="text-[11px] font-mono font-medium text-[#52504C]">
+                            {app.priceLabel}
+                          </span>
+                        </div>
+                        <p className="text-[13.5px] text-[#525252] leading-[1.5]">
                           {app.tagline}
                         </p>
                       </div>
