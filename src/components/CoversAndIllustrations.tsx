@@ -447,33 +447,43 @@ export const HeroWorkspaceShowcase: React.FC<{
           ].map((tab) => {
             const active = activeMode === tab.id;
             return (
-              <button
+              <motion.button
                 key={tab.id}
                 type="button"
                 role="tab"
                 aria-selected={active}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.965 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 28 }}
                 onClick={() => onSelectMode(tab.id)}
-                className={`px-3.5 py-2 rounded-[8px] text-[12.5px] font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                className={`relative px-3.5 py-2 rounded-[8px] text-[12.5px] font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                   active
-                    ? 'bg-[#111110] text-white shadow-[0_2px_6px_rgba(17,17,16,0.18)]'
+                    ? 'text-white'
                     : 'text-[#37352F] hover:text-[#111110] hover:bg-white/70'
                 }`}
               >
-                {tab.label}
-              </button>
+                {active && (
+                  <motion.span
+                    layoutId="hero-workspace-active-tab"
+                    transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                    className="absolute inset-0 rounded-[8px] bg-[#111110] shadow-[0_4px_12px_rgba(17,17,16,0.22)]"
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </motion.button>
             );
           })}
         </div>
 
-        <div className="hidden md:flex items-center gap-3 text-[12.5px] text-[#787671]">
+        <div className="hidden md:flex items-center gap-2.5 text-[12.5px] text-[#787671]">
           <span>Interactive Notion Workspace</span>
           <span aria-hidden="true">·</span>
           <span className="font-medium text-[#111110]">Click tasks & tabs to test live</span>
         </div>
       </div>
 
-      {/* Main Notion Desktop Window Card (Matches Notion design.md workspace-mockup-card) */}
-      <div className="rounded-[16px] border border-[#E5E3DF] bg-white overflow-hidden shadow-[0_24px_48px_-12px_rgba(15,15,15,0.14)]">
+      {/* Main Notion Desktop Window Card */}
+      <div className="rounded-[18px] border border-[#E5E3DF] bg-white overflow-hidden shadow-[0_26px_54px_-14px_rgba(15,15,15,0.14)]">
         {/* Top macOS / Notion Window Title Bar */}
         <div className="px-4 py-3 bg-[#FAF9F7] border-b border-[#E5E3DF] flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">
@@ -488,20 +498,26 @@ export const HeroWorkspaceShowcase: React.FC<{
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <button
+            <motion.button
               type="button"
+              whileHover={{ y: -1.5, scale: 1.015 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() => onOpenTemplate(modeConfig.slug)}
-              className="h-8 px-3 rounded-[8px] border border-[#C8C4BE] bg-white hover:bg-[#F7F6F4] text-[12px] font-semibold text-[#111110] transition-colors cursor-pointer whitespace-nowrap"
+              className="btn-motion-secondary h-8 px-3.5 rounded-[8px] border border-[#C8C4BE] bg-white hover:bg-[#F7F6F4] text-[12px] font-semibold text-[#111110] cursor-pointer whitespace-nowrap shrink-0"
             >
               Inspect Details
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               type="button"
+              whileHover={{ y: -1.5, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() => onQuickCheckout(modeConfig.slug)}
-              className="h-8 px-3.5 rounded-[8px] bg-[#111110] hover:bg-[#262523] text-white text-[12px] font-semibold transition-colors cursor-pointer whitespace-nowrap"
+              className="btn-motion-primary h-8 px-3.5 rounded-[8px] bg-[#111110] hover:bg-[#262523] text-white text-[12px] font-semibold cursor-pointer whitespace-nowrap shrink-0"
             >
               Duplicate Template
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -538,9 +554,12 @@ export const HeroWorkspaceShowcase: React.FC<{
                 ].map((item) => {
                   const isCurrent = activeMode === item.id;
                   return (
-                    <button
+                    <motion.button
                       key={item.id}
                       type="button"
+                      whileHover={{ x: 2 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 28 }}
                       onClick={() => onSelectMode(item.id)}
                       className={`w-full px-2.5 py-2 rounded-[8px] text-left flex items-center justify-between text-[12.5px] transition-colors cursor-pointer ${
                         isCurrent
@@ -552,13 +571,13 @@ export const HeroWorkspaceShowcase: React.FC<{
                       <span className="text-[10.5px] font-mono text-[#787671]">
                         {item.meta}
                       </span>
-                    </button>
+                    </motion.button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Sidebar Featured Blush Illustration Callout */}
+            {/* Sidebar Featured Illustration Callout */}
             <div
               style={{ backgroundColor: modeConfig.secondaryTint }}
               className="rounded-[12px] border border-[#E5E3DF] p-3 space-y-2"
@@ -577,8 +596,14 @@ export const HeroWorkspaceShowcase: React.FC<{
           </aside>
 
           {/* Right Main Notion Canvas */}
-          <div className="lg:col-span-9 p-5 sm:p-7 space-y-6">
-            {/* Top Page Header + Large Prominent Blush Illustration Stage */}
+          <motion.div
+            key={activeMode}
+            initial={{ opacity: 0.72, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-9 p-5 sm:p-7 space-y-6"
+          >
+            {/* Top Page Header + Large Prominent Illustration Stage */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pb-6 border-b border-[#E5E3DF]">
               <div className="md:col-span-6 space-y-2.5 text-left">
                 <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[#787671]">
@@ -592,7 +617,7 @@ export const HeroWorkspaceShowcase: React.FC<{
                 </p>
               </div>
 
-              {/* Large Heroic Blush Illustration Showcase Card */}
+              {/* Large Heroic Illustration Showcase Card */}
               <div className="md:col-span-6">
                 <div
                   style={{ backgroundColor: modeConfig.surfaceTint }}
@@ -624,7 +649,7 @@ export const HeroWorkspaceShowcase: React.FC<{
               {modeConfig.metrics.map((m) => (
                 <div
                   key={m.label}
-                  className="rounded-[12px] border border-[#E5E3DF] bg-[#FAF9F7] p-3.5 text-left"
+                  className="rounded-[12px] border border-[#E5E3DF] bg-[#FAF9F7] p-3.5 text-left transition-colors hover:border-[#C8C4BE]"
                 >
                   <p className="text-[10px] font-bold uppercase tracking-[0.07em] text-[#787671]">
                     {m.label}
@@ -664,11 +689,14 @@ export const HeroWorkspaceShowcase: React.FC<{
                 {modeConfig.tasks.map((task) => {
                   const isDone = Boolean(checkedTasks[task.id]);
                   return (
-                    <button
+                    <motion.button
                       key={task.id}
                       type="button"
+                      whileHover={{ y: -1, scale: 1.005 }}
+                      whileTap={{ scale: 0.985 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 28 }}
                       onClick={() => toggleTask(task.id)}
-                      className="w-full px-3 py-2.5 rounded-[8px] border border-[#E5E3DF] bg-[#FAF9F7] hover:bg-[#F0EEEC] flex items-center justify-between gap-2.5 text-left transition-colors cursor-pointer"
+                      className="w-full px-3 py-2.5 rounded-[8px] border border-[#E5E3DF] bg-[#FAF9F7] hover:bg-[#F0EEEC] hover:border-[#C8C4BE] flex items-center justify-between gap-2.5 text-left transition-colors cursor-pointer"
                     >
                       <span className="flex items-center gap-2.5 min-w-0">
                         <span
@@ -701,12 +729,12 @@ export const HeroWorkspaceShowcase: React.FC<{
                       <span className="text-[10.5px] font-medium text-[#787671] shrink-0">
                         {task.tag}
                       </span>
-                    </button>
+                    </motion.button>
                   );
                 })}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
