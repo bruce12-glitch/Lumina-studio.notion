@@ -148,14 +148,18 @@ test('testimonials include 4 attributable reviews linked to valid catalog templa
     assert.ok(linkedTemplate, `Testimonial should link to valid template ${rev.templateSlug}`);
   }
 
-  // Verify all 24 Blush assets exist and have unique paths
+  // Verify all 30 copyright-free Ultra-HD assets exist and have unique paths
   const assetUrls = Object.values(BLUSH_ASSETS);
-  assert.equal(assetUrls.length, 24);
-  assert.equal(new Set(assetUrls).size, 24, 'All 24 BLUSH_ASSETS URLs must be unique');
+  assert.equal(assetUrls.length, 30);
+  assert.equal(new Set(assetUrls).size, 30, 'All 30 BLUSH_ASSETS URLs must be unique');
 
-  // Verify the first 23 templates use 23 completely unique illustrations and no two adjacent templates share an asset
-  const first23Assets = new Set(TEMPLATES.slice(0, 23).map((t) => t.illustrationUrl));
-  assert.equal(first23Assets.size, 23, 'First 23 templates must use 23 distinct Blush illustrations');
+  // Verify all 4 Apps by Easlo have distinct illustrations
+  const appAssets = new Set(APPS.map((a) => a.illustrationUrl));
+  assert.equal(appAssets.size, 4, 'All 4 Apps by Easlo must use distinct illustrations');
+
+  // Verify the first 30 templates use 30 completely unique illustrations and no two adjacent templates share an asset
+  const first30Assets = new Set(TEMPLATES.slice(0, 30).map((t) => t.illustrationUrl));
+  assert.equal(first30Assets.size, 30, 'First 30 templates must use all 30 distinct copyright-free illustrations');
   for (let i = 1; i < TEMPLATES.length; i++) {
     assert.notEqual(
       TEMPLATES[i].illustrationUrl,
