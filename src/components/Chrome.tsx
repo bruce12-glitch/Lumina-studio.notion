@@ -431,35 +431,57 @@ export const Footer: React.FC<{
               )}
             </div>
 
-            {/* Right Notion System Specification Duo */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-3">
-                <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
-                  <span>Free Collection</span>
-                  <span className="font-bold text-[#15803D]">$0</span>
-                </div>
-                <div>
-                  <p className="font-display text-[26px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
-                    22 Setups
+            {/* Right Editorial Dispatch Visual & Notion System Specification Duo */}
+            <div className="lg:col-span-5 flex flex-col gap-4">
+              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex items-center justify-between gap-4">
+                <div className="space-y-1 min-w-0">
+                  <span className="text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
+                    Weekly Creator Dispatch
+                  </span>
+                  <p className="text-[14.5px] font-bold text-[#111110] leading-snug">
+                    120,000+ Notion Architects
                   </p>
-                  <p className="mt-1.5 text-[12.5px] text-[#37352F] leading-snug">
-                    Ready-to-duplicate Notion trackers for habits, reading, and tasks.
+                  <p className="text-[12px] text-[#37352F] leading-snug">
+                    New workflows, PARA setups & minimalist templates every Sunday.
                   </p>
                 </div>
+                <BlushAssetImage
+                  src={BLUSH_ASSETS.socialMegaphoneCreator}
+                  alt="Sunday Minimalist Dispatch creator newsletter illustration"
+                  floatDelay={0.2}
+                  className="w-28 h-24 shrink-0"
+                />
               </div>
 
-              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-3">
-                <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
-                  <span>PRO Systems</span>
-                  <span className="font-bold text-[#111110]">PARA</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-2">
+                  <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
+                    <span>Free Collection</span>
+                    <span className="font-bold text-[#15803D]">$0</span>
+                  </div>
+                  <div>
+                    <p className="font-display text-[22px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
+                      22 Setups
+                    </p>
+                    <p className="mt-1 text-[12px] text-[#37352F] leading-snug">
+                      Ready-to-duplicate Notion trackers for habits & tasks.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-display text-[26px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
-                    17 OS Kits
-                  </p>
-                  <p className="mt-1.5 text-[12.5px] text-[#37352F] leading-snug">
-                    Complete Second Brain, Finance, and Creator operating systems.
-                  </p>
+
+                <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-2">
+                  <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
+                    <span>PRO Systems</span>
+                    <span className="font-bold text-[#111110]">PARA</span>
+                  </div>
+                  <div>
+                    <p className="font-display text-[22px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
+                      17 OS Kits
+                    </p>
+                    <p className="mt-1 text-[12px] text-[#37352F] leading-snug">
+                      Complete Second Brain, Finance & Creator OS kits.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1182,9 +1204,9 @@ export const TestimonialsSection: React.FC<{
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-5">
         <motion.div
           whileHover={{ y: -2 }}
-          className="group lg:col-span-7 rounded-[16px] border border-[#E5E3DF] bg-[#F8F5E8] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-6 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
+          className="group lg:col-span-6 rounded-[16px] border border-[#E5E3DF] bg-[#EDF5FD] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-6 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
         >
-          <div className="space-y-2.5 max-w-[330px]">
+          <div className="space-y-2.5 max-w-[310px]">
             <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#787671]">
               Global Notion Community
             </p>
@@ -1196,20 +1218,19 @@ export const TestimonialsSection: React.FC<{
             </p>
           </div>
           <BlushAssetImage
-            src={BLUSH_ASSETS.communityBanner}
-            alt="Easlo Notion creator community illustration"
-            maskCorner={false}
+            src={BLUSH_ASSETS.globalCommunityNetwork}
+            alt="Easlo global Notion creator community network illustration"
             floatDelay={0.25}
-            className="w-full sm:w-[270px] h-[160px] rounded-[12px] bg-[#BFC8FF] border border-[#E5E3DF] overflow-hidden shrink-0"
-            imgClassName="w-full h-full object-cover"
+            className="w-full sm:w-[210px] h-[155px] rounded-[12px] bg-white border border-[#E5E3DF] p-3 shrink-0"
+            imgClassName="max-w-full max-h-full object-contain"
           />
         </motion.div>
 
         <motion.div
           whileHover={{ y: -2 }}
-          className="group lg:col-span-5 rounded-[16px] border border-[#E5E3DF] bg-[#FFF0E3] p-6 sm:p-7 flex flex-col justify-between gap-5 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
+          className="group lg:col-span-6 rounded-[16px] border border-[#E5E3DF] bg-[#F2EEFA] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-6 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
         >
-          <div className="space-y-2.5">
+          <div className="space-y-2.5 max-w-[310px]">
             <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#787671]">
               Instant Digital Delivery
             </p>
@@ -1217,25 +1238,29 @@ export const TestimonialsSection: React.FC<{
               Automated Stripe & Lemon Squeezy Fulfillment
             </h3>
             <p className="text-[13.5px] text-[#37352F] leading-relaxed">
-              Receive your one-click Notion duplicate link, verified license key, and downloadable receipt seconds after checkout.
+              Receive your one-click Notion duplicate link, verified license key, and receipt seconds after checkout.
             </p>
+            <div className="pt-1">
+              <a
+                href="/templates"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('/templates');
+                }}
+                className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#111110] hover:underline underline-offset-4"
+              >
+                <span>Browse 17 PRO templates</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
-          <div className="pt-3 border-t border-black/[0.08] flex items-center justify-between gap-3">
-            <span className="text-[12px] font-mono font-semibold text-[#111110]">
-              100% Instant Provisioning
-            </span>
-            <a
-              href="/templates"
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigate('/templates');
-              }}
-              className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#111110] hover:underline underline-offset-4"
-            >
-              <span>Browse 17 PRO templates</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
+          <BlushAssetImage
+            src={BLUSH_ASSETS.clientDealHandshake}
+            alt="Instant digital fulfillment and license delivery illustration"
+            floatDelay={0.45}
+            className="w-full sm:w-[210px] h-[155px] rounded-[12px] bg-white border border-[#E5E3DF] p-3 shrink-0"
+            imgClassName="max-w-full max-h-full object-contain"
+          />
         </motion.div>
       </div>
     </section>
