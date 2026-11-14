@@ -8,6 +8,7 @@ import { motion } from 'motion/react';
 import {
   ArrowRight,
   ArrowUpRight,
+  Check,
   CreditCard,
   Download,
   Search,
@@ -16,6 +17,7 @@ import {
 import {
   APPS,
   BLUSH_ASSETS,
+  BLUSH_WORKFLOW_CARDS,
   CATEGORIES,
   Category,
   TEMPLATES,
@@ -23,6 +25,7 @@ import {
 import {
   DigitalDeliveryPackage,
   filterTemplates,
+  formatPrice,
   getCategoryCounts,
 } from './utils/storeLogic';
 import {
@@ -155,6 +158,27 @@ export default function App() {
     });
   }, []);
 
+  const handleOpenTemplateOrCheckout = useCallback(
+    (slug: string) => {
+      const found = TEMPLATES.find((t) => t.slug === slug);
+      if (!found) return;
+      const existing = purchases.find((p) => p.itemSlug === found.slug);
+      if (existing) {
+        setActiveDelivery(existing);
+      } else {
+        setCheckoutTarget({
+          name: found.name,
+          slug: found.slug,
+          price: found.price,
+          compareAt: found.compareAt,
+          pro: found.pro,
+          whatsInside: found.whatsInside,
+        });
+      }
+    },
+    [purchases]
+  );
+
   // Hero 3-card preview strip: Second Brain, Finance Tracker, Habit Tracker
   const heroPreviewTemplates = useMemo(() => {
     const slugs = ['second-brain', 'finance-tracker', 'habit-tracker'];
@@ -196,7 +220,7 @@ export default function App() {
   const { pathname, category } = routeState;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDFCFB] text-[#111110]">
+    <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#1D1D1F]">
       <Header
         currentPath={pathname}
         onNavigate={navigate}
@@ -214,57 +238,99 @@ export default function App() {
       <main id="main-content" className="flex-1">
         {pathname === '/' && (
           <div>
-            {/* 1. HERO SECTION — SOTA Asymmetric 12-Column Editorial Split Stage & Interactive Notion Workspace */}
-            <section className="relative pt-10 pb-20 sm:pt-16 sm:pb-24 max-w-[1200px] mx-auto px-4 sm:px-6">
+            {/* 1. HERO SECTION — Notion × Blush.design Editorial Hero + Live Interactive Workspace */}
+            <section className="relative pt-10 pb-20 sm:pt-14 sm:pb-24 max-w-[1200px] mx-auto px-4 sm:px-6 overflow-hidden">
               {/* Subtle Architectural Dot-Matrix Backdrop */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-4 top-2 h-[540px] rounded-[28px] bg-editorial-grid opacity-65 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"
+                className="pointer-events-none absolute inset-x-4 top-2 h-[560px] rounded-[28px] bg-editorial-grid opacity-55 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_82%)]"
               />
 
-              {/* Primary Asymmetric 12-Column Hero Split */}
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center animate-fade-up">
-                {/* Left Column (5 Cols): Editorial Display Typography, Actions, & Metric Ledger */}
-                <div className="lg:col-span-5 space-y-6 text-left">
-                  {/* Studio Creator Eyebrow Pill with Floating Blush Vignette */}
-                  <div className="inline-flex items-center gap-3 pr-4 pl-2 py-1.5 rounded-full border border-[#E8E6E1] bg-[#F7F6F2] shadow-[0_2px_10px_rgba(17,17,16,0.03)]">
-                    <BlushAssetImage
-                      src={BLUSH_ASSETS.notionLineArtCreator}
-                      alt="Easlo Notion creator studio illustration"
-                      floatDelay={0.1}
-                      className="w-8 h-7 rounded-full bg-[#FDFCFB] border border-[#E8E6E1] p-0.5 shrink-0"
-                    />
-                    <div className="flex items-center gap-2 text-[12px] font-medium text-[#52504C]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#15803D] animate-pulse-soft" />
-                      <span className="font-semibold text-[#111110]">Easlo Studio</span>
-                      <span aria-hidden="true" className="text-[#D5D2CB]">·</span>
-                      <span>300k+ Duplications</span>
+              {/* Top Editorial Hero Stage: Framed by Large Floating Blush.design Character Vignettes */}
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                {/* Left Floating Blush Character Stack (Desktop) */}
+                <div className="hidden lg:flex lg:col-span-3 flex-col gap-4 items-end pr-2">
+                  <motion.div
+                    initial={{ opacity: 0, x: -16, rotate: -2 }}
+                    animate={{ opacity: 1, x: 0, rotate: -2 }}
+                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={() => navigate('/templates/second-brain')}
+                    className="w-full max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    style={{ backgroundColor: '#F8F5E8' }}
+                  >
+                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
+                      <span>01 · PARA System</span>
+                      <span className="font-bold text-[#111110]">$39</span>
                     </div>
+                    <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.notionLineArtCreator}
+                        alt="Second Brain Notion line art creator illustration"
+                        floatDelay={0.1}
+                        className="w-full h-32"
+                      />
+                    </div>
+                    <p className="mt-2 text-[12px] font-semibold text-[#111110] flex items-center justify-between">
+                      <span>Second Brain 5.0</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#78756F]" />
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -12, rotate: 1.5 }}
+                    animate={{ opacity: 1, x: 0, rotate: 1.5 }}
+                    transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={() => navigate('/templates/content-os')}
+                    className="w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    style={{ backgroundColor: '#FFF0E3' }}
+                  >
+                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
+                      <span>02 · Creator Desk</span>
+                      <span className="font-bold text-[#111110]">PRO</span>
+                    </div>
+                    <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.creatorDesktop}
+                        alt="Creator desktop studio Blush illustration"
+                        floatDelay={0.35}
+                        className="w-full h-24"
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Center Editorial Headline, Sub-Headline, Primary CTA & Trust Strip */}
+                <div className="lg:col-span-6 text-center space-y-6">
+                  <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-[8px] border border-[#E6E5E3] bg-[#F6F5F4] text-[12px] font-medium text-[#52504C]">
+                    <span className="font-semibold text-[#111110]">Easlo Notion Store</span>
+                    <span aria-hidden="true" className="text-[#C7C5C0]">·</span>
+                    <span>39 Minimalist Systems</span>
+                    <span aria-hidden="true" className="text-[#C7C5C0]">·</span>
+                    <span className="font-mono text-[11px] text-[#111110]">300k+ Users</span>
                   </div>
 
-                  {/* Display Heading + Editorial Serif Sub-Accent */}
-                  <div className="space-y-2.5">
-                    <h1 className="text-[clamp(42px,5.2vw,60px)] font-[680] tracking-[-0.038em] leading-[1.03] text-[#111110]">
+                  <div className="space-y-3">
+                    <h1 className="font-display text-[clamp(44px,6vw,68px)] font-bold tracking-[-0.04em] leading-[1.02] text-[#111110]">
                       Notion Templates
                     </h1>
-                    <p className="font-serif italic text-[21px] sm:text-[24px] font-normal tracking-[-0.01em] text-[#52504C] leading-[1.25]">
-                      Crafted for calm, daily execution.
+                    <p className="font-serif italic text-[22px] sm:text-[26px] font-normal tracking-[-0.01em] text-[#52504C] leading-[1.25]">
+                      Where productivity meets calm, visual minimalism.
                     </p>
                   </div>
 
-                  <p className="text-[16.5px] sm:text-[17.5px] font-normal leading-[1.6] tracking-[-0.005em] text-[#52504C] max-w-[480px]">
+                  <p className="text-[17px] sm:text-[18.5px] font-normal leading-[1.58] tracking-[-0.008em] text-[#52504C] max-w-[540px] mx-auto">
                     Discover 30+ Notion templates to organize work and life, saving you valuable time.
                   </p>
 
-                  {/* Primary & Secondary CTAs */}
-                  <div className="pt-1 flex flex-wrap items-center gap-3">
+                  {/* Primary & Secondary Notion CTAs */}
+                  <div className="pt-1 flex flex-wrap items-center justify-center gap-3.5">
                     <a
                       href="/templates"
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/templates');
                       }}
-                      className="h-12 px-6 rounded-[10px] bg-[#111110] hover:bg-[#262523] active:translate-y-[1px] text-[#FDFCFB] text-[14px] font-semibold inline-flex items-center justify-center gap-2 transition-all whitespace-nowrap shrink-0 shadow-[0_8px_20px_-4px_rgba(17,17,16,0.22)]"
+                      className="h-12 px-7 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] active:translate-y-[1px] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 transition-all whitespace-nowrap shrink-0 shadow-[0_10px_24px_-6px_rgba(17,17,16,0.25)]"
                     >
                       <span>Shop Templates</span>
                       <ArrowRight className="w-4 h-4" />
@@ -272,53 +338,67 @@ export default function App() {
 
                     <button
                       type="button"
-                      onClick={() => {
-                        const sb = TEMPLATES.find((t) => t.slug === 'second-brain')!;
-                        setCheckoutTarget({
-                          name: sb.name,
-                          slug: sb.slug,
-                          price: sb.price,
-                          compareAt: sb.compareAt,
-                          pro: sb.pro,
-                          whatsInside: sb.whatsInside,
-                        });
-                      }}
-                      className="h-12 px-5 rounded-[10px] border border-[#D5D2CB] bg-[#FDFCFB] hover:bg-[#F7F6F3] text-[#111110] text-[14px] font-semibold inline-flex items-center justify-center gap-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                      onClick={() => handleOpenTemplateOrCheckout('second-brain')}
+                      className="h-12 px-6 rounded-[9px] border border-[#D4D2CC] bg-white hover:bg-[#F6F5F4] text-[#111110] text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
                     >
                       <span>Get Second Brain ($39)</span>
                     </button>
                   </div>
 
-                  {/* Architectural 3-Column Metric & Blush Character Ledger */}
-                  <div className="pt-3 border-t border-[#E8E6E1] grid grid-cols-3 gap-4">
-                    <div>
-                      <p className="text-[20px] font-bold tracking-[-0.025em] text-[#111110] tabular-nums">
-                        39
-                      </p>
-                      <p className="text-[12px] text-[#78756F]">
-                        Ready-made setups
+                  {/* Mobile / Tablet Blush Character Trio (Visible below lg) */}
+                  <div className="grid grid-cols-3 gap-3 pt-2 lg:hidden max-w-[520px] mx-auto">
+                    <div
+                      onClick={() => navigate('/templates/second-brain')}
+                      className="rounded-[14px] border border-[#E6E5E3] p-2.5 cursor-pointer"
+                      style={{ backgroundColor: '#F8F5E8' }}
+                    >
+                      <div className="rounded-[10px] bg-white p-1.5">
+                        <BlushAssetImage
+                          src={BLUSH_ASSETS.notionLineArtCreator}
+                          alt="Second Brain illustration"
+                          className="w-full h-20"
+                        />
+                      </div>
+                      <p className="mt-1.5 text-[11px] font-semibold text-[#111110] truncate">
+                        Second Brain
                       </p>
                     </div>
-                    <div>
-                      <p className="text-[20px] font-bold tracking-[-0.025em] text-[#111110] tabular-nums">
-                        22 Free
-                      </p>
-                      <p className="text-[12px] text-[#78756F]">
-                        Zero-cost templates
+                    <div
+                      onClick={() => navigate('/templates/finance-tracker')}
+                      className="rounded-[14px] border border-[#E6E5E3] p-2.5 cursor-pointer"
+                      style={{ backgroundColor: '#EDF5FD' }}
+                    >
+                      <div className="rounded-[10px] bg-white p-1.5">
+                        <BlushAssetImage
+                          src={BLUSH_ASSETS.financeCharts}
+                          alt="Finance Tracker illustration"
+                          className="w-full h-20"
+                        />
+                      </div>
+                      <p className="mt-1.5 text-[11px] font-semibold text-[#111110] truncate">
+                        Finance Tracker
                       </p>
                     </div>
-                    <div>
-                      <p className="text-[20px] font-bold tracking-[-0.025em] text-[#111110] tabular-nums">
-                        4.98 / 5
-                      </p>
-                      <p className="text-[12px] text-[#78756F]">
-                        Verified rating
+                    <div
+                      onClick={() => navigate('/templates/habit-tracker')}
+                      className="rounded-[14px] border border-[#E6E5E3] p-2.5 cursor-pointer"
+                      style={{ backgroundColor: '#EBF8EF' }}
+                    >
+                      <div className="rounded-[10px] bg-white p-1.5">
+                        <BlushAssetImage
+                          src={BLUSH_ASSETS.calmStudyDesk}
+                          alt="Habit Tracker illustration"
+                          className="w-full h-20"
+                        />
+                      </div>
+                      <p className="mt-1.5 text-[11px] font-semibold text-[#111110] truncate">
+                        Habit Tracker
                       </p>
                     </div>
                   </div>
 
-                  {/* Quiet Trust & Automated Delivery Strip */}
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-[#78756F]">
+                  {/* Quiet Automated Delivery & Payment Trust Bar */}
+                  <div className="pt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12.5px] text-[#78756F]">
                     <span className="inline-flex items-center gap-1.5">
                       <Download className="w-3.5 h-3.5 text-[#111110]" />
                       Instant Notion Duplication
@@ -326,51 +406,86 @@ export default function App() {
                     <span aria-hidden="true">·</span>
                     <span className="inline-flex items-center gap-1.5">
                       <CreditCard className="w-3.5 h-3.5 text-[#111110]" />
-                      Stripe & Lemon Squeezy
+                      Stripe & Lemon Squeezy Checkout
                     </span>
                     <span aria-hidden="true">·</span>
                     <span className="inline-flex items-center gap-1.5">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#111110]" />
-                      Free Notion Plan Ready
+                      Works on Free Notion Plan
                     </span>
                   </div>
                 </div>
 
-                {/* Right Column (7 Cols): Interactive Live Notion Workspace Stage */}
-                <div className="lg:col-span-7">
-                  <HeroWorkspaceShowcase
-                    activeMode={heroMode}
-                    onSelectMode={setHeroMode}
-                    onOpenTemplate={(slug) => navigate(`/templates/${slug}`)}
-                    onQuickCheckout={(slug) => {
-                      const found = TEMPLATES.find((t) => t.slug === slug);
-                      if (!found) return;
-                      const existing = purchases.find((p) => p.itemSlug === found.slug);
-                      if (existing) {
-                        setActiveDelivery(existing);
-                      } else {
-                        setCheckoutTarget({
-                          name: found.name,
-                          slug: found.slug,
-                          price: found.price,
-                          compareAt: found.compareAt,
-                          pro: found.pro,
-                          whatsInside: found.whatsInside,
-                        });
-                      }
-                    }}
-                  />
+                {/* Right Floating Blush Character Stack (Desktop) */}
+                <div className="hidden lg:flex lg:col-span-3 flex-col gap-4 items-start pl-2">
+                  <motion.div
+                    initial={{ opacity: 0, x: 16, rotate: 2 }}
+                    animate={{ opacity: 1, x: 0, rotate: 2 }}
+                    transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={() => navigate('/templates/finance-tracker')}
+                    className="w-full max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    style={{ backgroundColor: '#EDF5FD' }}
+                  >
+                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
+                      <span>03 · Cash Flow</span>
+                      <span className="font-bold text-[#111110]">$39</span>
+                    </div>
+                    <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.financeCharts}
+                        alt="Finance Tracker charts Blush illustration"
+                        floatDelay={0.2}
+                        className="w-full h-32"
+                      />
+                    </div>
+                    <p className="mt-2 text-[12px] font-semibold text-[#111110] flex items-center justify-between">
+                      <span>Finance Tracker</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#78756F]" />
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: 12, rotate: -1.5 }}
+                    animate={{ opacity: 1, x: 0, rotate: -1.5 }}
+                    transition={{ duration: 0.55, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={() => navigate('/templates/habit-tracker')}
+                    className="w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
+                    style={{ backgroundColor: '#EBF8EF' }}
+                  >
+                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
+                      <span>04 · Daily Calm</span>
+                      <span className="font-bold text-[#15803D]">FREE</span>
+                    </div>
+                    <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.calmStudyDesk}
+                        alt="Calm study desk Blush illustration"
+                        floatDelay={0.45}
+                        className="w-full h-24"
+                      />
+                    </div>
+                  </motion.div>
                 </div>
               </div>
 
+              {/* Interactive Live Notion Workspace Stage (Full 12-Col Centerpiece) */}
+              <div className="relative z-10 mt-12 sm:mt-14">
+                <HeroWorkspaceShowcase
+                  activeMode={heroMode}
+                  onSelectMode={setHeroMode}
+                  onOpenTemplate={(slug) => navigate(`/templates/${slug}`)}
+                  onQuickCheckout={handleOpenTemplateOrCheckout}
+                />
+              </div>
+
               {/* Featured Flagship Systems 3-Card Preview Strip */}
-              <div className="relative z-10 mt-16 sm:mt-20 pt-10 border-t border-[#E8E6E1]">
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-7">
+              <div className="relative z-10 mt-16 sm:mt-20 pt-12 border-t border-[#E6E5E3]">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
                   <div>
-                    <p className="text-[11.5px] font-semibold uppercase tracking-[0.08em] text-[#78756F]">
-                      Flagship Notion Systems · One-Click Duplication
+                    <p className="text-[11.5px] font-mono uppercase tracking-[0.08em] text-[#78756F]">
+                      Flagship Notion Systems · Instant One-Click Duplication
                     </p>
-                    <h2 className="mt-1 text-[20px] sm:text-[22px] font-semibold tracking-[-0.02em] text-[#111110]">
+                    <h2 className="mt-1 font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] text-[#111110]">
                       Most duplicated templates this week
                     </h2>
                   </div>
@@ -380,10 +495,10 @@ export default function App() {
                       e.preventDefault();
                       navigate('/templates');
                     }}
-                    className="group inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#111110] hover:underline underline-offset-4"
+                    className="group inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4"
                   >
                     <span>Explore all 39 templates</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </a>
                 </div>
 
@@ -395,7 +510,7 @@ export default function App() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
                         duration: 0.45,
-                        delay: 0.12 + idx * 0.08,
+                        delay: 0.1 + idx * 0.07,
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >
@@ -411,27 +526,47 @@ export default function App() {
             </section>
 
             {/* 2. FEATURE SPLIT: SECOND BRAIN */}
-            <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6">
+            <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#F0EFEA]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                <div className="lg:col-span-5 space-y-4 order-2 lg:order-1">
-                  <h2 className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#0A0A0A]">
+                <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#F8F5E8] border border-[#E6E0C8] text-[11px] font-mono uppercase tracking-[0.08em] text-[#111110]">
+                    <span>01 · Flagship PARA OS</span>
+                  </div>
+                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
                     Second Brain
                   </h2>
-                  <p className="text-[16px] text-[#525252] leading-[1.6]">
+                  <p className="text-[16.5px] text-[#52504C] leading-[1.6]">
                     An all-in-one Notion system to organize your tasks, projects, goals, and notes.
                   </p>
-                  <div className="pt-2">
+                  <ul className="space-y-2 text-[14px] text-[#52504C] pt-1">
+                    <li className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#111110] shrink-0" />
+                      <span>Projects, Areas, Resources & Archives (PARA)</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#111110] shrink-0" />
+                      <span>Automated Weekly Review & Daily Quick Capture</span>
+                    </li>
+                  </ul>
+                  <div className="pt-2 flex flex-wrap items-center gap-4">
                     <a
                       href="/second-brain"
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/second-brain');
                       }}
-                      className="group inline-flex items-center gap-2 text-[15px] font-medium text-[#0A0A0A] hover:underline underline-offset-4"
+                      className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 transition-colors"
                     >
                       <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-180 group-hover:translate-x-[3px]" />
+                      <ArrowRight className="w-4 h-4" />
                     </a>
+                    <button
+                      type="button"
+                      onClick={() => handleOpenTemplateOrCheckout('second-brain')}
+                      className="text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 cursor-pointer"
+                    >
+                      Instant Duplicate ($39) →
+                    </button>
                   </div>
                 </div>
 
@@ -442,58 +577,98 @@ export default function App() {
             </section>
 
             {/* 3. MIRRORED SPLIT: ALL-IN-ONE FINANCE DASHBOARD */}
-            <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6">
+            <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#F0EFEA]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 <div className="lg:col-span-7">
                   <FeatureMedia kind="finance" />
                 </div>
 
-                <div className="lg:col-span-5 space-y-4">
-                  <h2 className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#0A0A0A]">
+                <div className="lg:col-span-5 space-y-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#EDF5FD] border border-[#D0E3F8] text-[11px] font-mono uppercase tracking-[0.08em] text-[#111110]">
+                    <span>02 · Personal & Creator Ledger</span>
+                  </div>
+                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
                     All-In-One Finance Dashboard
                   </h2>
-                  <p className="text-[16px] text-[#525252] leading-[1.6]">
+                  <p className="text-[16.5px] text-[#52504C] leading-[1.6]">
                     Bring your financials in one place to get the big picture.
                   </p>
-                  <div className="pt-2">
+                  <ul className="space-y-2 text-[14px] text-[#52504C] pt-1">
+                    <li className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#111110] shrink-0" />
+                      <span>Monthly Cash Flow, 50/30/20 Budgets & Net Worth</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#111110] shrink-0" />
+                      <span>Subscription Renewal Radar & Tax-Ready Exports</span>
+                    </li>
+                  </ul>
+                  <div className="pt-2 flex flex-wrap items-center gap-4">
                     <a
                       href="/finance-tracker"
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/finance-tracker');
                       }}
-                      className="group inline-flex items-center gap-2 text-[15px] font-medium text-[#0A0A0A] hover:underline underline-offset-4"
+                      className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 transition-colors"
                     >
                       <span>Get Finance Tracker</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-180 group-hover:translate-x-[3px]" />
+                      <ArrowRight className="w-4 h-4" />
                     </a>
+                    <button
+                      type="button"
+                      onClick={() => handleOpenTemplateOrCheckout('finance-tracker')}
+                      className="text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 cursor-pointer"
+                    >
+                      Instant Duplicate ($39) →
+                    </button>
                   </div>
                 </div>
               </div>
             </section>
 
             {/* 4. SPLIT: BECOME A DIGITAL MINIMALIST */}
-            <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6">
+            <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#F0EFEA]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                <div className="lg:col-span-5 space-y-4 order-2 lg:order-1">
-                  <h2 className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#0A0A0A]">
+                <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#EBF8EF] border border-[#CBEAD5] text-[11px] font-mono uppercase tracking-[0.08em] text-[#111110]">
+                    <span>03 · Intentional Workflows</span>
+                  </div>
+                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
                     Become a Digital Minimalist
                   </h2>
-                  <p className="text-[16px] text-[#525252] leading-[1.6]">
+                  <p className="text-[16.5px] text-[#52504C] leading-[1.6]">
                     Find tutorials, apps, and wallpapers to turn your devices into minimalist tools.
                   </p>
-                  <div className="pt-2">
+                  <ul className="space-y-2 text-[14px] text-[#52504C] pt-1">
+                    <li className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#111110] shrink-0" />
+                      <span>22 Free Notion setups for daily habits, reading & study</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#111110] shrink-0" />
+                      <span>Zero-clutter monochrome layouts that work on any device</span>
+                    </li>
+                  </ul>
+                  <div className="pt-2 flex flex-wrap items-center gap-4">
                     <a
                       href="/blog"
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/blog');
                       }}
-                      className="group inline-flex items-center gap-2 text-[15px] font-medium text-[#0A0A0A] hover:underline underline-offset-4"
+                      className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 transition-colors"
                     >
                       <span>Start Here</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-180 group-hover:translate-x-[3px]" />
+                      <ArrowRight className="w-4 h-4" />
                     </a>
+                    <button
+                      type="button"
+                      onClick={() => handleOpenTemplateOrCheckout('habit-tracker')}
+                      className="text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 cursor-pointer"
+                    >
+                      Duplicate Free Habit Tracker ($0) →
+                    </button>
                   </div>
                 </div>
 
@@ -503,15 +678,103 @@ export default function App() {
               </div>
             </section>
 
-            {/* TESTIMONIALS SECTION BENEATH FEATURE SPLITS */}
+            {/* 5. BUILT FOR EVERY WORKFLOW — FULL BLUSH.DESIGN VISUAL BENTO GALLERY */}
+            <section className="py-16 sm:py-24 bg-[#F6F5F4] border-t border-[#E6E5E3]">
+              <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                  <div className="space-y-2.5 max-w-[640px]">
+                    <span className="inline-flex items-center gap-2 text-[11.5px] font-mono uppercase tracking-[0.08em] text-[#52504C]">
+                      <span>Visual System Architecture · Blush.design × Notion</span>
+                    </span>
+                    <h2 className="font-display text-[clamp(28px,3.6vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
+                      Designed for every corner of your work and life
+                    </h2>
+                    <p className="text-[16px] text-[#52504C] leading-[1.6]">
+                      Every template pairs Notion’s relational databases with calm, illustrated visual workspaces—click any workflow below to inspect or duplicate it immediately.
+                    </p>
+                  </div>
+
+                  <a
+                    href="/templates"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/templates');
+                    }}
+                    className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[13.5px] font-semibold inline-flex items-center gap-2 self-start md:self-auto shrink-0"
+                  >
+                    <span>Browse All 39 Templates</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+
+                {/* 6-Card Blush Workflow Bento Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {BLUSH_WORKFLOW_CARDS.map((card, idx) => (
+                    <motion.div
+                      key={card.id}
+                      initial={{ opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.4, delay: idx * 0.05 }}
+                      onClick={() => navigate(`/templates/${card.templateSlug}`)}
+                      className="group rounded-[18px] border border-[#E6E5E3] p-5 flex flex-col justify-between gap-4 hover:-translate-y-1 hover:shadow-[0_14px_34px_-10px_rgba(17,17,16,0.09)] transition-all cursor-pointer"
+                      style={{ backgroundColor: card.tint }}
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="px-2.5 py-1 rounded-[6px] bg-white/90 border border-[#E6E5E3] text-[10.5px] font-mono uppercase tracking-[0.07em] font-semibold text-[#111110]">
+                            {card.category}
+                          </span>
+                          <span className="text-[12px] font-mono font-bold text-[#111110] bg-white/90 px-2.5 py-0.5 rounded-[6px] border border-[#E6E5E3]">
+                            {card.priceLabel}
+                          </span>
+                        </div>
+
+                        {/* Large Crisp White Blush Illustration Stage */}
+                        <div className="rounded-[14px] bg-white border border-[#EAE8E1] p-4 flex items-center justify-center overflow-hidden shadow-[0_2px_8px_rgba(17,17,16,0.03)]">
+                          <BlushAssetImage
+                            src={card.assetUrl}
+                            alt={card.title}
+                            floatDelay={idx * 0.12}
+                            className="w-full h-44 sm:h-48 group-hover:scale-[1.03] transition-transform duration-300"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2 pt-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <h3 className="font-display text-[19px] font-bold tracking-[-0.02em] text-[#111110]">
+                            {card.title}
+                          </h3>
+                          <ArrowUpRight className="w-4 h-4 text-[#52504C] group-hover:text-[#111110] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
+                        </div>
+                        <p className="text-[13.5px] text-[#52504C] leading-[1.55]">
+                          {card.subtitle}
+                        </p>
+                        <div className="pt-2 border-t border-black/[0.06] flex items-center justify-between text-[11.5px] font-medium text-[#111110]">
+                          <span className="font-mono text-[#52504C]">
+                            {card.templateName}
+                          </span>
+                          <span className="underline underline-offset-4">
+                            Inspect Template →
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 6. TESTIMONIALS SECTION BENEATH FEATURE SPLITS */}
             <TestimonialsSection onNavigate={navigate} />
 
-            {/* 5. APPS BY EASLO (#F7F6F3 Warm Alabaster Full-Bleed Band) */}
-            <section className="py-16 sm:py-24 bg-[#F7F6F3] border-t border-[#E8E6E1]">
+            {/* 7. APPS BY EASLO */}
+            <section className="py-16 sm:py-24 bg-[#F6F5F4] border-t border-[#E6E5E3]">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div className="space-y-2">
-                    <h2 className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#111110]">
+                    <h2 className="font-display text-[clamp(26px,3.2vw,36px)] font-bold tracking-[-0.025em] leading-[1.15] text-[#111110]">
                       Apps by Easlo
                     </h2>
                     <p className="text-[16px] text-[#52504C] leading-[1.6]">
@@ -525,7 +788,7 @@ export default function App() {
                       e.preventDefault();
                       navigate('/apps');
                     }}
-                    className="group inline-flex items-center gap-1.5 text-[14px] font-medium text-[#111110] hover:underline underline-offset-4 shrink-0"
+                    className="group inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 shrink-0"
                   >
                     <span>View All</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-180 group-hover:translate-x-[3px]" />
@@ -541,7 +804,7 @@ export default function App() {
                         e.preventDefault();
                         navigate(`/apps/${app.slug}`);
                       }}
-                      className="group p-6 rounded-[16px] border border-[#E8E6E1] bg-[#FDFCFB] hover:-translate-y-[2px] hover:border-[#D5D2CB] hover:shadow-[0_10px_24px_-6px_rgba(17,17,16,0.06)] transition-all duration-200 flex flex-col justify-between gap-6"
+                      className="group p-6 rounded-[16px] border border-[#E6E5E3] bg-white hover:-translate-y-[2px] hover:border-[#D5D2CB] hover:shadow-[0_10px_24px_-6px_rgba(17,17,16,0.06)] transition-all duration-200 flex flex-col justify-between gap-6"
                     >
                       <div className="flex items-start justify-between">
                         <AppIconGlyph icon={app.icon} />
@@ -570,20 +833,56 @@ export default function App() {
               dangerouslySetInnerHTML={{ __html: templatesJsonLd }}
             />
 
-            {/* 1. Page Head */}
-            <section className="pt-14 pb-10 sm:pt-20 sm:pb-14 max-w-[1200px] mx-auto px-4 sm:px-6">
-              <div className="max-w-[640px] space-y-3">
-                <h1 className="text-[clamp(32px,4.5vw,44px)] font-[650] tracking-[-0.03em] leading-[1.1] text-[#0A0A0A]">
-                  Notion Templates
-                </h1>
-                <p className="text-[18px] text-[#525252] leading-[1.55]">
-                  Get started with ready-made Notion setups to organize your work and life.
-                </p>
+            {/* 1. Page Head with Blush Illustration Banner */}
+            <section className="pt-12 pb-10 sm:pt-16 sm:pb-12 max-w-[1200px] mx-auto px-4 sm:px-6">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-7 space-y-3">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#F6F5F4] border border-[#E6E5E3] text-[11px] font-mono uppercase tracking-[0.08em] text-[#52504C]">
+                    39 Minimalist Systems · 22 Free + 17 PRO
+                  </span>
+                  <h1 className="font-display text-[clamp(34px,4.5vw,48px)] font-bold tracking-[-0.035em] leading-[1.08] text-[#111110]">
+                    Notion Templates
+                  </h1>
+                  <p className="text-[18px] text-[#52504C] leading-[1.55] max-w-[560px]">
+                    Get started with ready-made Notion setups to organize your work and life.
+                  </p>
+                </div>
+
+                {/* Right: Blush Studio Illustration Trio Card */}
+                <div className="lg:col-span-5 grid grid-cols-3 gap-3">
+                  <div className="rounded-[14px] border border-[#E6E5E3] bg-[#F8F5E8] p-2.5">
+                    <div className="rounded-[10px] bg-white p-1.5">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.notionLineArtCreator}
+                        alt="Productivity Notion system illustration"
+                        className="w-full h-20"
+                      />
+                    </div>
+                  </div>
+                  <div className="rounded-[14px] border border-[#E6E5E3] bg-[#EDF5FD] p-2.5">
+                    <div className="rounded-[10px] bg-white p-1.5">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.financeCharts}
+                        alt="Finance Notion system illustration"
+                        className="w-full h-20"
+                      />
+                    </div>
+                  </div>
+                  <div className="rounded-[14px] border border-[#E6E5E3] bg-[#EBF8EF] p-2.5">
+                    <div className="rounded-[10px] bg-white p-1.5">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.focusedCreator}
+                        alt="Creator Notion system illustration"
+                        className="w-full h-20"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
 
             {/* 2. Sticky Filter Tabs + Search Bar */}
-            <div className="sticky top-16 z-40 bg-white/90 backdrop-blur-md border-y border-[#EAEAEA]">
+            <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-md border-y border-[#E6E5E3]">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row md:items-center justify-between gap-3">
                 <div
                   role="tablist"
@@ -617,10 +916,10 @@ export default function App() {
                             tabRefs.current[prevIdx]?.focus();
                           }
                         }}
-                        className={`px-[14px] py-[8px] rounded-full text-[14px] font-medium border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                        className={`px-[14px] py-[7px] rounded-[8px] text-[13.5px] font-semibold border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                           active
-                            ? 'bg-[#0A0A0A] text-white border-[#0A0A0A]'
-                            : 'bg-white text-[#525252] border-[#EAEAEA] hover:bg-[#F5F5F5] hover:text-[#0A0A0A]'
+                            ? 'bg-[#111110] text-white border-[#111110]'
+                            : 'bg-white text-[#52504C] border-[#E6E5E3] hover:bg-[#F6F5F4] hover:text-[#111110]'
                         }`}
                       >
                         {cat}
@@ -639,7 +938,7 @@ export default function App() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search 39 templates..."
                       aria-label="Search templates"
-                      className="w-full h-9 pl-9 pr-3 rounded-[8px] bg-[#FAFAFA] border border-[#EAEAEA] text-[13px] text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#0A0A0A]"
+                      className="w-full h-9 pl-9 pr-3 rounded-[8px] bg-[#F6F5F4] border border-[#E6E5E3] text-[13px] text-[#111110] placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#111110]"
                     />
                   </div>
                   <span
