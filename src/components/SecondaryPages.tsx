@@ -65,6 +65,8 @@ export const TemplateDetailPage: React.FC<{
               slug={template.slug}
               category={template.category}
               pro={template.pro}
+              illustrationUrl={template.illustrationUrl}
+              cardTint={template.cardTint}
             />
           </div>
 

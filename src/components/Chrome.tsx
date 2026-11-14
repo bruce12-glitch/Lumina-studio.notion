@@ -385,8 +385,7 @@ export const Footer: React.FC<{
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 text-[12px] font-medium text-[#78756F]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#111110] animate-pulse-soft" />
+              <div className="inline-flex items-center gap-2 text-[12px] font-medium text-[#787671]">
                 <span>Sunday Minimalist Dispatch · 120,000+ Readers</span>
               </div>
 
@@ -394,12 +393,12 @@ export const Footer: React.FC<{
                 Build a calmer, more intentional Notion workspace.
               </h2>
 
-              <p className="text-[15px] text-[#52504C] leading-[1.6] max-w-[520px]">
+              <p className="text-[15px] text-[#37352F] leading-[1.6] max-w-[520px]">
                 Receive one actionable Notion architecture guide, digital minimalism workflow, and free template drop every Sunday morning. No noise, unsubscribe anytime.
               </p>
 
               {subscribed ? (
-                <div className="pt-1 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-[10px] bg-[#FDFCFB] border border-[#D5D2CB] text-[13.5px] font-medium text-[#111110]">
+                <div className="pt-1 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-[10px] bg-white border border-[#C8C4BE] text-[13.5px] font-medium text-[#111110]">
                   <span className="w-5 h-5 rounded-full bg-[#15803D] text-white inline-flex items-center justify-center shrink-0">
                     <Check className="w-3 h-3 stroke-[2.5]" />
                   </span>
@@ -419,11 +418,11 @@ export const Footer: React.FC<{
                     onChange={(e) => setNewsletterEmail(e.target.value)}
                     placeholder="Enter your email address..."
                     aria-label="Email address for newsletter"
-                    className="h-11 flex-1 px-3.5 rounded-[10px] bg-[#FDFCFB] border border-[#D5D2CB] text-[14px] text-[#111110] placeholder:text-[#A39F98] focus:outline-none focus:border-[#111110] transition-colors"
+                    className="h-11 flex-1 px-3.5 rounded-[8px] bg-white border border-[#C8C4BE] text-[14px] text-[#111110] placeholder:text-[#A4A097] focus:outline-none focus:border-[#111110] transition-colors"
                   />
                   <button
                     type="submit"
-                    className="h-11 px-5 rounded-[10px] bg-[#111110] hover:bg-[#262523] active:translate-y-[1px] text-[#FDFCFB] text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 transition-all whitespace-nowrap shrink-0 cursor-pointer"
+                    className="h-11 px-5 rounded-[8px] bg-[#111110] hover:bg-[#262523] active:translate-y-[1px] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 transition-all whitespace-nowrap shrink-0 cursor-pointer"
                   >
                     <span>Subscribe Free</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -433,36 +432,36 @@ export const Footer: React.FC<{
             </div>
 
             {/* Right Floating Blush Illustration Duo */}
-            <div className="lg:col-span-5 flex items-center justify-start lg:justify-end gap-3.5">
+            <div className="lg:col-span-5 flex items-center justify-start lg:justify-end gap-4">
               <motion.div
-                whileHover={{ y: -4, rotate: 0 }}
-                className="w-40 sm:w-44 h-32 rounded-[14px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.06)] flex flex-col justify-between"
+                whileHover={{ y: -4 }}
+                className="w-44 sm:w-48 h-36 rounded-[14px] border border-[#E5E3DF] bg-white p-3 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.06)] flex flex-col justify-between"
               >
-                <div className="flex items-center justify-between text-[9.5px] font-semibold uppercase tracking-[0.08em] text-[#78756F]">
+                <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.07em] text-[#787671]">
                   <span>22 Free Setups</span>
-                  <span className="text-[#111110]">$0</span>
+                  <span className="font-mono text-[#111110]">$0</span>
                 </div>
                 <BlushAssetImage
                   src={BLUSH_ASSETS.notionLineArtCreator}
                   alt="Notion template creator illustration"
                   floatDelay={0.2}
-                  className="w-full h-20"
+                  className="w-full h-24"
                 />
               </motion.div>
 
               <motion.div
-                whileHover={{ y: -4, rotate: 0 }}
-                className="w-40 sm:w-44 h-32 rounded-[14px] border border-[#E8E6E1] bg-[#FDFCFB] p-3 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.06)] flex flex-col justify-between"
+                whileHover={{ y: -4 }}
+                className="w-44 sm:w-48 h-36 rounded-[14px] border border-[#E5E3DF] bg-white p-3 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.06)] flex flex-col justify-between"
               >
-                <div className="flex items-center justify-between text-[9.5px] font-semibold uppercase tracking-[0.08em] text-[#78756F]">
+                <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.07em] text-[#787671]">
                   <span>17 Pro Systems</span>
-                  <span className="text-[#111110]">PARA</span>
+                  <span className="font-mono text-[#111110]">PARA</span>
                 </div>
                 <BlushAssetImage
                   src={BLUSH_ASSETS.minimalistLivingRoom}
                   alt="Minimalist study space illustration"
                   floatDelay={0.85}
-                  className="w-full h-20"
+                  className="w-full h-24"
                 />
               </motion.div>
             </div>
@@ -479,7 +478,7 @@ export const Footer: React.FC<{
                 onClick={(e) => go(e, '/')}
                 className="inline-flex items-center gap-2.5 group"
               >
-                <span className="w-7 h-7 rounded-[7px] bg-[#111110] text-[#FDFCFB] text-[14px] font-bold inline-flex items-center justify-center tracking-tight transition-transform duration-200 group-hover:scale-105">
+                <span className="w-7 h-7 rounded-[7px] bg-[#111110] text-white text-[14px] font-bold inline-flex items-center justify-center tracking-tight transition-transform duration-200 group-hover:scale-105">
                   e
                 </span>
                 <span className="text-[20px] font-bold tracking-[-0.03em] text-[#111110]">
@@ -489,20 +488,16 @@ export const Footer: React.FC<{
               <p className="text-[14.5px] font-medium text-[#111110]">
                 Productivity meets minimalism.
               </p>
-              <p className="text-[13.5px] text-[#52504C] leading-[1.6] max-w-[360px]">
+              <p className="text-[13.5px] text-[#37352F] leading-[1.6] max-w-[360px]">
                 Thoughtfully engineered Notion workspaces, financial ledgers, and minimalist tools designed to help you focus on what matters.
               </p>
             </div>
 
-            {/* Quiet System Status & Verified Checkout Row */}
-            <div className="pt-1 flex flex-wrap items-center gap-2 text-[12px] text-[#52504C]">
-              <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[7px] bg-[#F7F6F2] border border-[#E8E6E1] font-medium text-[#111110]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#15803D] animate-pulse-soft" />
-                <span>39 Notion Templates Ready</span>
-              </span>
-              <span className="px-2.5 py-1 rounded-[7px] bg-[#F7F6F2] border border-[#E8E6E1]">
-                Stripe & Lemon Squeezy
-              </span>
+            {/* Quiet Unboxed System Metadata */}
+            <div className="pt-1 flex flex-wrap items-center gap-2 text-[12.5px] text-[#787671]">
+              <span className="font-medium text-[#111110]">39 Notion Templates Ready</span>
+              <span aria-hidden="true">·</span>
+              <span>Stripe & Lemon Squeezy Fulfillment</span>
             </div>
           </div>
 
@@ -686,19 +681,26 @@ export const TemplateCard: React.FC<{
     <a
       href={`/templates/${template.slug}`}
       onClick={handleClick}
-      className="group block rounded-[16px] border border-[#E8E6E1] bg-[#FDFCFB] overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-[3px] hover:border-[#D5D2CB] hover:shadow-[0_12px_28px_-6px_rgba(17,17,16,0.07)]"
+      className="group block rounded-[16px] border border-[#E5E3DF] bg-white overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-[3px] hover:border-[#C8C4BE] hover:shadow-[0_14px_30px_-8px_rgba(15,15,15,0.08)]"
     >
       <TemplateCover
         name={template.name}
         slug={template.slug}
         category={template.category}
         pro={template.pro}
+        illustrationUrl={template.illustrationUrl}
+        cardTint={template.cardTint}
       />
       <div className="p-4 flex flex-col gap-2">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#0A0A0A]">
-            {template.name}
-          </h3>
+          <div className="min-w-0">
+            <p className="text-[11px] font-medium text-[#787671] truncate">
+              {template.category}
+            </p>
+            <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#111110] truncate mt-0.5">
+              {template.name}
+            </h3>
+          </div>
           {isPurchased && (
             <span className="text-[11px] font-medium text-[#15803D] shrink-0">
               Owned
@@ -709,15 +711,15 @@ export const TemplateCard: React.FC<{
         <div className="flex items-center justify-between pt-0.5">
           <div className="flex items-center gap-1.5 tabular-nums text-[14px] font-semibold leading-none">
             {template.compareAt !== undefined && (
-              <span className="text-[#A3A3A3] line-through">
+              <span className="text-[#A4A097] line-through">
                 {formatPrice(template.compareAt)}
               </span>
             )}
-            <span className="text-[#0A0A0A]">{formatPrice(template.price)}</span>
+            <span className="text-[#111110]">{formatPrice(template.price)}</span>
           </div>
 
           {template.pro && (
-            <span className="rounded-full bg-[#0A0A0A] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-[7px] py-[3px] leading-none">
+            <span className="rounded-full bg-[#111110] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-[7px] py-[3px] leading-none">
               PRO
             </span>
           )}
@@ -1126,18 +1128,18 @@ export const TestimonialsSection: React.FC<{
             }`}
           >
             <div className="space-y-4">
-              {/* Blush Character Workspace Illustration */}
+              {/* Prominent Blush Character Workspace Illustration */}
               <BlushAssetImage
                 src={item.illustrationUrl}
                 alt={`${item.author} workspace illustration`}
                 maskCorner
                 floatDelay={idx * 0.4}
-                className="h-28 w-full rounded-[12px] bg-[#FDFCFB] border border-[#E8E6E1] p-2"
+                className="h-36 w-full rounded-[12px] bg-white border border-[#E5E3DF] p-3"
                 imgClassName="max-h-full max-w-full object-contain"
               />
 
               {/* Quiet Unboxed Outcome & System Metadata */}
-              <div className="flex flex-col gap-1 text-[12px] text-[#52504C] border-b border-black/[0.06] pb-3.5">
+              <div className="flex flex-col gap-1 text-[12px] text-[#37352F] border-b border-black/[0.06] pb-3.5">
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-semibold text-[#111110] tabular-nums">
                     {item.outcomeMetric}
@@ -1148,7 +1150,7 @@ export const TestimonialsSection: React.FC<{
                       e.preventDefault();
                       onNavigate(`/templates/${item.templateSlug}`);
                     }}
-                    className="inline-flex items-center gap-1 font-medium text-[#52504C] hover:text-[#111110] hover:underline underline-offset-4 whitespace-nowrap shrink-0"
+                    className="inline-flex items-center gap-1 font-medium text-[#37352F] hover:text-[#111110] hover:underline underline-offset-4 whitespace-nowrap shrink-0"
                   >
                     <span>{item.templateUsed}</span>
                     <ArrowUpRight className="w-3 h-3 shrink-0" />
@@ -1169,7 +1171,7 @@ export const TestimonialsSection: React.FC<{
                 <p className="text-[14px] font-semibold text-[#111110] leading-snug">
                   {item.author}
                 </p>
-                <p className="text-[12px] text-[#52504C] leading-snug">
+                <p className="text-[12px] text-[#37352F] leading-snug">
                   {item.role} · {item.organization}
                 </p>
               </div>
@@ -1182,16 +1184,16 @@ export const TestimonialsSection: React.FC<{
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-5">
         <motion.div
           whileHover={{ y: -2 }}
-          className="group lg:col-span-7 rounded-[16px] border border-[#E8E6E1] bg-[#F7F6F2] p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-6 transition-shadow hover:shadow-[0_10px_24px_-6px_rgba(17,17,16,0.05)]"
+          className="group lg:col-span-7 rounded-[16px] border border-[#E5E3DF] bg-[#F8F5E8] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-6 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
         >
-          <div className="space-y-2 max-w-[320px]">
-            <p className="text-[12px] font-medium text-[#78756F]">
+          <div className="space-y-2.5 max-w-[330px]">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#787671]">
               Global Notion Community
             </p>
-            <h3 className="text-[18px] font-semibold tracking-[-0.015em] text-[#111110] leading-snug">
+            <h3 className="text-[20px] font-bold tracking-[-0.02em] text-[#111110] leading-snug">
               Join 300,000+ creators, students & operators
             </h3>
-            <p className="text-[13.5px] text-[#52504C] leading-relaxed">
+            <p className="text-[14px] text-[#37352F] leading-relaxed">
               Every template includes lifetime updates, step-by-step setup guides, and one-click workspace duplication.
             </p>
           </div>
@@ -1200,20 +1202,20 @@ export const TestimonialsSection: React.FC<{
             alt="Easlo Notion creator community illustration"
             maskCorner={false}
             floatDelay={0.25}
-            className="w-full sm:w-[230px] h-[132px] rounded-[12px] bg-[#EFECE6] border border-[#E8E6E1] overflow-hidden shrink-0"
+            className="w-full sm:w-[270px] h-[160px] rounded-[12px] bg-[#BFC8FF] border border-[#E5E3DF] overflow-hidden shrink-0"
             imgClassName="w-full h-full object-cover"
           />
         </motion.div>
 
         <motion.div
           whileHover={{ y: -2 }}
-          className="group lg:col-span-5 rounded-[16px] border border-[#E8E6E1] bg-[#F5F2EB] p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-5 transition-shadow hover:shadow-[0_10px_24px_-6px_rgba(17,17,16,0.05)]"
+          className="group lg:col-span-5 rounded-[16px] border border-[#E5E3DF] bg-[#FFF0E3] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
         >
-          <div className="space-y-2">
-            <p className="text-[12px] font-medium text-[#78756F]">
+          <div className="space-y-2.5">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#787671]">
               Instant Digital Delivery
             </p>
-            <h3 className="text-[17px] font-semibold tracking-[-0.015em] text-[#111110] leading-snug">
+            <h3 className="text-[18px] font-bold tracking-[-0.02em] text-[#111110] leading-snug">
               Automated Stripe & Lemon Squeezy Fulfillment
             </h3>
             <a
@@ -1222,9 +1224,9 @@ export const TestimonialsSection: React.FC<{
                 e.preventDefault();
                 onNavigate('/templates');
               }}
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#111110] hover:underline underline-offset-4 pt-1"
+              className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#111110] hover:underline underline-offset-4 pt-1"
             >
-              <span>Browse 17 templates</span>
+              <span>Browse 17 PRO templates</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -1233,7 +1235,7 @@ export const TestimonialsSection: React.FC<{
             alt="Automated digital storefront delivery illustration"
             maskCorner
             floatDelay={0.75}
-            className="w-full sm:w-[165px] h-[132px] rounded-[12px] bg-[#FDFCFB] border border-[#E8E6E1] p-2 shrink-0"
+            className="w-full sm:w-[195px] h-[160px] rounded-[12px] bg-white border border-[#E5E3DF] p-2 shrink-0"
             imgClassName="max-h-full max-w-full object-contain"
           />
         </motion.div>
