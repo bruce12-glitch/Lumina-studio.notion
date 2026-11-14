@@ -1,32 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  /* SOTA Swiss / Notion Editorial Minimalist Palette */
-  --bg: #FDFCFB;
+  /* Notion × Easlo Editorial Design System Tokens */
+  --bg: #FFFFFF;
   --bg-pure: #FFFFFF;
-  --bg-subtle: #F7F6F3;
+  --bg-subtle: #F7F6F4;
   --bg-muted: #F1EFEA;
   --ink: #111110;
-  --ink-2: #52504C;
-  --ink-3: #78756F;
-  --ink-4: #A39F98;
-  --line: #E8E6E1;
-  --line-strong: #D5D2CB;
+  --ink-2: #37352F;
+  --ink-3: #787671;
+  --ink-4: #A4A097;
+  --line: #E5E3DF;
+  --line-strong: #C8C4BE;
   --inverse-bg: #111110;
-  --inverse-ink: #FDFCFB;
+  --inverse-ink: #FFFFFF;
 
-  /* Whisper-Quiet Tonal Surface Palette */
-  --tint-alabaster: #F7F6F2;
-  --tint-sand: #F5F2EB;
-  --tint-sage: #F2F5F2;
-  --tint-mist: #F3F4F6;
-  --tint-stone: #F4F3F0;
+  /* Notion Pastel Feature Card Tints (from design.md) */
+  --card-tint-peach: #FFE8D4;
+  --card-tint-rose: #FDE0EC;
+  --card-tint-mint: #D9F3E1;
+  --card-tint-lavender: #E6E0F5;
+  --card-tint-sky: #DCECFA;
+  --card-tint-yellow: #FEF7D6;
+  --card-tint-cream: #F8F5E8;
+  --card-tint-gray: #F0EEEC;
 
   /* Semantic Validation Tokens */
   --success: #15803D;
   --warning: #B45309;
   --danger: #B42318;
-  --info: #1D4ED8;
+  --info: #0075DE;
   --scrim: rgba(17, 17, 16, 0.42);
 
   /* Radii & Shadows */
@@ -34,20 +37,20 @@
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-pill: 999px;
-  --shadow-sm: 0 1px 2px rgba(17, 17, 16, 0.035);
-  --shadow-md: 0 10px 30px -6px rgba(17, 17, 16, 0.06);
-  --shadow-mockup: 0 24px 48px -12px rgba(17, 17, 16, 0.1);
+  --shadow-sm: 0 1px 2px rgba(15, 15, 15, 0.04);
+  --shadow-md: 0 12px 32px -8px rgba(15, 15, 15, 0.08);
+  --shadow-mockup: 0 24px 48px -12px rgba(15, 15, 15, 0.14);
 }
 
 html {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scrollbar-width: thin;
-  scrollbar-color: #D5D2CB transparent;
+  scrollbar-color: #D4D4D4 transparent;
   scroll-behavior: smooth;
 }
 
@@ -59,9 +62,21 @@ body {
   overflow-x: hidden;
 }
 
+.font-display {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+}
+
+.font-editorial {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
 ::selection {
   background: #111110;
-  color: #FDFCFB;
+  color: #FFFFFF;
 }
 
 :focus-visible {
@@ -79,13 +94,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D5D2CB;
+  background: #D4D4D4;
   border-radius: 999px;
-  border: 3px solid #FDFCFB;
+  border: 3px solid #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A39F98;
+  background: #A3A3A3;
 }
 
 .tabular-nums {
@@ -96,16 +111,22 @@ body {
   text-wrap: balance;
 }
 
-/* SOTA Minimalist Editorial Filter for Illustration Assets */
-.blush-editorial-tone {
-  filter: saturate(0.22) contrast(1.05) brightness(1.01);
-  transition: filter 450ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+/* Crisp, Natural Blush Illustration Blending — Melts White PNG Backgrounds Into Any Surface */
+.blush-illustration {
+  mix-blend-mode: multiply;
+  filter: contrast(1.02) saturate(1.02);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 350ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.group:hover .blush-editorial-tone,
-.blush-editorial-tone:hover {
-  filter: saturate(0.72) contrast(1.03) brightness(1.01);
+.group:hover .blush-illustration,
+.blush-illustration:hover {
+  filter: contrast(1.04) saturate(1.08);
+}
+
+.blush-banner {
+  filter: contrast(1.02) saturate(1.02);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Subtle reveal & ambient asset motion keyframes */
@@ -130,31 +151,9 @@ body {
   }
 }
 
-@keyframes floatReverse {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(4px);
-  }
-}
-
 @keyframes dashFlow {
   to {
     stroke-dashoffset: -24;
-  }
-}
-
-@keyframes pulseSoft {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: scale(0.95);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.08);
   }
 }
 
@@ -166,22 +165,14 @@ body {
   animation: floatSlow 5.5s ease-in-out infinite;
 }
 
-.animate-float-reverse {
-  animation: floatReverse 6.2s ease-in-out infinite;
-}
-
 .animate-dash-flow {
   animation: dashFlow 3.2s linear infinite;
 }
 
-.animate-pulse-soft {
-  animation: pulseSoft 3.5s ease-in-out infinite;
-}
-
-/* Subtle architectural dot matrix background for hero/showcase surfaces */
+/* Subtle architectural grid background for hero/showcase surfaces */
 .bg-editorial-grid {
-  background-image: radial-gradient(rgba(17, 17, 16, 0.07) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(17, 17, 16, 0.075) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 /* Hide horizontal scrollbar on mobile filter strip */
