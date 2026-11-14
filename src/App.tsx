@@ -301,19 +301,19 @@ export default function App() {
 
                 {/* Center Editorial Headline, Sub-Headline, Primary CTA & Trust Strip */}
                 <div className="order-1 lg:order-2 lg:col-span-6 text-center space-y-6">
-                  <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-[8px] border border-[#E6E5E3] bg-[#F6F5F4] text-[12px] font-medium text-[#52504C]">
+                  <div className="inline-flex items-center gap-2.5 text-[12.5px] font-medium text-[#52504C]">
                     <span className="font-semibold text-[#111110]">Easlo Notion Store</span>
                     <span aria-hidden="true" className="text-[#C7C5C0]">·</span>
                     <span>39 Minimalist Systems</span>
                     <span aria-hidden="true" className="text-[#C7C5C0]">·</span>
-                    <span className="font-mono text-[11px] text-[#111110]">300k+ Users</span>
+                    <span className="font-mono text-[11.5px] text-[#111110] tabular-nums">300k+ Users</span>
                   </div>
 
                   <div className="space-y-3">
-                    <h1 className="font-display text-[clamp(44px,6vw,68px)] font-bold tracking-[-0.04em] leading-[1.02] text-[#111110]">
+                    <h1 className="font-display text-[clamp(44px,6vw,68px)] font-bold tracking-[-0.04em] leading-[1.02] text-[#111110] text-balance">
                       Notion Templates
                     </h1>
-                    <p className="font-serif italic text-[22px] sm:text-[26px] font-normal tracking-[-0.01em] text-[#52504C] leading-[1.25]">
+                    <p className="font-editorial italic text-[22px] sm:text-[26px] font-normal tracking-[-0.01em] text-[#52504C] leading-[1.25]">
                       Where productivity meets calm, visual minimalism.
                     </p>
                   </div>
@@ -322,27 +322,34 @@ export default function App() {
                     Discover 30+ Notion templates to organize work and life, saving you valuable time.
                   </p>
 
-                  {/* Primary & Secondary Notion CTAs */}
+                  {/* Primary & Secondary Notion CTAs with Tactile Spring Motion */}
                   <div className="pt-1 flex flex-wrap items-center justify-center gap-3.5">
-                    <a
+                    <motion.a
                       href="/templates"
+                      whileHover={{ y: -2, scale: 1.018 }}
+                      whileTap={{ y: 0.5, scale: 0.975 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/templates');
                       }}
-                      className="h-12 px-7 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] active:translate-y-[1px] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 transition-all whitespace-nowrap shrink-0 shadow-[0_10px_24px_-6px_rgba(17,17,16,0.25)]"
+                      className="btn-motion-primary h-12 px-7 rounded-[10px] bg-[#111110] hover:bg-[#242422] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
                     >
                       <span>Shop Templates</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                      <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+                    </motion.a>
 
-                    <button
+                    <motion.button
                       type="button"
+                      whileHover={{ y: -2, scale: 1.015 }}
+                      whileTap={{ y: 0.5, scale: 0.975 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                       onClick={() => handleOpenTemplateOrCheckout('second-brain')}
-                      className="h-12 px-6 rounded-[9px] border border-[#D4D2CC] bg-white hover:bg-[#F6F5F4] text-[#111110] text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                      className="btn-motion-secondary h-12 px-6 rounded-[10px] border border-[#D4D2CC] bg-white hover:bg-[#F7F6F4] text-[#111110] text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
                     >
                       <span>Get Second Brain ($39)</span>
-                    </button>
+                      <ArrowUpRight className="w-4 h-4 text-[#78756F] btn-arrow-diagonal" />
+                    </motion.button>
                   </div>
 
                   {/* Quiet Automated Delivery & Payment Trust Bar */}
@@ -477,10 +484,10 @@ export default function App() {
             <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#F0EFEA]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#F8F5E8] border border-[#E6E0C8] text-[11px] font-mono uppercase tracking-[0.08em] text-[#111110]">
-                    <span>01 · Flagship PARA OS</span>
-                  </div>
-                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
+                  <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#78756F]">
+                    01. Flagship PARA OS
+                  </p>
+                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110] text-balance">
                     Second Brain
                   </h2>
                   <p className="text-[16.5px] text-[#52504C] leading-[1.6]">
@@ -497,24 +504,30 @@ export default function App() {
                     </li>
                   </ul>
                   <div className="pt-2 flex flex-wrap items-center gap-4">
-                    <a
+                    <motion.a
                       href="/second-brain"
+                      whileHover={{ y: -2, scale: 1.015 }}
+                      whileTap={{ scale: 0.975 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/second-brain');
                       }}
-                      className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 transition-colors"
+                      className="btn-motion-primary h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0"
                     >
                       <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                    <button
+                      <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+                    </motion.a>
+                    <motion.button
                       type="button"
+                      whileHover={{ x: 2 }}
+                      whileTap={{ scale: 0.97 }}
                       onClick={() => handleOpenTemplateOrCheckout('second-brain')}
-                      className="text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 cursor-pointer"
+                      className="btn-motion-ghost text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 inline-flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0"
                     >
-                      Instant Duplicate ($39) →
-                    </button>
+                      <span>Instant Duplicate ($39)</span>
+                      <span className="btn-arrow-slide">→</span>
+                    </motion.button>
                   </div>
                 </div>
 
@@ -532,10 +545,10 @@ export default function App() {
                 </div>
 
                 <div className="lg:col-span-5 space-y-5">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#EDF5FD] border border-[#D0E3F8] text-[11px] font-mono uppercase tracking-[0.08em] text-[#111110]">
-                    <span>02 · Personal & Creator Ledger</span>
-                  </div>
-                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
+                  <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#78756F]">
+                    02. Personal & Creator Ledger
+                  </p>
+                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110] text-balance">
                     All-In-One Finance Dashboard
                   </h2>
                   <p className="text-[16.5px] text-[#52504C] leading-[1.6]">
@@ -552,24 +565,30 @@ export default function App() {
                     </li>
                   </ul>
                   <div className="pt-2 flex flex-wrap items-center gap-4">
-                    <a
+                    <motion.a
                       href="/finance-tracker"
+                      whileHover={{ y: -2, scale: 1.015 }}
+                      whileTap={{ scale: 0.975 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/finance-tracker');
                       }}
-                      className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 transition-colors"
+                      className="btn-motion-primary h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0"
                     >
                       <span>Get Finance Tracker</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                    <button
+                      <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+                    </motion.a>
+                    <motion.button
                       type="button"
+                      whileHover={{ x: 2 }}
+                      whileTap={{ scale: 0.97 }}
                       onClick={() => handleOpenTemplateOrCheckout('finance-tracker')}
-                      className="text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 cursor-pointer"
+                      className="btn-motion-ghost text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 inline-flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0"
                     >
-                      Instant Duplicate ($39) →
-                    </button>
+                      <span>Instant Duplicate ($39)</span>
+                      <span className="btn-arrow-slide">→</span>
+                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -579,10 +598,10 @@ export default function App() {
             <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#F0EFEA]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#EBF8EF] border border-[#CBEAD5] text-[11px] font-mono uppercase tracking-[0.08em] text-[#111110]">
-                    <span>03 · Intentional Workflows</span>
-                  </div>
-                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110]">
+                  <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#78756F]">
+                    03. Intentional Workflows
+                  </p>
+                  <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110] text-balance">
                     Become a Digital Minimalist
                   </h2>
                   <p className="text-[16.5px] text-[#52504C] leading-[1.6]">
@@ -599,24 +618,30 @@ export default function App() {
                     </li>
                   </ul>
                   <div className="pt-2 flex flex-wrap items-center gap-4">
-                    <a
+                    <motion.a
                       href="/blog"
+                      whileHover={{ y: -2, scale: 1.015 }}
+                      whileTap={{ scale: 0.975 }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                       onClick={(e) => {
                         e.preventDefault();
                         navigate('/blog');
                       }}
-                      className="h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 transition-colors"
+                      className="btn-motion-primary h-11 px-5 rounded-[9px] bg-[#111110] hover:bg-[#2B2B29] text-white text-[14px] font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0"
                     >
                       <span>Start Here</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                    <button
+                      <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+                    </motion.a>
+                    <motion.button
                       type="button"
+                      whileHover={{ x: 2 }}
+                      whileTap={{ scale: 0.97 }}
                       onClick={() => handleOpenTemplateOrCheckout('habit-tracker')}
-                      className="text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 cursor-pointer"
+                      className="btn-motion-ghost text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 inline-flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0"
                     >
-                      Duplicate Free Habit Tracker ($0) →
-                    </button>
+                      <span>Duplicate Free Habit Tracker ($0)</span>
+                      <span className="btn-arrow-slide">→</span>
+                    </motion.button>
                   </div>
                 </div>
 
@@ -721,9 +746,9 @@ export default function App() {
             {/* 1. Page Head */}
             <section className="pt-12 pb-10 sm:pt-16 sm:pb-12 max-w-[1200px] mx-auto px-4 sm:px-6">
               <div className="max-w-[640px] space-y-3">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-[6px] bg-[#F6F5F4] border border-[#E6E5E3] text-[11px] font-mono uppercase tracking-[0.08em] text-[#52504C]">
+                <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#52504C]">
                   39 Minimalist Systems · 22 Free + 17 PRO
-                </span>
+                </p>
                 <h1 className="font-display text-[clamp(34px,4.5vw,48px)] font-bold tracking-[-0.035em] leading-[1.08] text-[#111110]">
                   Notion Templates
                 </h1>
@@ -744,7 +769,7 @@ export default function App() {
                   {CATEGORIES.map((cat, idx) => {
                     const active = category === cat;
                     return (
-                      <button
+                      <motion.button
                         key={cat}
                         ref={(el) => {
                           tabRefs.current[idx] = el;
@@ -753,6 +778,9 @@ export default function App() {
                         role="tab"
                         aria-selected={active}
                         tabIndex={active ? 0 : -1}
+                        whileHover={{ y: -1 }}
+                        whileTap={{ scale: 0.96 }}
+                        transition={{ type: 'spring', stiffness: 420, damping: 28 }}
                         onClick={() => selectCategory(cat)}
                         onKeyDown={(e) => {
                           if (e.key === 'ArrowRight') {
@@ -770,12 +798,12 @@ export default function App() {
                         }}
                         className={`px-[14px] py-[7px] rounded-[8px] text-[13.5px] font-semibold border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                           active
-                            ? 'bg-[#111110] text-white border-[#111110]'
+                            ? 'bg-[#111110] text-white border-[#111110] shadow-[0_4px_12px_rgba(17,17,16,0.18)]'
                             : 'bg-white text-[#52504C] border-[#E6E5E3] hover:bg-[#F6F5F4] hover:text-[#111110]'
                         }`}
                       >
                         {cat}
-                      </button>
+                      </motion.button>
                     );
                   })}
                 </div>
