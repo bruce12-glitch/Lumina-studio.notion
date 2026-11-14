@@ -36,6 +36,8 @@ export interface AppItem {
   features: { title: string; body: string }[];
   platform: string;
   priceLabel: string;
+  illustrationUrl: string;
+  cardTint: string;
 }
 
 export interface FaqItem {
@@ -198,67 +200,79 @@ function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean
 }
 
 export const BLUSH_ASSETS = {
-  // Batch 1 (12 assets)
-  communityBanner: '/assets/aistudio/image_c28b94df.png',
-  digitalStorefront: '/assets/aistudio/image_a84eeadd.png',
-  financeCharts: '/assets/aistudio/image_5d91597f.png',
-  calmStudyDesk: '/assets/aistudio/image_f7e50191.png',
-  creatorDesktop: '/assets/aistudio/image_68fd0787.png',
-  notionLineArtCreator: '/assets/aistudio/image_db731ad5.png',
-  minimalistLivingRoom: '/assets/aistudio/image_73137508.png',
-  teamAnalytics: '/assets/aistudio/image_0f583a0f.png',
-  modernWorkspace: '/assets/aistudio/image_97100f05.png',
-  focusedCreator: '/assets/aistudio/image_e18206f5.png',
-  financialAnalyst: '/assets/aistudio/image_28f39d0d.png',
-  relaxedLaptopCreator: '/assets/aistudio/image_c26ace4c.png',
-  // Batch 2 (12 new assets)
-  purpleWindowCreator: '/assets/aistudio/image_c1c2c2f7.png',
-  laptopAnalyticsCall: '/assets/aistudio/image_cb175577.png',
-  founderBriefcaseAnalytics: '/assets/aistudio/image_9e53c1ce.png',
-  mobileTravelApp: '/assets/aistudio/image_c9579ca3.png',
-  donutLineChartAnalyst: '/assets/aistudio/image_7458120e.png',
-  dataBubblesJuggler: '/assets/aistudio/image_cfaf236f.png',
-  magnifyingGlassResearcher: '/assets/aistudio/image_74288ce6.png',
-  monochromeSystemsArchitect: '/assets/aistudio/image_377fe483.png',
-  socialCreatorsPhone: '/assets/aistudio/image_7aa4a560.png',
-  pinkStudioDesk: '/assets/aistudio/image_1e0e10b5.png',
-  monochromeTouchWorkflow: '/assets/aistudio/image_fe6f7de7.png',
-  remoteCallSofa: '/assets/aistudio/image_a482c404.png',
+  // 30 Copyright-Free Ultra-HD Storyset Vector Illustrations (880x800 Enhanced)
+  expenseReceiptAlert: '/assets/aistudio/image_994c9eea.png',
+  mobilePiggyPortfolio: '/assets/aistudio/image_6f469fd4.png',
+  savingsJarsCalendar: '/assets/aistudio/image_1073bb8b.png',
+  executiveSofaStrategy: '/assets/aistudio/image_73df9636.png',
+  vrIdeaLab: '/assets/aistudio/image_1e71dd22.png',
+  dualDeskStudio: '/assets/aistudio/image_39833869.png',
+  boardroomPieChart: '/assets/aistudio/image_6abd788b.png',
+  isometricCompanyOS: '/assets/aistudio/image_6e478f9f.png',
+  teamGrowthClimb: '/assets/aistudio/image_e5de7079.png',
+  secondBrainMazeBulb: '/assets/aistudio/image_325e535e.png',
+  strategicMazeThinker: '/assets/aistudio/image_4e538395.png',
+  clockCalendarPlanner: '/assets/aistudio/image_ce36d90f.png',
+  mindfulMeditationClock: '/assets/aistudio/image_7307a332.png',
+  yellowClockTasks: '/assets/aistudio/image_84cbd4da.png',
+  mobileProfileLauncher: '/assets/aistudio/image_1d1aa18f.png',
+  laptopFinanceLedger: '/assets/aistudio/image_f55a3ea4.png',
+  secondBrainPuzzleHead: '/assets/aistudio/image_81de8a00.png',
+  mentalGardenWatering: '/assets/aistudio/image_b42bb9d2.png',
+  bloomingMindGarden: '/assets/aistudio/image_3349b033.png',
+  clientDealHandshake: '/assets/aistudio/image_cc88b829.png',
+  developerCodeDesk: '/assets/aistudio/image_75c19751.png',
+  onlineCourseLecture: '/assets/aistudio/image_7ae70ebe.png',
+  bookStackReader: '/assets/aistudio/image_5471920d.png',
+  relaxedFloorReader: '/assets/aistudio/image_42c746a3.png',
+  zettelkastenBookLotus: '/assets/aistudio/image_cf1244e8.png',
+  mathStudyChecklist: '/assets/aistudio/image_f05ad58a.png',
+  globalCommunityNetwork: '/assets/aistudio/image_2ce78738.png',
+  creativeDesignerCoffee: '/assets/aistudio/image_f70909f2.png',
+  videoStudioCreator: '/assets/aistudio/image_1cad396b.png',
+  socialMegaphoneCreator: '/assets/aistudio/image_496ea7b7.png',
 } as const;
 
 export const CATEGORY_BLUSH_ASSET: Record<TemplateCategory, string> = {
-  'Personal Productivity': BLUSH_ASSETS.notionLineArtCreator,
-  'Health & Fitness': BLUSH_ASSETS.minimalistLivingRoom,
-  Business: BLUSH_ASSETS.creatorDesktop,
-  School: BLUSH_ASSETS.magnifyingGlassResearcher,
-  Finance: BLUSH_ASSETS.financeCharts,
-  Travel: BLUSH_ASSETS.mobileTravelApp,
+  'Personal Productivity': BLUSH_ASSETS.zettelkastenBookLotus,
+  'Health & Fitness': BLUSH_ASSETS.bloomingMindGarden,
+  Business: BLUSH_ASSETS.isometricCompanyOS,
+  School: BLUSH_ASSETS.onlineCourseLecture,
+  Finance: BLUSH_ASSETS.laptopFinanceLedger,
+  Travel: BLUSH_ASSETS.globalCommunityNetwork,
 };
 
-const ALL_23_TEMPLATE_ILLUSTRATIONS: string[] = [
-  BLUSH_ASSETS.monochromeSystemsArchitect, // 0: Task Tracker
-  BLUSH_ASSETS.relaxedLaptopCreator, // 1: Dopamine Menu
-  BLUSH_ASSETS.mobileTravelApp, // 2: Travel Planner
-  BLUSH_ASSETS.digitalStorefront, // 3: Travel Dashboard
-  BLUSH_ASSETS.purpleWindowCreator, // 4: Project Tracker
-  BLUSH_ASSETS.monochromeTouchWorkflow, // 5: 12 Week Year Planner
-  BLUSH_ASSETS.financialAnalyst, // 6: Savings Tracker
-  BLUSH_ASSETS.donutLineChartAnalyst, // 7: Payday Budget
-  BLUSH_ASSETS.magnifyingGlassResearcher, // 8: Prompts Library
-  BLUSH_ASSETS.remoteCallSofa, // 9: Knowledge Base
-  BLUSH_ASSETS.notionLineArtCreator, // 10: Second Brain
-  BLUSH_ASSETS.minimalistLivingRoom, // 11: Habit Tracker
-  BLUSH_ASSETS.pinkStudioDesk, // 12: Wheel of Life Template
-  BLUSH_ASSETS.calmStudyDesk, // 13: Habit Journal
-  BLUSH_ASSETS.socialCreatorsPhone, // 14: Symptom Tracker
-  BLUSH_ASSETS.creatorDesktop, // 15: Freelance OS
-  BLUSH_ASSETS.laptopAnalyticsCall, // 16: Book Tracker
-  BLUSH_ASSETS.teamAnalytics, // 17: OKRs Tracker
-  BLUSH_ASSETS.focusedCreator, // 18: GTD Dashboard
-  BLUSH_ASSETS.founderBriefcaseAnalytics, // 19: Grocery List
-  BLUSH_ASSETS.dataBubblesJuggler, // 20: All-In-One Meal Planner
-  BLUSH_ASSETS.modernWorkspace, // 21: Expense Tracker
-  BLUSH_ASSETS.financeCharts, // 22: Budget Tracker
+const ALL_30_TEMPLATE_ILLUSTRATIONS: string[] = [
+  BLUSH_ASSETS.yellowClockTasks, // 0: Task Tracker
+  BLUSH_ASSETS.laptopFinanceLedger, // 1: Dopamine Menu & 31: Finance Tracker
+  BLUSH_ASSETS.globalCommunityNetwork, // 2: Travel Planner
+  BLUSH_ASSETS.mobileProfileLauncher, // 3: Travel Dashboard
+  BLUSH_ASSETS.developerCodeDesk, // 4: Project Tracker
+  BLUSH_ASSETS.clockCalendarPlanner, // 5: 12 Week Year Planner
+  BLUSH_ASSETS.savingsJarsCalendar, // 6: Savings Tracker
+  BLUSH_ASSETS.mobilePiggyPortfolio, // 7: Payday Budget
+  BLUSH_ASSETS.vrIdeaLab, // 8: Prompts Library
+  BLUSH_ASSETS.secondBrainPuzzleHead, // 9: Knowledge Base
+  BLUSH_ASSETS.zettelkastenBookLotus, // 10: Second Brain
+  BLUSH_ASSETS.bloomingMindGarden, // 11: Habit Tracker
+  BLUSH_ASSETS.mindfulMeditationClock, // 12: Wheel of Life Template
+  BLUSH_ASSETS.mentalGardenWatering, // 13: Habit Journal
+  BLUSH_ASSETS.relaxedFloorReader, // 14: Symptom Tracker
+  BLUSH_ASSETS.isometricCompanyOS, // 15: Freelance OS
+  BLUSH_ASSETS.bookStackReader, // 16: Book Tracker
+  BLUSH_ASSETS.teamGrowthClimb, // 17: OKRs Tracker
+  BLUSH_ASSETS.strategicMazeThinker, // 18: GTD Dashboard
+  BLUSH_ASSETS.mathStudyChecklist, // 19: Grocery List
+  BLUSH_ASSETS.creativeDesignerCoffee, // 20: All-In-One Meal Planner
+  BLUSH_ASSETS.expenseReceiptAlert, // 21: Expense Tracker
+  BLUSH_ASSETS.boardroomPieChart, // 22: Budget Tracker
+  BLUSH_ASSETS.clientDealHandshake, // 23: CRM Template
+  BLUSH_ASSETS.secondBrainMazeBulb, // 24: Goal Tracker
+  BLUSH_ASSETS.socialMegaphoneCreator, // 25: Content Calendar
+  BLUSH_ASSETS.dualDeskStudio, // 26: Journal
+  BLUSH_ASSETS.executiveSofaStrategy, // 27: Gift Tracker
+  BLUSH_ASSETS.onlineCourseLecture, // 28: Vocabulary Builder
+  BLUSH_ASSETS.videoStudioCreator, // 29: Content OS
 ];
 
 const ALL_CARD_TINTS: string[] = [
@@ -271,10 +285,8 @@ const ALL_CARD_TINTS: string[] = [
   '#FDF0F5',
 ];
 
-function resolveTemplateAsset(slug: string, _category: TemplateCategory, idx: number): string {
-  if (slug === 'finance-tracker') return BLUSH_ASSETS.financeCharts;
-  if (slug === 'content-os') return BLUSH_ASSETS.modernWorkspace;
-  return ALL_23_TEMPLATE_ILLUSTRATIONS[idx % ALL_23_TEMPLATE_ILLUSTRATIONS.length];
+function resolveTemplateAsset(_slug: string, _category: TemplateCategory, idx: number): string {
+  return ALL_30_TEMPLATE_ILLUSTRATIONS[idx % ALL_30_TEMPLATE_ILLUSTRATIONS.length];
 }
 
 function resolveTemplateTint(slug: string, _category: TemplateCategory, idx: number): string {
@@ -328,6 +340,8 @@ export const APPS: AppItem[] = [
       'A calm command bar and personal launcher that keeps your daily links, routines, and quick notes one keystroke away.',
     platform: 'Web · macOS · iOS',
     priceLabel: 'Free / $4 mo',
+    illustrationUrl: BLUSH_ASSETS.mobileProfileLauncher,
+    cardTint: '#EBF8EF',
     features: [
       {
         title: 'Keyboard-First Launcher',
@@ -352,6 +366,8 @@ export const APPS: AppItem[] = [
       'A distraction-free daily writing space with guided evening reflections, streak tracking, and plain-text export.',
     platform: 'Web · iOS · Android',
     priceLabel: 'Free / $3 mo',
+    illustrationUrl: BLUSH_ASSETS.relaxedFloorReader,
+    cardTint: '#F2EEFA',
     features: [
       {
         title: 'One-Page Daily Canvas',
@@ -376,6 +392,8 @@ export const APPS: AppItem[] = [
       'Design 7-day, 14-day, and 30-day personal habits as structured hypotheses, track daily adherence, and review clear outcomes.',
     platform: 'Web · iOS',
     priceLabel: 'Free / $5 mo',
+    illustrationUrl: BLUSH_ASSETS.vrIdeaLab,
+    cardTint: '#FDF0F5',
     features: [
       {
         title: 'Hypothesis-Driven Habits',
@@ -400,6 +418,8 @@ export const APPS: AppItem[] = [
       'Fast, plain-text task management with two-way Notion database synchronization and natural-language due dates.',
     platform: 'Web · macOS · iOS',
     priceLabel: 'Free / $5 mo',
+    illustrationUrl: BLUSH_ASSETS.yellowClockTasks,
+    cardTint: '#FEF9E6',
     features: [
       {
         title: 'Two-Way Notion Sync',
@@ -616,7 +636,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Second Brain',
     priceLabel: '$39',
     tint: '#F8F5E8',
-    assetUrl: BLUSH_ASSETS.notionLineArtCreator,
+    assetUrl: BLUSH_ASSETS.zettelkastenBookLotus,
   },
   {
     id: 'wf-finance',
@@ -627,7 +647,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Finance Tracker',
     priceLabel: '$39',
     tint: '#EDF5FD',
-    assetUrl: BLUSH_ASSETS.financeCharts,
+    assetUrl: BLUSH_ASSETS.laptopFinanceLedger,
   },
   {
     id: 'wf-freelance',
@@ -638,7 +658,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Freelance OS',
     priceLabel: '$79',
     tint: '#FFF0E3',
-    assetUrl: BLUSH_ASSETS.creatorDesktop,
+    assetUrl: BLUSH_ASSETS.isometricCompanyOS,
   },
   {
     id: 'wf-study',
@@ -649,7 +669,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Student Dashboard',
     priceLabel: '$0',
     tint: '#FEF9E6',
-    assetUrl: BLUSH_ASSETS.calmStudyDesk,
+    assetUrl: BLUSH_ASSETS.onlineCourseLecture,
   },
   {
     id: 'wf-minimalism',
@@ -660,7 +680,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Habit Tracker',
     priceLabel: '$0',
     tint: '#EBF8EF',
-    assetUrl: BLUSH_ASSETS.minimalistLivingRoom,
+    assetUrl: BLUSH_ASSETS.bloomingMindGarden,
   },
   {
     id: 'wf-team-okrs',
@@ -671,7 +691,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'OKRs Tracker',
     priceLabel: '$9',
     tint: '#FDF0F5',
-    assetUrl: BLUSH_ASSETS.teamAnalytics,
+    assetUrl: BLUSH_ASSETS.teamGrowthClimb,
   },
   {
     id: 'wf-content-os',
@@ -682,7 +702,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Content OS',
     priceLabel: '$79',
     tint: '#F2EEFA',
-    assetUrl: BLUSH_ASSETS.modernWorkspace,
+    assetUrl: BLUSH_ASSETS.videoStudioCreator,
   },
   {
     id: 'wf-deep-work',
@@ -693,7 +713,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'GTD Dashboard',
     priceLabel: '$39',
     tint: '#FFF0E3',
-    assetUrl: BLUSH_ASSETS.focusedCreator,
+    assetUrl: BLUSH_ASSETS.strategicMazeThinker,
   },
   {
     id: 'wf-net-worth',
@@ -704,7 +724,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Savings Tracker',
     priceLabel: '$5',
     tint: '#EDF5FD',
-    assetUrl: BLUSH_ASSETS.financialAnalyst,
+    assetUrl: BLUSH_ASSETS.savingsJarsCalendar,
   },
   {
     id: 'wf-mindful-journal',
@@ -715,7 +735,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Dopamine Menu',
     priceLabel: '$0',
     tint: '#EBF8EF',
-    assetUrl: BLUSH_ASSETS.relaxedLaptopCreator,
+    assetUrl: BLUSH_ASSETS.relaxedFloorReader,
   },
   {
     id: 'wf-storefront',
@@ -726,7 +746,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: 'Travel Dashboard',
     priceLabel: '$9',
     tint: '#FEF9E6',
-    assetUrl: BLUSH_ASSETS.digitalStorefront,
+    assetUrl: BLUSH_ASSETS.clientDealHandshake,
   },
   {
     id: 'wf-community',
@@ -737,7 +757,7 @@ export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
     templateName: '12 Week Year Planner',
     priceLabel: '$9',
     tint: '#F2EEFA',
-    assetUrl: BLUSH_ASSETS.communityBanner,
+    assetUrl: BLUSH_ASSETS.globalCommunityNetwork,
   },
 ];
 
@@ -754,7 +774,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: 'second-brain',
     surfaceTint: '#F8F7F3',
     accentInk: '#37352F',
-    illustrationUrl: BLUSH_ASSETS.laptopAnalyticsCall,
+    illustrationUrl: BLUSH_ASSETS.creativeDesignerCoffee,
   },
   {
     id: 'rev-2',
@@ -768,7 +788,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: 'finance-tracker',
     surfaceTint: '#F4F6F8',
     accentInk: '#1A2A52',
-    illustrationUrl: BLUSH_ASSETS.founderBriefcaseAnalytics,
+    illustrationUrl: BLUSH_ASSETS.teamGrowthClimb,
   },
   {
     id: 'rev-3',
@@ -782,7 +802,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: 'freelance-os',
     surfaceTint: '#F4F7F4',
     accentInk: '#254232',
-    illustrationUrl: BLUSH_ASSETS.socialCreatorsPhone,
+    illustrationUrl: BLUSH_ASSETS.isometricCompanyOS,
   },
   {
     id: 'rev-4',
@@ -796,7 +816,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: '12-week-year-planner',
     surfaceTint: '#F7F5F8',
     accentInk: '#391C57',
-    illustrationUrl: BLUSH_ASSETS.digitalStorefront,
+    illustrationUrl: BLUSH_ASSETS.executiveSofaStrategy,
   },
 ];
 
