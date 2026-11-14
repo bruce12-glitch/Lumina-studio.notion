@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import {
   ArrowUpRight,
   Check,
@@ -238,23 +239,29 @@ export const CheckoutModal: React.FC<{
 
             {/* Primary Digital Delivery Actions */}
             <div className="space-y-2.5">
-              <button
+              <motion.button
                 type="button"
+                whileHover={{ y: -1.5, scale: 1.012 }}
+                whileTap={{ scale: 0.978 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={() => setDuplicatedPreview(true)}
-                className="w-full h-11 px-4 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                className="btn-motion-primary w-full h-11 px-4 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Duplicate to Notion Workspace</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </button>
+                <ArrowUpRight className="w-4 h-4 btn-arrow-diagonal" />
+              </motion.button>
 
-              <button
+              <motion.button
                 type="button"
+                whileHover={{ y: -1.5, scale: 1.01 }}
+                whileTap={{ scale: 0.978 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={() => handleDownloadBlueprint(deliveryPkg)}
-                className="w-full h-10 px-4 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[14px] font-medium inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                className="btn-motion-secondary w-full h-10 px-4 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[14px] font-medium inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Download Setup Blueprint & Receipt (.md)</span>
-              </button>
+              </motion.button>
             </div>
 
             {duplicatedPreview && (
@@ -498,10 +505,13 @@ export const CheckoutModal: React.FC<{
               </>
             )}
 
-            <button
+            <motion.button
               type="submit"
               disabled={submitting}
-              className="w-full h-12 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] disabled:opacity-40 text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
+              whileHover={{ y: -1.5, scale: 1.012 }}
+              whileTap={{ scale: 0.978 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+              className="btn-motion-primary w-full h-12 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] disabled:opacity-40 text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
             >
               {submitting ? (
                 <span>Provisioning Notion Workspace...</span>
@@ -513,7 +523,7 @@ export const CheckoutModal: React.FC<{
                   {provider === 'stripe' ? 'Stripe' : 'Lemon Squeezy'} & Unlock Template
                 </span>
               )}
-            </button>
+            </motion.button>
           </form>
         )}
       </div>
