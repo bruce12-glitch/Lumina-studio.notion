@@ -1,0 +1,6 @@
+{
+  "name": "Easlo — Minimalist Notion Templates & Digital Storefront",
+  "description": "Minimalist Notion templates and productivity apps to organize your work and life, with instant automated digital delivery and Stripe / Lemon Squeezy checkout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
