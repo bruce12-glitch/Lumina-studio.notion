@@ -70,6 +70,7 @@ export interface Testimonial {
   author: string;
   role: string;
   organization: string;
+  avatarUrl: string;
   templateUsed: string;
   templateSlug: string;
   surfaceTint: string;
@@ -572,57 +573,61 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: 'rev-1',
     quote:
-      'Before switching to Second Brain, our product notes lived across four disconnected apps. Consolidating into Lumina’s PARA workspace cut our weekly planning overhead by 4.5 hours and gave every project a single source of truth.',
+      'Before switching to Second Brain, our product specs and research lived across four separate apps. Consolidating into Lumina’s PARA workspace cut weekly planning overhead by 4.5 hours for our design team.',
     outcomeMetric: '4.5 hrs saved weekly',
-    author: 'Elena Rostova',
-    role: 'Staff Product Designer',
-    organization: 'Linearity Studio',
+    author: 'Hannah Lin',
+    role: 'Product Designer',
+    organization: 'Kanso Design',
+    avatarUrl: '/src/assets/images/creator_hannah_lin_1794743242429.jpg',
     templateUsed: 'Second Brain',
     templateSlug: 'second-brain',
-    surfaceTint: '#F8F7F3',
+    surfaceTint: '#F7F6F3',
     accentInk: '#37352F',
     illustrationUrl: BLUSH_ASSETS.creativeDesignerCoffee,
   },
   {
     id: 'rev-2',
     quote:
-      'I tried complex spreadsheets for years and always abandoned them by February. The All-In-One Finance Tracker took ten minutes to duplicate, surfaced $340 in forgotten monthly subscriptions, and raised my savings rate from 22% to 41%.',
+      'I abandoned complex spreadsheets every spring until I duplicated the Finance Tracker. It took ten minutes to set up, caught $340 in forgotten SaaS subscriptions, and raised my monthly savings rate from 22% to 41%.',
     outcomeMetric: '+19% savings rate in 90 days',
-    author: 'Marcus Vance',
-    role: 'Principal Engineer',
-    organization: 'Vance Systems',
+    author: 'David Morales',
+    role: 'Indie Software Engineer',
+    organization: 'BuildLog',
+    avatarUrl: '/src/assets/images/creator_david_morales_1794743241310.jpg',
     templateUsed: 'Finance Tracker',
     templateSlug: 'finance-tracker',
-    surfaceTint: '#F4F6F8',
-    accentInk: '#1A2A52',
+    surfaceTint: '#F4F7FA',
+    accentInk: '#37352F',
     illustrationUrl: BLUSH_ASSETS.teamGrowthClimb,
   },
   {
     id: 'rev-3',
     quote:
-      'Running a solo design consultancy meant client proposals, invoices, and deliverables were constantly slipping. Freelance OS turned my chaotic Notion sidebar into a calm executive dashboard that helped me close $48k in retainer work.',
+      'Running a small studio meant client proposals, invoices, and sprint deliverables were constantly scattered. Freelance OS turned my Notion sidebar into a clear client workspace and helped me close $48k in retainers.',
     outcomeMetric: '12 client pipelines unified',
-    author: 'Sora Takahashi',
-    role: 'Founder & Creative Director',
-    organization: 'Atelier Koto',
+    author: 'Priya Nair',
+    role: 'Creative Director',
+    organization: 'Studio Nair',
+    avatarUrl: '/src/assets/images/creator_priya_nair_1794743242303.jpg',
     templateUsed: 'Freelance OS',
     templateSlug: 'freelance-os',
-    surfaceTint: '#F4F7F4',
-    accentInk: '#254232',
+    surfaceTint: '#F4F8F5',
+    accentInk: '#37352F',
     illustrationUrl: BLUSH_ASSETS.clientDealHandshake,
   },
   {
     id: 'rev-4',
     quote:
-      'Compressing annual goals into 12-week sprints changed how I write and ship research. The minimalist layout removes every decorative distraction so I can open Notion at 7 AM and execute immediately.',
+      'Breaking annual goals into 12-week sprints changed how I write and ship weekly essays. The Notion layout keeps every distraction out of sight so I can open my workspace at 7 AM and start writing right away.',
     outcomeMetric: '94% weekly task completion',
-    author: 'Dr. Julian Mercer',
-    role: 'Computational Fellow',
-    organization: 'ETH Zurich',
+    author: 'Thomas Lind',
+    role: 'Operations Consultant',
+    organization: 'Nordic Editorial',
+    avatarUrl: '/src/assets/images/creator_thomas_lind_1794743242396.jpg',
     templateUsed: '12 Week Year Planner',
     templateSlug: '12-week-year-planner',
-    surfaceTint: '#F7F5F8',
-    accentInk: '#391C57',
+    surfaceTint: '#F7F5FA',
+    accentInk: '#37352F',
     illustrationUrl: BLUSH_ASSETS.executiveSofaStrategy,
   },
 ];

@@ -138,10 +138,13 @@ test('testimonials include 4 attributable reviews linked to valid catalog templa
   assert.equal(TESTIMONIALS.length, 4);
   const testimonialAssets = new Set(TESTIMONIALS.map((r) => r.illustrationUrl));
   assert.equal(testimonialAssets.size, 4, 'All 4 testimonials must use distinct Blush assets');
+  const testimonialAvatars = new Set(TESTIMONIALS.map((r) => r.avatarUrl));
+  assert.equal(testimonialAvatars.size, 4, 'All 4 testimonials must use distinct creator portrait photos');
   for (const rev of TESTIMONIALS) {
     assert.ok(rev.author.length > 0);
     assert.ok(rev.role.length > 0);
     assert.ok(rev.organization.length > 0);
+    assert.ok(rev.avatarUrl.length > 0);
     assert.ok(rev.quote.length > 40);
     assert.ok(rev.surfaceTint.startsWith('#'));
     const linkedTemplate = TEMPLATES.find((t) => t.slug === rev.templateSlug);
