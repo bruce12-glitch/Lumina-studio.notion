@@ -143,18 +143,18 @@ export const CheckoutModal: React.FC<{
           ? `Automated Digital Delivery — ${deliveryPkg.itemName}`
           : `Checkout — ${target?.name}`
       }
-      className="fixed inset-0 z-[95] bg-black/40 backdrop-blur-[2px] flex items-center justify-center p-4 overflow-y-auto"
+      className="fixed inset-0 z-[95] bg-[#37352F]/40 backdrop-blur-[2px] flex items-center justify-center p-4 overflow-y-auto"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-[540px] rounded-[16px] bg-white border border-[#EAEAEA] shadow-[0_8px_24px_rgba(10,10,10,0.08)] overflow-hidden my-auto"
+        className="w-full max-w-[540px] rounded-[16px] bg-white border border-[#E9E9E7] shadow-[0_8px_24px_rgba(55,53,47,0.08)] overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}
-        <div className="px-6 py-4 border-b border-[#EAEAEA] flex items-center justify-between bg-[#FAFAFA]">
+        <div className="px-6 py-4 border-b border-[#E9E9E7] flex items-center justify-between bg-[#F7F6F3]">
           <div className="flex items-center gap-2">
-            <Lock className="w-4 h-4 text-[#0A0A0A]" />
-            <span className="text-[14px] font-semibold text-[#0A0A0A]">
+            <Lock className="w-4 h-4 text-[#37352F]" />
+            <span className="text-[14px] font-semibold text-[#37352F]">
               {deliveryPkg
                 ? 'Automated Digital Delivery — Ready'
                 : finalPrice === 0
@@ -166,7 +166,7 @@ export const CheckoutModal: React.FC<{
             type="button"
             onClick={onClose}
             aria-label="Close checkout"
-            className="w-8 h-8 rounded-[8px] inline-flex items-center justify-center text-[#525252] hover:bg-[#EAEAEA] cursor-pointer"
+            className="w-8 h-8 rounded-[8px] inline-flex items-center justify-center text-[#52504A] hover:bg-[#E9E9E7] cursor-pointer"
           >
             ✕
           </button>
@@ -175,17 +175,17 @@ export const CheckoutModal: React.FC<{
         {deliveryPkg ? (
           /* Automated Digital Delivery View */
           <div className="p-6 space-y-6">
-            <div className="p-4 rounded-[12px] bg-[#FAFAFA] border border-[#EAEAEA] flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#15803D] text-white flex items-center justify-center shrink-0 mt-0.5">
+            <div className="p-4 rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#0F7B6C] text-white flex items-center justify-center shrink-0 mt-0.5">
                 <Check className="w-4 h-4 stroke-[2.5]" />
               </div>
               <div className="space-y-1">
-                <h3 className="text-[16px] font-semibold text-[#0A0A0A]">
+                <h3 className="text-[16px] font-semibold text-[#37352F]">
                   Your {deliveryPkg.itemName} workspace is ready
                 </h3>
-                <p className="text-[13px] text-[#525252]">
+                <p className="text-[13px] text-[#52504A]">
                   Receipt & duplication link sent to{' '}
-                  <span className="font-medium text-[#0A0A0A]">
+                  <span className="font-medium text-[#37352F]">
                     {deliveryPkg.customerEmail}
                   </span>{' '}
                   via {deliveryPkg.provider === 'stripe' ? 'Stripe' : 'Lemon Squeezy'}.
@@ -202,29 +202,29 @@ export const CheckoutModal: React.FC<{
               ].map((s) => (
                 <div
                   key={s.step}
-                  className="p-2.5 rounded-[8px] border border-[#EAEAEA] bg-white"
+                  className="p-2.5 rounded-[8px] border border-[#E9E9E7] bg-white"
                 >
-                  <p className="text-[11px] text-[#737373] font-medium">{s.step}</p>
-                  <p className="text-[12px] font-semibold text-[#15803D]">{s.status}</p>
+                  <p className="text-[11px] text-[#6E6D68] font-medium">{s.step}</p>
+                  <p className="text-[12px] font-semibold text-[#0F7B6C]">{s.status}</p>
                 </div>
               ))}
             </div>
 
             {/* License Key Box */}
             <div className="space-y-1.5">
-              <label className="block text-[12px] font-semibold uppercase tracking-[0.06em] text-[#737373]">
+              <label className="block text-[12px] font-semibold uppercase tracking-[0.06em] text-[#6E6D68]">
                 License Key & Order ID ({deliveryPkg.orderId})
               </label>
-              <div className="flex items-center justify-between gap-2 p-3 rounded-[8px] bg-[#FAFAFA] border border-[#D4D4D4] font-mono text-[13px] text-[#0A0A0A]">
+              <div className="flex items-center justify-between gap-2 p-3 rounded-[8px] bg-[#F7F6F3] border border-[#D3D1CB] font-mono text-[13px] text-[#37352F]">
                 <span className="truncate">{deliveryPkg.licenseKey}</span>
                 <button
                   type="button"
                   onClick={() => handleCopyLicense(deliveryPkg.licenseKey)}
-                  className="px-2.5 py-1 rounded-[6px] bg-white border border-[#D4D4D4] hover:bg-[#F5F5F5] text-[12px] font-sans font-medium inline-flex items-center gap-1 shrink-0 cursor-pointer"
+                  className="px-2.5 py-1 rounded-[6px] bg-white border border-[#D3D1CB] hover:bg-[#F7F6F3] text-[12px] font-sans font-medium text-[#37352F] inline-flex items-center gap-1 shrink-0 cursor-pointer"
                 >
                   {copiedKey ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-[#15803D]" />
+                      <Check className="w-3.5 h-3.5 text-[#0F7B6C]" />
                       <span>Copied</span>
                     </>
                   ) : (
@@ -245,7 +245,7 @@ export const CheckoutModal: React.FC<{
                 whileTap={{ scale: 0.978 }}
                 transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={() => setDuplicatedPreview(true)}
-                className="btn-motion-primary w-full h-11 px-4 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-motion-primary w-full h-11 px-4 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Duplicate to Notion Workspace</span>
                 <ArrowUpRight className="w-4 h-4 btn-arrow-diagonal" />
@@ -257,7 +257,7 @@ export const CheckoutModal: React.FC<{
                 whileTap={{ scale: 0.978 }}
                 transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={() => handleDownloadBlueprint(deliveryPkg)}
-                className="btn-motion-secondary w-full h-10 px-4 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[14px] font-medium inline-flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-motion-secondary w-full h-10 px-4 rounded-[10px] border border-[#D3D1CB] bg-white hover:bg-[#F7F6F3] text-[#37352F] text-[14px] font-medium inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Download Setup Blueprint & Receipt (.md)</span>
@@ -265,22 +265,22 @@ export const CheckoutModal: React.FC<{
             </div>
 
             {duplicatedPreview && (
-              <div className="p-4 rounded-[10px] bg-[#FAFAFA] border border-[#EAEAEA] space-y-2">
+              <div className="p-4 rounded-[10px] bg-[#F7F6F3] border border-[#E9E9E7] space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-[13px] font-semibold text-[#0A0A0A]">
+                  <span className="text-[13px] font-semibold text-[#37352F]">
                     Notion Duplication Link Active
                   </span>
-                  <span className="text-[12px] text-[#15803D] font-medium">
+                  <span className="text-[12px] text-[#0F7B6C] font-medium">
                     Ready to import
                   </span>
                 </div>
-                <p className="text-[12px] font-mono text-[#525252] break-all">
+                <p className="text-[12px] font-mono text-[#52504A] break-all">
                   {deliveryPkg.notionDuplicateUrl}
                 </p>
                 {deliveryPkg.circleCommunityInviteUrl && (
-                  <p className="text-[12px] text-[#525252] pt-1 border-t border-[#EAEAEA]">
+                  <p className="text-[12px] text-[#52504A] pt-1 border-t border-[#E9E9E7]">
                     Private Circle Community Invite:{' '}
-                    <span className="font-mono text-[#0A0A0A]">
+                    <span className="font-mono text-[#37352F]">
                       {deliveryPkg.circleCommunityInviteUrl}
                     </span>
                   </p>
@@ -292,40 +292,40 @@ export const CheckoutModal: React.FC<{
           /* Checkout Form View */
           <form onSubmit={handleSubmit} noValidate className="p-6 space-y-5">
             {/* Order Summary Row */}
-            <div className="p-4 rounded-[12px] bg-[#FAFAFA] border border-[#EAEAEA] flex items-center justify-between">
+            <div className="p-4 rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-[16px] font-semibold text-[#0A0A0A]">
+                  <h3 className="text-[16px] font-semibold text-[#37352F]">
                     {target?.name}
                   </h3>
                   {target?.pro && (
-                    <span className="rounded-full bg-[#0A0A0A] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-[7px] py-[3px] leading-none">
+                    <span className="rounded-[4px] bg-[#37352F] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-[7px] py-[3px] leading-none">
                       PRO
                     </span>
                   )}
                 </div>
-                <p className="text-[13px] text-[#737373] mt-0.5">
+                <p className="text-[13px] text-[#6E6D68] mt-0.5">
                   Instant Notion workspace link + setup blueprint
                 </p>
               </div>
               <div className="text-right tabular-nums">
                 {discountAmount > 0 ? (
                   <div>
-                    <span className="text-[13px] text-[#A3A3A3] line-through mr-1.5">
+                    <span className="text-[13px] text-[#9B9A97] line-through mr-1.5">
                       {formatPrice(basePrice)}
                     </span>
-                    <span className="text-[18px] font-bold text-[#0A0A0A]">
+                    <span className="text-[18px] font-bold text-[#37352F]">
                       ${finalPrice}
                     </span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5">
                     {target?.compareAt !== undefined && (
-                      <span className="text-[14px] text-[#A3A3A3] line-through">
+                      <span className="text-[14px] text-[#9B9A97] line-through">
                         {formatPrice(target.compareAt)}
                       </span>
                     )}
-                    <span className="text-[18px] font-bold text-[#0A0A0A]">
+                    <span className="text-[18px] font-bold text-[#37352F]">
                       {formatPrice(basePrice)}
                     </span>
                   </div>
@@ -335,7 +335,7 @@ export const CheckoutModal: React.FC<{
 
             {/* Payment Gateway Selector (Stripe vs Lemon Squeezy) */}
             <div className="space-y-1.5">
-              <label className="block text-[13px] font-medium text-[#0A0A0A]">
+              <label className="block text-[13px] font-medium text-[#37352F]">
                 Payment & Automated Delivery Provider
               </label>
               <div className="grid grid-cols-2 gap-2.5" role="radiogroup">
@@ -346,8 +346,8 @@ export const CheckoutModal: React.FC<{
                   onClick={() => setProvider('stripe')}
                   className={`h-11 px-3.5 rounded-[10px] border text-[13px] font-semibold flex items-center justify-between transition-all cursor-pointer ${
                     provider === 'stripe'
-                      ? 'border-[#0A0A0A] bg-[#0A0A0A] text-white'
-                      : 'border-[#D4D4D4] bg-white text-[#525252] hover:bg-[#FAFAFA]'
+                      ? 'border-[#37352F] bg-[#37352F] text-white'
+                      : 'border-[#D3D1CB] bg-white text-[#52504A] hover:bg-[#F7F6F3]'
                   }`}
                 >
                   <span>Stripe Checkout</span>
@@ -360,8 +360,8 @@ export const CheckoutModal: React.FC<{
                   onClick={() => setProvider('lemonsqueezy')}
                   className={`h-11 px-3.5 rounded-[10px] border text-[13px] font-semibold flex items-center justify-between transition-all cursor-pointer ${
                     provider === 'lemonsqueezy'
-                      ? 'border-[#0A0A0A] bg-[#0A0A0A] text-white'
-                      : 'border-[#D4D4D4] bg-white text-[#525252] hover:bg-[#FAFAFA]'
+                      ? 'border-[#37352F] bg-[#37352F] text-white'
+                      : 'border-[#D3D1CB] bg-white text-[#52504A] hover:bg-[#F7F6F3]'
                   }`}
                 >
                   <span>Lemon Squeezy</span>
@@ -374,7 +374,7 @@ export const CheckoutModal: React.FC<{
             <div className="space-y-1.5">
               <label
                 htmlFor="checkout-email"
-                className="block text-[13px] font-medium text-[#0A0A0A]"
+                className="block text-[13px] font-medium text-[#37352F]"
               >
                 Delivery Email Address
               </label>
@@ -384,14 +384,14 @@ export const CheckoutModal: React.FC<{
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className={`w-full h-10 px-3 rounded-[8px] bg-[#FAFAFA] border text-[14px] text-[#0A0A0A] placeholder:text-[#A3A3A3] focus:outline-none ${
+                className={`w-full h-10 px-3 rounded-[8px] bg-[#F7F6F3] border text-[14px] text-[#37352F] placeholder:text-[#9B9A97] focus:outline-none ${
                   errors.email
-                    ? 'border-[#B42318] focus:border-[#B42318]'
-                    : 'border-[#D4D4D4] focus:border-[#0A0A0A]'
+                    ? 'border-[#C43B3B] focus:border-[#C43B3B]'
+                    : 'border-[#D3D1CB] focus:border-[#37352F]'
                 }`}
               />
               {errors.email && (
-                <p className="text-[13px] text-[#B42318]">{errors.email}</p>
+                <p className="text-[13px] text-[#C43B3B]">{errors.email}</p>
               )}
             </div>
 
@@ -402,14 +402,14 @@ export const CheckoutModal: React.FC<{
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="checkout-promo"
-                      className="block text-[13px] font-medium text-[#0A0A0A]"
+                      className="block text-[13px] font-medium text-[#37352F]"
                     >
                       Discount Code
                     </label>
                     <button
                       type="button"
                       onClick={() => setPromoCode('ORGANIZE2026')}
-                      className="text-[12px] text-[#525252] underline hover:text-[#0A0A0A] cursor-pointer"
+                      className="text-[12px] text-[#52504A] underline hover:text-[#37352F] cursor-pointer"
                     >
                       Apply 2026 Promo (ORGANIZE2026)
                     </button>
@@ -420,17 +420,17 @@ export const CheckoutModal: React.FC<{
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
                     placeholder="ORGANIZE2026"
-                    className={`w-full h-10 px-3 rounded-[8px] bg-[#FAFAFA] border text-[14px] text-[#0A0A0A] placeholder:text-[#A3A3A3] ${
-                      errors.promoCode ? 'border-[#B42318]' : 'border-[#D4D4D4]'
+                    className={`w-full h-10 px-3 rounded-[8px] bg-[#F7F6F3] border text-[14px] text-[#37352F] placeholder:text-[#9B9A97] ${
+                      errors.promoCode ? 'border-[#C43B3B]' : 'border-[#D3D1CB]'
                     }`}
                   />
                   {appliedCode && (
-                    <p className="text-[12px] text-[#15803D] font-medium">
+                    <p className="text-[12px] text-[#0F7B6C] font-medium">
                       Code {appliedCode} applied — saving ${discountAmount}
                     </p>
                   )}
                   {errors.promoCode && (
-                    <p className="text-[13px] text-[#B42318]">{errors.promoCode}</p>
+                    <p className="text-[13px] text-[#C43B3B]">{errors.promoCode}</p>
                   )}
                 </div>
 
@@ -438,7 +438,7 @@ export const CheckoutModal: React.FC<{
                   <div className="space-y-1.5">
                     <label
                       htmlFor="checkout-card"
-                      className="block text-[13px] font-medium text-[#0A0A0A]"
+                      className="block text-[13px] font-medium text-[#37352F]"
                     >
                       Card Number ({provider === 'stripe' ? 'Stripe' : 'Lemon Squeezy'})
                     </label>
@@ -448,12 +448,12 @@ export const CheckoutModal: React.FC<{
                       value={cardNumber}
                       onChange={(e) => setCardNumber(e.target.value)}
                       placeholder="4242 4242 4242 4242"
-                      className={`w-full h-10 px-3 rounded-[8px] bg-[#FAFAFA] border text-[14px] tabular-nums text-[#0A0A0A] ${
-                        errors.cardNumber ? 'border-[#B42318]' : 'border-[#D4D4D4]'
+                      className={`w-full h-10 px-3 rounded-[8px] bg-[#F7F6F3] border text-[14px] tabular-nums text-[#37352F] ${
+                        errors.cardNumber ? 'border-[#C43B3B]' : 'border-[#D3D1CB]'
                       }`}
                     />
                     {errors.cardNumber && (
-                      <p className="text-[13px] text-[#B42318]">{errors.cardNumber}</p>
+                      <p className="text-[13px] text-[#C43B3B]">{errors.cardNumber}</p>
                     )}
                   </div>
 
@@ -461,7 +461,7 @@ export const CheckoutModal: React.FC<{
                     <div className="space-y-1.5">
                       <label
                         htmlFor="checkout-expiry"
-                        className="block text-[13px] font-medium text-[#0A0A0A]"
+                        className="block text-[13px] font-medium text-[#37352F]"
                       >
                         Expiry (MM/YY)
                       </label>
@@ -471,18 +471,18 @@ export const CheckoutModal: React.FC<{
                         value={expiry}
                         onChange={(e) => setExpiry(e.target.value)}
                         placeholder="12/28"
-                        className={`w-full h-10 px-3 rounded-[8px] bg-[#FAFAFA] border text-[14px] tabular-nums text-[#0A0A0A] ${
-                          errors.expiry ? 'border-[#B42318]' : 'border-[#D4D4D4]'
+                        className={`w-full h-10 px-3 rounded-[8px] bg-[#F7F6F3] border text-[14px] tabular-nums text-[#37352F] ${
+                          errors.expiry ? 'border-[#C43B3B]' : 'border-[#D3D1CB]'
                         }`}
                       />
                       {errors.expiry && (
-                        <p className="text-[13px] text-[#B42318]">{errors.expiry}</p>
+                        <p className="text-[13px] text-[#C43B3B]">{errors.expiry}</p>
                       )}
                     </div>
                     <div className="space-y-1.5">
                       <label
                         htmlFor="checkout-cvc"
-                        className="block text-[13px] font-medium text-[#0A0A0A]"
+                        className="block text-[13px] font-medium text-[#37352F]"
                       >
                         CVC
                       </label>
@@ -492,12 +492,12 @@ export const CheckoutModal: React.FC<{
                         value={cvc}
                         onChange={(e) => setCvc(e.target.value)}
                         placeholder="424"
-                        className={`w-full h-10 px-3 rounded-[8px] bg-[#FAFAFA] border text-[14px] tabular-nums text-[#0A0A0A] ${
-                          errors.cvc ? 'border-[#B42318]' : 'border-[#D4D4D4]'
+                        className={`w-full h-10 px-3 rounded-[8px] bg-[#F7F6F3] border text-[14px] tabular-nums text-[#37352F] ${
+                          errors.cvc ? 'border-[#C43B3B]' : 'border-[#D3D1CB]'
                         }`}
                       />
                       {errors.cvc && (
-                        <p className="text-[13px] text-[#B42318]">{errors.cvc}</p>
+                        <p className="text-[13px] text-[#C43B3B]">{errors.cvc}</p>
                       )}
                     </div>
                   </div>
@@ -511,7 +511,7 @@ export const CheckoutModal: React.FC<{
               whileHover={{ y: -1.5, scale: 1.012 }}
               whileTap={{ scale: 0.978 }}
               transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-              className="btn-motion-primary w-full h-12 rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] disabled:opacity-40 text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
+              className="btn-motion-primary w-full h-12 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] disabled:opacity-40 text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
             >
               {submitting ? (
                 <span>Provisioning Notion Workspace...</span>
