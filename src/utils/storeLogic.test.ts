@@ -13,7 +13,7 @@ import {
   validateCheckoutInput,
 } from './storeLogic';
 
-test('catalog integrity matches Easlo specification (39 items, 22 free, 17 PRO, exact category counts)', () => {
+test('catalog integrity matches Lumina specification (39 items, 22 free, 17 PRO, exact category counts)', () => {
   assert.equal(TEMPLATES.length, 39);
 
   const freeItems = TEMPLATES.filter((t) => !t.pro);
@@ -113,7 +113,7 @@ test('validateCheckoutInput and generateDeliveryPackage validate and provision d
     provider: 'stripe',
     customerEmail: 'alex@example.com',
   });
-  assert.ok(pkg.licenseKey.startsWith('EASLO-PRO-'));
+  assert.ok(pkg.licenseKey.startsWith('LUMINA-PRO-'));
   assert.ok(pkg.notionDuplicateUrl.includes('second-brain'));
   assert.ok(pkg.circleCommunityInviteUrl);
 });
@@ -124,7 +124,7 @@ test('validateAuthForm and getProTemplatesTotalValue', () => {
   assert.ok(badAuth.errors.email);
   assert.ok(badAuth.errors.password);
 
-  const goodAuth = validateAuthForm('creator@easlo.co', 'minimalism2026', true);
+  const goodAuth = validateAuthForm('creator@lumina.co', 'minimalism2026', true);
   assert.equal(goodAuth.valid, true);
 
   const bundle = getProTemplatesTotalValue();
@@ -153,9 +153,9 @@ test('testimonials include 4 attributable reviews linked to valid catalog templa
   assert.equal(assetUrls.length, 30);
   assert.equal(new Set(assetUrls).size, 30, 'All 30 BLUSH_ASSETS URLs must be unique');
 
-  // Verify all 4 Apps by Easlo have distinct illustrations
+  // Verify all 4 Apps by Lumina have distinct illustrations
   const appAssets = new Set(APPS.map((a) => a.illustrationUrl));
-  assert.equal(appAssets.size, 4, 'All 4 Apps by Easlo must use distinct illustrations');
+  assert.equal(appAssets.size, 4, 'All 4 Apps by Lumina must use distinct illustrations');
 
   // Verify the first 30 templates use 30 completely unique illustrations and no two adjacent templates share an asset
   const first30Assets = new Set(TEMPLATES.slice(0, 30).map((t) => t.illustrationUrl));
