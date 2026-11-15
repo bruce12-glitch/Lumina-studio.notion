@@ -10,9 +10,99 @@ import {
   Download,
   Menu as MenuIcon,
 } from 'lucide-react';
-import { BLUSH_ASSETS, FAQ_ITEMS, Template, TESTIMONIALS } from '../data/catalog';
+import {
+  AppItem,
+  BLUSH_ASSETS,
+  FAQ_ITEMS,
+  Template,
+  TESTIMONIALS,
+} from '../data/catalog';
 import { DigitalDeliveryPackage, formatPrice } from '../utils/storeLogic';
-import { BlushAssetImage, TemplateCover } from './CoversAndIllustrations';
+import {
+  AppIconGlyph,
+  BlushAssetImage,
+  TemplateCover,
+} from './CoversAndIllustrations';
+import hannahLinAvatar from '../assets/images/creator_hannah_lin_1794743242429.jpg';
+import davidMoralesAvatar from '../assets/images/creator_david_morales_1794743241310.jpg';
+import priyaNairAvatar from '../assets/images/creator_priya_nair_1794743242303.jpg';
+import thomasLindAvatar from '../assets/images/creator_thomas_lind_1794743242396.jpg';
+
+const CREATOR_AVATAR_MAP: Record<string, string> = {
+  'rev-1': hannahLinAvatar,
+  'rev-2': davidMoralesAvatar,
+  'rev-3': priyaNairAvatar,
+  'rev-4': thomasLindAvatar,
+};
+
+export const LuminaLogo: React.FC<{ size?: number; className?: string }> = ({
+  size = 26,
+  className = '',
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    className={`shrink-0 ${className}`}
+  >
+    <rect width="32" height="32" rx="8" fill="#37352F" />
+    <rect
+      x="1.75"
+      y="1.75"
+      width="28.5"
+      height="28.5"
+      rx="6.25"
+      stroke="#FFFFFF"
+      strokeOpacity="0.16"
+      strokeWidth="1"
+    />
+    <path
+      d="M16 6.5L18.45 13.55L25.5 16L18.45 18.45L16 25.5L13.55 18.45L6.5 16L13.55 13.55Z"
+      fill="#FFFFFF"
+    />
+  </svg>
+);
+
+const NAV_DIRECTORY_GROUPS: Array<{
+  title: string;
+  links: Array<{ label: string; path: string; badge?: string }>;
+}> = [
+  {
+    title: 'Pages',
+    links: [
+      { label: 'Apps', path: '/apps' },
+      { label: 'Templates', path: '/templates' },
+      { label: 'Blog', path: '/blog' },
+    ],
+  },
+  {
+    title: 'Apps',
+    links: [
+      { label: 'SyncTasks', path: '/apps/sync-tasks' },
+      { label: 'Experiments', path: '/apps/experiments' },
+      { label: 'Menu', path: '/apps/menu' },
+    ],
+  },
+  {
+    title: 'Templates',
+    links: [
+      { label: 'Second Brain', path: '/second-brain' },
+      { label: 'Finance Tracker', path: '/finance-tracker' },
+      { label: 'All Access', path: '/all-access', badge: 'Bundle' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', path: '/about' },
+      { label: 'Updates', path: '/updates' },
+      { label: 'Privacy Policy', path: '/privacy' },
+    ],
+  },
+];
 
 export interface NavigationProps {
   currentPath: string;
@@ -67,24 +157,28 @@ export const Header: React.FC<NavigationProps> = ({
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-[100] focus:bg-[#0A0A0A] focus:text-white focus:px-4 focus:py-2 focus:rounded-[8px] focus:text-sm focus:font-semibold"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-[100] focus:bg-[#37352F] focus:text-white focus:px-4 focus:py-2 focus:rounded-[8px] focus:text-sm focus:font-semibold"
       >
         Skip to content
       </a>
       <header
-        className={`sticky top-0 z-50 h-16 w-full bg-[#FDFCFB]/88 backdrop-blur-md transition-[border-color] duration-150 ${
-          scrolled ? 'border-b border-[#E8E6E1]' : 'border-b border-transparent'
+        className={`sticky top-0 z-50 h-16 w-full bg-[#FFFFFF]/92 backdrop-blur-md transition-[border-color] duration-150 ${
+          scrolled ? 'border-b border-[#E9E9E7]' : 'border-b border-transparent'
         }`}
       >
         <div className="max-w-[1200px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between gap-8">
-          {/* Zone 1: Brand Wordmark + Primary Nav Links */}
+          {/* Zone 1: Brand Logo + Wordmark + Primary Nav Links */}
           <div className="flex items-center gap-8">
             <a
               href="/"
               onClick={(e) => handleLink(e, '/')}
-              className="text-[20px] font-bold tracking-[-0.03em] text-[#0A0A0A] whitespace-nowrap shrink-0"
+              className="group inline-flex items-center gap-2.5 text-[20px] font-bold tracking-[-0.03em] text-[#37352F] whitespace-nowrap shrink-0"
             >
-              Lumina
+              <LuminaLogo
+                size={26}
+                className="transition-transform duration-200 group-hover:scale-105"
+              />
+              <span>Lumina</span>
             </a>
 
             <nav
@@ -105,8 +199,8 @@ export const Header: React.FC<NavigationProps> = ({
                     aria-current={active ? 'page' : undefined}
                     className={`whitespace-nowrap shrink-0 transition-colors duration-150 ${
                       active
-                        ? 'text-[#0A0A0A] underline decoration-2 underline-offset-[6px]'
-                        : 'text-[#737373] hover:text-[#0A0A0A]'
+                        ? 'text-[#37352F] underline decoration-2 underline-offset-[6px]'
+                        : 'text-[#6E6D68] hover:text-[#37352F]'
                     }`}
                   >
                     {item.label}
@@ -125,7 +219,7 @@ export const Header: React.FC<NavigationProps> = ({
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 onClick={onOpenLibrary}
-                className="btn-motion-secondary h-10 px-3.5 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[13px] font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
+                className="btn-motion-secondary h-10 px-3.5 rounded-[10px] border border-[#D3D1CB] bg-white hover:bg-[#F7F6F3] text-[#37352F] text-[13px] font-semibold inline-flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>My Downloads ({purchasesCount})</span>
@@ -137,7 +231,7 @@ export const Header: React.FC<NavigationProps> = ({
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 420, damping: 28 }}
               onClick={(e) => handleLink(e, '/sign-in')}
-              className="btn-motion-ghost h-10 px-4 rounded-[10px] text-[14px] font-medium text-[#525252] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] inline-flex items-center justify-center whitespace-nowrap shrink-0"
+              className="btn-motion-ghost h-10 px-4 rounded-[10px] text-[14px] font-medium text-[#52504A] hover:text-[#37352F] hover:bg-[#F1F1EF] inline-flex items-center justify-center whitespace-nowrap shrink-0"
             >
               Sign In
             </motion.a>
@@ -147,7 +241,7 @@ export const Header: React.FC<NavigationProps> = ({
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={(e) => handleLink(e, '/sign-up')}
-              className="btn-motion-primary h-10 px-[18px] rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center justify-center whitespace-nowrap shrink-0"
+              className="btn-motion-primary h-10 px-[18px] rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center whitespace-nowrap shrink-0"
             >
               Create a free account
             </motion.a>
@@ -161,7 +255,7 @@ export const Header: React.FC<NavigationProps> = ({
                 whileTap={{ scale: 0.95 }}
                 onClick={onOpenLibrary}
                 aria-label={`My Downloads (${purchasesCount})`}
-                className="h-11 px-3 rounded-[10px] border border-[#EAEAEA] bg-[#FAFAFA] text-[#0A0A0A] text-xs font-semibold inline-flex items-center gap-1.5"
+                className="h-11 px-3 rounded-[10px] border border-[#E9E9E7] bg-[#F7F6F3] text-[#37352F] text-xs font-semibold inline-flex items-center gap-1.5"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>{purchasesCount}</span>
@@ -172,7 +266,7 @@ export const Header: React.FC<NavigationProps> = ({
               whileTap={{ scale: 0.94 }}
               onClick={onOpenMenu}
               aria-label="Open menu"
-              className="w-11 h-11 rounded-[10px] inline-flex items-center justify-center text-[#0A0A0A] hover:bg-[#F5F5F5] transition-colors cursor-pointer"
+              className="w-11 h-11 rounded-[10px] inline-flex items-center justify-center text-[#37352F] hover:bg-[#F1F1EF] transition-colors cursor-pointer"
             >
               <MenuIcon className="w-5 h-5 stroke-[1.5]" />
             </motion.button>
@@ -236,41 +330,6 @@ export const MenuOverlay: React.FC<{
     onNavigate(path);
   };
 
-  const groups = [
-    {
-      title: 'Pages',
-      links: [
-        { label: 'Apps', path: '/apps' },
-        { label: 'Templates', path: '/templates' },
-        { label: 'Blog', path: '/blog' },
-      ],
-    },
-    {
-      title: 'Apps',
-      links: [
-        { label: 'SyncTasks', path: '/apps/sync-tasks' },
-        { label: 'Experiments', path: '/apps/experiments' },
-        { label: 'Menu', path: '/apps/menu' },
-      ],
-    },
-    {
-      title: 'Templates',
-      links: [
-        { label: 'Second Brain', path: '/second-brain' },
-        { label: 'Finance Tracker', path: '/finance-tracker' },
-        { label: 'All Access', path: '/all-access' },
-      ],
-    },
-    {
-      title: 'Company',
-      links: [
-        { label: 'About', path: '/about' },
-        { label: 'Updates', path: '/updates' },
-        { label: 'Privacy Policy', path: '/privacy' },
-      ],
-    },
-  ];
-
   return (
     <div
       ref={dialogRef}
@@ -280,21 +339,22 @@ export const MenuOverlay: React.FC<{
       className="fixed inset-0 z-[90] bg-white flex flex-col justify-between overflow-y-auto animate-fade-up"
     >
       {/* Top Bar Mirror */}
-      <div className="h-16 border-b border-[#EAEAEA] shrink-0">
+      <div className="h-16 border-b border-[#E9E9E7] shrink-0">
         <div className="max-w-[1200px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between">
           <a
             href="/"
             onClick={(e) => go(e, '/')}
-            className="text-[20px] font-bold tracking-[-0.03em] text-[#0A0A0A]"
+            className="inline-flex items-center gap-2.5 text-[20px] font-bold tracking-[-0.03em] text-[#37352F]"
           >
-            Lumina
+            <LuminaLogo size={26} />
+            <span>Lumina</span>
           </a>
           <button
             ref={closeBtnRef}
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="w-11 h-11 rounded-[10px] inline-flex items-center justify-center text-[20px] font-medium text-[#0A0A0A] hover:bg-[#F5F5F5] transition-colors cursor-pointer"
+            className="w-11 h-11 rounded-[10px] inline-flex items-center justify-center text-[20px] font-medium text-[#37352F] hover:bg-[#F1F1EF] transition-colors cursor-pointer"
           >
             ✕
           </button>
@@ -304,9 +364,9 @@ export const MenuOverlay: React.FC<{
       {/* Center Link Groups */}
       <div className="max-w-[720px] w-full mx-auto px-4 sm:px-6 py-10 sm:py-14 my-auto">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10">
-          {groups.map((group) => (
+          {NAV_DIRECTORY_GROUPS.map((group) => (
             <div key={group.title} className="space-y-4">
-              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#737373]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
                 {group.title}
               </p>
               <ul className="space-y-3">
@@ -315,7 +375,7 @@ export const MenuOverlay: React.FC<{
                     <a
                       href={item.path}
                       onClick={(e) => go(e, item.path)}
-                      className="block text-[22px] sm:text-[26px] font-semibold tracking-[-0.02em] leading-[1.2] text-[#0A0A0A] hover:text-[#525252] transition-colors"
+                      className="block text-[22px] sm:text-[26px] font-semibold tracking-[-0.02em] leading-[1.2] text-[#37352F] hover:text-[#6E6D68] transition-colors"
                     >
                       {item.label}
                     </a>
@@ -328,30 +388,30 @@ export const MenuOverlay: React.FC<{
       </div>
 
       {/* Bottom Auth Row + Ctrl M Shortcut Hint */}
-      <div className="border-t border-[#EAEAEA] py-5 shrink-0">
+      <div className="border-t border-[#E9E9E7] py-5 shrink-0">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <a
               href="/sign-in"
               onClick={(e) => go(e, '/sign-in')}
-              className="h-10 px-4 rounded-[10px] border border-[#D4D4D4] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] text-[14px] font-medium inline-flex items-center justify-center"
+              className="h-10 px-4 rounded-[10px] border border-[#D3D1CB] bg-white hover:bg-[#F7F6F3] text-[#37352F] text-[14px] font-medium inline-flex items-center justify-center"
             >
               Sign In
             </a>
             <a
               href="/sign-up"
               onClick={(e) => go(e, '/sign-up')}
-              className="h-10 px-[18px] rounded-[10px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[14px] font-semibold inline-flex items-center justify-center"
+              className="h-10 px-[18px] rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center"
             >
               Create a free account
             </a>
           </div>
 
-          <div className="flex items-center gap-1.5 text-[12px] text-[#737373]">
-            <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#0A0A0A] bg-[#FAFAFA] border border-[#D4D4D4] border-b-2 rounded-[6px]">
+          <div className="flex items-center gap-1.5 text-[12px] text-[#6E6D68]">
+            <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#37352F] bg-[#F7F6F3] border border-[#D3D1CB] border-b-2 rounded-[6px]">
               Ctrl
             </kbd>
-            <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#0A0A0A] bg-[#FAFAFA] border border-[#D4D4D4] border-b-2 rounded-[6px]">
+            <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#37352F] bg-[#F7F6F3] border border-[#D3D1CB] border-b-2 rounded-[6px]">
               M
             </kbd>
           </div>
@@ -384,7 +444,7 @@ export const Footer: React.FC<{
   };
 
   return (
-    <footer className="border-t border-[#E8E6E1] bg-[#FDFCFB] pt-14 sm:pt-20 pb-12 sm:pb-16">
+    <footer className="border-t border-[#E9E9E7] bg-[#FFFFFF] pt-14 sm:pt-20 pb-12 sm:pb-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* 1. Editorial Pre-Footer Dispatch & Free Systems Card */}
         <motion.div
@@ -392,25 +452,25 @@ export const Footer: React.FC<{
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-[20px] border border-[#E8E6E1] bg-[#F7F6F2] p-6 sm:p-10 mb-14 sm:mb-16 overflow-hidden"
+          className="relative rounded-[20px] border border-[#E9E9E7] bg-[#F7F6F3] p-6 sm:p-10 mb-14 sm:mb-16 overflow-hidden"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 text-[12px] font-medium text-[#787671]">
+              <div className="inline-flex items-center gap-2 text-[12px] font-medium text-[#6E6D68]">
                 <span>Lumina Newsletter · Free Weekly Templates</span>
               </div>
 
-              <h2 className="text-[clamp(24px,3vw,32px)] font-[630] tracking-[-0.025em] leading-[1.15] text-[#111110] text-balance">
+              <h2 className="text-[clamp(24px,3vw,32px)] font-[630] tracking-[-0.025em] leading-[1.15] text-[#37352F] text-balance">
                 Get new free Notion templates in your inbox.
               </h2>
 
-              <p className="text-[15px] text-[#37352F] leading-[1.6] max-w-[520px]">
-                Join 120,000+ readers receiving practical Notion guides and free templates every Sunday. No spam, unsubscribe anytime.
+              <p className="text-[15px] text-[#52504A] leading-[1.6] max-w-[520px]">
+                Receive practical Notion guides and free templates every Sunday. No spam, unsubscribe anytime.
               </p>
 
               {subscribed ? (
-                <div className="pt-1 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-[10px] bg-white border border-[#C8C4BE] text-[13.5px] font-medium text-[#111110]">
-                  <span className="w-5 h-5 rounded-full bg-[#15803D] text-white inline-flex items-center justify-center shrink-0">
+                <div className="pt-1 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-[10px] bg-white border border-[#D3D1CB] text-[13.5px] font-medium text-[#37352F]">
+                  <span className="w-5 h-5 rounded-full bg-[#0F7B6C] text-white inline-flex items-center justify-center shrink-0">
                     <Check className="w-3 h-3 stroke-[2.5]" />
                   </span>
                   <span>
@@ -429,14 +489,14 @@ export const Footer: React.FC<{
                     onChange={(e) => setNewsletterEmail(e.target.value)}
                     placeholder="Enter your email address..."
                     aria-label="Email address for newsletter"
-                    className="h-11 flex-1 px-3.5 rounded-[8px] bg-white border border-[#C8C4BE] text-[14px] text-[#111110] placeholder:text-[#A4A097] focus:outline-none focus:border-[#111110] transition-colors"
+                    className="h-11 flex-1 px-3.5 rounded-[8px] bg-white border border-[#D3D1CB] text-[14px] text-[#37352F] placeholder:text-[#9B9A97] focus:outline-none focus:border-[#37352F] transition-colors"
                   />
                   <motion.button
                     type="submit"
                     whileHover={{ y: -1.5, scale: 1.015 }}
                     whileTap={{ scale: 0.97 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                    className="btn-motion-primary h-11 px-5 rounded-[8px] bg-[#111110] hover:bg-[#262523] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
+                    className="btn-motion-primary h-11 px-5 rounded-[8px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
                   >
                     <span>Subscribe Free</span>
                     <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
@@ -447,15 +507,15 @@ export const Footer: React.FC<{
 
             {/* Right Newsletter Starter Pack Visual */}
             <div className="lg:col-span-5">
-              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-5 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex items-center justify-between gap-4">
+              <div className="rounded-[14px] border border-[#E9E9E7] bg-white p-5 shadow-[0_8px_24px_-6px_rgba(55,53,47,0.06)] flex items-center justify-between gap-4">
                 <div className="space-y-1.5 min-w-0">
-                  <span className="text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
+                  <span className="text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#6E6D68]">
                     Free Starter Pack
                   </span>
-                  <p className="text-[15px] font-bold text-[#111110] leading-snug">
+                  <p className="text-[15px] font-bold text-[#37352F] leading-snug">
                     3 Free Templates Included
                   </p>
-                  <p className="text-[12.5px] text-[#37352F] leading-snug">
+                  <p className="text-[12.5px] text-[#52504A] leading-snug">
                     Get instant access to our Habit Tracker, Reading List, and Weekly Planner.
                   </p>
                 </div>
@@ -480,17 +540,18 @@ export const Footer: React.FC<{
                 onClick={(e) => go(e, '/')}
                 className="inline-flex items-center gap-2.5 group"
               >
-                <span className="w-7 h-7 rounded-[7px] bg-[#111110] text-white text-[14px] font-bold inline-flex items-center justify-center tracking-tight transition-transform duration-200 group-hover:scale-105">
-                  L
-                </span>
-                <span className="text-[20px] font-bold tracking-[-0.03em] text-[#111110]">
+                <LuminaLogo
+                  size={28}
+                  className="transition-transform duration-200 group-hover:scale-105"
+                />
+                <span className="text-[20px] font-bold tracking-[-0.03em] text-[#37352F]">
                   Lumina
                 </span>
               </a>
-              <p className="text-[14.5px] font-medium text-[#111110]">
+              <p className="text-[14.5px] font-medium text-[#37352F]">
                 Productivity meets minimalism.
               </p>
-              <p className="text-[13.5px] text-[#37352F] leading-[1.6] max-w-[360px]">
+              <p className="text-[13.5px] text-[#52504A] leading-[1.6] max-w-[360px]">
                 Minimalist Notion templates and web apps built to help you organize your work, finances, and daily routines.
               </p>
             </div>
@@ -498,120 +559,38 @@ export const Footer: React.FC<{
 
           {/* 4 Navigation Columns */}
           <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8">
-            <div className="space-y-3.5">
-              <h3 className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#111110]">
-                Pages
-              </h3>
-              <ul className="space-y-2.5 text-[14px] text-[#52504C]">
-                {[
-                  { label: 'Apps', path: '/apps' },
-                  { label: 'Templates', path: '/templates' },
-                  { label: 'Blog', path: '/blog' },
-                ].map((item) => (
-                  <li key={item.path}>
-                    <a
-                      href={item.path}
-                      onClick={(e) => go(e, item.path)}
-                      className="group/link inline-flex items-center gap-1 hover:text-[#111110] transition-colors"
-                    >
-                      <span>{item.label}</span>
-                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 group-hover/link:opacity-100 group-hover/link:translate-y-0 transition-all" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="space-y-3.5">
-              <h3 className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#111110]">
-                Apps
-              </h3>
-              <ul className="space-y-2.5 text-[14px] text-[#52504C]">
-                {[
-                  { label: 'SyncTasks', path: '/apps/sync-tasks' },
-                  { label: 'Experiments', path: '/apps/experiments' },
-                  { label: 'Menu', path: '/apps/menu' },
-                ].map((item) => (
-                  <li key={item.path}>
-                    <a
-                      href={item.path}
-                      onClick={(e) => go(e, item.path)}
-                      className="group/link inline-flex items-center gap-1 hover:text-[#111110] transition-colors"
-                    >
-                      <span>{item.label}</span>
-                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 group-hover/link:opacity-100 group-hover/link:translate-y-0 transition-all" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="space-y-3.5">
-              <h3 className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#111110]">
-                Templates
-              </h3>
-              <ul className="space-y-2.5 text-[14px] text-[#52504C]">
-                <li>
-                  <a
-                    href="/second-brain"
-                    onClick={(e) => go(e, '/second-brain')}
-                    className="group/link inline-flex items-center gap-1.5 hover:text-[#111110] transition-colors"
-                  >
-                    <span>Second Brain</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/finance-tracker"
-                    onClick={(e) => go(e, '/finance-tracker')}
-                    className="group/link inline-flex items-center gap-1.5 hover:text-[#111110] transition-colors"
-                  >
-                    <span>Finance Tracker</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/all-access"
-                    onClick={(e) => go(e, '/all-access')}
-                    className="group/link inline-flex items-center gap-1.5 hover:text-[#111110] transition-colors"
-                  >
-                    <span>All Access</span>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.05em] px-1.5 py-0.5 rounded-[4px] bg-[#F1EFEA] text-[#111110]">
-                      Bundle
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-3.5">
-              <h3 className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#111110]">
-                Company
-              </h3>
-              <ul className="space-y-2.5 text-[14px] text-[#52504C]">
-                {[
-                  { label: 'About', path: '/about' },
-                  { label: 'Updates', path: '/updates' },
-                  { label: 'Privacy Policy', path: '/privacy' },
-                ].map((item) => (
-                  <li key={item.path}>
-                    <a
-                      href={item.path}
-                      onClick={(e) => go(e, item.path)}
-                      className="group/link inline-flex items-center gap-1 hover:text-[#111110] transition-colors"
-                    >
-                      <span>{item.label}</span>
-                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 group-hover/link:opacity-100 group-hover/link:translate-y-0 transition-all" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {NAV_DIRECTORY_GROUPS.map((group) => (
+              <div key={group.title} className="space-y-3.5">
+                <h3 className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#37352F]">
+                  {group.title}
+                </h3>
+                <ul className="space-y-2.5 text-[14px] text-[#52504A]">
+                  {group.links.map((item) => (
+                    <li key={item.path}>
+                      <a
+                        href={item.path}
+                        onClick={(e) => go(e, item.path)}
+                        className="group/link inline-flex items-center gap-1.5 hover:text-[#37352F] transition-colors"
+                      >
+                        <span>{item.label}</span>
+                        {item.badge ? (
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.05em] px-1.5 py-0.5 rounded-[4px] bg-[#F1F1EF] text-[#37352F]">
+                            {item.badge}
+                          </span>
+                        ) : (
+                          <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 group-hover/link:opacity-100 group-hover/link:translate-y-0 transition-all" />
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* 3. Bottom Bar: Copyright, Interactive Quick Menu Shortcut & Back to Top */}
-        <div className="pt-8 border-t border-[#E8E6E1] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[13px] text-[#78756F]">
+        <div className="pt-8 border-t border-[#E9E9E7] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[13px] text-[#6E6D68]">
           <p>© 2022-2026 Lumina. All rights reserved.</p>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -619,30 +598,30 @@ export const Footer: React.FC<{
               <button
                 type="button"
                 onClick={onOpenMenu}
-                className="inline-flex items-center gap-1.5 text-[12px] text-[#52504C] hover:text-[#111110] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-[12px] text-[#52504A] hover:text-[#37352F] transition-colors cursor-pointer"
               >
                 <span>Quick menu</span>
-                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#111110] bg-[#F7F6F2] border border-[#D5D2CB] rounded-[5px]">
+                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#37352F] bg-[#F7F6F3] border border-[#D3D1CB] rounded-[5px]">
                   Ctrl
                 </kbd>
-                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#111110] bg-[#F7F6F2] border border-[#D5D2CB] rounded-[5px]">
+                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#37352F] bg-[#F7F6F3] border border-[#D3D1CB] rounded-[5px]">
                   M
                 </kbd>
               </button>
             ) : (
-              <p className="text-[12px] text-[#78756F]">
+              <p className="text-[12px] text-[#6E6D68]">
                 Press{' '}
-                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#111110] bg-[#F7F6F2] border border-[#D5D2CB] rounded-[5px]">
+                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#37352F] bg-[#F7F6F3] border border-[#D3D1CB] rounded-[5px]">
                   Ctrl
                 </kbd>{' '}
-                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#111110] bg-[#F7F6F2] border border-[#D5D2CB] rounded-[5px]">
+                <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#37352F] bg-[#F7F6F3] border border-[#D3D1CB] rounded-[5px]">
                   M
                 </kbd>{' '}
                 anywhere to open quick menu
               </p>
             )}
 
-            <span aria-hidden="true" className="text-[#D5D2CB]">
+            <span aria-hidden="true" className="text-[#D3D1CB]">
               ·
             </span>
 
@@ -651,7 +630,7 @@ export const Footer: React.FC<{
               whileHover={{ y: -1.5 }}
               whileTap={{ scale: 0.96 }}
               onClick={scrollToTop}
-              className="btn-motion-ghost inline-flex items-center gap-1 text-[12px] font-medium text-[#52504C] hover:text-[#111110] cursor-pointer"
+              className="btn-motion-ghost inline-flex items-center gap-1 text-[12px] font-medium text-[#52504A] hover:text-[#37352F] cursor-pointer"
             >
               <span>Back to top</span>
               <ArrowUp className="w-3.5 h-3.5 transition-transform duration-180 group-hover:-translate-y-0.5" />
@@ -678,7 +657,7 @@ export const TemplateCard: React.FC<{
     <a
       href={`/templates/${template.slug}`}
       onClick={handleClick}
-      className="group card-editorial-surface block rounded-[16px] border border-[#E5E3DF] bg-white overflow-hidden"
+      className="group card-editorial-surface block rounded-[16px] border border-[#E9E9E7] bg-white overflow-hidden"
     >
       <TemplateCover
         name={template.name}
@@ -691,40 +670,93 @@ export const TemplateCard: React.FC<{
       <div className="p-4 flex flex-col gap-2">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
-            <p className="text-[11.5px] font-medium text-[#787671] truncate">
+            <p className="text-[11.5px] font-medium text-[#6E6D68] truncate">
               {template.category}
             </p>
-            <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#111110] truncate mt-0.5 group-hover:text-[#0A0A0A]">
+            <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#37352F] truncate mt-0.5 group-hover:text-[#1F1E1B]">
               {template.name}
             </h3>
           </div>
           {isPurchased && (
-            <span className="text-[11px] font-semibold text-[#15803D] shrink-0">
+            <span className="text-[11px] font-semibold text-[#0F7B6C] shrink-0">
               Owned
             </span>
           )}
         </div>
 
-        <div className="flex items-center justify-between pt-1 border-t border-[#F3F2EE]">
+        <div className="flex items-center justify-between pt-1 border-t border-[#F1F1EF]">
           <div className="flex items-center gap-1.5 tabular-nums text-[14.5px] font-semibold leading-none">
             {template.compareAt !== undefined && (
-              <span className="text-[#A4A097] line-through">
+              <span className="text-[#9B9A97] line-through">
                 {formatPrice(template.compareAt)}
               </span>
             )}
-            <span className="text-[#111110]">{formatPrice(template.price)}</span>
+            <span className="text-[#37352F]">{formatPrice(template.price)}</span>
             {template.pro && (
-              <span className="ml-1 text-[10px] font-mono font-bold uppercase tracking-[0.07em] text-[#787671]">
+              <span className="ml-1 text-[10px] font-mono font-bold uppercase tracking-[0.07em] text-[#6E6D68]">
                 · PRO
               </span>
             )}
           </div>
 
-          <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#52504C] group-hover:text-[#111110] transition-colors">
+          <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#52504A] group-hover:text-[#37352F] transition-colors">
             <span>Inspect</span>
             <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
           </span>
         </div>
+      </div>
+    </a>
+  );
+};
+
+export const AppCard: React.FC<{
+  app: AppItem;
+  index?: number;
+  onNavigate: (path: string) => void;
+  showPrice?: boolean;
+}> = ({ app, index = 0, onNavigate, showPrice = false }) => {
+  return (
+    <a
+      href={`/apps/${app.slug}`}
+      onClick={(e) => {
+        e.preventDefault();
+        onNavigate(`/apps/${app.slug}`);
+      }}
+      className="group p-5 rounded-[18px] border border-[#E9E9E7] bg-white hover:-translate-y-[3px] hover:border-[#D3D1CB] hover:shadow-[0_14px_30px_-8px_rgba(55,53,47,0.09)] transition-all duration-200 flex flex-col justify-between gap-4"
+    >
+      <div className="flex items-center justify-between">
+        <AppIconGlyph icon={app.icon} />
+        <ArrowUpRight className="w-4 h-4 text-[#6E6D68] group-hover:text-[#37352F] transition-transform duration-180 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </div>
+
+      <div
+        style={{ backgroundColor: app.cardTint }}
+        className="rounded-[12px] border border-[#E9E9E7] p-2.5 flex items-center justify-center"
+      >
+        <div className="w-full h-36 rounded-[9px] bg-white border border-[#EFEFED] p-2 flex items-center justify-center">
+          <BlushAssetImage
+            src={app.illustrationUrl}
+            alt={`${app.name} — ${app.tagline} illustration`}
+            floatDelay={index * 0.25}
+            className="w-full h-full"
+          />
+        </div>
+      </div>
+
+      <div className="space-y-1 pt-0.5">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#37352F]">
+            {app.name}
+          </h3>
+          {showPrice && (
+            <span className="text-[11px] font-mono text-[#6E6D68]">
+              {app.priceLabel}
+            </span>
+          )}
+        </div>
+        <p className="text-[13.5px] text-[#52504A] leading-[1.5]">
+          {app.tagline}
+        </p>
       </div>
     </a>
   );
@@ -741,15 +773,15 @@ export const FaqAccordion: React.FC = () => {
       <div className="space-y-3 mb-10">
         <h2
           id="faq-heading"
-          className="text-[clamp(26px,3.2vw,36px)] font-semibold tracking-[-0.025em] leading-[1.15] text-[#0A0A0A]"
+          className="text-[clamp(26px,3.2vw,36px)] font-semibold tracking-[-0.025em] leading-[1.15] text-[#37352F]"
         >
           Frequently asked questions
         </h2>
-        <p className="text-[16px] text-[#525252] leading-[1.6]">
+        <p className="text-[16px] text-[#52504A] leading-[1.6]">
           If you still have questions, feel free to{' '}
           <a
             href="mailto:support@lumina.co"
-            className="text-[#0A0A0A] underline underline-offset-4 hover:text-[#525252]"
+            className="text-[#37352F] underline underline-offset-4 hover:text-[#6E6D68]"
           >
             get in touch
           </a>{' '}
@@ -757,24 +789,24 @@ export const FaqAccordion: React.FC = () => {
         </p>
       </div>
 
-      <div className="border-t border-[#EAEAEA]">
+      <div className="border-t border-[#E9E9E7]">
         {FAQ_ITEMS.map((item, idx) => {
           const isOpen = openIndex === idx;
           const panelId = `faq-panel-${idx}`;
           const btnId = `faq-btn-${idx}`;
           return (
-            <div key={item.question} className="border-b border-[#EAEAEA]">
+            <div key={item.question} className="border-b border-[#E9E9E7]">
               <button
                 id={btnId}
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : idx)}
-                className="w-full py-5 flex items-center justify-between gap-4 text-left text-[16px] font-semibold text-[#0A0A0A] hover:text-[#525252] transition-colors cursor-pointer"
+                className="w-full py-5 flex items-center justify-between gap-4 text-left text-[16px] font-semibold text-[#37352F] hover:text-[#52504A] transition-colors cursor-pointer"
               >
                 <span>{item.question}</span>
                 <ChevronDown
-                  className={`w-5 h-5 shrink-0 text-[#525252] transition-transform duration-200 ${
+                  className={`w-5 h-5 shrink-0 text-[#52504A] transition-transform duration-200 ${
                     isOpen ? 'rotate-180' : ''
                   }`}
                 />
@@ -788,7 +820,7 @@ export const FaqAccordion: React.FC = () => {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className="text-[15px] text-[#525252] leading-[1.7]">
+                  <p className="text-[15px] text-[#52504A] leading-[1.7]">
                     {item.answer}
                   </p>
                 </div>
@@ -803,7 +835,7 @@ export const FaqAccordion: React.FC = () => {
 
 export const PromoBanner: React.FC = () => {
   return (
-    <div className="w-full bg-[#0A0A0A] text-[#FAFAFA]">
+    <div className="w-full bg-[#37352F] text-[#FFFFFF]">
       <a
         href="https://www.notionsecondbrain.com/"
         target="_blank"
@@ -844,19 +876,19 @@ export const LibraryModal: React.FC<{
       role="dialog"
       aria-modal="true"
       aria-label="My Purchased Templates & Digital Downloads"
-      className="fixed inset-0 z-[95] bg-black/40 backdrop-blur-[2px] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[95] bg-[#37352F]/40 backdrop-blur-[2px] flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-[600px] rounded-[16px] bg-white border border-[#EAEAEA] shadow-[0_8px_24px_rgba(10,10,10,0.08)] overflow-hidden"
+        className="w-full max-w-[600px] rounded-[16px] bg-white border border-[#E9E9E7] shadow-[0_8px_24px_rgba(55,53,47,0.10)] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-6 py-4 border-b border-[#EAEAEA] flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-[#E9E9E7] flex items-center justify-between">
           <div>
-            <h2 className="text-[18px] font-semibold text-[#0A0A0A]">
+            <h2 className="text-[18px] font-semibold text-[#37352F]">
               My Digital Downloads ({purchases.length})
             </h2>
-            <p className="text-[13px] text-[#737373]">
+            <p className="text-[13px] text-[#6E6D68]">
               Instant access to your Notion template duplication links and license keys.
             </p>
           </div>
@@ -864,7 +896,7 @@ export const LibraryModal: React.FC<{
             type="button"
             onClick={onClose}
             aria-label="Close library"
-            className="w-9 h-9 rounded-[8px] inline-flex items-center justify-center text-[#525252] hover:bg-[#F5F5F5] cursor-pointer"
+            className="w-9 h-9 rounded-[8px] inline-flex items-center justify-center text-[#52504A] hover:bg-[#F1F1EF] cursor-pointer"
           >
             ✕
           </button>
@@ -872,25 +904,25 @@ export const LibraryModal: React.FC<{
 
         <div className="p-6 max-h-[65vh] overflow-y-auto space-y-3">
           {purchases.length === 0 ? (
-            <p className="text-[14px] text-[#737373] text-center py-8">
+            <p className="text-[14px] text-[#6E6D68] text-center py-8">
               You have not downloaded any templates yet.
             </p>
           ) : (
             purchases.map((pkg) => (
               <div
                 key={pkg.orderId}
-                className="p-4 rounded-[12px] border border-[#EAEAEA] bg-[#FAFAFA] flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                className="p-4 rounded-[12px] border border-[#E9E9E7] bg-[#F7F6F3] flex flex-col sm:flex-row sm:items-center justify-between gap-4"
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[15px] font-semibold text-[#0A0A0A]">
+                    <span className="text-[15px] font-semibold text-[#37352F]">
                       {pkg.itemName}
                     </span>
-                    <span className="text-[12px] text-[#737373] tabular-nums">
+                    <span className="text-[12px] text-[#6E6D68] tabular-nums">
                       · ${pkg.amountPaid} ({pkg.provider === 'stripe' ? 'Stripe' : 'Lemon Squeezy'})
                     </span>
                   </div>
-                  <p className="text-[12px] font-mono text-[#525252]">
+                  <p className="text-[12px] font-mono text-[#52504A]">
                     License: {pkg.licenseKey} · Order {pkg.orderId}
                   </p>
                 </div>
@@ -900,7 +932,7 @@ export const LibraryModal: React.FC<{
                     onClose();
                     onSelectDelivery(pkg);
                   }}
-                  className="h-9 px-3.5 rounded-[8px] bg-[#0A0A0A] hover:bg-[#262626] text-white text-[13px] font-semibold inline-flex items-center gap-1.5 shrink-0 cursor-pointer"
+                  className="h-9 px-3.5 rounded-[8px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[13px] font-semibold inline-flex items-center gap-1.5 shrink-0 cursor-pointer"
                 >
                   <span>Open Delivery</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -914,79 +946,37 @@ export const LibraryModal: React.FC<{
   );
 };
 
-const MinimalistAvatar: React.FC<{ index: number }> = ({ index }) => {
+const CreatorAvatar: React.FC<{
+  id: string;
+  src: string;
+  author: string;
+}> = ({ id, src, author }) => {
+  const [failed, setFailed] = useState(false);
+  const resolvedSrc = CREATOR_AVATAR_MAP[id] || src;
+  const initials = author
+    .split(' ')
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+
   return (
-    <div className="w-10 h-10 rounded-full bg-white border border-[#E5E5E5] flex items-center justify-center shrink-0 overflow-hidden">
-      <svg
-        viewBox="0 0 40 40"
-        className="w-full h-full"
-        aria-hidden="true"
-      >
-        <rect width="40" height="40" fill="#FFFFFF" />
-        {/* Head */}
-        <circle
-          cx="20"
-          cy="15.5"
-          r="6.2"
-          fill="#FFFFFF"
-          stroke="#0A0A0A"
-          strokeWidth="1.4"
+    <div className="w-11 h-11 rounded-full bg-[#F7F6F3] border border-[#E9E9E7] flex items-center justify-center shrink-0 overflow-hidden shadow-[0_1px_3px_rgba(55,53,47,0.08)]">
+      {failed ? (
+        <span className="text-[13px] font-semibold text-[#37352F] tracking-tight">
+          {initials}
+        </span>
+      ) : (
+        <img
+          src={resolvedSrc}
+          alt={`${author} portrait`}
+          referrerPolicy="no-referrer"
+          loading="eager"
+          decoding="async"
+          onError={() => setFailed(true)}
+          className="w-full h-full object-cover object-top"
         />
-        {/* Distinct Blush/Notion minimalist hairstyle per reviewer */}
-        {index % 4 === 0 && (
-          <path
-            d="M13.8 15 C14 10, 26 10, 26.2 15 C23 12.5, 17 12.5, 13.8 15 Z"
-            fill="#0A0A0A"
-          />
-        )}
-        {index % 4 === 1 && (
-          <>
-            <path
-              d="M14 13.5 C15.5 9.5, 24.5 9.5, 26 13.5"
-              fill="#0A0A0A"
-            />
-            <circle cx="17.8" cy="15.5" r="1.8" fill="none" stroke="#0A0A0A" strokeWidth="1.1" />
-            <circle cx="22.2" cy="15.5" r="1.8" fill="none" stroke="#0A0A0A" strokeWidth="1.1" />
-            <line x1="19.6" y1="15.5" x2="20.4" y2="15.5" stroke="#0A0A0A" strokeWidth="1.1" />
-          </>
-        )}
-        {index % 4 === 2 && (
-          <path
-            d="M13.5 16.5 C13.5 9.5, 26.5 9.5, 26.5 16.5 C24.5 12.5, 15.5 12.5, 13.5 16.5 Z"
-            fill="#0A0A0A"
-          />
-        )}
-        {index % 4 === 3 && (
-          <path
-            d="M14.5 13 C16.5 10, 23.5 10, 25.5 13"
-            fill="none"
-            stroke="#0A0A0A"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        )}
-        {index % 4 !== 1 && (
-          <>
-            <circle cx="18" cy="15.5" r="0.9" fill="#0A0A0A" />
-            <circle cx="22" cy="15.5" r="0.9" fill="#0A0A0A" />
-          </>
-        )}
-        <path
-          d="M18.5 18.2 Q20 19.4 21.5 18.2"
-          fill="none"
-          stroke="#0A0A0A"
-          strokeWidth="1.1"
-          strokeLinecap="round"
-        />
-        {/* Shoulders */}
-        <path
-          d="M9.5 34.5 C11 25.5, 29 25.5, 30.5 34.5"
-          fill="none"
-          stroke="#0A0A0A"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-      </svg>
+      )}
     </div>
   );
 };
@@ -1025,22 +1015,22 @@ export const TestimonialsSection: React.FC<{
     <section
       aria-labelledby="testimonials-heading"
       data-testid="testimonials-section"
-      className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#EAEAEA]"
+      className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#E9E9E7]"
     >
       {/* Header Row */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
         <div className="space-y-2.5 max-w-[580px]">
-          <p className="text-[12px] font-medium text-[#737373]">
-            Customer Reviews
+          <p className="text-[12px] font-medium text-[#6E6D68]">
+            Creator Reviews
           </p>
           <h2
             id="testimonials-heading"
-            className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#0A0A0A] text-balance"
+            className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#37352F] text-balance"
           >
-            Used by 300,000+ creators and teams
+            Used by Creators and Teams
           </h2>
-          <p className="text-[16px] text-[#525252] leading-[1.6]">
-            How designers, engineers, and founders organize their work and finances with Lumina Notion templates.
+          <p className="text-[16px] text-[#52504A] leading-[1.6]">
+            How designers, engineers, and studio teams organize their work and finances with Lumina Notion templates.
           </p>
         </div>
 
@@ -1049,7 +1039,7 @@ export const TestimonialsSection: React.FC<{
           <div
             role="group"
             aria-label="Testimonial layout mode"
-            className="inline-flex items-center p-1 rounded-[10px] bg-[#F5F5F5] border border-[#EAEAEA]"
+            className="inline-flex items-center p-1 rounded-[10px] bg-[#F7F6F3] border border-[#E9E9E7]"
           >
             <motion.button
               type="button"
@@ -1058,8 +1048,8 @@ export const TestimonialsSection: React.FC<{
               aria-pressed={layoutMode === 'grid'}
               className={`relative px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 layoutMode === 'grid'
-                  ? 'bg-white text-[#0A0A0A] shadow-[0_1px_2px_rgba(10,10,10,0.06)]'
-                  : 'text-[#525252] hover:text-[#0A0A0A]'
+                  ? 'bg-white text-[#37352F] shadow-[0_1px_2px_rgba(55,53,47,0.08)]'
+                  : 'text-[#52504A] hover:text-[#37352F]'
               }`}
             >
               Grid View
@@ -1071,8 +1061,8 @@ export const TestimonialsSection: React.FC<{
               aria-pressed={layoutMode === 'swipe'}
               className={`relative px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 layoutMode === 'swipe'
-                  ? 'bg-white text-[#0A0A0A] shadow-[0_1px_2px_rgba(10,10,10,0.06)]'
-                  : 'text-[#525252] hover:text-[#0A0A0A]'
+                  ? 'bg-white text-[#37352F] shadow-[0_1px_2px_rgba(55,53,47,0.08)]'
+                  : 'text-[#52504A] hover:text-[#37352F]'
               }`}
             >
               Swipe View
@@ -1087,7 +1077,7 @@ export const TestimonialsSection: React.FC<{
               transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() => scrollToCard(activeIndex - 1)}
               aria-label="Previous customer review"
-              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#EAEAEA] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] inline-flex items-center justify-center cursor-pointer"
+              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#E9E9E7] bg-white hover:bg-[#F7F6F3] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
             </motion.button>
@@ -1098,7 +1088,7 @@ export const TestimonialsSection: React.FC<{
               transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() => scrollToCard(activeIndex + 1)}
               aria-label="Next customer review"
-              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#EAEAEA] bg-white hover:bg-[#FAFAFA] text-[#0A0A0A] inline-flex items-center justify-center cursor-pointer"
+              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#E9E9E7] bg-white hover:bg-[#F7F6F3] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
             >
               <ArrowRight className="w-4 h-4" />
             </motion.button>
@@ -1130,57 +1120,58 @@ export const TestimonialsSection: React.FC<{
             }}
             whileHover={{ y: -3 }}
             style={{ backgroundColor: item.surfaceTint }}
-            className={`group rounded-[16px] border border-[#E8E6E1] p-6 flex flex-col justify-between gap-6 transition-shadow duration-300 hover:border-[#D5D2CB] hover:shadow-[0_12px_28px_-6px_rgba(17,17,16,0.06)] ${
+            className={`group rounded-[16px] border border-[#E9E9E7] p-6 flex flex-col justify-between gap-6 transition-shadow duration-300 hover:border-[#D3D1CB] hover:shadow-[0_12px_28px_-6px_rgba(55,53,47,0.08)] ${
               layoutMode === 'swipe'
                 ? 'w-[310px] sm:w-[360px] flex-none snap-start'
                 : 'w-full'
             }`}
           >
             <div className="space-y-4">
-              {/* Prominent Blush Character Workspace Illustration */}
+              {/* Prominent Storyset Workspace Illustration */}
               <BlushAssetImage
                 src={item.illustrationUrl}
                 alt={`${item.author} workspace illustration`}
-                maskCorner
                 floatDelay={idx * 0.4}
-                className="h-36 w-full rounded-[12px] bg-white border border-[#E5E3DF] p-3"
+                className="h-36 w-full rounded-[12px] bg-white border border-[#E9E9E7] p-3"
                 imgClassName="max-h-full max-w-full object-contain"
               />
 
               {/* Quiet Unboxed Outcome & System Metadata */}
-              <div className="flex flex-col gap-1 text-[12px] text-[#37352F] border-b border-black/[0.06] pb-3.5">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-semibold text-[#111110] tabular-nums">
-                    {item.outcomeMetric}
-                  </span>
-                  <a
-                    href={`/templates/${item.templateSlug}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onNavigate(`/templates/${item.templateSlug}`);
-                    }}
-                    className="inline-flex items-center gap-1 font-medium text-[#37352F] hover:text-[#111110] hover:underline underline-offset-4 whitespace-nowrap shrink-0"
-                  >
-                    <span>{item.templateUsed}</span>
-                    <ArrowUpRight className="w-3 h-3 shrink-0" />
-                  </a>
-                </div>
+              <div className="flex flex-col gap-1 text-[12px] text-[#52504A] border-b border-[#E9E9E7] pb-3.5">
+                <span className="font-semibold text-[#37352F] tabular-nums">
+                  {item.outcomeMetric}
+                </span>
+                <a
+                  href={`/templates/${item.templateSlug}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(`/templates/${item.templateSlug}`);
+                  }}
+                  className="inline-flex items-center gap-1 font-medium text-[#6E6D68] hover:text-[#37352F] hover:underline underline-offset-4 w-fit"
+                >
+                  <span>{item.templateUsed}</span>
+                  <ArrowUpRight className="w-3 h-3 shrink-0" />
+                </a>
               </div>
 
               {/* Editorial Review Quote */}
-              <blockquote className="text-[14.5px] leading-[1.65] text-[#111110] font-normal">
+              <blockquote className="text-[14.5px] leading-[1.65] text-[#37352F] font-normal">
                 “{item.quote}”
               </blockquote>
             </div>
 
-            {/* Reviewer Attribution Footer */}
+            {/* Creator Photo & Attribution Footer */}
             <footer className="flex items-center gap-3 pt-2">
-              <MinimalistAvatar index={idx} />
+              <CreatorAvatar
+                id={item.id}
+                src={item.avatarUrl}
+                author={item.author}
+              />
               <div className="min-w-0">
-                <p className="text-[14px] font-semibold text-[#111110] leading-snug">
+                <p className="text-[14px] font-semibold text-[#37352F] leading-snug">
                   {item.author}
                 </p>
-                <p className="text-[12px] text-[#37352F] leading-snug">
+                <p className="text-[12px] text-[#6E6D68] leading-[1.35]">
                   {item.role} · {item.organization}
                 </p>
               </div>
