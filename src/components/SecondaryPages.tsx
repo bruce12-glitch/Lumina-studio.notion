@@ -9,7 +9,6 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import {
-  AI_TOOLS_LIST,
   ALL_ACCESS_PRICE,
   APPS,
   BLOG_POSTS,
@@ -139,11 +138,11 @@ export const TemplateDetailPage: React.FC<{
               <div className="flex items-center justify-between text-[12px] text-[#737373] pt-1">
                 <span className="inline-flex items-center gap-1.5">
                   <CreditCard className="w-3.5 h-3.5" />
-                  Stripe & Lemon Squeezy
+                  Secure Checkout
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  Instant Automated Notion Delivery
+                  Instant Notion Duplication
                 </span>
               </div>
             </div>
@@ -415,7 +414,7 @@ export const AppsPage: React.FC<{
           className="inline-flex items-center gap-2 text-[14px] font-medium text-[#737373] hover:text-[#0A0A0A] cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>All Apps by Easlo</span>
+          <span>All Apps by Lumina</span>
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -537,7 +536,7 @@ export const AppsPage: React.FC<{
     <div className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 space-y-12">
       <div className="space-y-3 max-w-[600px]">
         <h1 className="text-[clamp(32px,4.5vw,44px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#0A0A0A]">
-          Apps by Easlo
+          Apps by Lumina
         </h1>
         <p className="text-[18px] text-[#525252] leading-[1.55]">
           Get things done with apps designed with simplicity in mind.
@@ -678,25 +677,25 @@ export const BlogPage: React.FC<{
 };
 
 export const StaticInfoPage: React.FC<{
-  page: 'about' | 'updates' | 'privacy' | 'ai-tools';
+  page: 'about' | 'updates' | 'privacy';
 }> = ({ page }) => {
   if (page === 'about') {
     return (
       <div className="py-16 sm:py-24 max-w-[720px] mx-auto px-4 sm:px-6 space-y-6">
         <h1 className="text-[clamp(32px,4.5vw,44px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#0A0A0A]">
-          About Easlo
+          About Lumina
         </h1>
         <div className="space-y-5 text-[16px] text-[#525252] leading-[1.7]">
           <p>
-            Easlo is an independent digital product studio focused on minimalist Notion templates and single-purpose productivity web apps. Since 2022, over 500,000 creators, students, and founders have used our templates to bring clarity to their daily work.
+            Lumina is an independent digital product studio focused on minimalist Notion templates and single-purpose productivity web apps. Since 2022, over 300,000 creators, students, and founders have used our templates to bring clarity to their daily work.
           </p>
           <p>
-            We believe software should stay out of your way. Every template in our catalog is built on a strict monochrome design language: zero visual clutter, intuitive database relations, and immediate utility on Notion’s free plan.
+            We believe software should stay out of your way. Every template in our catalog is built on a clean monochrome design language: zero visual clutter, intuitive database relations, and immediate utility on Notion’s free plan.
           </p>
           <p>
             Have a question about a template, partnership, or educational discount? Reach out directly at{' '}
-            <a href="mailto:support@easlo.co" className="text-[#0A0A0A] underline">
-              support@easlo.co
+            <a href="mailto:support@lumina.co" className="text-[#0A0A0A] underline">
+              support@lumina.co
             </a>
             .
           </p>
@@ -738,72 +737,34 @@ export const StaticInfoPage: React.FC<{
     );
   }
 
-  if (page === 'privacy') {
-    return (
-      <div className="py-16 sm:py-24 max-w-[720px] mx-auto px-4 sm:px-6 space-y-8">
-        <h1 className="text-[clamp(32px,4.5vw,44px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#0A0A0A]">
-          Privacy Policy
-        </h1>
-        <div className="space-y-6 text-[15px] text-[#525252] leading-[1.7]">
-          <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#0A0A0A]">1. Data Collected</h2>
-            <p>
-              We collect only the email address and billing details necessary to deliver your digital Notion template links, generate license receipts, and provide access to your customer library.
-            </p>
-          </section>
-          <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#0A0A0A]">2. Payments & Security</h2>
-            <p>
-              All payments are processed securely by Stripe and Lemon Squeezy. Easlo never stores raw payment card numbers on our servers.
-            </p>
-          </section>
-          <section className="space-y-2">
-            <h2 className="text-[18px] font-semibold text-[#0A0A0A]">3. Contact</h2>
-            <p>
-              For data export or deletion requests, email{' '}
-              <a href="mailto:privacy@easlo.co" className="text-[#0A0A0A] underline">
-                privacy@easlo.co
-              </a>
-              .
-            </p>
-          </section>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
-      <div className="space-y-2 max-w-[600px]">
-        <h1 className="text-[clamp(32px,4.5vw,44px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#0A0A0A]">
-          Curated AI Tools
-        </h1>
-        <p className="text-[16px] text-[#525252]">
-          Six essential AI tools that pair seamlessly with your minimalist Notion workspace.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {AI_TOOLS_LIST.map((tool) => (
-          <a
-            key={tool.name}
-            href={tool.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group p-6 rounded-[16px] border border-[#EAEAEA] bg-white hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(10,10,10,0.08)] transition-all flex flex-col justify-between gap-4"
-          >
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[12px] text-[#737373]">{tool.category}</span>
-                <ArrowUpRight className="w-4 h-4 text-[#737373] group-hover:text-[#0A0A0A]" />
-              </div>
-              <h2 className="text-[18px] font-semibold text-[#0A0A0A]">{tool.name}</h2>
-              <p className="text-[14px] text-[#525252] leading-[1.55]">
-                {tool.description}
-              </p>
-            </div>
-          </a>
-        ))}
+    <div className="py-16 sm:py-24 max-w-[720px] mx-auto px-4 sm:px-6 space-y-8">
+      <h1 className="text-[clamp(32px,4.5vw,44px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#0A0A0A]">
+        Privacy Policy
+      </h1>
+      <div className="space-y-6 text-[15px] text-[#525252] leading-[1.7]">
+        <section className="space-y-2">
+          <h2 className="text-[18px] font-semibold text-[#0A0A0A]">1. Data Collected</h2>
+          <p>
+            We collect only the email address and billing details necessary to deliver your Notion template duplication links, generate license receipts, and provide access to your customer library.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h2 className="text-[18px] font-semibold text-[#0A0A0A]">2. Payments & Security</h2>
+          <p>
+            All payments are processed securely by Stripe and Lemon Squeezy. Lumina never stores raw payment card numbers on our servers.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h2 className="text-[18px] font-semibold text-[#0A0A0A]">3. Contact</h2>
+          <p>
+            For data export or deletion requests, email{' '}
+            <a href="mailto:privacy@lumina.co" className="text-[#0A0A0A] underline">
+              privacy@lumina.co
+            </a>
+            .
+          </p>
+        </section>
       </div>
     </div>
   );

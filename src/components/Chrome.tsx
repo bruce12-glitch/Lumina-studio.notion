@@ -84,7 +84,7 @@ export const Header: React.FC<NavigationProps> = ({
               onClick={(e) => handleLink(e, '/')}
               className="text-[20px] font-bold tracking-[-0.03em] text-[#0A0A0A] whitespace-nowrap shrink-0"
             >
-              Easlo
+              Lumina
             </a>
 
             <nav
@@ -287,7 +287,7 @@ export const MenuOverlay: React.FC<{
             onClick={(e) => go(e, '/')}
             className="text-[20px] font-bold tracking-[-0.03em] text-[#0A0A0A]"
           >
-            Easlo
+            Lumina
           </a>
           <button
             ref={closeBtnRef}
@@ -397,15 +397,15 @@ export const Footer: React.FC<{
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 text-[12px] font-medium text-[#787671]">
-                <span>Sunday Minimalist Dispatch · 120,000+ Readers</span>
+                <span>Lumina Newsletter · Free Weekly Templates</span>
               </div>
 
               <h2 className="text-[clamp(24px,3vw,32px)] font-[630] tracking-[-0.025em] leading-[1.15] text-[#111110] text-balance">
-                Build a calmer, more intentional Notion workspace.
+                Get new free Notion templates in your inbox.
               </h2>
 
               <p className="text-[15px] text-[#37352F] leading-[1.6] max-w-[520px]">
-                Receive one actionable Notion architecture guide, digital minimalism workflow, and free template drop every Sunday morning. No noise, unsubscribe anytime.
+                Join 120,000+ readers receiving practical Notion guides and free templates every Sunday. No spam, unsubscribe anytime.
               </p>
 
               {subscribed ? (
@@ -445,58 +445,26 @@ export const Footer: React.FC<{
               )}
             </div>
 
-            {/* Right Editorial Dispatch Visual & Notion System Specification Duo */}
-            <div className="lg:col-span-5 flex flex-col gap-4">
-              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex items-center justify-between gap-4">
-                <div className="space-y-1 min-w-0">
+            {/* Right Newsletter Starter Pack Visual */}
+            <div className="lg:col-span-5">
+              <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-5 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex items-center justify-between gap-4">
+                <div className="space-y-1.5 min-w-0">
                   <span className="text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
-                    Weekly Creator Dispatch
+                    Free Starter Pack
                   </span>
-                  <p className="text-[14.5px] font-bold text-[#111110] leading-snug">
-                    120,000+ Notion Architects
+                  <p className="text-[15px] font-bold text-[#111110] leading-snug">
+                    3 Free Templates Included
                   </p>
-                  <p className="text-[12px] text-[#37352F] leading-snug">
-                    New workflows, PARA setups & minimalist templates every Sunday.
+                  <p className="text-[12.5px] text-[#37352F] leading-snug">
+                    Get instant access to our Habit Tracker, Reading List, and Weekly Planner.
                   </p>
                 </div>
                 <BlushAssetImage
                   src={BLUSH_ASSETS.socialMegaphoneCreator}
-                  alt="Sunday Minimalist Dispatch creator newsletter illustration"
+                  alt="Lumina newsletter starter pack illustration"
                   floatDelay={0.2}
                   className="w-28 h-24 shrink-0"
                 />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-2">
-                  <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
-                    <span>Free Collection</span>
-                    <span className="font-bold text-[#15803D]">$0</span>
-                  </div>
-                  <div>
-                    <p className="font-display text-[22px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
-                      22 Setups
-                    </p>
-                    <p className="mt-1 text-[12px] text-[#37352F] leading-snug">
-                      Ready-to-duplicate Notion trackers for habits & tasks.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="rounded-[14px] border border-[#E5E3DF] bg-white p-4 shadow-[0_8px_24px_-6px_rgba(17,17,16,0.05)] flex flex-col justify-between gap-2">
-                  <div className="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#787671]">
-                    <span>PRO Systems</span>
-                    <span className="font-bold text-[#111110]">PARA</span>
-                  </div>
-                  <div>
-                    <p className="font-display text-[22px] font-bold tracking-[-0.03em] text-[#111110] leading-none">
-                      17 OS Kits
-                    </p>
-                    <p className="mt-1 text-[12px] text-[#37352F] leading-snug">
-                      Complete Second Brain, Finance & Creator OS kits.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -504,8 +472,8 @@ export const Footer: React.FC<{
 
         {/* 2. Architectural 12-Column Directory Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 sm:pb-14">
-          {/* Brand & System Status Block */}
-          <div className="lg:col-span-5 space-y-5">
+          {/* Brand Block */}
+          <div className="lg:col-span-5 space-y-4">
             <div className="space-y-2.5">
               <a
                 href="/"
@@ -513,25 +481,18 @@ export const Footer: React.FC<{
                 className="inline-flex items-center gap-2.5 group"
               >
                 <span className="w-7 h-7 rounded-[7px] bg-[#111110] text-white text-[14px] font-bold inline-flex items-center justify-center tracking-tight transition-transform duration-200 group-hover:scale-105">
-                  e
+                  L
                 </span>
                 <span className="text-[20px] font-bold tracking-[-0.03em] text-[#111110]">
-                  Easlo
+                  Lumina
                 </span>
               </a>
               <p className="text-[14.5px] font-medium text-[#111110]">
                 Productivity meets minimalism.
               </p>
               <p className="text-[13.5px] text-[#37352F] leading-[1.6] max-w-[360px]">
-                Thoughtfully engineered Notion workspaces, financial ledgers, and minimalist tools designed to help you focus on what matters.
+                Minimalist Notion templates and web apps built to help you organize your work, finances, and daily routines.
               </p>
-            </div>
-
-            {/* Quiet Unboxed System Metadata */}
-            <div className="pt-1 flex flex-wrap items-center gap-2 text-[12.5px] text-[#787671]">
-              <span className="font-medium text-[#111110]">39 Notion Templates Ready</span>
-              <span aria-hidden="true">·</span>
-              <span>Stripe & Lemon Squeezy Fulfillment</span>
             </div>
           </div>
 
@@ -651,7 +612,7 @@ export const Footer: React.FC<{
 
         {/* 3. Bottom Bar: Copyright, Interactive Quick Menu Shortcut & Back to Top */}
         <div className="pt-8 border-t border-[#E8E6E1] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[13px] text-[#78756F]">
-          <p>© 2022-2026 Easlo. All rights reserved.</p>
+          <p>© 2022-2026 Lumina. All rights reserved.</p>
 
           <div className="flex flex-wrap items-center gap-3">
             {onOpenMenu ? (
@@ -787,7 +748,7 @@ export const FaqAccordion: React.FC = () => {
         <p className="text-[16px] text-[#525252] leading-[1.6]">
           If you still have questions, feel free to{' '}
           <a
-            href="mailto:support@easlo.co"
+            href="mailto:support@lumina.co"
             className="text-[#0A0A0A] underline underline-offset-4 hover:text-[#525252]"
           >
             get in touch
@@ -1070,16 +1031,16 @@ export const TestimonialsSection: React.FC<{
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
         <div className="space-y-2.5 max-w-[580px]">
           <p className="text-[12px] font-medium text-[#737373]">
-            Reader & Customer Stories · 4.9/5 Average Rating
+            Customer Reviews
           </p>
           <h2
             id="testimonials-heading"
             className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#0A0A0A] text-balance"
           >
-            Designed for calm, daily execution
+            Used by 300,000+ creators and teams
           </h2>
           <p className="text-[16px] text-[#525252] leading-[1.6]">
-            How designers, engineers, and founders organize their work and finances with Easlo Notion systems.
+            How designers, engineers, and founders organize their work and finances with Lumina Notion templates.
           </p>
         </div>
 
@@ -1226,70 +1187,6 @@ export const TestimonialsSection: React.FC<{
             </footer>
           </motion.article>
         ))}
-      </div>
-
-      {/* Community & Instant Digital Storefront Showcase Strip */}
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-5">
-        <motion.div
-          whileHover={{ y: -2 }}
-          className="group lg:col-span-6 rounded-[16px] border border-[#E5E3DF] bg-[#EDF5FD] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-6 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
-        >
-          <div className="space-y-2.5 max-w-[310px]">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#787671]">
-              Global Notion Community
-            </p>
-            <h3 className="text-[20px] font-bold tracking-[-0.02em] text-[#111110] leading-snug">
-              Join 300,000+ creators, students & operators
-            </h3>
-            <p className="text-[14px] text-[#37352F] leading-relaxed">
-              Every template includes lifetime updates, step-by-step setup guides, and one-click workspace duplication.
-            </p>
-          </div>
-          <BlushAssetImage
-            src={BLUSH_ASSETS.globalCommunityNetwork}
-            alt="Easlo global Notion creator community network illustration"
-            floatDelay={0.25}
-            className="w-full sm:w-[210px] h-[155px] rounded-[12px] bg-white border border-[#E5E3DF] p-3 shrink-0"
-            imgClassName="max-w-full max-h-full object-contain"
-          />
-        </motion.div>
-
-        <motion.div
-          whileHover={{ y: -2 }}
-          className="group lg:col-span-6 rounded-[16px] border border-[#E5E3DF] bg-[#F2EEFA] p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-6 transition-shadow hover:shadow-[0_12px_28px_-6px_rgba(15,15,15,0.06)]"
-        >
-          <div className="space-y-2.5 max-w-[310px]">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#787671]">
-              Instant Digital Delivery
-            </p>
-            <h3 className="text-[19px] font-bold tracking-[-0.02em] text-[#111110] leading-snug">
-              Automated Stripe & Lemon Squeezy Fulfillment
-            </h3>
-            <p className="text-[13.5px] text-[#37352F] leading-relaxed">
-              Receive your one-click Notion duplicate link, verified license key, and receipt seconds after checkout.
-            </p>
-            <div className="pt-1">
-              <a
-                href="/templates"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate('/templates');
-                }}
-                className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#111110] hover:underline underline-offset-4"
-              >
-                <span>Browse 17 PRO templates</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-          <BlushAssetImage
-            src={BLUSH_ASSETS.clientDealHandshake}
-            alt="Instant digital fulfillment and license delivery illustration"
-            floatDelay={0.45}
-            className="w-full sm:w-[210px] h-[155px] rounded-[12px] bg-white border border-[#E5E3DF] p-3 shrink-0"
-            imgClassName="max-w-full max-h-full object-contain"
-          />
-        </motion.div>
       </div>
     </section>
   );
