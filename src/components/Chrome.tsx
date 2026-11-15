@@ -45,26 +45,40 @@ export const LuminaLogo: React.FC<{ size?: number; className?: string }> = ({
     aria-hidden="true"
     className={`shrink-0 ${className}`}
   >
-    <path
-      d="M7 5.5C7 4.12 8.12 3 9.5 3H19.5L26 9.5V26.5C26 27.88 24.88 29 23.5 29H9.5C8.12 29 7 27.88 7 26.5V5.5Z"
+    <rect
+      x="2.5"
+      y="2.5"
+      width="27"
+      height="27"
+      rx="7"
       fill="#FFFFFF"
       stroke="#37352F"
-      strokeWidth="1.85"
-      strokeLinejoin="round"
+      strokeWidth="1.75"
     />
     <path
-      d="M19.5 3V8C19.5 8.83 20.17 9.5 21 9.5H26L19.5 3Z"
-      fill="#F1F1EF"
+      d="M12.2 15.2A3.8 3.8 0 0 1 19.8 15.2"
+      fill="#F7F6F3"
       stroke="#37352F"
-      strokeWidth="1.85"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M13 13V23H20"
-      stroke="#37352F"
-      strokeWidth="2.15"
+      strokeWidth="1.75"
       strokeLinecap="round"
-      strokeLinejoin="round"
+    />
+    <path
+      d="M16 6.5V8.7M10.2 9.2L11.7 10.7M21.8 9.2L20.3 10.7M7.5 13.7L9.6 14.1M24.5 13.7L22.4 14.1"
+      stroke="#37352F"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+    />
+    <path
+      d="M7 18.8C10 16.8 13 16.8 16 18.8C19 20.8 22 20.8 25 18.8"
+      stroke="#37352F"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+    />
+    <path
+      d="M7 23.2C10 21.2 13 21.2 16 23.2C19 25.2 22 25.2 25 23.2"
+      stroke="#37352F"
+      strokeWidth="1.75"
+      strokeLinecap="round"
     />
   </svg>
 );
