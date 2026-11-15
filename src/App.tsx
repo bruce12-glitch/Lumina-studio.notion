@@ -9,10 +9,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  CreditCard,
-  Download,
   Search,
-  ShieldCheck,
 } from 'lucide-react';
 import {
   APPS,
@@ -41,8 +38,6 @@ import {
   AppIconGlyph,
   BlushAssetImage,
   FeatureMedia,
-  HeroWorkspaceMode,
-  HeroWorkspaceShowcase,
   UltraHdSvgFilter,
 } from './components/CoversAndIllustrations';
 import {
@@ -55,7 +50,7 @@ import {
   TemplateDetailPage,
 } from './components/SecondaryPages';
 
-const STORAGE_KEY = 'easlo_purchased_deliveries_v1';
+const STORAGE_KEY = 'lumina_purchased_deliveries_v1';
 
 function parseLocationState(): { pathname: string; category: Category } {
   const pathname = window.location.pathname || '/';
@@ -69,7 +64,6 @@ export default function App() {
   const [routeState, setRouteState] = useState(parseLocationState);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [heroMode, setHeroMode] = useState<HeroWorkspaceMode>('second-brain');
   const [checkoutTarget, setCheckoutTarget] = useState<CheckoutTarget | null>(
     null
   );
@@ -128,19 +122,19 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  // Dynamic Document Title + JSON-LD Product Schema on /templates
+  // Dynamic Document Title
   useEffect(() => {
     const { pathname } = routeState;
     if (pathname === '/templates') {
-      document.title = 'Notion Templates | Easlo';
+      document.title = 'Notion Templates | Lumina';
     } else if (pathname === '/') {
-      document.title = 'Easlo';
+      document.title = 'Lumina';
     } else if (pathname.startsWith('/templates/')) {
       const slug = pathname.replace('/templates/', '');
       const found = TEMPLATES.find((t) => t.slug === slug);
-      document.title = found ? `${found.name} | Easlo` : 'Easlo';
+      document.title = found ? `${found.name} | Lumina` : 'Lumina';
     } else {
-      document.title = 'Easlo';
+      document.title = 'Lumina';
     }
   }, [routeState]);
 
@@ -178,9 +172,16 @@ export default function App() {
     [purchases]
   );
 
-  // Hero 3-card preview strip: Second Brain, Finance Tracker, Habit Tracker
-  const heroPreviewTemplates = useMemo(() => {
-    const slugs = ['second-brain', 'finance-tracker', 'habit-tracker'];
+  // Featured templates on the homepage
+  const featuredTemplates = useMemo(() => {
+    const slugs = [
+      'second-brain',
+      'finance-tracker',
+      'freelance-os',
+      'habit-tracker',
+      'content-os',
+      'book-tracker',
+    ];
     return slugs
       .map((s) => TEMPLATES.find((t) => t.slug === s))
       .filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -238,211 +239,134 @@ export default function App() {
       <main id="main-content" className="flex-1">
         {pathname === '/' && (
           <div>
-            {/* 1. HERO SECTION — Editorial Hero + Live Interactive Workspace */}
-            <section className="relative pt-10 pb-20 sm:pt-14 sm:pb-24 max-w-[1200px] mx-auto px-4 sm:px-6 overflow-hidden">
-              {/* Subtle Architectural Dot-Matrix Backdrop */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-4 top-2 h-[560px] rounded-[28px] bg-editorial-grid opacity-55 [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_82%)]"
-              />
-
-              {/* Top Editorial Hero Stage: Framed by 4 Unique Floating Ultra-HD Character Vignettes */}
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Left Floating Character Stack */}
-                <div className="order-2 lg:order-1 lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col gap-4 items-stretch lg:items-end lg:pr-2">
+            {/* 1. CLEAN EDITORIAL HERO SECTION */}
+            <section className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 max-w-[1200px] mx-auto px-4 sm:px-6">
+              <div className="max-w-[780px] mx-auto text-center space-y-8">
+                {/* 3-Card Illustration Triptych */}
+                <div className="flex items-center justify-center gap-3 sm:gap-5 pb-2">
+                  {/* Left Card: Focus */}
                   <motion.div
-                    initial={{ opacity: 0, x: -16, rotate: -2 }}
-                    animate={{ opacity: 1, x: 0, rotate: -2 }}
-                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                    onClick={() => navigate('/templates/second-brain')}
-                    className="w-full lg:max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
-                    style={{ backgroundColor: '#F8F5E8' }}
-                  >
-                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
-                      <span>01 · PARA System</span>
-                      <span className="font-bold text-[#111110]">$39</span>
-                    </div>
-                    <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
-                      <BlushAssetImage
-                        src={BLUSH_ASSETS.secondBrainMazeBulb}
-                        alt="Second Brain Notion PARA system illustration"
-                        floatDelay={0.1}
-                        className="w-full h-28 sm:h-32"
-                      />
-                    </div>
-                    <p className="mt-2 text-[12px] font-semibold text-[#111110] flex items-center justify-between">
-                      <span>Second Brain 5.0</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#78756F]" />
-                    </p>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: -12, rotate: 1.5 }}
-                    animate={{ opacity: 1, x: 0, rotate: 1.5 }}
-                    transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                    onClick={() => navigate('/templates/content-os')}
-                    className="w-full lg:w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
-                    style={{ backgroundColor: '#F2EEFA' }}
-                  >
-                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
-                      <span>02 · Creator OS</span>
-                      <span className="font-bold text-[#111110]">PRO</span>
-                    </div>
-                    <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
-                      <BlushAssetImage
-                        src={BLUSH_ASSETS.videoStudioCreator}
-                        alt="Content OS creator studio illustration"
-                        floatDelay={0.35}
-                        className="w-full h-24"
-                      />
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Center Editorial Headline, Sub-Headline, Primary CTA & Trust Strip */}
-                <div className="order-1 lg:order-2 lg:col-span-6 text-center space-y-6">
-                  <div className="inline-flex items-center gap-2.5 text-[12.5px] font-medium text-[#52504C]">
-                    <span className="font-semibold text-[#111110]">Easlo Notion Store</span>
-                    <span aria-hidden="true" className="text-[#C7C5C0]">·</span>
-                    <span>39 Minimalist Systems</span>
-                    <span aria-hidden="true" className="text-[#C7C5C0]">·</span>
-                    <span className="font-mono text-[11.5px] text-[#111110] tabular-nums">300k+ Users</span>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h1 className="font-display text-[clamp(44px,6vw,68px)] font-bold tracking-[-0.04em] leading-[1.02] text-[#111110] text-balance">
-                      Notion Templates
-                    </h1>
-                    <p className="font-editorial italic text-[22px] sm:text-[26px] font-normal tracking-[-0.01em] text-[#52504C] leading-[1.25]">
-                      Where productivity meets calm, visual minimalism.
-                    </p>
-                  </div>
-
-                  <p className="text-[17px] sm:text-[18.5px] font-normal leading-[1.58] tracking-[-0.008em] text-[#52504C] max-w-[540px] mx-auto">
-                    Discover 30+ Notion templates to organize work and life, saving you valuable time.
-                  </p>
-
-                  {/* Primary & Secondary Notion CTAs with Tactile Spring Motion */}
-                  <div className="pt-1 flex flex-wrap items-center justify-center gap-3.5">
-                    <motion.a
-                      href="/templates"
-                      whileHover={{ y: -2, scale: 1.018 }}
-                      whileTap={{ y: 0.5, scale: 0.975 }}
-                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate('/templates');
-                      }}
-                      className="btn-motion-primary h-12 px-7 rounded-[10px] bg-[#111110] hover:bg-[#242422] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
-                    >
-                      <span>Shop Templates</span>
-                      <ArrowRight className="w-4 h-4 btn-arrow-slide" />
-                    </motion.a>
-
-                    <motion.button
-                      type="button"
-                      whileHover={{ y: -2, scale: 1.015 }}
-                      whileTap={{ y: 0.5, scale: 0.975 }}
-                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                      onClick={() => handleOpenTemplateOrCheckout('second-brain')}
-                      className="btn-motion-secondary h-12 px-6 rounded-[10px] border border-[#D4D2CC] bg-white hover:bg-[#F7F6F4] text-[#111110] text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
-                    >
-                      <span>Get Second Brain ($39)</span>
-                      <ArrowUpRight className="w-4 h-4 text-[#78756F] btn-arrow-diagonal" />
-                    </motion.button>
-                  </div>
-
-                  {/* Quiet Automated Delivery & Payment Trust Bar */}
-                  <div className="pt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12.5px] text-[#78756F]">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Download className="w-3.5 h-3.5 text-[#111110]" />
-                      Instant Notion Duplication
-                    </span>
-                    <span aria-hidden="true">·</span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <CreditCard className="w-3.5 h-3.5 text-[#111110]" />
-                      Stripe & Lemon Squeezy Checkout
-                    </span>
-                    <span aria-hidden="true">·</span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#111110]" />
-                      Works on Free Notion Plan
-                    </span>
-                  </div>
-                </div>
-
-                {/* Right Floating Character Stack */}
-                <div className="order-3 lg:col-span-3 grid grid-cols-2 lg:flex lg:flex-col gap-4 items-stretch lg:items-start lg:pl-2">
-                  <motion.div
-                    initial={{ opacity: 0, x: 16, rotate: 2 }}
-                    animate={{ opacity: 1, x: 0, rotate: 2 }}
-                    transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                    onClick={() => navigate('/templates/finance-tracker')}
-                    className="w-full lg:max-w-[235px] rounded-[18px] border border-[#E6E5E3] p-4 shadow-[0_14px_34px_-12px_rgba(17,17,16,0.08)] hover:-translate-y-1 transition-transform cursor-pointer"
-                    style={{ backgroundColor: '#EDF5FD' }}
-                  >
-                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
-                      <span>03 · Cash Flow</span>
-                      <span className="font-bold text-[#111110]">$39</span>
-                    </div>
-                    <div className="rounded-[12px] bg-white border border-[#EAE8E1] p-2">
-                      <BlushAssetImage
-                        src={BLUSH_ASSETS.mobilePiggyPortfolio}
-                        alt="Finance Tracker mobile portfolio illustration"
-                        floatDelay={0.2}
-                        className="w-full h-28 sm:h-32"
-                      />
-                    </div>
-                    <p className="mt-2 text-[12px] font-semibold text-[#111110] flex items-center justify-between">
-                      <span>Finance Tracker</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#78756F]" />
-                    </p>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: 12, rotate: -1.5 }}
-                    animate={{ opacity: 1, x: 0, rotate: -1.5 }}
-                    transition={{ duration: 0.55, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, y: 12, rotate: -4 }}
+                    animate={{ opacity: 1, y: 0, rotate: -4 }}
+                    whileHover={{ y: -4, rotate: -2, scale: 1.02 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => navigate('/templates/habit-tracker')}
-                    className="w-full lg:w-[215px] rounded-[16px] border border-[#E6E5E3] p-3.5 shadow-[0_10px_28px_-10px_rgba(17,17,16,0.07)] hover:-translate-y-1 transition-transform cursor-pointer"
-                    style={{ backgroundColor: '#EBF8EF' }}
+                    className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E6E5E3] bg-[#FAF9F6] p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(17,17,16,0.07)] cursor-pointer"
                   >
-                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.08em] text-[#52504C] mb-1.5">
-                      <span>04 · Daily Calm</span>
-                      <span className="font-bold text-[#15803D]">FREE</span>
+                    <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#78756F] mb-1.5">
+                      <span>01 · Focus</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C7C5C0]" />
                     </div>
-                    <div className="rounded-[10px] bg-white border border-[#EAE8E1] p-1.5">
+                    <div className="rounded-[10px] bg-white border border-[#EFECE6] p-2 h-20 sm:h-28 flex items-center justify-center">
                       <BlushAssetImage
                         src={BLUSH_ASSETS.mindfulMeditationClock}
-                        alt="Minimalist daily meditation and habits illustration"
-                        floatDelay={0.45}
-                        className="w-full h-24"
+                        alt="Minimalist daily habits illustration"
+                        disableFloat
+                        className="w-full h-full"
+                      />
+                    </div>
+                  </motion.div>
+
+                  {/* Center Card: System (PARA) */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -5, scale: 1.03 }}
+                    transition={{ duration: 0.45, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={() => navigate('/templates/second-brain')}
+                    className="w-[140px] sm:w-[190px] rounded-[18px] border border-[#DFDDD8] bg-white p-3 sm:p-4 shadow-[0_16px_36px_-10px_rgba(17,17,16,0.10)] z-10 cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between text-[9.5px] sm:text-[10.5px] font-mono uppercase tracking-[0.06em] text-[#111110] font-semibold mb-2">
+                      <span>02 · System</span>
+                      <span className="inline-flex items-center gap-1 text-[9px] text-[#15803D]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#15803D]" />
+                        PARA
+                      </span>
+                    </div>
+                    <div className="rounded-[12px] bg-[#FAF9F6] border border-[#EFECE6] p-2.5 h-24 sm:h-32 flex items-center justify-center">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.secondBrainMazeBulb}
+                        alt="Second Brain PARA system illustration"
+                        disableFloat
+                        className="w-full h-full"
+                      />
+                    </div>
+                  </motion.div>
+
+                  {/* Right Card: Calm / Finance */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 12, rotate: 4 }}
+                    animate={{ opacity: 1, y: 0, rotate: 4 }}
+                    whileHover={{ y: -4, rotate: 2, scale: 1.02 }}
+                    transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    onClick={() => navigate('/templates/finance-tracker')}
+                    className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E6E5E3] bg-[#FAF9F6] p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(17,17,16,0.07)] cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#78756F] mb-1.5">
+                      <span>03 · Clarity</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C7C5C0]" />
+                    </div>
+                    <div className="rounded-[10px] bg-white border border-[#EFECE6] p-2 h-20 sm:h-28 flex items-center justify-center">
+                      <BlushAssetImage
+                        src={BLUSH_ASSETS.mobilePiggyPortfolio}
+                        alt="Finance Tracker illustration"
+                        disableFloat
+                        className="w-full h-full"
                       />
                     </div>
                   </motion.div>
                 </div>
+
+                {/* Headline & Subtitle */}
+                <div className="space-y-4">
+                  <h1 className="font-display text-[clamp(44px,6.2vw,72px)] font-bold tracking-[-0.04em] leading-[1.02] text-[#111110] text-balance">
+                    Notion Templates
+                  </h1>
+                  <p className="text-[18px] sm:text-[20px] font-normal leading-[1.55] tracking-[-0.01em] text-[#52504C] max-w-[520px] mx-auto">
+                    Discover 30+ Notion templates to organize work and life, saving you valuable time.
+                  </p>
+                </div>
+
+                {/* Primary & Secondary CTAs with Tactile Spring Motion */}
+                <div className="pt-1 flex flex-wrap items-center justify-center gap-3.5">
+                  <motion.a
+                    href="/templates"
+                    whileHover={{ y: -2, scale: 1.018 }}
+                    whileTap={{ y: 0.5, scale: 0.975 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/templates');
+                    }}
+                    className="btn-motion-primary h-12 px-7 rounded-[10px] bg-[#111110] hover:bg-[#242422] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                  >
+                    <span>Shop Templates</span>
+                    <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+                  </motion.a>
+
+                  <motion.button
+                    type="button"
+                    whileHover={{ y: -2, scale: 1.015 }}
+                    whileTap={{ y: 0.5, scale: 0.975 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                    onClick={() => handleOpenTemplateOrCheckout('second-brain')}
+                    className="btn-motion-secondary h-12 px-6 rounded-[10px] border border-[#D4D2CC] bg-white hover:bg-[#F7F6F4] text-[#111110] text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
+                  >
+                    <span>Get Second Brain ($39)</span>
+                  </motion.button>
+                </div>
               </div>
 
-              {/* Interactive Live Notion Workspace Stage (Full 12-Col Centerpiece) */}
-              <div className="relative z-10 mt-12 sm:mt-14">
-                <HeroWorkspaceShowcase
-                  activeMode={heroMode}
-                  onSelectMode={setHeroMode}
-                  onOpenTemplate={(slug) => navigate(`/templates/${slug}`)}
-                  onQuickCheckout={handleOpenTemplateOrCheckout}
-                />
-              </div>
-
-              {/* Featured Flagship Systems 3-Card Preview Strip */}
-              <div className="relative z-10 mt-16 sm:mt-20 pt-12 border-t border-[#E6E5E3]">
+              {/* Curated Featured Templates Grid */}
+              <div className="mt-16 sm:mt-20 pt-14 border-t border-[#E6E5E3]">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
-                  <div>
-                    <p className="text-[11.5px] font-mono uppercase tracking-[0.08em] text-[#78756F]">
-                      Flagship Notion Systems · Instant One-Click Duplication
-                    </p>
-                    <h2 className="mt-1 font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] text-[#111110]">
-                      Most duplicated templates this week
+                  <div className="space-y-1">
+                    <h2 className="font-display text-[24px] sm:text-[28px] font-bold tracking-[-0.025em] text-[#111110]">
+                      Featured Templates
                     </h2>
+                    <p className="text-[15px] text-[#52504C]">
+                      Our most popular workspaces for personal productivity, finance, and business.
+                    </p>
                   </div>
                   <a
                     href="/templates"
@@ -452,20 +376,20 @@ export default function App() {
                     }}
                     className="group inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4"
                   >
-                    <span>Explore all 39 templates</span>
+                    <span>View all 39 templates</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </a>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {heroPreviewTemplates.map((template, idx) => (
+                  {featuredTemplates.map((template, idx) => (
                     <motion.div
                       key={template.slug}
-                      initial={{ opacity: 0, y: 14 }}
+                      initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        duration: 0.45,
-                        delay: 0.1 + idx * 0.07,
+                        duration: 0.4,
+                        delay: 0.05 + idx * 0.05,
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >
@@ -484,9 +408,6 @@ export default function App() {
             <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#F0EFEA]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
-                  <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#78756F]">
-                    01. Flagship PARA OS
-                  </p>
                   <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110] text-balance">
                     Second Brain
                   </h2>
@@ -500,7 +421,7 @@ export default function App() {
                     </li>
                     <li className="flex items-center gap-2.5">
                       <Check className="w-4 h-4 text-[#111110] shrink-0" />
-                      <span>Automated Weekly Review & Daily Quick Capture</span>
+                      <span>Weekly Review & Daily Quick Capture</span>
                     </li>
                   </ul>
                   <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -518,16 +439,6 @@ export default function App() {
                       <span>Learn More</span>
                       <ArrowRight className="w-4 h-4 btn-arrow-slide" />
                     </motion.a>
-                    <motion.button
-                      type="button"
-                      whileHover={{ x: 2 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => handleOpenTemplateOrCheckout('second-brain')}
-                      className="btn-motion-ghost text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 inline-flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0"
-                    >
-                      <span>Instant Duplicate ($39)</span>
-                      <span className="btn-arrow-slide">→</span>
-                    </motion.button>
                   </div>
                 </div>
 
@@ -545,9 +456,6 @@ export default function App() {
                 </div>
 
                 <div className="lg:col-span-5 space-y-5">
-                  <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#78756F]">
-                    02. Personal & Creator Ledger
-                  </p>
                   <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110] text-balance">
                     All-In-One Finance Dashboard
                   </h2>
@@ -557,11 +465,11 @@ export default function App() {
                   <ul className="space-y-2 text-[14px] text-[#52504C] pt-1">
                     <li className="flex items-center gap-2.5">
                       <Check className="w-4 h-4 text-[#111110] shrink-0" />
-                      <span>Monthly Cash Flow, 50/30/20 Budgets & Net Worth</span>
+                      <span>Monthly Cash Flow, Budgets & Net Worth</span>
                     </li>
                     <li className="flex items-center gap-2.5">
                       <Check className="w-4 h-4 text-[#111110] shrink-0" />
-                      <span>Subscription Renewal Radar & Tax-Ready Exports</span>
+                      <span>Subscription Tracker & Savings Targets</span>
                     </li>
                   </ul>
                   <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -579,16 +487,6 @@ export default function App() {
                       <span>Get Finance Tracker</span>
                       <ArrowRight className="w-4 h-4 btn-arrow-slide" />
                     </motion.a>
-                    <motion.button
-                      type="button"
-                      whileHover={{ x: 2 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => handleOpenTemplateOrCheckout('finance-tracker')}
-                      className="btn-motion-ghost text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 inline-flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0"
-                    >
-                      <span>Instant Duplicate ($39)</span>
-                      <span className="btn-arrow-slide">→</span>
-                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -598,23 +496,20 @@ export default function App() {
             <section className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#F0EFEA]">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
-                  <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#78756F]">
-                    03. Intentional Workflows
-                  </p>
                   <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#111110] text-balance">
                     Become a Digital Minimalist
                   </h2>
                   <p className="text-[16.5px] text-[#52504C] leading-[1.6]">
-                    Find tutorials, apps, and wallpapers to turn your devices into minimalist tools.
+                    Find tutorials, apps, and templates to turn your devices into minimalist tools.
                   </p>
                   <ul className="space-y-2 text-[14px] text-[#52504C] pt-1">
                     <li className="flex items-center gap-2.5">
                       <Check className="w-4 h-4 text-[#111110] shrink-0" />
-                      <span>22 Free Notion setups for daily habits, reading & study</span>
+                      <span>22 Free Notion templates for daily habits, reading & study</span>
                     </li>
                     <li className="flex items-center gap-2.5">
                       <Check className="w-4 h-4 text-[#111110] shrink-0" />
-                      <span>Zero-clutter monochrome layouts that work on any device</span>
+                      <span>Clean monochrome layouts that work on any device</span>
                     </li>
                   </ul>
                   <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -632,16 +527,6 @@ export default function App() {
                       <span>Start Here</span>
                       <ArrowRight className="w-4 h-4 btn-arrow-slide" />
                     </motion.a>
-                    <motion.button
-                      type="button"
-                      whileHover={{ x: 2 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => handleOpenTemplateOrCheckout('habit-tracker')}
-                      className="btn-motion-ghost text-[14px] font-semibold text-[#111110] hover:underline underline-offset-4 inline-flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0"
-                    >
-                      <span>Duplicate Free Habit Tracker ($0)</span>
-                      <span className="btn-arrow-slide">→</span>
-                    </motion.button>
                   </div>
                 </div>
 
@@ -654,13 +539,13 @@ export default function App() {
             {/* 5. TESTIMONIALS SECTION BENEATH FEATURE SPLITS */}
             <TestimonialsSection onNavigate={navigate} />
 
-            {/* 6. APPS BY EASLO */}
+            {/* 6. APPS BY LUMINA */}
             <section className="py-16 sm:py-24 bg-[#F6F5F4] border-t border-[#E6E5E3]">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div className="space-y-2">
                     <h2 className="font-display text-[clamp(26px,3.2vw,36px)] font-bold tracking-[-0.025em] leading-[1.15] text-[#111110]">
-                      Apps by Easlo
+                      Apps by Lumina
                     </h2>
                     <p className="text-[16px] text-[#52504C] leading-[1.6]">
                       Get things done with apps designed with simplicity in mind.
@@ -692,12 +577,7 @@ export default function App() {
                       className="group p-5 rounded-[18px] border border-[#E6E5E3] bg-white hover:-translate-y-[3px] hover:border-[#D5D2CB] hover:shadow-[0_14px_30px_-8px_rgba(17,17,16,0.08)] transition-all duration-200 flex flex-col justify-between gap-4"
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
-                          <AppIconGlyph icon={app.icon} />
-                          <span className="text-[11px] font-mono text-[#78756F]">
-                            {app.platform.split('·')[0].trim()}
-                          </span>
-                        </div>
+                        <AppIconGlyph icon={app.icon} />
                         <ArrowUpRight className="w-4 h-4 text-[#737373] group-hover:text-[#0A0A0A] transition-transform duration-180 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
 
@@ -716,14 +596,9 @@ export default function App() {
                       </div>
 
                       <div className="space-y-1 pt-0.5">
-                        <div className="flex items-center justify-between gap-2">
-                          <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#0A0A0A]">
-                            {app.name}
-                          </h3>
-                          <span className="text-[11px] font-mono font-medium text-[#52504C]">
-                            {app.priceLabel}
-                          </span>
-                        </div>
+                        <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#0A0A0A]">
+                          {app.name}
+                        </h3>
                         <p className="text-[13.5px] text-[#525252] leading-[1.5]">
                           {app.tagline}
                         </p>
@@ -746,9 +621,6 @@ export default function App() {
             {/* 1. Page Head */}
             <section className="pt-12 pb-10 sm:pt-16 sm:pb-12 max-w-[1200px] mx-auto px-4 sm:px-6">
               <div className="max-w-[640px] space-y-3">
-                <p className="text-[12px] font-mono font-semibold uppercase tracking-[0.08em] text-[#52504C]">
-                  39 Minimalist Systems · 22 Free + 17 PRO
-                </p>
                 <h1 className="font-display text-[clamp(34px,4.5vw,48px)] font-bold tracking-[-0.035em] leading-[1.08] text-[#111110]">
                   Notion Templates
                 </h1>
@@ -816,7 +688,7 @@ export default function App() {
                       type="search"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search 39 templates..."
+                      placeholder="Search templates..."
                       aria-label="Search templates"
                       className="w-full h-9 pl-9 pr-3 rounded-[8px] bg-[#F6F5F4] border border-[#E6E5E3] text-[13px] text-[#111110] placeholder:text-[#A3A3A3] focus:outline-none focus:border-[#111110]"
                     />
