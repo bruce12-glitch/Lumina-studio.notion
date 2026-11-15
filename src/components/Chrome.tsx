@@ -5,14 +5,12 @@ import {
   ArrowRight,
   ArrowUp,
   ArrowUpRight,
-  Check,
   ChevronDown,
   Download,
   Menu as MenuIcon,
 } from 'lucide-react';
 import {
   AppItem,
-  BLUSH_ASSETS,
   FAQ_ITEMS,
   Template,
   TESTIMONIALS,
@@ -409,18 +407,9 @@ export const Footer: React.FC<{
   onNavigate: (path: string) => void;
   onOpenMenu?: () => void;
 }> = ({ onNavigate, onOpenMenu }) => {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
   const go = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     e.preventDefault();
     onNavigate(path);
-  };
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail.trim() || !newsletterEmail.includes('@')) return;
-    setSubscribed(true);
   };
 
   const scrollToTop = () => {
@@ -428,93 +417,9 @@ export const Footer: React.FC<{
   };
 
   return (
-    <footer className="border-t border-[#E9E9E7] bg-[#FFFFFF] pt-14 sm:pt-20 pb-12 sm:pb-16">
+    <footer className="border-t border-[#E9E9E7] bg-[#FFFFFF] pt-14 sm:pt-16 pb-12 sm:pb-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-        {/* 1. Editorial Pre-Footer Dispatch & Free Systems Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-[20px] border border-[#E9E9E7] bg-[#F7F6F3] p-6 sm:p-10 mb-14 sm:mb-16 overflow-hidden"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 text-[12px] font-medium text-[#6E6D68]">
-                <span>Lumina Newsletter · Free Weekly Templates</span>
-              </div>
-
-              <h2 className="text-[clamp(24px,3vw,32px)] font-[630] tracking-[-0.025em] leading-[1.15] text-[#37352F] text-balance">
-                Get new free Notion templates in your inbox.
-              </h2>
-
-              <p className="text-[15px] text-[#52504A] leading-[1.6] max-w-[520px]">
-                Receive practical Notion guides and free templates every Sunday. No spam, unsubscribe anytime.
-              </p>
-
-              {subscribed ? (
-                <div className="pt-1 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-[10px] bg-white border border-[#D3D1CB] text-[13.5px] font-medium text-[#37352F]">
-                  <span className="w-5 h-5 rounded-full bg-[#0F7B6C] text-white inline-flex items-center justify-center shrink-0">
-                    <Check className="w-3 h-3 stroke-[2.5]" />
-                  </span>
-                  <span>
-                    You’re subscribed with <strong>{newsletterEmail}</strong>. Check your inbox for the free Notion Starter Pack.
-                  </span>
-                </div>
-              ) : (
-                <form
-                  onSubmit={handleSubscribe}
-                  className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 max-w-[460px]"
-                >
-                  <input
-                    type="email"
-                    required
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    placeholder="Enter your email address..."
-                    aria-label="Email address for newsletter"
-                    className="h-11 flex-1 px-3.5 rounded-[8px] bg-white border border-[#D3D1CB] text-[14px] text-[#37352F] placeholder:text-[#9B9A97] focus:outline-none focus:border-[#37352F] transition-colors"
-                  />
-                  <motion.button
-                    type="submit"
-                    whileHover={{ y: -1.5, scale: 1.015 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                    className="btn-motion-primary h-11 px-5 rounded-[8px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
-                  >
-                    <span>Subscribe Free</span>
-                    <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
-                  </motion.button>
-                </form>
-              )}
-            </div>
-
-            {/* Right Newsletter Starter Pack Visual */}
-            <div className="lg:col-span-5">
-              <div className="rounded-[14px] border border-[#E9E9E7] bg-white p-5 shadow-[0_8px_24px_-6px_rgba(55,53,47,0.06)] flex items-center justify-between gap-4">
-                <div className="space-y-1.5 min-w-0">
-                  <span className="text-[10.5px] font-mono uppercase tracking-[0.07em] text-[#6E6D68]">
-                    Free Starter Pack
-                  </span>
-                  <p className="text-[15px] font-bold text-[#37352F] leading-snug">
-                    3 Free Templates Included
-                  </p>
-                  <p className="text-[12.5px] text-[#52504A] leading-snug">
-                    Get instant access to our Habit Tracker, Reading List, and Weekly Planner.
-                  </p>
-                </div>
-                <BlushAssetImage
-                  src={BLUSH_ASSETS.socialMegaphoneCreator}
-                  alt="Lumina newsletter starter pack illustration"
-                  floatDelay={0.2}
-                  className="w-28 h-24 shrink-0"
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 2. Architectural 12-Column Directory Grid */}
+        {/* Architectural 12-Column Directory Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 sm:pb-14">
           {/* Brand Block */}
           <div className="lg:col-span-5 space-y-4">
