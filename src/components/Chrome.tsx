@@ -45,22 +45,27 @@ export const LuminaLogo: React.FC<{ size?: number; className?: string }> = ({
     aria-hidden="true"
     className={`shrink-0 ${className}`}
   >
-    <rect x="5" y="5" width="25" height="25" rx="6" fill="#37352F" />
-    <rect
-      x="2.25"
-      y="2.25"
-      width="24.5"
-      height="24.5"
-      rx="5.75"
+    <path
+      d="M7 5.5C7 4.12 8.12 3 9.5 3H19.5L26 9.5V26.5C26 27.88 24.88 29 23.5 29H9.5C8.12 29 7 27.88 7 26.5V5.5Z"
       fill="#FFFFFF"
       stroke="#37352F"
-      strokeWidth="2.2"
+      strokeWidth="1.85"
+      strokeLinejoin="round"
     />
     <path
-      d="M9.5 8.5H12.8V17.4H19.8V20.5H9.5V8.5Z"
-      fill="#37352F"
+      d="M19.5 3V8C19.5 8.83 20.17 9.5 21 9.5H26L19.5 3Z"
+      fill="#F1F1EF"
+      stroke="#37352F"
+      strokeWidth="1.85"
+      strokeLinejoin="round"
     />
-    <rect x="16" y="8.5" width="3.8" height="3.8" rx="0.9" fill="#37352F" />
+    <path
+      d="M13 13V23H20"
+      stroke="#37352F"
+      strokeWidth="2.15"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
