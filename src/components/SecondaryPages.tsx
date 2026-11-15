@@ -452,10 +452,14 @@ export const AppsPage: React.FC<{
                 whileHover={{ y: -2, scale: 1.015 }}
                 whileTap={{ scale: 0.975 }}
                 transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                onClick={() => onNavigate('/sign-up')}
+                onClick={() => {
+                  const previewInput = document.getElementById('app-preview-input');
+                  previewInput?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  previewInput?.focus();
+                }}
                 className="btn-motion-primary h-11 px-5 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center gap-2 cursor-pointer"
               >
-                <span>Launch {app.name} Web App</span>
+                <span>Try {app.name} Preview</span>
                 <ArrowUpRight className="w-4 h-4 btn-arrow-diagonal" />
               </motion.button>
             </div>
@@ -480,6 +484,7 @@ export const AppsPage: React.FC<{
               className="flex gap-2"
             >
               <input
+                id="app-preview-input"
                 type="text"
                 value={demoInput}
                 onChange={(e) => setDemoInput(e.target.value)}

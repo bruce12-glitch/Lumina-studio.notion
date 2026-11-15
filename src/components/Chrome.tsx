@@ -227,24 +227,15 @@ export const Header: React.FC<NavigationProps> = ({
               </motion.button>
             )}
             <motion.a
-              href="/sign-in"
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 420, damping: 28 }}
-              onClick={(e) => handleLink(e, '/sign-in')}
-              className="btn-motion-ghost h-10 px-4 rounded-[10px] text-[14px] font-medium text-[#52504A] hover:text-[#37352F] hover:bg-[#F1F1EF] inline-flex items-center justify-center whitespace-nowrap shrink-0"
-            >
-              Sign In
-            </motion.a>
-            <motion.a
-              href="/sign-up"
+              href="/templates"
               whileHover={{ y: -1.5, scale: 1.015 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-              onClick={(e) => handleLink(e, '/sign-up')}
-              className="btn-motion-primary h-10 px-[18px] rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center whitespace-nowrap shrink-0"
+              onClick={(e) => handleLink(e, '/templates')}
+              className="btn-motion-primary h-10 px-[18px] rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              Create a free account
+              <span>Browse Templates</span>
+              <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
             </motion.a>
           </div>
 
@@ -388,25 +379,17 @@ export const MenuOverlay: React.FC<{
         </div>
       </div>
 
-      {/* Bottom Auth Row + Ctrl M Shortcut Hint */}
+      {/* Bottom Quick Action + Ctrl M Shortcut Hint */}
       <div className="border-t border-[#E9E9E7] py-5 shrink-0">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <a
-              href="/sign-in"
-              onClick={(e) => go(e, '/sign-in')}
-              className="h-10 px-4 rounded-[10px] border border-[#D3D1CB] bg-white hover:bg-[#F7F6F3] text-[#37352F] text-[14px] font-medium inline-flex items-center justify-center"
-            >
-              Sign In
-            </a>
-            <a
-              href="/sign-up"
-              onClick={(e) => go(e, '/sign-up')}
-              className="h-10 px-[18px] rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center"
-            >
-              Create a free account
-            </a>
-          </div>
+          <a
+            href="/templates"
+            onClick={(e) => go(e, '/templates')}
+            className="h-10 px-[18px] rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-1.5"
+          >
+            <span>Browse All Templates</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
 
           <div className="flex items-center gap-1.5 text-[12px] text-[#6E6D68]">
             <kbd className="px-1.5 py-0.5 text-[11px] font-semibold text-[#37352F] bg-[#F7F6F3] border border-[#D3D1CB] border-b-2 rounded-[6px]">
