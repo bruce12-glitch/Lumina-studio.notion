@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUp,
   ArrowUpRight,
@@ -873,33 +872,6 @@ const CreatorAvatar: React.FC<{
 export const TestimonialsSection: React.FC<{
   onNavigate: (path: string) => void;
 }> = ({ onNavigate }) => {
-  const [layoutMode, setLayoutMode] = useState<'swipe' | 'grid'>('grid');
-  const [activeIndex, setActiveIndex] = useState(0);
-  const trackRef = useRef<HTMLDivElement | null>(null);
-
-  const scrollToCard = (nextIdx: number) => {
-    const clamped =
-      (nextIdx + TESTIMONIALS.length) % TESTIMONIALS.length;
-    setActiveIndex(clamped);
-    if (layoutMode !== 'swipe') {
-      setLayoutMode('swipe');
-    }
-    requestAnimationFrame(() => {
-      const container = trackRef.current;
-      if (!container) return;
-      const cards = container.querySelectorAll<HTMLElement>(
-        '[data-testimonial-card]'
-      );
-      const targetCard = cards[clamped];
-      if (targetCard) {
-        container.scrollTo({
-          left: targetCard.offsetLeft - container.offsetLeft,
-          behavior: 'smooth',
-        });
-      }
-    });
-  };
-
   return (
     <section
       aria-labelledby="testimonials-heading"
@@ -907,7 +879,7 @@ export const TestimonialsSection: React.FC<{
       className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#E9E9E7]"
     >
       {/* Header Row */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
+      <div className="mb-10 sm:mb-12">
         <div className="space-y-2.5 max-w-[580px]">
           <p className="text-[12px] font-medium text-[#6E6D68]">
             Creator Reviews
@@ -922,78 +894,12 @@ export const TestimonialsSection: React.FC<{
             How designers, engineers, and studio teams organize their work and finances with Lumina Notion templates.
           </p>
         </div>
-
-        {/* Minimalist View & Swipe Controls */}
-        <div className="flex items-center gap-3 self-start md:self-auto shrink-0">
-          <div
-            role="group"
-            aria-label="Testimonial layout mode"
-            className="inline-flex items-center p-1 rounded-[10px] bg-[#F7F6F3] border border-[#E9E9E7]"
-          >
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.96 }}
-              onClick={() => setLayoutMode('grid')}
-              aria-pressed={layoutMode === 'grid'}
-              className={`relative px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                layoutMode === 'grid'
-                  ? 'bg-white text-[#37352F] shadow-[0_1px_2px_rgba(55,53,47,0.08)]'
-                  : 'text-[#52504A] hover:text-[#37352F]'
-              }`}
-            >
-              Grid View
-            </motion.button>
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.96 }}
-              onClick={() => setLayoutMode('swipe')}
-              aria-pressed={layoutMode === 'swipe'}
-              className={`relative px-3 py-1.5 rounded-[7px] text-[13px] font-medium transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                layoutMode === 'swipe'
-                  ? 'bg-white text-[#37352F] shadow-[0_1px_2px_rgba(55,53,47,0.08)]'
-                  : 'text-[#52504A] hover:text-[#37352F]'
-              }`}
-            >
-              Swipe View
-            </motion.button>
-          </div>
-
-          <div className="flex items-center gap-1.5">
-            <motion.button
-              type="button"
-              whileHover={{ y: -1.5, scale: 1.04 }}
-              whileTap={{ scale: 0.94 }}
-              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-              onClick={() => scrollToCard(activeIndex - 1)}
-              aria-label="Previous customer review"
-              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#E9E9E7] bg-white hover:bg-[#F7F6F3] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-            >
-              <ArrowLeft className="w-4 h-4" />
-            </motion.button>
-            <motion.button
-              type="button"
-              whileHover={{ y: -1.5, scale: 1.04 }}
-              whileTap={{ scale: 0.94 }}
-              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-              onClick={() => scrollToCard(activeIndex + 1)}
-              aria-label="Next customer review"
-              className="btn-motion-secondary w-10 h-10 rounded-[10px] border border-[#E9E9E7] bg-white hover:bg-[#F7F6F3] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-            >
-              <ArrowRight className="w-4 h-4" />
-            </motion.button>
-          </div>
-        </div>
       </div>
 
-      {/* Cards Container: Responsive Grid or Horizontal Swipe Track */}
+      {/* Cards Container: Responsive 4-Column Grid */}
       <div
-        ref={trackRef}
         data-testid="testimonials-track"
-        className={
-          layoutMode === 'grid'
-            ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'
-            : 'flex items-stretch gap-5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2'
-        }
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
       >
         {TESTIMONIALS.map((item, idx) => (
           <motion.article
@@ -1009,11 +915,7 @@ export const TestimonialsSection: React.FC<{
             }}
             whileHover={{ y: -3 }}
             style={{ backgroundColor: item.surfaceTint }}
-            className={`group rounded-[16px] border border-[#E9E9E7] p-6 flex flex-col justify-between gap-6 transition-shadow duration-300 hover:border-[#D3D1CB] hover:shadow-[0_12px_28px_-6px_rgba(55,53,47,0.08)] ${
-              layoutMode === 'swipe'
-                ? 'w-[310px] sm:w-[360px] flex-none snap-start'
-                : 'w-full'
-            }`}
+            className="group w-full rounded-[16px] border border-[#E9E9E7] p-6 flex flex-col justify-between gap-6 transition-shadow duration-300 hover:border-[#D3D1CB] hover:shadow-[0_12px_28px_-6px_rgba(55,53,47,0.08)]"
           >
             <div className="space-y-4">
               {/* Prominent Storyset Workspace Illustration */}
