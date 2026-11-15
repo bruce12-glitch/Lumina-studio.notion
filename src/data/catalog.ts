@@ -63,13 +63,6 @@ export interface UpdateEntry {
   changes: string[];
 }
 
-export interface AiTool {
-  name: string;
-  category: string;
-  description: string;
-  url: string;
-}
-
 export interface Testimonial {
   id: string;
   quote: string;
@@ -314,17 +307,17 @@ export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
         ? 'An all-in-one Notion system to organize your tasks, projects, goals, and notes.'
         : item.name === 'Finance Tracker'
         ? 'Bring your financials in one place to get the big picture.'
-        : `A minimalist ${item.category.toLowerCase()} Notion workspace built to streamline your ${item.name.toLowerCase()} without clutter.`,
+        : `A clean ${item.category.toLowerCase()} Notion template to track and organize your ${item.name.toLowerCase()}.`,
     description: [
-      `${item.name} is a thoughtfully engineered Notion workspace designed around monochrome clarity and frictionless daily capture. Instead of spending hours wiring relational databases and formulas from scratch, duplicate this system in one click and begin organizing immediately.`,
+      `${item.name} is a ready-to-use Notion template with pre-linked databases, filtered views, and a clean layout. Duplicate it into your Notion workspace in one click and start organizing right away.`,
       pro
-        ? `As a PRO system in our ${item.category} collection, ${item.name} includes interconnected multi-view databases, automated rollup metrics, step-by-step onboarding documentation, and lifetime access to our private Circle community.`
-        : `Built for speed and simplicity on Notion's free plan, ${item.name} removes visual noise so you can focus entirely on consistent execution across desktop and mobile.`,
+        ? `Includes interconnected databases, automated progress rollups, a step-by-step setup guide, and lifetime updates with access to the private Circle community.`
+        : `Works on Notion's free plan across desktop, tablet, and mobile with no complex setup required.`,
     ],
     whatsInside: buildWhatsInside(item.name, item.category, pro),
     databaseCount: pro ? (item.price >= 39 ? 8 : 4) : 2,
     viewsCount: pro ? (item.price >= 39 ? 18 : 9) : 4,
-    version: pro ? 'v4.2 (2026 Edition)' : 'v2.4',
+    version: pro ? 'v4.2' : 'v2.4',
     illustrationUrl: resolveTemplateAsset(slug, item.category, idx),
     cardTint: resolveTemplateTint(slug, item.category, idx),
   };
@@ -575,197 +568,11 @@ export const UPDATES_LIST: UpdateEntry[] = [
   },
 ];
 
-export const AI_TOOLS_LIST: AiTool[] = [
-  {
-    name: 'Notion AI',
-    category: 'Workspace & Knowledge',
-    description: 'Search across your Second Brain, summarize meeting notes, and auto-fill database properties directly inside Notion.',
-    url: 'https://www.notion.so/product/ai',
-  },
-  {
-    name: 'Claude',
-    category: 'Writing & Synthesis',
-    description: 'Thoughtful long-context reasoning partner for drafting essays, structuring project plans, and analyzing documents.',
-    url: 'https://claude.ai',
-  },
-  {
-    name: 'ChatGPT',
-    category: 'General Assistant',
-    description: 'Versatile conversational assistant for brainstorming, voice mode ideation, and custom workflow automation.',
-    url: 'https://chatgpt.com',
-  },
-  {
-    name: 'Gemini',
-    category: 'Multimodal Research',
-    description: 'Deep multimodal analysis across large documents, codebases, and workspace workflows with fast synthesis.',
-    url: 'https://gemini.google.com',
-  },
-  {
-    name: 'Perplexity',
-    category: 'Citation Search',
-    description: 'Real-time answer engine with verifiable source citations for rapid market and academic research.',
-    url: 'https://www.perplexity.ai',
-  },
-  {
-    name: 'Midjourney',
-    category: 'Visual Direction',
-    description: 'High-craft image synthesis for editorial illustrations, moodboards, and minimalist visual assets.',
-    url: 'https://www.midjourney.com',
-  },
-];
-
-export interface BlushShowcaseCard {
-  id: string;
-  title: string;
-  subtitle: string;
-  category: TemplateCategory;
-  templateSlug: string;
-  templateName: string;
-  priceLabel: string;
-  tint: string;
-  assetUrl: string;
-}
-
-export const BLUSH_WORKFLOW_CARDS: BlushShowcaseCard[] = [
-  {
-    id: 'wf-second-brain',
-    title: 'Second Brain Architecture',
-    subtitle: 'Capture notes, projects, and PARA resources in one unified workspace.',
-    category: 'Personal Productivity',
-    templateSlug: 'second-brain',
-    templateName: 'Second Brain',
-    priceLabel: '$39',
-    tint: '#F8F5E8',
-    assetUrl: BLUSH_ASSETS.zettelkastenBookLotus,
-  },
-  {
-    id: 'wf-finance',
-    title: 'Visual Cash-Flow & Budgets',
-    subtitle: 'Track monthly income, expenses, and savings targets with automated rollups.',
-    category: 'Finance',
-    templateSlug: 'finance-tracker',
-    templateName: 'Finance Tracker',
-    priceLabel: '$39',
-    tint: '#EDF5FD',
-    assetUrl: BLUSH_ASSETS.laptopFinanceLedger,
-  },
-  {
-    id: 'wf-freelance',
-    title: 'Solo Creator & Studio OS',
-    subtitle: 'Manage client pipelines, deliverables, and content calendars without chaos.',
-    category: 'Business',
-    templateSlug: 'freelance-os',
-    templateName: 'Freelance OS',
-    priceLabel: '$79',
-    tint: '#FFF0E3',
-    assetUrl: BLUSH_ASSETS.isometricCompanyOS,
-  },
-  {
-    id: 'wf-study',
-    title: 'Academic & Reading Hub',
-    subtitle: 'Spaced-repetition study notes, book trackers, and semester planners.',
-    category: 'School',
-    templateSlug: 'student-dashboard',
-    templateName: 'Student Dashboard',
-    priceLabel: '$0',
-    tint: '#FEF9E6',
-    assetUrl: BLUSH_ASSETS.onlineCourseLecture,
-  },
-  {
-    id: 'wf-minimalism',
-    title: 'Calm Daily Rituals & Habits',
-    subtitle: 'Build sustainable daily routines and distraction-free digital environments.',
-    category: 'Health & Fitness',
-    templateSlug: 'habit-tracker',
-    templateName: 'Habit Tracker',
-    priceLabel: '$0',
-    tint: '#EBF8EF',
-    assetUrl: BLUSH_ASSETS.bloomingMindGarden,
-  },
-  {
-    id: 'wf-team-okrs',
-    title: 'Executive OKRs & CRM',
-    subtitle: 'Align quarterly company goals and sales pipelines on a single dashboard.',
-    category: 'Business',
-    templateSlug: 'okrs-tracker',
-    templateName: 'OKRs Tracker',
-    priceLabel: '$9',
-    tint: '#FDF0F5',
-    assetUrl: BLUSH_ASSETS.teamGrowthClimb,
-  },
-  {
-    id: 'wf-content-os',
-    title: 'Multi-Channel Content OS',
-    subtitle: 'Plan, draft, and schedule essays, newsletters, and videos from one queue.',
-    category: 'Business',
-    templateSlug: 'content-os',
-    templateName: 'Content OS',
-    priceLabel: '$79',
-    tint: '#F2EEFA',
-    assetUrl: BLUSH_ASSETS.videoStudioCreator,
-  },
-  {
-    id: 'wf-deep-work',
-    title: 'GTD & Deep Focus Sprint',
-    subtitle: 'Zero-inbox task capture and 12-week execution sprints for high output.',
-    category: 'Personal Productivity',
-    templateSlug: 'gtd-dashboard',
-    templateName: 'GTD Dashboard',
-    priceLabel: '$39',
-    tint: '#FFF0E3',
-    assetUrl: BLUSH_ASSETS.strategicMazeThinker,
-  },
-  {
-    id: 'wf-net-worth',
-    title: 'Net-Worth & Savings Ledger',
-    subtitle: 'Audit subscriptions, paycheck allocations, and long-term investment growth.',
-    category: 'Finance',
-    templateSlug: 'savings-tracker',
-    templateName: 'Savings Tracker',
-    priceLabel: '$5',
-    tint: '#EDF5FD',
-    assetUrl: BLUSH_ASSETS.savingsJarsCalendar,
-  },
-  {
-    id: 'wf-mindful-journal',
-    title: 'Evening Reflection & Menu',
-    subtitle: 'Unwind with guided daily journaling and intentional dopamine menus.',
-    category: 'Personal Productivity',
-    templateSlug: 'dopamine-menu',
-    templateName: 'Dopamine Menu',
-    priceLabel: '$0',
-    tint: '#EBF8EF',
-    assetUrl: BLUSH_ASSETS.relaxedFloorReader,
-  },
-  {
-    id: 'wf-storefront',
-    title: 'Instant Digital Delivery',
-    subtitle: 'One-click Notion duplication + license keys fulfilled via Stripe & Lemon Squeezy.',
-    category: 'Travel',
-    templateSlug: 'travel-dashboard',
-    templateName: 'Travel Dashboard',
-    priceLabel: '$9',
-    tint: '#FEF9E6',
-    assetUrl: BLUSH_ASSETS.clientDealHandshake,
-  },
-  {
-    id: 'wf-community',
-    title: '12-Week Execution & Circle',
-    subtitle: 'Compress annual goals into 12-week sprints alongside 300,000+ Notion creators.',
-    category: 'Personal Productivity',
-    templateSlug: '12-week-year-planner',
-    templateName: '12 Week Year Planner',
-    priceLabel: '$9',
-    tint: '#F2EEFA',
-    assetUrl: BLUSH_ASSETS.globalCommunityNetwork,
-  },
-];
-
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 'rev-1',
     quote:
-      'Before switching to Second Brain, our product notes lived across four disconnected apps. Consolidating into Easlo’s PARA workspace cut our weekly planning overhead by 4.5 hours and gave every project a single source of truth.',
+      'Before switching to Second Brain, our product notes lived across four disconnected apps. Consolidating into Lumina’s PARA workspace cut our weekly planning overhead by 4.5 hours and gave every project a single source of truth.',
     outcomeMetric: '4.5 hrs saved weekly',
     author: 'Elena Rostova',
     role: 'Staff Product Designer',
@@ -802,7 +609,7 @@ export const TESTIMONIALS: Testimonial[] = [
     templateSlug: 'freelance-os',
     surfaceTint: '#F4F7F4',
     accentInk: '#254232',
-    illustrationUrl: BLUSH_ASSETS.isometricCompanyOS,
+    illustrationUrl: BLUSH_ASSETS.clientDealHandshake,
   },
   {
     id: 'rev-4',
