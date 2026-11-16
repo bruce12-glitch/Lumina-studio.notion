@@ -45,34 +45,38 @@ export const LuminaLogo: React.FC<{ size?: number; className?: string }> = ({
     aria-hidden="true"
     className={`shrink-0 ${className}`}
   >
-    <rect x="2" y="2" width="28" height="28" rx="7.5" fill="#37352F" />
+    {/* Minimalist Notion-Charcoal Squircle */}
+    <rect x="2" y="2" width="28" height="28" rx="8" fill="#1E293B" />
     <rect
       x="3"
       y="3"
       width="26"
       height="26"
-      rx="6.5"
+      rx="7"
       stroke="#FFFFFF"
-      strokeOpacity="0.14"
+      strokeOpacity="0.12"
       strokeWidth="1"
     />
+    {/* Geometric "R" Monogram */}
     <path
-      d="M8.5 7.5V19C8.5 21.8 10.5 23.5 13.2 23.5C15.5 23.5 17 21.5 19.3 21.5C21.6 21.5 22.8 23.5 24.5 23.5"
+      d="M9.5 23V9H15.2C17.85 9 19.8 10.75 19.8 13.25C19.8 15.75 17.85 17.5 15.2 17.5H9.5"
       stroke="#FFFFFF"
-      strokeWidth="2.1"
+      strokeWidth="2.3"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
-      d="M13 7.5V15C13 17.2 14.4 18.5 16.5 18.5C18.5 18.5 19.8 16.7 21.8 16.7C23.2 16.7 24 17.6 24.5 18.2"
+      d="M14.8 17.5L19.8 23"
       stroke="#FFFFFF"
-      strokeWidth="2.1"
+      strokeWidth="2.3"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
+    {/* Harmonic Resonance Wave Arc */}
     <path
-      d="M17.5 7.5V12.5"
+      d="M22.5 10.2C24.3 11.85 24.3 14.65 22.5 16.3"
       stroke="#FFFFFF"
+      strokeOpacity="0.82"
       strokeWidth="2.1"
       strokeLinecap="round"
     />
