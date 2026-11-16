@@ -270,13 +270,10 @@ const ALL_30_TEMPLATE_ILLUSTRATIONS: string[] = [
 ];
 
 const ALL_CARD_TINTS: string[] = [
-  '#F8F5E8',
-  '#EDF5FD',
-  '#FFF0E3',
-  '#EBF8EF',
-  '#F2EEFA',
-  '#FEF9E6',
-  '#FDF0F5',
+  '#F7F6F3',
+  '#F2F6FB',
+  '#F2F7F4',
+  '#F5F4F8',
 ];
 
 function resolveTemplateAsset(_slug: string, _category: TemplateCategory, idx: number): string {
@@ -284,11 +281,11 @@ function resolveTemplateAsset(_slug: string, _category: TemplateCategory, idx: n
 }
 
 function resolveTemplateTint(slug: string, _category: TemplateCategory, idx: number): string {
-  if (slug === 'second-brain') return '#F8F5E8';
-  if (slug === 'finance-tracker') return '#EDF5FD';
-  if (slug === 'habit-tracker') return '#EBF8EF';
-  if (slug === 'freelance-os') return '#FFF0E3';
-  if (slug === 'content-os') return '#F2EEFA';
+  if (slug === 'second-brain') return '#F7F6F3';
+  if (slug === 'finance-tracker') return '#F2F6FB';
+  if (slug === 'habit-tracker') return '#F2F7F4';
+  if (slug === 'freelance-os') return '#F5F4F8';
+  if (slug === 'content-os') return '#F2F6FB';
   return ALL_CARD_TINTS[idx % ALL_CARD_TINTS.length];
 }
 
@@ -335,7 +332,7 @@ export const APPS: AppItem[] = [
     platform: 'Web · macOS · iOS',
     priceLabel: 'Free / $4 mo',
     illustrationUrl: BLUSH_ASSETS.mobileProfileLauncher,
-    cardTint: '#EBF8EF',
+    cardTint: '#F2F7F4',
     features: [
       {
         title: 'Keyboard-First Launcher',
@@ -361,7 +358,7 @@ export const APPS: AppItem[] = [
     platform: 'Web · iOS · Android',
     priceLabel: 'Free / $3 mo',
     illustrationUrl: BLUSH_ASSETS.relaxedFloorReader,
-    cardTint: '#F2EEFA',
+    cardTint: '#F2F6FB',
     features: [
       {
         title: 'One-Page Daily Canvas',
@@ -387,7 +384,7 @@ export const APPS: AppItem[] = [
     platform: 'Web · iOS',
     priceLabel: 'Free / $5 mo',
     illustrationUrl: BLUSH_ASSETS.vrIdeaLab,
-    cardTint: '#FDF0F5',
+    cardTint: '#F5F4F8',
     features: [
       {
         title: 'Hypothesis-Driven Habits',
@@ -413,7 +410,7 @@ export const APPS: AppItem[] = [
     platform: 'Web · macOS · iOS',
     priceLabel: 'Free / $5 mo',
     illustrationUrl: BLUSH_ASSETS.yellowClockTasks,
-    cardTint: '#FEF9E6',
+    cardTint: '#F7F6F3',
     features: [
       {
         title: 'Two-Way Notion Sync',
