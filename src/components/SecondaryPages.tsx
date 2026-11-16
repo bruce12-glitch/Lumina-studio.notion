@@ -5,8 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  CreditCard,
-  ShieldCheck,
 } from 'lucide-react';
 import {
   ALL_ACCESS_PRICE,
@@ -25,9 +23,9 @@ import { AppCard, FaqAccordion, PromoBanner, TemplateCard } from './Chrome';
 import {
   AppIconGlyph,
   BlushAssetImage,
-  FeatureMedia,
-  TemplateCover,
 } from './CoversAndIllustrations';
+
+import { TemplateShowcasePage } from './TemplateShowcasePage';
 
 export const TemplateDetailPage: React.FC<{
   slug: string;
@@ -35,169 +33,13 @@ export const TemplateDetailPage: React.FC<{
   onOpenCheckout: (target: CheckoutTarget) => void;
   purchasedSlugs: Set<string>;
 }> = ({ slug, onNavigate, onOpenCheckout, purchasedSlugs }) => {
-  const template =
-    TEMPLATES.find((t) => t.slug === slug) ||
-    TEMPLATES.find((t) => t.slug === 'second-brain')!;
-
-  const related = TEMPLATES.filter(
-    (t) => t.category === template.category && t.slug !== template.slug
-  ).slice(0, 3);
-
-  const isOwned = purchasedSlugs.has(template.slug);
-
   return (
-    <div className="pb-20">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-10 sm:pt-14">
-        <button
-          type="button"
-          onClick={() => onNavigate('/templates')}
-          className="inline-flex items-center gap-2 text-[14px] font-medium text-[#6E6D68] hover:text-[#37352F] mb-8 transition-colors cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Notion Templates</span>
-        </button>
-
-        {/* Contiguous Purchase Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Left: Large 16/10 Cover */}
-          <div className="lg:col-span-7 rounded-[16px] border border-[#E9E9E7] overflow-hidden bg-[#F7F6F3]">
-            <TemplateCover
-              name={template.name}
-              slug={template.slug}
-              category={template.category}
-              pro={template.pro}
-              illustrationUrl={template.illustrationUrl}
-              cardTint={template.cardTint}
-            />
-          </div>
-
-          {/* Right: Purchase & Delivery Module */}
-          <div className="lg:col-span-5 rounded-[16px] border border-[#E9E9E7] bg-white p-6 sm:p-8 space-y-6">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between gap-2 text-[13px] text-[#6E6D68]">
-                <span>{template.category}</span>
-                <span>·</span>
-                <span>{template.version}</span>
-              </div>
-
-              <h1 className="text-[clamp(28px,3.5vw,38px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#37352F]">
-                {template.name}
-              </h1>
-            </div>
-
-            <div className="flex items-center gap-2.5 pt-1">
-              {template.compareAt !== undefined && (
-                <span className="text-[20px] font-semibold text-[#9B9A97] line-through tabular-nums">
-                  {formatPrice(template.compareAt)}
-                </span>
-              )}
-              <span className="text-[24px] font-bold text-[#37352F] tabular-nums">
-                {formatPrice(template.price)}
-              </span>
-              {template.pro && (
-                <span className="rounded-[4px] bg-[#37352F] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-1.5 py-0.5 leading-none">
-                  PRO
-                </span>
-              )}
-            </div>
-
-            <div className="space-y-3 text-[15px] text-[#52504A] leading-[1.6]">
-              <p>{template.description[0]}</p>
-              <p>{template.description[1]}</p>
-            </div>
-
-            {/* Primary CTA Button */}
-            <div className="space-y-3 pt-2">
-              <motion.button
-                type="button"
-                whileHover={{ y: -2, scale: 1.012 }}
-                whileTap={{ scale: 0.978 }}
-                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                onClick={() =>
-                  onOpenCheckout({
-                    name: template.name,
-                    slug: template.slug,
-                    price: template.price,
-                    compareAt: template.compareAt,
-                    pro: template.pro,
-                    whatsInside: template.whatsInside,
-                  })
-                }
-                className="btn-motion-primary w-full h-12 px-6 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>
-                  {isOwned
-                    ? 'Open Template Delivery & License'
-                    : template.price === 0
-                    ? 'Get Template ($0 — Instant Duplicate)'
-                    : `Get Template (${formatPrice(template.price)})`}
-                </span>
-                <ArrowRight className="w-4 h-4 btn-arrow-slide" />
-              </motion.button>
-
-              <div className="flex items-center justify-between text-[12px] text-[#6E6D68] pt-1">
-                <span className="inline-flex items-center gap-1.5">
-                  <CreditCard className="w-3.5 h-3.5" />
-                  Secure Checkout
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  Instant Notion Duplication
-                </span>
-              </div>
-            </div>
-
-            {/* What's Inside */}
-            <div className="pt-6 border-t border-[#E9E9E7] space-y-3">
-              <h2 className="text-[14px] font-semibold text-[#37352F]">
-                What’s inside
-              </h2>
-              <ul className="space-y-2.5 text-[14px] text-[#52504A]">
-                {template.whatsInside.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 text-[#37352F] shrink-0 mt-0.5" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Related Templates */}
-        {related.length > 0 && (
-          <div className="mt-20 pt-14 border-t border-[#E9E9E7]">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-[24px] font-semibold tracking-[-0.02em] text-[#37352F]">
-                More in {template.category}
-              </h2>
-              <button
-                type="button"
-                onClick={() =>
-                  onNavigate(
-                    `/templates?category=${encodeURIComponent(template.category)}`
-                  )
-                }
-                className="text-[14px] font-medium text-[#37352F] inline-flex items-center gap-1.5 hover:underline cursor-pointer"
-              >
-                <span>View All</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {related.map((item) => (
-                <TemplateCard
-                  key={item.slug}
-                  template={item}
-                  onNavigate={onNavigate}
-                  isPurchased={purchasedSlugs.has(item.slug)}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+    <TemplateShowcasePage
+      slug={slug}
+      onNavigate={onNavigate}
+      onOpenCheckout={onOpenCheckout}
+      purchasedSlugs={purchasedSlugs}
+    />
   );
 };
 
@@ -206,122 +48,13 @@ export const FlagshipProductPage: React.FC<{
   onNavigate: (path: string) => void;
   onOpenCheckout: (target: CheckoutTarget) => void;
 }> = ({ kind, onNavigate, onOpenCheckout }) => {
-  const isSecondBrain = kind === 'second-brain';
-  const template = TEMPLATES.find((t) => t.slug === kind)!;
-
-  const features = isSecondBrain
-    ? [
-        {
-          title: '01. Unified PARA Architecture',
-          body: 'Organize Projects, Areas, Resources, and Archives inside one coherent hierarchy so every note and task has a permanent home.',
-        },
-        {
-          title: '02. Daily Focus & Quick Capture',
-          body: 'Drop fleeting ideas into your inbox in seconds on desktop or mobile, then sort them cleanly during your weekly review.',
-        },
-        {
-          title: '03. Quarterly Goal Alignment',
-          body: 'Connect daily tasks directly to quarterly OKRs and annual milestones with automated progress rollups.',
-        },
-      ]
-    : [
-        {
-          title: '01. Complete Cash-Flow Visibility',
-          body: 'Track income streams, fixed bills, variable spending, and savings targets inside one minimalist financial ledger.',
-        },
-        {
-          title: '02. Automated Budget Rollups',
-          body: 'See real-time category utilization and monthly net-worth progression without maintaining complex spreadsheet macros.',
-        },
-        {
-          title: '03. Subscription & Renewal Radar',
-          body: 'Spot recurring charges before they renew and calculate your exact monthly burn rate in one view.',
-        },
-      ];
-
   return (
-    <div>
-      <section className="py-20 sm:py-28 max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
-        <div className="max-w-[680px] mx-auto space-y-5">
-          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#52504A]">
-            <span>Flagship Notion System</span>
-            <span>·</span>
-            <span className="rounded-[4px] bg-[#37352F] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-1.5 py-0.5 leading-none">
-              PRO
-            </span>
-          </div>
-          <h1 className="text-[clamp(36px,5vw,56px)] font-semibold tracking-[-0.035em] leading-[1.08] text-[#37352F] text-balance">
-            {isSecondBrain ? 'Second Brain' : 'All-In-One Finance Dashboard'}
-          </h1>
-          <p className="text-[18px] text-[#52504A] leading-[1.55]">
-            {isSecondBrain
-              ? 'An all-in-one Notion system to organize your tasks, projects, goals, and notes.'
-              : 'Bring your financials in one place to get the big picture.'}
-          </p>
-
-          <div className="pt-3 flex flex-wrap items-center justify-center gap-4">
-            <motion.button
-              type="button"
-              whileHover={{ y: -2, scale: 1.015 }}
-              whileTap={{ scale: 0.975 }}
-              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-              onClick={() =>
-                onOpenCheckout({
-                  name: template.name,
-                  slug: template.slug,
-                  price: template.price,
-                  compareAt: template.compareAt,
-                  pro: true,
-                  whatsInside: template.whatsInside,
-                })
-              }
-              className="btn-motion-primary h-12 px-6 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[15px] font-semibold inline-flex items-center gap-2 cursor-pointer"
-            >
-              <span>Get {template.name} —</span>
-              {template.compareAt && (
-                <span className="text-[#9B9A97] line-through tabular-nums">
-                  {formatPrice(template.compareAt)}
-                </span>
-              )}
-              <span className="tabular-nums">{formatPrice(template.price)}</span>
-              <ArrowRight className="w-4 h-4 btn-arrow-slide" />
-            </motion.button>
-
-            <motion.button
-              type="button"
-              whileHover={{ y: -2, scale: 1.015 }}
-              whileTap={{ scale: 0.978 }}
-              transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-              onClick={() => onNavigate(`/templates/${template.slug}`)}
-              className="btn-motion-secondary h-12 px-5 rounded-[10px] border border-[#D3D1CB] bg-white hover:bg-[#F7F6F3] text-[#37352F] text-[14px] font-semibold cursor-pointer"
-            >
-              Inspect Specifications
-            </motion.button>
-          </div>
-        </div>
-
-        <div className="mt-14">
-          <FeatureMedia kind={isSecondBrain ? 'second-brain' : 'finance'} />
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-24 bg-[#F7F6F3] border-y border-[#E9E9E7]">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="p-6 rounded-[16px] border border-[#E9E9E7] bg-white space-y-3"
-            >
-              <h2 className="text-[18px] font-semibold text-[#37352F]">{f.title}</h2>
-              <p className="text-[15px] text-[#52504A] leading-[1.6]">{f.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <FaqAccordion />
-      <PromoBanner />
-    </div>
+    <TemplateShowcasePage
+      slug={kind}
+      onNavigate={onNavigate}
+      onOpenCheckout={onOpenCheckout}
+      purchasedSlugs={new Set()}
+    />
   );
 };
 
