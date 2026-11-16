@@ -33,54 +33,17 @@ const CREATOR_AVATAR_MAP: Record<string, string> = {
 };
 
 export const LuminaLogo: React.FC<{ size?: number; className?: string }> = ({
-  size = 26,
   className = '',
 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 32 32"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    className={`shrink-0 ${className}`}
+  <span
+    aria-label="Resonance"
+    className={`font-display text-[22px] sm:text-[23px] font-extrabold tracking-[-0.045em] leading-none text-[#0F172A] inline-flex items-baseline select-none ${className}`}
   >
-    {/* Minimalist Notion-Charcoal Squircle */}
-    <rect x="2" y="2" width="28" height="28" rx="8" fill="#1E293B" />
-    <rect
-      x="3"
-      y="3"
-      width="26"
-      height="26"
-      rx="7"
-      stroke="#FFFFFF"
-      strokeOpacity="0.12"
-      strokeWidth="1"
-    />
-    {/* Geometric "R" Monogram */}
-    <path
-      d="M9.5 23V9H15.2C17.85 9 19.8 10.75 19.8 13.25C19.8 15.75 17.85 17.5 15.2 17.5H9.5"
-      stroke="#FFFFFF"
-      strokeWidth="2.3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M14.8 17.5L19.8 23"
-      stroke="#FFFFFF"
-      strokeWidth="2.3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    {/* Harmonic Resonance Wave Arc */}
-    <path
-      d="M22.5 10.2C24.3 11.85 24.3 14.65 22.5 16.3"
-      stroke="#FFFFFF"
-      strokeOpacity="0.82"
-      strokeWidth="2.1"
-      strokeLinecap="round"
-    />
-  </svg>
+    <span>Res</span>
+    <span className="text-[#1D6EE3]">o</span>
+    <span>nance</span>
+    <span className="text-[#1D6EE3] ml-[1px]">.</span>
+  </span>
 );
 
 const NAV_DIRECTORY_GROUPS: Array<{
@@ -189,13 +152,9 @@ export const Header: React.FC<NavigationProps> = ({
             <a
               href="/"
               onClick={(e) => handleLink(e, '/')}
-              className="group inline-flex items-center gap-2.5 text-[20px] font-bold tracking-[-0.03em] text-[#37352F] whitespace-nowrap shrink-0"
+              className="group inline-flex items-center whitespace-nowrap shrink-0 transition-opacity hover:opacity-85"
             >
-              <LuminaLogo
-                size={26}
-                className="transition-transform duration-200 group-hover:scale-105"
-              />
-              <span>Resonance</span>
+              <LuminaLogo />
             </a>
 
             <nav
@@ -352,10 +311,9 @@ export const MenuOverlay: React.FC<{
           <a
             href="/"
             onClick={(e) => go(e, '/')}
-            className="inline-flex items-center gap-2.5 text-[20px] font-bold tracking-[-0.03em] text-[#37352F]"
+            className="inline-flex items-center transition-opacity hover:opacity-85"
           >
-            <LuminaLogo size={26} />
-            <span>Resonance</span>
+            <LuminaLogo />
           </a>
           <button
             ref={closeBtnRef}
@@ -445,15 +403,9 @@ export const Footer: React.FC<{
               <a
                 href="/"
                 onClick={(e) => go(e, '/')}
-                className="inline-flex items-center gap-2.5 group"
+                className="inline-flex items-center group transition-opacity hover:opacity-85"
               >
-                <LuminaLogo
-                  size={28}
-                  className="transition-transform duration-200 group-hover:scale-105"
-                />
-                <span className="text-[20px] font-bold tracking-[-0.03em] text-[#37352F]">
-                  Resonance
-                </span>
+                <LuminaLogo />
               </a>
               <p className="text-[14.5px] font-medium text-[#37352F]">
                 Productivity meets minimalism.
