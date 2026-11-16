@@ -100,7 +100,7 @@ export function calculateDiscountedPrice(
   }
 
   const code = promoCode.trim().toUpperCase();
-  if (code === 'ORGANIZE2026' || code === 'LUMINA50' || code === 'LUMEN50' || code === 'EASLO50') {
+  if (code === 'ORGANIZE2026' || code === 'RESONANCE50' || code === 'LUMINA50' || code === 'LUMEN50' || code === 'EASLO50') {
     const discountAmount = Math.round(basePrice * 0.5 * 100) / 100;
     return {
       finalPrice: Math.max(0, Number((basePrice - discountAmount).toFixed(2))),
@@ -213,9 +213,9 @@ export function generateDeliveryPackage(params: {
   const blockB = ((seed * 31) >>> 0).toString(36).toUpperCase().padStart(4, '0').slice(0, 4);
   const orderNum = (100000 + (seed % 900000)).toString();
 
-  const licenseKey = `LUMINA-${params.price > 0 ? 'PRO' : 'FREE'}-${blockA}-${blockB}`;
+  const licenseKey = `RESONANCE-${params.price > 0 ? 'PRO' : 'FREE'}-${blockA}-${blockB}`;
   const orderId = `ORD-${orderNum}`;
-  const notionDuplicateUrl = `https://www.notion.so/lumina/${params.itemSlug}-${blockA.toLowerCase()}?duplicate=true`;
+  const notionDuplicateUrl = `https://www.notion.so/resonance/${params.itemSlug}-${blockA.toLowerCase()}?duplicate=true`;
 
   const insideList = (
     params.whatsInside || [
@@ -227,7 +227,7 @@ export function generateDeliveryPackage(params: {
     .map((line) => `- [x] ${line}`)
     .join('\n');
 
-  const blueprintMarkdown = `# ${params.itemName} — Lumina Notion Setup Guide
+  const blueprintMarkdown = `# ${params.itemName} — Resonance Notion Setup Guide
 Order ID: ${orderId}
 License Key: ${licenseKey}
 Licensed To: ${params.customerEmail}
@@ -246,7 +246,7 @@ ${insideList}
 3. Use Ctrl/Cmd + K inside Notion to jump directly to this page anytime.
 ${
   params.price > 0
-    ? '\n## 4. Private Circle Community\nInvite URL: https://community.lumina.co/invite/' + blockB.toLowerCase()
+    ? '\n## 4. Private Circle Community\nInvite URL: https://community.resonance.co/invite/' + blockB.toLowerCase()
     : ''
 }
 `;
@@ -262,7 +262,7 @@ ${
     purchasedAt: '2026-11-14',
     notionDuplicateUrl,
     circleCommunityInviteUrl:
-      params.price > 0 ? `https://community.lumina.co/invite/${blockB.toLowerCase()}` : undefined,
+      params.price > 0 ? `https://community.resonance.co/invite/${blockB.toLowerCase()}` : undefined,
     blueprintMarkdown,
   };
 }

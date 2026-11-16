@@ -191,7 +191,7 @@ export const Header: React.FC<NavigationProps> = ({
                 size={26}
                 className="transition-transform duration-200 group-hover:scale-105"
               />
-              <span>Lumina</span>
+              <span>Resonance</span>
             </a>
 
             <nav
@@ -351,7 +351,7 @@ export const MenuOverlay: React.FC<{
             className="inline-flex items-center gap-2.5 text-[20px] font-bold tracking-[-0.03em] text-[#37352F]"
           >
             <LuminaLogo size={26} />
-            <span>Lumina</span>
+            <span>Resonance</span>
           </a>
           <button
             ref={closeBtnRef}
@@ -448,7 +448,7 @@ export const Footer: React.FC<{
                   className="transition-transform duration-200 group-hover:scale-105"
                 />
                 <span className="text-[20px] font-bold tracking-[-0.03em] text-[#37352F]">
-                  Lumina
+                  Resonance
                 </span>
               </a>
               <p className="text-[14.5px] font-medium text-[#37352F]">
@@ -494,7 +494,7 @@ export const Footer: React.FC<{
 
         {/* 3. Bottom Bar: Copyright, Interactive Quick Menu Shortcut & Back to Top */}
         <div className="pt-8 border-t border-[#E9E9E7] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[13px] text-[#6E6D68]">
-          <p>© 2022-2026 Lumina. All rights reserved.</p>
+          <p>© 2022-2026 Resonance. All rights reserved.</p>
 
           <div className="flex flex-wrap items-center gap-3">
             {onOpenMenu ? (
@@ -683,7 +683,7 @@ export const FaqAccordion: React.FC = () => {
         <p className="text-[16px] text-[#52504A] leading-[1.6]">
           If you still have questions, feel free to{' '}
           <a
-            href="mailto:support@lumina.co"
+            href="mailto:support@resonance.co"
             className="text-[#37352F] underline underline-offset-4 hover:text-[#6E6D68]"
           >
             get in touch
@@ -906,7 +906,7 @@ export const TestimonialsSection: React.FC<{
             Used by Creators and Teams
           </h2>
           <p className="text-[16px] text-[#52504A] leading-[1.6]">
-            How designers, engineers, and studio teams organize their work and finances with Lumina Notion templates.
+            How designers, engineers, and studio teams organize their work and finances with Resonance Notion templates.
           </p>
         </div>
       </div>

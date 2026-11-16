@@ -113,7 +113,7 @@ test('validateCheckoutInput and generateDeliveryPackage validate and provision d
     provider: 'stripe',
     customerEmail: 'alex@example.com',
   });
-  assert.ok(pkg.licenseKey.startsWith('LUMINA-PRO-'));
+  assert.ok(pkg.licenseKey.startsWith('RESONANCE-PRO-'));
   assert.ok(pkg.notionDuplicateUrl.includes('second-brain'));
   assert.ok(pkg.circleCommunityInviteUrl);
 });
@@ -124,7 +124,7 @@ test('validateAuthForm and getProTemplatesTotalValue', () => {
   assert.ok(badAuth.errors.email);
   assert.ok(badAuth.errors.password);
 
-  const goodAuth = validateAuthForm('creator@lumina.co', 'minimalism2026', true);
+  const goodAuth = validateAuthForm('creator@resonance.co', 'minimalism2026', true);
   assert.equal(goodAuth.valid, true);
 
   const bundle = getProTemplatesTotalValue();

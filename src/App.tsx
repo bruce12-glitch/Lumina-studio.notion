@@ -212,15 +212,15 @@ export default function App() {
   useEffect(() => {
     const { pathname } = routeState;
     if (pathname === '/templates') {
-      document.title = 'Notion Templates | Lumina';
+      document.title = 'Notion Templates | Resonance';
     } else if (pathname === '/') {
-      document.title = 'Lumina';
+      document.title = 'Resonance';
     } else if (pathname.startsWith('/templates/')) {
       const slug = pathname.replace('/templates/', '');
       const found = TEMPLATES.find((t) => t.slug === slug);
-      document.title = found ? `${found.name} | Lumina` : 'Lumina';
+      document.title = found ? `${found.name} | Resonance` : 'Lumina';
     } else {
-      document.title = 'Lumina';
+      document.title = 'Resonance';
     }
   }, [routeState]);
 
@@ -698,13 +698,13 @@ export default function App() {
             {/* 5. TESTIMONIALS SECTION BENEATH FEATURE SPLITS */}
             <TestimonialsSection onNavigate={navigate} />
 
-            {/* 6. APPS BY LUMINA */}
+            {/* 6. APPS BY RESONANCE */}
             <section className="py-16 sm:py-24 bg-[#F7F6F3] border-t border-[#E9E9E7]">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div className="space-y-2">
                     <h2 className="font-display text-[clamp(26px,3.2vw,36px)] font-bold tracking-[-0.025em] leading-[1.15] text-[#37352F]">
-                      Apps by Lumina
+                      Apps by Resonance
                     </h2>
                     <p className="text-[16px] text-[#52504A] leading-[1.6]">
                       Get things done with apps designed with simplicity in mind.

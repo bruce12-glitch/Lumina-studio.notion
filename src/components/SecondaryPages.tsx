@@ -147,7 +147,7 @@ export const AppsPage: React.FC<{
           className="inline-flex items-center gap-2 text-[14px] font-medium text-[#6E6D68] hover:text-[#37352F] cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>All Apps by Lumina</span>
+          <span>All Apps by Resonance</span>
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -274,7 +274,7 @@ export const AppsPage: React.FC<{
     <div className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 space-y-12">
       <div className="space-y-3 max-w-[600px]">
         <h1 className="text-[clamp(32px,4.5vw,44px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#37352F]">
-          Apps by Lumina
+          Apps by Resonance
         </h1>
         <p className="text-[18px] text-[#52504A] leading-[1.55]">
           Get things done with apps designed with simplicity in mind.
@@ -394,19 +394,19 @@ export const StaticInfoPage: React.FC<{
     return (
       <div className="py-16 sm:py-24 max-w-[720px] mx-auto px-4 sm:px-6 space-y-6">
         <h1 className="text-[clamp(32px,4.5vw,44px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#37352F]">
-          About Lumina
+          About Resonance
         </h1>
         <div className="space-y-5 text-[16px] text-[#52504A] leading-[1.7]">
           <p>
-            Lumina is an independent digital product studio focused on minimalist Notion templates and single-purpose productivity web apps designed to bring clarity to daily workflows.
+            Resonance is an independent digital product studio focused on minimalist Notion templates and single-purpose productivity web apps designed to bring clarity to daily workflows.
           </p>
           <p>
             We believe software should stay out of your way. Every template in our catalog is built on a clean monochrome design language: zero visual clutter, intuitive database relations, and immediate utility on Notion’s free plan.
           </p>
           <p>
             Have a question about a template, partnership, or educational discount? Reach out directly at{' '}
-            <a href="mailto:support@lumina.co" className="text-[#37352F] underline">
-              support@lumina.co
+            <a href="mailto:support@resonance.co" className="text-[#37352F] underline">
+              support@resonance.co
             </a>
             .
           </p>
@@ -463,15 +463,15 @@ export const StaticInfoPage: React.FC<{
         <section className="space-y-2">
           <h2 className="text-[18px] font-semibold text-[#37352F]">2. Payments & Security</h2>
           <p>
-            All payments are processed securely by Stripe and Lemon Squeezy. Lumina never stores raw payment card numbers on our servers.
+            All payments are processed securely by Stripe and Lemon Squeezy. Resonance never stores raw payment card numbers on our servers.
           </p>
         </section>
         <section className="space-y-2">
           <h2 className="text-[18px] font-semibold text-[#37352F]">3. Contact</h2>
           <p>
             For data export or deletion requests, email{' '}
-            <a href="mailto:privacy@lumina.co" className="text-[#37352F] underline">
-              privacy@lumina.co
+            <a href="mailto:privacy@resonance.co" className="text-[#37352F] underline">
+              privacy@resonance.co
             </a>
             .
           </p>

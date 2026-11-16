@@ -570,7 +570,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: 'rev-1',
     quote:
-      'Before switching to Second Brain, our product specs and research lived across four separate apps. Consolidating into Lumina’s PARA workspace cut weekly planning overhead by 4.5 hours for our design team.',
+      'Before switching to Second Brain, our product specs and research lived across four separate apps. Consolidating into Resonance’s PARA workspace cut weekly planning overhead by 4.5 hours for our design team.',
     outcomeMetric: '4.5 hrs saved weekly',
     author: 'Hannah Lin',
     role: 'Product Designer',
