@@ -264,9 +264,9 @@ export default function App() {
       'second-brain',
       'finance-tracker',
       'freelance-os',
+      'student-os',
+      'researcher-os',
       'habit-tracker',
-      'content-os',
-      'book-tracker',
     ];
     return slugs
       .map((s) => TEMPLATES.find((t) => t.slug === s))
@@ -279,7 +279,7 @@ export default function App() {
     [routeState.category, searchQuery]
   );
 
-  // JSON-LD ItemList of 39 Products for /templates SEO requirement
+  // JSON-LD ItemList of 41 Products for /templates SEO requirement
   const templatesJsonLd = useMemo(() => {
     return JSON.stringify({
       '@context': 'https://schema.org',
@@ -456,7 +456,7 @@ export default function App() {
                       Notion Templates
                     </h1>
                     <p className="text-[18px] sm:text-[20px] font-normal leading-[1.55] tracking-[-0.01em] text-[#52504A] max-w-[520px] mx-auto">
-                      Discover 39 minimalist Notion templates to organize your work and daily life.
+                      Discover 41 minimalist Notion templates to organize your work, research, study, and daily life.
                     </p>
                   </div>
 
@@ -603,7 +603,7 @@ export default function App() {
                     }}
                     className="group inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#2383E2] hover:text-[#1B6EC2] hover:underline underline-offset-4"
                   >
-                    <span>View all 39 templates</span>
+                    <span>View all {TEMPLATES.length} templates</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </a>
                 </div>
@@ -832,7 +832,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* 3. Grid of 39 Cards */}
+            {/* 3. Grid of 41 Cards */}
             <section
               aria-label={`${category} Notion templates (${categoryCounts[category]})`}
               className="py-12 sm:py-16 max-w-[1200px] mx-auto px-4 sm:px-6"
