@@ -18,8 +18,12 @@ import { CheckoutTarget } from './CheckoutModal';
 import { TemplateCard } from './Chrome';
 import { BlushAssetImage } from './CoversAndIllustrations';
 import { FreelanceOsGallery } from './FreelanceOsGallery';
+import { StudentOsShowcase } from './StudentOsShowcase';
+import { ResearcherOsShowcase } from './ResearcherOsShowcase';
 import freelancerMascotHeroImg from '../assets/images/freelancer_mascot_hero_1794923265472.jpg';
 import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
+import studentOsMascotHeroImg from '../assets/images/student_os_mascot_hero_1794933584495.jpg';
+import researcherOsMascotHeroImg from '../assets/images/researcher_os_mascot_hero_1794933583291.jpg';
 
 interface TemplateShowcaseMetadata {
   heroHeadline: string;
