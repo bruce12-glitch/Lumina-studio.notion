@@ -216,6 +216,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Experiments & Runs', 'Lab Protocols', 'Datasets'],
       includedSubTemplates: ['Reproducible Run Log'],
     },
+    {
+      id: 'datasets-repos',
+      number: '06',
+      shortLabel: 'Datasets & Code',
+      title: 'Datasets, Code & Baselines',
+      category: 'Lab & Experiments',
+      summary:
+        'Track data provenance, Zenodo DOIs, Git commit tags, environment lockfiles, and SOTA metrics.',
+      whatItContains: [
+        'Dataset Provenance — Document sample size, splits, license, and IRB privacy tier.',
+        'Code Repo Index — Link scripts, model checkpoints, and exact Git commit SHAs.',
+        'Benchmark Table — Compare new run outputs cleanly against published baselines.',
+      ],
+      includedViews: [
+        {
+          name: 'Dataset Catalog',
+          layout: 'Table',
+          description: 'Versioning, licenses & storage paths.',
+        },
+        {
+          name: 'Codebases Registry',
+          layout: 'List',
+          description: 'Repos, branch tags & lockfile status.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Data Privacy Tier (Public / Controlled / IRB)',
+        'Pinned Git SHA & Zenodo DOI fields',
+      ],
+      connectedDatabases: ['Datasets & Baselines', 'Code & Repos', 'Experiments'],
+      includedSubTemplates: ['Dataset README Spec'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
