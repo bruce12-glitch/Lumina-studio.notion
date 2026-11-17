@@ -115,6 +115,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Literature Papers', 'Atomic Zettel Notes', 'Hypotheses'],
       includedSubTemplates: ['Paper Extraction Sheet'],
     },
+    {
+      id: 'zettelkasten-notes',
+      number: '03',
+      shortLabel: 'Zettelkasten Notes',
+      title: 'Zettelkasten & Atomic Claims',
+      category: 'Command & Synthesis',
+      summary:
+        'Connect modular concept cards and empirical citations directly into manuscript drafts.',
+      whatItContains: [
+        'Literature -> Permanent Notes — Distill highlights into one-claim cards.',
+        'Parent/Child Link Graph — Build concept trees ready to drop into papers.',
+        'Seedling-to-Evergreen Tags — Track claim maturity over time.',
+      ],
+      includedViews: [
+        {
+          name: 'Permanent Zettels Index',
+          layout: 'Table',
+          description: 'Evergreen concepts filtered by cluster.',
+        },
+        {
+          name: 'Inbox Triage Board',
+          layout: 'Board',
+          description: 'Promote raw highlights to permanent claims.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Cite Readiness tag',
+        'Incoming/outgoing note counts',
+      ],
+      connectedDatabases: ['Atomic Zettel Notes', 'Literature Papers', 'Manuscripts'],
+      includedSubTemplates: ['Atomic Zettel Claim Card'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
