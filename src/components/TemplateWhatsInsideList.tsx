@@ -261,6 +261,50 @@ export const TemplateWhatsInsideList: React.FC<TemplateWhatsInsideListProps> = (
           </div>
         )}
 
+        {isDatabasesView && (
+          <div className="divide-y divide-[#F1F5F9]">
+            <div className="px-6 py-4 sm:px-8 bg-[#F8FAFC]/80 flex flex-wrap items-center justify-between gap-2">
+              <h4 className="font-display text-[16px] font-bold text-[#0F172A]">
+                {spec.databaseCountLabel}
+              </h4>
+              <span className="text-[12.5px] font-medium text-[#64748B] tabular-nums">
+                {spec.databases.length} relational tables included
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:gap-px bg-[#F1F5F9]">
+              {spec.databases.map((db, idx) => (
+                <div
+                  key={db.id}
+                  data-testid={`${spec.slug}-db-item-${db.id}`}
+                  className="bg-white px-6 py-4 sm:px-8 sm:py-5 space-y-1.5"
+                >
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="text-[15px] font-bold text-[#0F172A]">
+                      <span className="font-mono text-[12px] text-[#1D6EE3] mr-2 tabular-nums">
+                        DB {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      {db.name}
+                    </p>
+                    <span className="text-[12px] font-medium text-[#64748B] shrink-0">
+                      {db.category}
+                    </span>
+                  </div>
+                  <p className="text-[13.5px] text-[#52504A] leading-[1.5]">
+                    {db.purpose}
+                  </p>
+                  <p className="text-[12px] text-[#64748B]">
+                    Properties: {db.keyProperties.join(' · ')}
+                    <span aria-hidden="true" className="mx-2 text-[#CBD5E1]">
+                      |
+                    </span>
+                    Linked: {db.relations.join(' · ')}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
     </section>
   );
