@@ -211,6 +211,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Flashcards', 'Lecture Notes', 'Exams', 'Courses'],
       includedSubTemplates: ['Recall Deck Entry'],
     },
+    {
+      id: 'exams-revision',
+      number: '06',
+      shortLabel: 'Exams & Sprints',
+      title: 'Exams & Revision Sprints',
+      category: 'Recall & Exams',
+      summary:
+        'Organize midterms and finals with readiness checklists, past papers, and countdowns.',
+      whatItContains: [
+        'Countdown Dashboard — Days remaining to every midterm and final.',
+        'Coverage Checklist — Audit syllabus topics and practice exams completed.',
+        'Study Session Links — Connects timed Pomodoro hours to each test.',
+      ],
+      includedViews: [
+        {
+          name: 'Exam Calendar',
+          layout: 'Calendar',
+          description: 'All test dates, rooms, and allowed aids.',
+        },
+        {
+          name: 'Readiness Board',
+          layout: 'Board',
+          description: 'Confidence tiers across upcoming exams.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Exam readiness rollup from covered notes',
+        'Logged revision hours summary',
+      ],
+      connectedDatabases: ['Exams & Sprints', 'Courses', 'Flashcards', 'Study Sessions'],
+      includedSubTemplates: ['14-Day Exam Sprint'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
