@@ -1080,6 +1080,42 @@ function getTemplateShowcaseData(template: Template): TemplateShowcaseMetadata {
     };
   }
 
+  if (template.slug === 'student-os') {
+    return {
+      ...base,
+      heroHeadline: 'Master every semester in one Notion system.',
+      heroSubheadline:
+        'Courses, deadlines, Cornell notes, spaced repetition flashcards, exams, and weighted 4.0 GPA math inside 12 linked Notion databases.',
+      closerLookModules: [
+        'Student Command Hub',
+        'Courses & Syllabi Tracker',
+        'Assignments & 7-Day Queue',
+        'Cornell Notes & Flashcards',
+        'Exams Sprint & Weighted GPA',
+        'Readings, Aid & 12 Databases',
+      ],
+      showcaseHeading: 'Inside Student OS',
+    };
+  }
+
+  if (template.slug === 'researcher-os') {
+    return {
+      ...base,
+      heroHeadline: 'From literature matrix to published paper.',
+      heroSubheadline:
+        'Paper matrices, Zettelkasten claims, hypotheses, lab run logs, datasets, IMRaD drafts, and peer review inside 14 linked Notion databases.',
+      closerLookModules: [
+        'Research Command Hub',
+        'Literature Synthesis Matrix',
+        'Zettelkasten Claim Network',
+        'Hypotheses, Runs & Protocols',
+        'Datasets, Code & Manuscripts',
+        'Peer Review, Grants & 14 DBs',
+      ],
+      showcaseHeading: 'Inside Researcher OS',
+    };
+  }
+
   return {
     ...base,
     closerLookModules: base.defaultModules,
