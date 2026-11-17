@@ -1270,7 +1270,11 @@ export const TemplateShowcasePage: React.FC<{
       <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-10 sm:pt-16 pb-16 sm:pb-24 border-b border-[#EDF2F7]">
         <div
           className={`${
-            template.slug === 'freelance-os' ? 'max-w-[1200px]' : 'max-w-[960px]'
+            template.slug === 'freelance-os' ||
+            template.slug === 'student-os' ||
+            template.slug === 'researcher-os'
+              ? 'max-w-[1200px]'
+              : 'max-w-[960px]'
           } mx-auto px-4 sm:px-6 space-y-10 sm:space-y-14`}
         >
           {/* Top Breadcrumb: All templates / {template.name} */}
@@ -1293,8 +1297,10 @@ export const TemplateShowcasePage: React.FC<{
             <span className="text-[#0F172A] font-semibold">{template.name}</span>
           </nav>
 
-          {template.slug === 'freelance-os' ? (
-            /* Airy Asymmetric 2-Column Hero Split Featuring Studio Mascot */
+          {template.slug === 'freelance-os' ||
+          template.slug === 'student-os' ||
+          template.slug === 'researcher-os' ? (
+            /* Airy Asymmetric 2-Column Hero Split Featuring Flagship OS Mascot */
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-center">
               <div className="md:col-span-6 space-y-6">
                 <div>
@@ -1397,7 +1403,12 @@ export const TemplateShowcasePage: React.FC<{
                 <div className="flex items-center gap-2 pt-2 text-[14px] font-medium text-[#64748B]">
                   <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
                   <span>
-                    {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings · 11 modules & 18 databases
+                    {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings ·{' '}
+                    {template.slug === 'freelance-os'
+                      ? '11 modules & 18 databases'
+                      : template.slug === 'student-os'
+                      ? '10 modules & 12 databases'
+                      : '12 modules & 14 databases'}
                   </span>
                 </div>
               </div>
@@ -1415,14 +1426,26 @@ export const TemplateShowcasePage: React.FC<{
                       handleScrollToCloserLook();
                     }
                   }}
-                  aria-label="Preview Freelance OS interactive workspace modules"
+                  aria-label={`Preview ${template.name} interactive modules and database details`}
                   className="group rounded-[28px] bg-gradient-to-br from-[#EAF2FF] via-[#F4F8FD] to-[#FFFFFF] border border-[#DCE6F3] p-6 sm:p-10 shadow-[0_24px_60px_-24px_rgba(29,110,227,0.16)] flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] overflow-hidden cursor-pointer"
                 >
                   <img
-                    src={freelancerMascotHeroImg}
-                    alt="Freelance OS studio mascot working with calendar, deliverables, and invoices"
+                    src={
+                      template.slug === 'freelance-os'
+                        ? freelancerMascotHeroImg
+                        : template.slug === 'student-os'
+                        ? studentOsMascotHeroImg
+                        : researcherOsMascotHeroImg
+                    }
+                    alt={
+                      template.slug === 'freelance-os'
+                        ? 'Freelance OS studio mascot working with calendar, deliverables, and invoices'
+                        : template.slug === 'student-os'
+                        ? 'Student OS academic mascot studying with class calendar, notes, and textbooks'
+                        : 'Researcher OS scholar mascot analyzing papers, microscope experiments, and datasets'
+                    }
                     referrerPolicy="no-referrer"
-                    className="w-full max-h-[340px] lg:max-h-[380px] object-contain mix-blend-multiply scale-[1.1] transition-transform duration-500 group-hover:scale-[1.14]"
+                    className="w-full max-h-[340px] lg:max-h-[380px] object-contain mix-blend-multiply scale-[1.08] transition-transform duration-500 group-hover:scale-[1.12]"
                   />
                 </div>
               </div>
