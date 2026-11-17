@@ -127,3 +127,19 @@ export function getOsSpecSummaryCounts(spec: OsSystemSpec): {
   };
 }
 
+export function validateOsSpecIntegrity(spec: OsSystemSpec): boolean {
+  if (!spec.modules.length || !spec.databases.length || !spec.readyTemplates.length) {
+    return false;
+  }
+  const moduleIds = new Set(spec.modules.map((m) => m.id));
+  const dbIds = new Set(spec.databases.map((d) => d.id));
+  if (moduleIds.size !== spec.modules.length || dbIds.size !== spec.databases.length) {
+    return false;
+  }
+  return spec.modules.every(
+    (m) =>
+      m.whatItContains.length >= 3 &&
+      m.includedViews.length >= 2 &&
+      m.connectedDatabases.length >= 1
+  );
+}
