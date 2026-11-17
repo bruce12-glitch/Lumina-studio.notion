@@ -1,13 +1,26 @@
-import React from "react";
-import { RESEARCHER_OS_SPEC } from "../data/researcherOsSpec";
-import { ResearcherOsWorkspaceTabs } from "./ResearcherOsWorkspaceTabs";
+import React from 'react';
+import { RESEARCHER_OS_SPEC } from '../data/researcherOsSpec';
+import { ResearcherOsWorkspaceTabs } from './ResearcherOsWorkspaceTabs';
+import {
+  TemplateWhatsInsideList,
+  WhatsInsideFilter,
+} from './TemplateWhatsInsideList';
 
-export const ResearcherOsShowcase: React.FC = () => {
+interface ResearcherOsShowcaseProps {
+  activeFilter?: WhatsInsideFilter;
+  onFilterChange?: (nextFilter: WhatsInsideFilter) => void;
+}
+
+export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
+  activeFilter,
+  onFilterChange,
+}) => {
   return (
     <div data-testid="researcher-os-details-showcase" className="space-y-10">
+      {/* Header Row Matching Freelancer OS */}
       <div className="space-y-3">
         <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#1D6EE3]">
-          Inside {RESEARCHER_OS_SPEC.name} · Interactive Workspace
+          Inside Researcher OS · Interactive Workspace
         </p>
         <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#0F172A] text-balance">
           1 Research Hub, 12 Modules, 14 Interconnected Databases
@@ -17,7 +30,15 @@ export const ResearcherOsShowcase: React.FC = () => {
         </p>
       </div>
 
+      {/* Interactive Notion Workspace Explorer */}
       <ResearcherOsWorkspaceTabs />
+
+      {/* Simplified, Text-Focused What's Inside Feature Breakdown */}
+      <TemplateWhatsInsideList
+        spec={RESEARCHER_OS_SPEC}
+        activeFilter={activeFilter}
+        onFilterChange={onFilterChange}
+      />
     </div>
   );
 };
