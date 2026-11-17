@@ -329,16 +329,49 @@ export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
         ? 'An all-in-one Notion system to organize your tasks, projects, goals, and notes.'
         : item.name === 'Finance Tracker'
         ? 'Bring your financials in one place to get the big picture.'
+        : item.name === 'Student OS'
+        ? '10 study modules, 12 linked Notion databases, flashcards & GPA tracker.'
+        : item.name === 'Researcher OS'
+        ? '12 research modules, 14 linked databases, literature matrix & IMRaD pipeline.'
         : `A clean ${item.category.toLowerCase()} Notion template to track and organize your ${item.name.toLowerCase()}.`,
-    description: [
-      `${item.name} is a ready-to-use Notion template with pre-linked databases, filtered views, and a clean layout. Duplicate it into your Notion workspace in one click and start organizing right away.`,
-      pro
-        ? `Includes interconnected databases, automated progress rollups, a step-by-step setup guide, and lifetime updates with access to the private Circle community.`
-        : `Works on Notion's free plan across desktop, tablet, and mobile with no complex setup required.`,
-    ],
+    description:
+      item.name === 'Student OS'
+        ? [
+            'Student OS keeps courses, syllabi, deadlines, Cornell notes, spaced-repetition flashcards, and weighted 4.0 GPA rollups in one workspace.',
+            'Includes 10 modules, 12 connected databases, and 8 one-click academic templates—works on Notion Free.',
+          ]
+        : item.name === 'Researcher OS'
+        ? [
+            'Researcher OS links literature synthesis matrices, Zettelkasten notes, hypotheses, reproducible experiment logs, datasets, and manuscripts.',
+            'Built with 12 modules and 14 connected databases covering peer-review rebuttals, CFPs, and grants.',
+          ]
+        : [
+            `${item.name} is a ready-to-use Notion template with pre-linked databases, filtered views, and a clean layout. Duplicate it into your Notion workspace in one click and start organizing right away.`,
+            pro
+              ? `Includes interconnected databases, automated progress rollups, a step-by-step setup guide, and lifetime updates with access to the private Circle community.`
+              : `Works on Notion's free plan across desktop, tablet, and mobile with no complex setup required.`,
+          ],
     whatsInside: buildWhatsInside(item.name, item.category, pro),
-    databaseCount: pro ? (item.price >= 39 ? 8 : 4) : 2,
-    viewsCount: pro ? (item.price >= 39 ? 18 : 9) : 4,
+    databaseCount:
+      item.name === 'Student OS'
+        ? 12
+        : item.name === 'Researcher OS'
+        ? 14
+        : pro
+        ? item.price >= 39
+          ? 8
+          : 4
+        : 2,
+    viewsCount:
+      item.name === 'Student OS'
+        ? 24
+        : item.name === 'Researcher OS'
+        ? 28
+        : pro
+        ? item.price >= 39
+          ? 18
+          : 9
+        : 4,
     version: pro ? 'v4.2' : 'v2.4',
     illustrationUrl: resolveTemplateAsset(slug, item.category, idx),
     cardTint: resolveTemplateTint(slug, item.category, idx),
@@ -652,3 +685,4 @@ export const TESTIMONIALS: Testimonial[] = [
     illustrationUrl: BLUSH_ASSETS.executiveSofaStrategy,
   },
 ];
+
