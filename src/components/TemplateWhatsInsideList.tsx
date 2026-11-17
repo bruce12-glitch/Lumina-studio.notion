@@ -218,8 +218,49 @@ export const TemplateWhatsInsideList: React.FC<TemplateWhatsInsideListProps> = (
               </div>
             ))}
 
+            {/* Concise Databases & Page Templates Summary Footer Row when viewing All */}
+            {activeFilter === 'All' && (
+              <div className="px-6 py-6 sm:px-8 sm:py-7 bg-[#F8FAFC]/70 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
+                <div className="space-y-2.5">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h4 className="font-display text-[16px] font-bold text-[#0F172A]">
+                      {counts.databasesCount} Interconnected Notion Databases
+                    </h4>
+                    <button
+                      type="button"
+                      onClick={() => setFilter(DATABASES_TAB)}
+                      className="text-[12.5px] font-semibold text-[#1D6EE3] hover:underline whitespace-nowrap shrink-0 cursor-pointer"
+                    >
+                      Inspect all {counts.databasesCount}
+                    </button>
+                  </div>
+                  <p className="text-[13.5px] text-[#52504A] leading-[1.6]">
+                    {spec.databases.map((db) => db.name).join(' · ')}
+                  </p>
+                </div>
+
+                <div className="space-y-2.5">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h4 className="font-display text-[16px] font-bold text-[#0F172A]">
+                      {counts.templatesCount} Ready-to-Use Page Templates
+                    </h4>
+                    <button
+                      type="button"
+                      onClick={() => setFilter(TEMPLATES_TAB)}
+                      className="text-[12.5px] font-semibold text-[#1D6EE3] hover:underline whitespace-nowrap shrink-0 cursor-pointer"
+                    >
+                      Inspect all {counts.templatesCount}
+                    </button>
+                  </div>
+                  <p className="text-[13.5px] text-[#52504A] leading-[1.6]">
+                    {spec.readyTemplates.map((tpl) => tpl.title).join(' · ')}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         )}
+
       </div>
     </section>
   );
