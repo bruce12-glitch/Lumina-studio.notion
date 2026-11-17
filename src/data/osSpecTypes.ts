@@ -143,3 +143,29 @@ export function validateOsSpecIntegrity(spec: OsSystemSpec): boolean {
       m.connectedDatabases.length >= 1
   );
 }
+
+export function buildWhatsInsideSummary(spec: OsSystemSpec): string[] {
+  const counts = getOsSpecSummaryCounts(spec);
+  const topModules = spec.modules
+    .slice(1, 5)
+    .map((m) => m.shortLabel)
+    .join(', ');
+  const topDbs = spec.databases
+    .slice(0, 5)
+    .map((d) => d.name)
+    .join(', ');
+  const topTemplates = spec.readyTemplates
+    .slice(0, 3)
+    .map((t) => t.title)
+    .join(', ');
+
+  return [
+    `${spec.modules[0]?.title || 'Command Hub'} + ${counts.modulesCount - 1} modules (${topModules}, and more)`,
+    `${counts.databasesCount} interconnected databases (${topDbs}, etc.)`,
+    `${counts.totalViewsCount}+ pre-built filtered views across tables, Kanban boards, timelines, and calendars`,
+    `${counts.templatesCount} one-click page templates (${topTemplates})`,
+    'Works seamlessly on Notion Free plan across desktop, tablet, and mobile',
+    'Lifetime template updates + Private Circle community invite',
+  ];
+}
+
