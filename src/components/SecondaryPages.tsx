@@ -35,6 +35,7 @@ export const TemplateDetailPage: React.FC<{
 }> = ({ slug, onNavigate, onOpenCheckout, purchasedSlugs }) => {
   return (
     <TemplateShowcasePage
+      key={slug}
       slug={slug}
       onNavigate={onNavigate}
       onOpenCheckout={onOpenCheckout}
