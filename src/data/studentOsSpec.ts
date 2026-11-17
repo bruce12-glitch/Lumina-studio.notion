@@ -243,6 +243,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Exams & Sprints', 'Courses', 'Flashcards', 'Study Sessions'],
       includedSubTemplates: ['14-Day Exam Sprint'],
     },
+    {
+      id: 'gpa-grades',
+      number: '07',
+      shortLabel: 'GPA & Grades',
+      title: 'Weighted GPA & Gradebook',
+      category: 'Recall & Exams',
+      summary:
+        'Automatic 4.0 weighted grade calculator across midterms, labs, homework, and credits.',
+      whatItContains: [
+        'Live Course Grade Rollup — Multiplies earned scores by syllabus weight.',
+        'Cumulative Term GPA — Credit-weighted GPA computed across semesters.',
+        'Target Score Check — Shows points needed on finals for your target grade.',
+      ],
+      includedViews: [
+        {
+          name: 'Active Gradebook',
+          layout: 'Table',
+          description: 'Scores, weights, and weighted totals.',
+        },
+        {
+          name: 'Semester GPA Summary',
+          layout: 'Gallery',
+          description: 'Credit-weighted GPA cards by term.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Letter-grade mapping (A = 4.0 to F = 0.0)',
+        'Credit-weighted term GPA rollup',
+      ],
+      connectedDatabases: ['Gradebook', 'Courses', 'Assignments'],
+      includedSubTemplates: ['Grade Weight Entry'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
