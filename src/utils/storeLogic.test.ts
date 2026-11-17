@@ -2,6 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { TEMPLATES, FAQ_ITEMS, APPS } from '../data/catalog';
 import {
+  filterOsDatabases,
+  filterOsModules,
+  getOsSpecSummaryCounts,
+  validateOsSpecIntegrity,
+} from '../data/osSpecTypes';
+import { STUDENT_OS_SPEC } from '../data/studentOsSpec';
+import { RESEARCHER_OS_SPEC } from '../data/researcherOsSpec';
+import {
   calculateDiscountedPrice,
   filterTemplates,
   formatPrice,
@@ -13,13 +21,13 @@ import {
   validateCheckoutInput,
 } from './storeLogic';
 
-test('catalog integrity matches Lumina specification (39 items, 22 free, 17 PRO, exact category counts)', () => {
-  assert.equal(TEMPLATES.length, 39);
+test('catalog integrity matches Resonance specification (41 items, 22 free, 19 PRO, exact category counts)', () => {
+  assert.equal(TEMPLATES.length, 41);
 
   const freeItems = TEMPLATES.filter((t) => !t.pro);
   const proItems = TEMPLATES.filter((t) => t.pro);
   assert.equal(freeItems.length, 22);
-  assert.equal(proItems.length, 17);
+  assert.equal(proItems.length, 19);
 
   // Every item satisfies pro <=> price > 0
   for (const item of TEMPLATES) {
@@ -33,15 +41,23 @@ test('catalog integrity matches Lumina specification (39 items, 22 free, 17 PRO,
   assert.equal(saleItems[0].price, 39);
   assert.equal(saleItems[0].compareAt, 79);
 
-  // Exact category counts: All 39, Health & Fitness 9, Personal Productivity 13, Business 5, School 4, Finance 6, Travel 2
+  // Exact category counts: All 41, Health & Fitness 9, Personal Productivity 13, Business 5, School 6, Finance 6, Travel 2
   const counts = getCategoryCounts(TEMPLATES);
-  assert.equal(counts['All'], 39);
+  assert.equal(counts['All'], 41);
   assert.equal(counts['Health & Fitness'], 9);
   assert.equal(counts['Personal Productivity'], 13);
   assert.equal(counts['Business'], 5);
-  assert.equal(counts['School'], 4);
+  assert.equal(counts['School'], 6);
   assert.equal(counts['Finance'], 6);
   assert.equal(counts['Travel'], 2);
+
+  // Student OS & Researcher OS must exist in School category
+  const studentOs = TEMPLATES.find((t) => t.slug === 'student-os');
+  const researcherOs = TEMPLATES.find((t) => t.slug === 'researcher-os');
+  assert.ok(studentOs);
+  assert.ok(researcherOs);
+  assert.equal(studentOs.databaseCount, 12);
+  assert.equal(researcherOs.databaseCount, 14);
 
   // FAQ & Apps count
   assert.equal(FAQ_ITEMS.length, 6);
@@ -52,12 +68,19 @@ test('filterTemplates filters accurately by category and search query', () => {
   const finance = filterTemplates(TEMPLATES, 'Finance');
   assert.equal(finance.length, 6);
 
+  const school = filterTemplates(TEMPLATES, 'School');
+  assert.equal(school.length, 6);
+
   const travel = filterTemplates(TEMPLATES, 'Travel');
   assert.equal(travel.length, 2);
 
   const searchBrain = filterTemplates(TEMPLATES, 'All', 'Second Brain');
   assert.equal(searchBrain.length, 1);
   assert.equal(searchBrain[0].slug, 'second-brain');
+
+  const searchResearcher = filterTemplates(TEMPLATES, 'School', 'Researcher OS');
+  assert.equal(searchResearcher.length, 1);
+  assert.equal(searchResearcher[0].slug, 'researcher-os');
 });
 
 test('formatPrice and calculateDiscountedPrice handle $0 and promo codes properly', () => {
@@ -128,7 +151,7 @@ test('validateAuthForm and getProTemplatesTotalValue', () => {
   assert.equal(goodAuth.valid, true);
 
   const bundle = getProTemplatesTotalValue();
-  assert.equal(bundle.proCount, 17);
+  assert.equal(bundle.proCount, 19);
   assert.equal(bundle.allAccessPrice, 99);
   assert.ok(bundle.individualTotal > 99);
 });
@@ -156,9 +179,9 @@ test('testimonials include 4 attributable reviews linked to valid catalog templa
   assert.equal(assetUrls.length, 30);
   assert.equal(new Set(assetUrls).size, 30, 'All 30 BLUSH_ASSETS URLs must be unique');
 
-  // Verify all 4 Apps by Lumina have distinct illustrations
+  // Verify all 4 Apps by Resonance have distinct illustrations
   const appAssets = new Set(APPS.map((a) => a.illustrationUrl));
-  assert.equal(appAssets.size, 4, 'All 4 Apps by Lumina must use distinct illustrations');
+  assert.equal(appAssets.size, 4, 'All 4 Apps by Resonance must use distinct illustrations');
 
   // Verify the first 30 templates use 30 completely unique illustrations and no two adjacent templates share an asset
   const first30Assets = new Set(TEMPLATES.slice(0, 30).map((t) => t.illustrationUrl));
@@ -171,5 +194,4 @@ test('testimonials include 4 attributable reviews linked to valid catalog templa
     );
   }
 });
-
 
