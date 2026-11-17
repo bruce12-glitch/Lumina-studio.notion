@@ -305,6 +305,42 @@ export const TemplateWhatsInsideList: React.FC<TemplateWhatsInsideListProps> = (
           </div>
         )}
 
+        {isTemplatesView && (
+          <div className="divide-y divide-[#F1F5F9]">
+            <div className="px-6 py-4 sm:px-8 bg-[#F8FAFC]/80 flex flex-wrap items-center justify-between gap-2">
+              <h4 className="font-display text-[16px] font-bold text-[#0F172A]">
+                {counts.templatesCount} One-Click Notion Page Templates
+              </h4>
+              <span className="text-[12.5px] font-medium text-[#64748B]">
+                Pre-wired inside your workspace databases
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:gap-px bg-[#F1F5F9]">
+              {spec.readyTemplates.map((tpl, idx) => (
+                <div
+                  key={tpl.id}
+                  data-testid={`${spec.slug}-tpl-item-${tpl.id}`}
+                  className="bg-white px-6 py-4 sm:px-8 sm:py-5 flex items-start gap-3"
+                >
+                  <Check className="w-4 h-4 text-[#1D6EE3] shrink-0 mt-1" />
+                  <div className="space-y-1">
+                    <div className="flex flex-wrap items-baseline gap-2">
+                      <p className="text-[15px] font-bold text-[#0F172A]">
+                        {String(idx + 1).padStart(2, '0')}. {tpl.title}
+                      </p>
+                      <span className="text-[12px] text-[#64748B]">
+                        · {tpl.triggerContext}
+                      </span>
+                    </div>
+                    <p className="text-[13.5px] text-[#52504A] leading-[1.5]">
+                      {tpl.contains}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
