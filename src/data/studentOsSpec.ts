@@ -339,6 +339,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Study Sessions', 'Campus & Internships'],
       includedSubTemplates: ['Daily Wellness Check-In'],
     },
+    {
+      id: 'student-finances',
+      number: '10',
+      shortLabel: 'Budget & Aid',
+      title: 'Student Budget & Scholarships',
+      category: 'Life & System',
+      summary:
+        'Monitor monthly allowance caps, textbooks, campus spending, and scholarship deadlines.',
+      whatItContains: [
+        'Monthly Budget Health — Auto-tracks income, spent, and savings rate.',
+        'Transaction Log — Tag spending across dining, books, and transit.',
+        'Scholarship Tracker — Essay status, award size, and due dates.',
+      ],
+      includedViews: [
+        {
+          name: 'Monthly Budgets',
+          layout: 'Gallery',
+          description: 'Budget cap, spent, and remaining balance.',
+        },
+        {
+          name: 'Scholarships Board',
+          layout: 'Board',
+          description: 'Applications grouped by submission status.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Monthly remaining budget & savings %',
+        'Scholarship deadline countdown',
+      ],
+      connectedDatabases: ['Student Expenses', 'Scholarships & Aid'],
+      includedSubTemplates: ['Scholarship Essay Sheet'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
