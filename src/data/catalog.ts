@@ -147,6 +147,26 @@ const RAW_TEMPLATES: Array<{
 ];
 
 function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean): string[] {
+  if (name === 'Student OS') {
+    return [
+      'Command Hub + 10 study, recall & campus modules',
+      '12 linked Notion databases (Courses, Tasks, Notes, Flashcards, Exams, GPA)',
+      'Automated Spaced Repetition (1d/3d/7d/21d) & live 4.0 GPA math',
+      '8 one-click templates (Cornell notes, lab reports, exam sprints)',
+      'Lifetime updates + Private Circle community invite',
+    ];
+  }
+
+  if (name === 'Researcher OS') {
+    return [
+      'Research Hub + 12 synthesis, lab & publishing modules',
+      '14 linked databases (Literature, Zettels, Runs, Datasets, Manuscripts)',
+      'IMRaD draft tracker, CFP deadlines & Peer Review rebuttal matrix',
+      '8 one-click academic templates (Paper sheets, run logs, Grant Aims)',
+      'Lifetime updates + Private Circle community invite',
+    ];
+  }
+
   const base: Record<TemplateCategory, string[]> = {
     'Personal Productivity': [
       `Pre-configured ${name} master database with Today, Upcoming, and Archive views`,
@@ -287,6 +307,8 @@ function resolveTemplateTint(slug: string, _category: TemplateCategory, idx: num
   if (slug === 'finance-tracker') return '#F2F6FB';
   if (slug === 'habit-tracker') return '#F2F7F4';
   if (slug === 'freelance-os') return '#F5F4F8';
+  if (slug === 'student-os') return '#F2F6FB';
+  if (slug === 'researcher-os') return '#F5F4F8';
   if (slug === 'content-os') return '#F2F6FB';
   return ALL_CARD_TINTS[idx % ALL_CARD_TINTS.length];
 }
