@@ -78,6 +78,43 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Research Projects', 'Literature Papers', 'Experiments', 'Manuscripts'],
       includedSubTemplates: ['Daily Lab Notebook', 'Friday Synthesis Ritual'],
     },
+    {
+      id: 'literature-matrix',
+      number: '02',
+      shortLabel: 'Literature Matrix',
+      title: 'Literature Review & Synthesis Matrix',
+      category: 'Command & Synthesis',
+      summary:
+        'Structured matrix comparing methodology, cohort/data, key empirical findings, limitations, and gaps.',
+      whatItContains: [
+        'Side-by-Side Matrix — Compare methodology, N, findings, and limitations across 50+ papers.',
+        'BibTeX & DOI Vault — Store citation keys, venue year, and PDF links.',
+        'Research Gap Tagging — Flag open questions to seed future studies.',
+      ],
+      includedViews: [
+        {
+          name: 'Synthesis Matrix Table',
+          layout: 'Table',
+          description: 'Compare methods, findings & limitations.',
+        },
+        {
+          name: 'By Research Question',
+          layout: 'Board',
+          description: 'Group citations under thesis sub-questions.',
+        },
+        {
+          name: 'Seminal Anchors',
+          layout: 'Gallery',
+          description: 'Pin foundational papers cleanly.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Citation Readiness status',
+        'Gap Priority scoring',
+      ],
+      connectedDatabases: ['Literature Papers', 'Atomic Zettel Notes', 'Hypotheses'],
+      includedSubTemplates: ['Paper Extraction Sheet'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
