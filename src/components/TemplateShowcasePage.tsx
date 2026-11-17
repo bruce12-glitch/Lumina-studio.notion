@@ -1235,7 +1235,10 @@ export const TemplateShowcasePage: React.FC<{
   const [selectedModuleIndex, setSelectedModuleIndex] = useState<number>(0);
   const [whatsInsideFilter, setWhatsInsideFilter] =
     useState<WhatsInsideFilter>('All');
-
+  const isFlagshipOs =
+    template.slug === 'freelance-os' ||
+    template.slug === 'student-os' ||
+    template.slug === 'researcher-os';
 
   const related = TEMPLATES.filter(
     (t) => t.category === template.category && t.slug !== template.slug
@@ -2322,7 +2325,11 @@ export const TemplateShowcasePage: React.FC<{
       {/* =====================================================================
           4. WHAT'S INCLUDED & INSTANT DUPLICATION SUMMARY CARD
           ===================================================================== */}
-      <section className="py-12 sm:py-16 max-w-[960px] mx-auto px-4 sm:px-6">
+      <section
+        className={`py-12 sm:py-16 ${
+          isFlagshipOs ? 'max-w-[1200px]' : 'max-w-[960px]'
+        } mx-auto px-4 sm:px-6`}
+      >
         <div className="rounded-[24px] bg-[#F8FAFC] border border-[#E2E8F0] p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFF6FF] text-[#1D6EE3] text-[12px] font-semibold">
@@ -2407,7 +2414,11 @@ export const TemplateShowcasePage: React.FC<{
           5. RELATED TEMPLATES IN THE SAME CATEGORY
           ===================================================================== */}
       {related.length > 0 && (
-        <section className="pt-8 max-w-[960px] mx-auto px-4 sm:px-6 border-t border-[#E2E8F0]">
+        <section
+          className={`pt-8 ${
+            isFlagshipOs ? 'max-w-[1200px]' : 'max-w-[960px]'
+          } mx-auto px-4 sm:px-6 border-t border-[#E2E8F0]`}
+        >
           <div className="flex items-center justify-between mb-8 pt-8">
             <div>
               <h2 className="text-[24px] font-bold tracking-[-0.02em] text-[#0F172A]">
