@@ -18,9 +18,14 @@ import { CheckoutTarget } from './CheckoutModal';
 import { TemplateCard } from './Chrome';
 import { BlushAssetImage } from './CoversAndIllustrations';
 import { FreelanceOsGallery } from './FreelanceOsGallery';
-import { StudentOsShowcase } from './StudentOsShowcase';
-import { ResearcherOsShowcase } from './ResearcherOsShowcase';
-import { WhatsInsideFilter } from './TemplateWhatsInsideList';
+import {
+  StudentOsShowcase,
+  StudentStudioFilterId,
+} from './StudentOsShowcase';
+import {
+  ResearcherOsShowcase,
+  ResearcherStudioFilterId,
+} from './ResearcherOsShowcase';
 import freelancerMascotHeroImg from '../assets/images/freelancer_mascot_hero_1794923265472.jpg';
 import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
 import studentOsMascotHeroImg from '../assets/images/student_os_mascot_hero_1794933584495.jpg';
@@ -1233,8 +1238,10 @@ export const TemplateShowcasePage: React.FC<{
   const showcase = getTemplateShowcaseData(template);
   const isOwned = purchasedSlugs.has(template.slug);
   const [selectedModuleIndex, setSelectedModuleIndex] = useState<number>(0);
-  const [whatsInsideFilter, setWhatsInsideFilter] =
-    useState<WhatsInsideFilter>('All');
+  const [studentViewFilter, setStudentViewFilter] =
+    useState<StudentStudioFilterId>('all');
+  const [researcherViewFilter, setResearcherViewFilter] =
+    useState<ResearcherStudioFilterId>('all');
   const isFlagshipOs =
     template.slug === 'freelance-os' ||
     template.slug === 'student-os' ||
@@ -1272,30 +1279,30 @@ export const TemplateShowcasePage: React.FC<{
   const handleSelectCloserLookModule = (index: number) => {
     setSelectedModuleIndex(index);
     if (template.slug === 'student-os') {
-      const mapping: WhatsInsideFilter[] = [
-        'Core Hub',
-        'Courses & Notes',
-        'Core Hub',
-        'Recall & Exams',
-        'Recall & Exams',
-        '__databases__',
+      const mapping: StudentStudioFilterId[] = [
+        'hub-career',
+        'toolkit-wellness',
+        'hub-career',
+        'toolkit-wellness',
+        'toolkit-wellness',
+        'all',
       ];
-      setWhatsInsideFilter(mapping[index] || 'All');
+      setStudentViewFilter(mapping[index] || 'all');
       document
-        .getElementById('template-whats-inside')
+        .getElementById('student-os-studio-views')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (template.slug === 'researcher-os') {
-      const mapping: WhatsInsideFilter[] = [
-        'Command & Synthesis',
-        'Command & Synthesis',
-        'Command & Synthesis',
-        'Lab & Experiments',
-        'Publishing & Grants',
-        '__databases__',
+      const mapping: ResearcherStudioFilterId[] = [
+        'synthesis',
+        'synthesis',
+        'synthesis',
+        'lab-grants',
+        'lab-grants',
+        'all',
       ];
-      setWhatsInsideFilter(mapping[index] || 'All');
+      setResearcherViewFilter(mapping[index] || 'all');
       document
-        .getElementById('template-whats-inside')
+        .getElementById('researcher-os-studio-views')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
@@ -1891,8 +1898,8 @@ export const TemplateShowcasePage: React.FC<{
           className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
           <StudentOsShowcase
-            activeFilter={whatsInsideFilter}
-            onFilterChange={setWhatsInsideFilter}
+            activeViewFilter={studentViewFilter}
+            onViewFilterChange={setStudentViewFilter}
           />
         </section>
       ) : template.slug === 'researcher-os' ? (
@@ -1901,8 +1908,8 @@ export const TemplateShowcasePage: React.FC<{
           className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
           <ResearcherOsShowcase
-            activeFilter={whatsInsideFilter}
-            onFilterChange={setWhatsInsideFilter}
+            activeViewFilter={researcherViewFilter}
+            onViewFilterChange={setResearcherViewFilter}
           />
         </section>
       ) : (
