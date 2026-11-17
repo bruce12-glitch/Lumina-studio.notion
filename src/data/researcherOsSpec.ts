@@ -312,6 +312,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Peer Reviews & Rebuttals', 'Manuscripts', 'Experiments'],
       includedSubTemplates: ['Reviewer Response Matrix'],
     },
+    {
+      id: 'grants-funding',
+      number: '09',
+      shortLabel: 'Grants & Funding',
+      title: 'Grants, RFPs & Lab Budget',
+      category: 'Publishing & Grants',
+      summary:
+        'Manage fellowship deadlines, specific aims, award ceilings, and equipment/compute spend.',
+      whatItContains: [
+        'Grant Opportunity Pipeline — Track NIH, NSF, ERC, and industry fellowship RFPs.',
+        'Post-Award Budget — Monitor cloud compute, travel grants, and stipends.',
+        'Reporting Alerts — Never miss mid-grant progress report cutoffs.',
+      ],
+      includedViews: [
+        {
+          name: 'Funding Pipeline Board',
+          layout: 'Board',
+          description: 'Scoped -> Drafting -> Under Review -> Funded.',
+        },
+        {
+          name: 'Grant Deadlines Calendar',
+          layout: 'Calendar',
+          description: 'Sponsor due dates & sign-off windows.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Remaining award budget balance',
+        'Internal sign-off lead time alerts',
+      ],
+      connectedDatabases: ['Grants & RFPs', 'Research Projects', 'Collaborators'],
+      includedSubTemplates: ['Grant Specific Aims 1-Pager'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
