@@ -20,6 +20,7 @@ import { BlushAssetImage } from './CoversAndIllustrations';
 import { FreelanceOsGallery } from './FreelanceOsGallery';
 import { StudentOsShowcase } from './StudentOsShowcase';
 import { ResearcherOsShowcase } from './ResearcherOsShowcase';
+import { WhatsInsideFilter } from './TemplateWhatsInsideList';
 import freelancerMascotHeroImg from '../assets/images/freelancer_mascot_hero_1794923265472.jpg';
 import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
 import studentOsMascotHeroImg from '../assets/images/student_os_mascot_hero_1794933584495.jpg';
@@ -1232,6 +1233,8 @@ export const TemplateShowcasePage: React.FC<{
   const showcase = getTemplateShowcaseData(template);
   const isOwned = purchasedSlugs.has(template.slug);
   const [selectedModuleIndex, setSelectedModuleIndex] = useState<number>(0);
+  const [whatsInsideFilter, setWhatsInsideFilter] =
+    useState<WhatsInsideFilter>('All');
 
   const related = TEMPLATES.filter(
     (t) => t.category === template.category && t.slug !== template.slug
@@ -1852,14 +1855,20 @@ export const TemplateShowcasePage: React.FC<{
           data-testid="template-full-specification"
           className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
-          <StudentOsShowcase />
+          <StudentOsShowcase
+            activeFilter={whatsInsideFilter}
+            onFilterChange={setWhatsInsideFilter}
+          />
         </section>
       ) : template.slug === 'researcher-os' ? (
         <section
           data-testid="template-full-specification"
           className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
-          <ResearcherOsShowcase />
+          <ResearcherOsShowcase
+            activeFilter={whatsInsideFilter}
+            onFilterChange={setWhatsInsideFilter}
+          />
         </section>
       ) : (
       <section
