@@ -1843,6 +1843,20 @@ export const TemplateShowcasePage: React.FC<{
         >
           <FreelanceOsGallery variant="detail" />
         </section>
+      ) : template.slug === 'student-os' ? (
+        <section
+          data-testid="template-full-specification"
+          className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
+        >
+          <StudentOsShowcase />
+        </section>
+      ) : template.slug === 'researcher-os' ? (
+        <section
+          data-testid="template-full-specification"
+          className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
+        >
+          <ResearcherOsShowcase />
+        </section>
       ) : (
       <section
         data-testid="template-cascading-pages"
