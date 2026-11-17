@@ -5,13 +5,14 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  Expand,
   X,
 } from 'lucide-react';
+import { FreelanceOsWorkspaceTabs } from './FreelanceOsWorkspaceTabs';
 import freelanceOsHubImg from '../assets/images/freelance_os_hub_hd_1794922765448.jpg';
 import freelanceOsClientsImg from '../assets/images/freelance_os_clients_hd_1794922767161.jpg';
 import freelanceOsGrowthImg from '../assets/images/freelance_os_growth_hd_1794922765086.jpg';
 import freelanceOsFinancesImg from '../assets/images/freelance_os_finances_hd_1794922767056.jpg';
+import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
 
 export interface FreelanceOsIncludedModule {
   title: string;
@@ -180,119 +181,162 @@ export const FreelanceOsGallery: React.FC<{
   }, [lightboxIndex]);
 
   return (
-    <div data-testid="freelance-os-gallery" className="space-y-8">
-      {/* Header Row */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
-        <div className="space-y-2.5 max-w-[700px]">
+    <div data-testid="freelance-os-gallery" className="space-y-10">
+      {/* Header Row (Includes Freelancer Mascot on Home Hero Section) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        <div
+          className={`${
+            variant === 'home' ? 'lg:col-span-8' : 'lg:col-span-12'
+          } space-y-3`}
+        >
           <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#1D6EE3]">
             {variant === 'home'
               ? 'Featured System · Freelancer Business OS'
-              : 'Inside Freelancer Business OS · Full Workspace Walkthrough'}
+              : 'Inside Freelancer Business OS · Interactive Workspace'}
           </p>
           <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#0F172A] text-balance">
             {variant === 'home'
               ? 'Run Your Entire Freelance Studio in Notion'
               : '1 Command Hub, 11 Modules, 18 Interconnected Databases'}
           </h2>
-          <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6]">
-            Freelancer OS includes a main command-center hub, 11 functional modules, 18 interconnected databases, and ready-to-use templates.
+          <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
+            Freelancer OS includes a main command-center hub, 11 functional modules, 18 interconnected databases, and ready-to-use templates. Explore every section live below.
           </p>
+
+          {variant === 'home' && onInspectTemplate && (
+            <div className="pt-2">
+              <motion.button
+                type="button"
+                whileHover={{ y: -2, scale: 1.015 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                onClick={onInspectTemplate}
+                className="btn-motion-primary h-11 px-5 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
+              >
+                <span>Explore Freelance OS ($79)</span>
+                <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+              </motion.button>
+            </div>
+          )}
         </div>
 
-        {variant === 'home' && onInspectTemplate && (
-          <motion.button
-            type="button"
-            whileHover={{ y: -2, scale: 1.015 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-            onClick={onInspectTemplate}
-            className="btn-motion-primary h-11 px-5 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
-          >
-            <span>Explore Freelance OS ($79)</span>
-            <ArrowRight className="w-4 h-4 btn-arrow-slide" />
-          </motion.button>
+        {variant === 'home' && (
+          <div className="lg:col-span-4 flex justify-start lg:justify-end">
+            <div
+              data-testid="home-freelance-mascot"
+              onClick={onInspectTemplate}
+              role={onInspectTemplate ? 'button' : undefined}
+              tabIndex={onInspectTemplate ? 0 : undefined}
+              onKeyDown={(e) => {
+                if (onInspectTemplate && (e.key === 'Enter' || e.key === ' ')) {
+                  e.preventDefault();
+                  onInspectTemplate();
+                }
+              }}
+              className="w-full max-w-[320px] rounded-[20px] bg-gradient-to-br from-[#EFF6FF] via-[#F8FAFC] to-[#FFFFFF] border border-[#DCE6F3] p-4 shadow-[0_12px_30px_-14px_rgba(29,110,227,0.16)] flex items-center justify-center cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+            >
+              <img
+                src={freelancerMascotCardImg}
+                alt="Freelancer Business OS studio mascot"
+                referrerPolicy="no-referrer"
+                className="w-full h-44 sm:h-48 object-contain mix-blend-multiply"
+              />
+            </div>
+          </div>
         )}
       </div>
 
-      {/* Interactive Filter Tabs */}
-      <div
-        role="tablist"
-        aria-label="Freelancer OS Workspace Modules"
-        className="flex flex-wrap items-center gap-2"
-      >
-        <button
-          type="button"
-          role="tab"
-          aria-selected={filterId === 'all'}
-          data-testid="freelance-os-tab-all"
-          onClick={() => setFilterId('all')}
-          className={`px-3.5 py-2 rounded-[10px] text-[13px] font-semibold border transition-all whitespace-nowrap shrink-0 cursor-pointer ${
-            filterId === 'all'
-              ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
-              : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
-          }`}
+      {/* Interactive 13-Tab Notion Workspace Explorer */}
+      <FreelanceOsWorkspaceTabs />
+
+      {/* High-Resolution Studio Previews Section */}
+      <div className="space-y-6 pt-4 border-t border-[#E2E8F0]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="space-y-1">
+            <h3 className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] text-[#0F172A]">
+              Studio Workspace Views
+            </h3>
+            <p className="text-[14.5px] text-[#64748B]">
+              Click any preview below to inspect the full-screen layout.
+            </p>
+          </div>
+        </div>
+
+        {/* Interactive Filter Tabs for Studio Previews */}
+        <div
+          role="tablist"
+          aria-label="Freelancer OS Studio Previews"
+          className="flex flex-wrap items-center gap-2"
         >
-          All 4 Views (13 Systems)
-        </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={filterId === 'all'}
+            data-testid="freelance-os-tab-all"
+            onClick={() => setFilterId('all')}
+            className={`px-3.5 py-2 rounded-[10px] text-[13px] font-semibold border transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+              filterId === 'all'
+                ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
+                : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
+            }`}
+          >
+            All 4 Views (13 Systems)
+          </button>
 
-        {FREELANCE_OS_SLIDES.map((slide) => {
-          const isActive = filterId === slide.id;
-          return (
-            <button
-              key={slide.id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              data-testid={`freelance-os-tab-${slide.id}`}
-              onClick={() => setFilterId(slide.id)}
-              className={`px-3.5 py-2 rounded-[10px] text-[13px] font-semibold border transition-all whitespace-nowrap shrink-0 cursor-pointer ${
-                isActive
-                  ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
-                  : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
-              }`}
-            >
-              {slide.label}
-            </button>
-          );
-        })}
-      </div>
+          {FREELANCE_OS_SLIDES.map((slide) => {
+            const isActive = filterId === slide.id;
+            return (
+              <button
+                key={slide.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                data-testid={`freelance-os-tab-${slide.id}`}
+                onClick={() => setFilterId(slide.id)}
+                className={`px-3.5 py-2 rounded-[10px] text-[13px] font-semibold border transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                  isActive
+                    ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
+                    : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
+                }`}
+              >
+                {slide.label}
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Vertically Stacked HD Showcase Cards (PDF Pages 6–13 Rhythm) */}
-      <div
-        data-testid="freelance-os-all-images"
-        className="flex flex-col gap-8"
-      >
-        {visibleSlides.map((slide) => {
-          const slideIndex = FREELANCE_OS_SLIDES.findIndex(
-            (item) => item.id === slide.id
-          );
+        {/* Vertically Stacked Studio Cards */}
+        <div
+          data-testid="freelance-os-all-images"
+          className="flex flex-col gap-8"
+        >
+          {visibleSlides.map((slide) => {
+            const slideIndex = FREELANCE_OS_SLIDES.findIndex(
+              (item) => item.id === slide.id
+            );
 
-          return (
-            <article
-              key={slide.id}
-              data-testid={`freelance-os-card-${slide.id}`}
-              className="rounded-[24px] bg-white border border-[#E2E8F0] shadow-[0_12px_36px_-16px_rgba(15,23,42,0.08)] overflow-hidden"
-            >
-              {/* Crisp 16:9 Enhanced HD Preview Image */}
-              <div className="bg-[#F8FAFC] p-3 sm:p-5 border-b border-[#E2E8F0]">
-                <button
-                  type="button"
-                  onClick={() => setLightboxIndex(slideIndex)}
-                  aria-label={`Expand ${slide.title} full-resolution preview`}
-                  className="group relative w-full rounded-[16px] overflow-hidden border border-[#E2E8F0] bg-white aspect-[16/9] cursor-zoom-in block text-left"
-                >
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="w-full h-full object-cover showcase-hd-image transition-transform duration-500 group-hover:scale-[1.012]"
-                  />
-
-                  <span className="absolute right-3.5 bottom-3.5 px-3.5 py-1.5 rounded-full bg-[#0F172A]/85 backdrop-blur-md text-white text-[12px] font-medium inline-flex items-center gap-1.5 shadow-sm group-hover:bg-[#1D6EE3] transition-colors">
-                    <Expand className="w-3.5 h-3.5" />
-                    <span>Full-Res HD View</span>
-                  </span>
-                </button>
-              </div>
+            return (
+              <article
+                key={slide.id}
+                data-testid={`freelance-os-card-${slide.id}`}
+                className="rounded-[24px] bg-white border border-[#E2E8F0] shadow-[0_12px_36px_-16px_rgba(15,23,42,0.08)] overflow-hidden"
+              >
+                {/* Clean Edge-to-Edge Studio Preview Image (No Overlay Badge/Icon) */}
+                <div className="bg-[#F8FAFC] p-3 sm:p-5 border-b border-[#E2E8F0]">
+                  <button
+                    type="button"
+                    onClick={() => setLightboxIndex(slideIndex)}
+                    aria-label={`Inspect ${slide.title} workspace preview`}
+                    className="group relative w-full rounded-[16px] overflow-hidden border border-[#E2E8F0] bg-white aspect-[16/9] cursor-zoom-in block text-left"
+                  >
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover showcase-hd-image transition-transform duration-500 group-hover:scale-[1.012]"
+                    />
+                  </button>
+                </div>
 
               {/* Generous Unclipped Text & Vertical Module Breakdown */}
               <div className="p-6 sm:p-8 space-y-6">
@@ -335,6 +379,7 @@ export const FreelanceOsGallery: React.FC<{
             </article>
           );
         })}
+        </div>
       </div>
 
       {/* Full-Resolution Lightbox Modal */}
