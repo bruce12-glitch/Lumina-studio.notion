@@ -147,6 +147,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Assignments & Deliverables', 'Courses'],
       includedSubTemplates: ['Essay Outline Scaffold', 'Lab Report Sheet'],
     },
+    {
+      id: 'lecture-notes',
+      number: '04',
+      shortLabel: 'Lecture Notes',
+      title: 'Cornell Lecture Notes',
+      category: 'Courses & Notes',
+      summary:
+        'Structured Cornell note-taking linked directly to syllabus topics and recall cards.',
+      whatItContains: [
+        'Cornell 2-Column Layout — Cue questions, class notes, and takeaway summary.',
+        'Pass Status Tracker — Tracks First Pass, Consolidated, and Quiz Ready.',
+        'Direct Card Linking — Promote key definitions straight to Flashcards.',
+      ],
+      includedViews: [
+        {
+          name: 'Needs First Pass',
+          layout: 'Table',
+          description: 'Fresh notes awaiting cleanup & summary.',
+        },
+        {
+          name: 'Notes Library by Course',
+          layout: 'Gallery',
+          description: 'Searchable archive by semester topic.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Review Pass status property',
+        'Two-way Course & Flashcard relations',
+      ],
+      connectedDatabases: ['Lecture Notes', 'Courses', 'Flashcards'],
+      includedSubTemplates: ['Cornell Lecture Sheet'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
