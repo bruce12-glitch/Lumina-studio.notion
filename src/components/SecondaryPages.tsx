@@ -87,13 +87,13 @@ export const AllAccessPage: React.FC<{
               transition={{ type: 'spring', stiffness: 420, damping: 26 }}
               onClick={() =>
                 onOpenCheckout({
-                  name: 'All Access Bundle (All 17 PRO Templates)',
+                  name: `All Access Bundle (All ${stats.proCount} PRO Templates)`,
                   slug: 'all-access',
                   price: ALL_ACCESS_PRICE,
                   compareAt: stats.individualTotal,
                   pro: true,
                   whatsInside: [
-                    'All 17 PRO Notion templates including Second Brain, Finance Tracker, Freelance OS, and Content OS',
+                    `All ${stats.proCount} PRO Notion templates including Second Brain, Finance Tracker, Freelance OS, Student OS, and Researcher OS`,
                     'Instant access to all future PRO releases at no extra cost',
                     'Private Circle community membership & priority support',
                   ],
