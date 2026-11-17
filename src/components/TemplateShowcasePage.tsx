@@ -1254,9 +1254,9 @@ export const TemplateShowcasePage: React.FC<{
           </nav>
 
           {template.slug === 'freelance-os' ? (
-            /* Balanced 2-Column Hero Split Featuring Freelancer Mascot on the Right */
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-              <div className="lg:col-span-6 space-y-6">
+            /* Balanced 2-Column Hero Split Featuring Freelancer Mascot on the Right Side */
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-center">
+              <div className="md:col-span-6 space-y-5 lg:space-y-6">
                 <div>
                   <div
                     data-testid="made-for-notion-badge"
@@ -1303,27 +1303,27 @@ export const TemplateShowcasePage: React.FC<{
                   </div>
                 </div>
 
-                <h1 className="font-display text-[clamp(34px,4.2vw,52px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
+                <h1 className="font-display text-[clamp(30px,3.8vw,50px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
                   {showcase.heroHeadline}
                 </h1>
 
-                <p className="text-[16.5px] sm:text-[18px] leading-[1.6] text-[#64748B]">
+                <p className="text-[15.5px] sm:text-[17px] leading-[1.6] text-[#64748B]">
                   {showcase.heroSubheadline}
                 </p>
 
-                <div className="flex flex-wrap items-baseline gap-3 pt-1">
-                  <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
+                <div className="flex flex-wrap items-baseline gap-3 pt-0.5">
+                  <span className="text-[20px] sm:text-[22px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
                     Premium from {formatPrice(template.price)}
                   </span>
-                  <span className="text-[18px] font-medium text-[#64748B] line-through tabular-nums">
+                  <span className="text-[17px] font-medium text-[#64748B] line-through tabular-nums">
                     {formatPrice(displayCompareAt)}
                   </span>
-                  <span className="text-[14px] text-[#64748B]">
+                  <span className="text-[13.5px] text-[#64748B]">
                     One-time purchase
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3.5 pt-1">
+                <div className="flex flex-wrap items-center gap-3 pt-1">
                   <motion.button
                     type="button"
                     data-testid="template-primary-cta"
@@ -1331,7 +1331,7 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleOpenBuy}
-                    className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors"
+                    className="h-11 sm:h-12 px-6 sm:px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[14.5px] sm:text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors whitespace-nowrap shrink-0"
                   >
                     <span>
                       {isOwned
@@ -1348,27 +1348,27 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleScrollToCloserLook}
-                    className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors"
+                    className="h-11 sm:h-12 px-5 sm:px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[14.5px] sm:text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors whitespace-nowrap shrink-0"
                   >
                     <span>Preview what&apos;s inside</span>
                   </motion.button>
                 </div>
 
-                <div className="space-y-2 pt-1">
-                  <div className="flex items-center gap-2 text-[14px] font-medium text-[#64748B]">
+                <div className="space-y-1.5 pt-1">
+                  <div className="flex items-center gap-2 text-[13.5px] font-medium text-[#64748B]">
                     <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
                     <span>
                       {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
                     </span>
                   </div>
-                  <p className="text-[13.5px] text-[#64748B]">
+                  <p className="text-[13px] text-[#64748B]">
                     1 command hub, 11 functional modules, and 18 interconnected databases.
                   </p>
                 </div>
               </div>
 
               {/* Right Column: Prominent Freelancer Studio Mascot Stage */}
-              <div className="lg:col-span-6">
+              <div className="md:col-span-6">
                 <div
                   data-testid="template-device-mockup"
                   onClick={handleScrollToCloserLook}
@@ -1380,17 +1380,17 @@ export const TemplateShowcasePage: React.FC<{
                       handleScrollToCloserLook();
                     }
                   }}
-                  className="group rounded-[24px] bg-gradient-to-br from-[#EFF6FF] via-[#F8FAFC] to-[#FFFFFF] border border-[#DCE6F3] p-5 sm:p-7 shadow-[0_20px_50px_-18px_rgba(29,110,227,0.16)] relative overflow-hidden cursor-pointer"
+                  className="group rounded-[24px] bg-gradient-to-br from-[#EFF6FF] via-[#F8FAFC] to-[#FFFFFF] border border-[#DCE6F3] p-4 sm:p-6 shadow-[0_20px_50px_-18px_rgba(29,110,227,0.16)] relative overflow-hidden cursor-pointer"
                 >
-                  <div className="rounded-[18px] bg-white/75 border border-white/80 p-3 sm:p-4 h-[300px] sm:h-[380px] flex items-center justify-center overflow-hidden">
+                  <div className="rounded-[18px] bg-white/80 border border-white/90 p-2 sm:p-3 h-[280px] sm:h-[340px] lg:h-[380px] flex items-center justify-center overflow-hidden">
                     <img
                       src={freelancerMascotHeroImg}
                       alt="Freelance OS studio mascot working with calendar, deliverables, and invoices"
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain mix-blend-multiply scale-[1.06] transition-transform duration-500 group-hover:scale-[1.1]"
+                      className="w-full h-full object-contain mix-blend-multiply scale-[1.05] transition-transform duration-500 group-hover:scale-[1.09]"
                     />
                   </div>
-                  <div className="pt-4 mt-2 border-t border-[#DCE6F3]/80 px-1 flex flex-wrap items-center justify-between gap-2 text-[13px] text-[#475569]">
+                  <div className="pt-3.5 mt-2 border-t border-[#DCE6F3]/80 px-1 flex flex-wrap items-center justify-between gap-2 text-[12.5px] text-[#475569]">
                     <span className="font-semibold text-[#0F172A]">
                       Freelancer Business OS · Studio Mascot Edition
                     </span>
@@ -1733,14 +1733,16 @@ export const TemplateShowcasePage: React.FC<{
       </section>
 
       {/* =====================================================================
-          2. "TAKE A CLOSER LOOK — Everything has a place." (PDF Page 2 Stacked List)
+          2. "TAKE A CLOSER LOOK — Everything has a place." (Horizontal Row Grid)
           ===================================================================== */}
       <section
         id="template-closer-look"
         data-testid="template-closer-look"
-        className="pt-16 sm:pt-24 pb-12 sm:pb-16 max-w-[960px] mx-auto px-4 sm:px-6"
+        className={`pt-14 sm:pt-20 pb-10 sm:pb-14 ${
+          template.slug === 'freelance-os' ? 'max-w-[1100px]' : 'max-w-[960px]'
+        } mx-auto px-4 sm:px-6`}
       >
-        <div className="space-y-3 max-w-[680px] mb-10">
+        <div className="space-y-3 max-w-[680px] mb-8 sm:mb-10">
           <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#64748B]">
             TAKE A CLOSER LOOK
           </p>
@@ -1752,10 +1754,10 @@ export const TemplateShowcasePage: React.FC<{
           </p>
         </div>
 
-        {/* Full-Width Single-Column Stacked Rows (Matching PDF Page 2) */}
+        {/* Horizontal 3-Column / 2-Column Grid */}
         <div
           data-testid="closer-look-grid"
-          className="grid grid-cols-1 gap-3.5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4"
         >
           {showcase.closerLookModules.map((moduleTitle, index) => {
             const isSelected = selectedModuleIndex === index;
@@ -1763,17 +1765,17 @@ export const TemplateShowcasePage: React.FC<{
               <motion.button
                 key={moduleTitle}
                 type="button"
-                whileHover={{ y: -1.5 }}
-                whileTap={{ scale: 0.995 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.99 }}
                 onClick={() => setSelectedModuleIndex(index)}
-                className={`w-full text-left rounded-[14px] bg-white border px-6 py-4.5 sm:py-5 flex items-center gap-3.5 transition-all duration-200 cursor-pointer ${
+                className={`w-full h-full text-left rounded-[14px] bg-white border px-5 py-4 flex items-center gap-3 transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? 'border-[#1D6EE3] shadow-[0_10px_24px_-10px_rgba(29,110,227,0.18)]'
                     : 'border-[#E2E8F0] hover:border-[#1D6EE3]/45 shadow-[0_2px_8px_-3px_rgba(15,23,42,0.04)]'
                 }`}
               >
                 <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
-                <span className="text-[16px] sm:text-[17px] font-semibold tracking-[-0.015em] text-[#0F172A]">
+                <span className="text-[15px] sm:text-[15.5px] font-semibold tracking-[-0.015em] text-[#0F172A] leading-snug">
                   {moduleTitle}
                 </span>
               </motion.button>
@@ -1788,7 +1790,7 @@ export const TemplateShowcasePage: React.FC<{
       {template.slug === 'freelance-os' ? (
         <section
           data-testid="template-cascading-pages"
-          className="py-10 sm:py-14 max-w-[960px] mx-auto px-4 sm:px-6"
+          className="py-10 sm:py-14 max-w-[1100px] mx-auto px-4 sm:px-6"
         >
           <FreelanceOsGallery variant="detail" />
         </section>
