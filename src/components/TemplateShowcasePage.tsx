@@ -1788,7 +1788,11 @@ export const TemplateShowcasePage: React.FC<{
         id="template-closer-look"
         data-testid="template-closer-look"
         className={`pt-14 sm:pt-20 pb-10 sm:pb-14 ${
-          template.slug === 'freelance-os' ? 'max-w-[1200px]' : 'max-w-[960px]'
+          template.slug === 'freelance-os' ||
+          template.slug === 'student-os' ||
+          template.slug === 'researcher-os'
+            ? 'max-w-[1200px]'
+            : 'max-w-[960px]'
         } mx-auto px-4 sm:px-6`}
       >
         <div className="space-y-3 max-w-[680px] mb-8 sm:mb-10">
@@ -1834,7 +1838,7 @@ export const TemplateShowcasePage: React.FC<{
       </section>
 
       {/* =====================================================================
-          3. "Master Your Productivity" — FREELANCE OS HD GALLERY OR 3-PAGE CASCADING SHOWCASE
+          3. FREELANCE OS GALLERY, STUDENT/RESEARCHER FULL SPECS, OR CASCADING PREVIEW
           ===================================================================== */}
       {template.slug === 'freelance-os' ? (
         <section
@@ -2323,13 +2327,21 @@ export const TemplateShowcasePage: React.FC<{
                 src={
                   template.slug === 'freelance-os'
                     ? freelancerMascotCardImg
+                    : template.slug === 'student-os'
+                    ? studentOsMascotHeroImg
+                    : template.slug === 'researcher-os'
+                    ? researcherOsMascotHeroImg
                     : template.illustrationUrl
                 }
                 alt={`${template.name} mascot illustration`}
                 disableFloat
                 className="w-full h-full"
                 imgClassName={`max-w-full max-h-full w-auto h-auto object-contain ${
-                  template.slug === 'freelance-os' ? 'scale-[1.08]' : ''
+                  template.slug === 'freelance-os' ||
+                  template.slug === 'student-os' ||
+                  template.slug === 'researcher-os'
+                    ? 'scale-[1.06]'
+                    : ''
                 }`}
               />
             </div>
