@@ -110,6 +110,43 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Courses', 'Assignments', 'Lecture Notes', 'Exams'],
       includedSubTemplates: ['Course Syllabus Setup'],
     },
+    {
+      id: 'assignments-deadlines',
+      number: '03',
+      shortLabel: 'Assignments',
+      title: 'Assignments & Deadlines',
+      category: 'Core Hub',
+      summary:
+        'Track essays, problem sets, group projects, and lab submissions from To-Do to Submitted.',
+      whatItContains: [
+        'Status Workflow Board — Move tasks from Not Started to Submitted.',
+        'Grade Weight Priority — Separates high-weight papers from minor quizzes.',
+        'Overdue Aging Alerts — Highlights late work automatically.',
+      ],
+      includedViews: [
+        {
+          name: 'Urgent 7-Day Queue',
+          layout: 'List',
+          description: 'Tasks due this week grouped by course.',
+        },
+        {
+          name: 'Deliverables Board',
+          layout: 'Board',
+          description: 'Kanban status view across classes.',
+        },
+        {
+          name: 'Submission Calendar',
+          layout: 'Calendar',
+          description: 'Monthly due-date planner.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Days Remaining countdown formula',
+        'Weight Impact % tagging',
+      ],
+      connectedDatabases: ['Assignments & Deliverables', 'Courses'],
+      includedSubTemplates: ['Essay Outline Scaffold', 'Lab Report Sheet'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
