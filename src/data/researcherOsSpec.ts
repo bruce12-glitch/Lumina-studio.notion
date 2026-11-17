@@ -248,6 +248,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Datasets & Baselines', 'Code & Repos', 'Experiments'],
       includedSubTemplates: ['Dataset README Spec'],
     },
+    {
+      id: 'manuscript-pipeline',
+      number: '07',
+      shortLabel: 'Manuscripts',
+      title: 'IMRaD Manuscript Pipeline',
+      category: 'Publishing & Grants',
+      summary:
+        'Manage drafts from Outline to Published with word counts, figures, co-authors, and venues.',
+      whatItContains: [
+        'IMRaD Drafting Scaffold — Track word count limits across Intro, Methods, and Results.',
+        'Figure & Table Tracker — Ensure every vector chart and caption is publication-ready.',
+        'Overleaf & Authorship Sync — Link LaTeX projects and CRediT contributor sign-offs.',
+      ],
+      includedViews: [
+        {
+          name: 'Paper Pipeline Board',
+          layout: 'Board',
+          description: 'Outline -> Drafting -> Internal Review -> Accepted.',
+        },
+        {
+          name: 'Drafting Timeline',
+          layout: 'Timeline',
+          description: 'Co-author review milestones.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Word Limit % budget bar',
+        'Target venue CFP countdown',
+      ],
+      connectedDatabases: ['Manuscripts', 'Target Journals & CFPs', 'Collaborators'],
+      includedSubTemplates: ['IMRaD Manuscript Scaffold'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
