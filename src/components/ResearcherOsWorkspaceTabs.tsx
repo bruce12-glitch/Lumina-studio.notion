@@ -256,6 +256,165 @@ export const ResearcherOsWorkspaceTabs: React.FC = () => {
             </p>
           </div>
 
+          {/* TAB 01: RESEARCH HUB */}
+          {activeTab === 'hub' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                <KpiTile
+                  bg="#EAF3FC"
+                  icon={<FileText className="w-4 h-4 text-[#1D6EE3]" />}
+                  label="Manuscripts"
+                  value="2 active in flight"
+                />
+                <KpiTile
+                  bg="#FBF5E2"
+                  icon={<MessageSquare className="w-4 h-4 text-[#CA8A04]" />}
+                  label="Comments open"
+                  value="3 reviewer items"
+                />
+                <KpiTile
+                  bg="#F3EFFB"
+                  icon={<BookOpen className="w-4 h-4 text-[#7C3AED]" />}
+                  label="Reading queue"
+                  value="12 papers to screen"
+                />
+                <KpiTile
+                  bg="#EDF5EE"
+                  icon={<Layers className="w-4 h-4 text-[#16A34A]" />}
+                  label="Word count progress"
+                  value="4,050 / 7,000 w (58%)"
+                />
+              </div>
+
+              <div className="border-t border-[#EAEAEA] pt-5 grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <div className="lg:col-span-5 rounded-[12px] border border-[#EAEAEA] p-4 space-y-3 bg-[#FBFBFA]">
+                  <h4 className="text-[15px] font-bold text-[#2F2D28]">
+                    Guides & One-Click Templates
+                  </h4>
+                  <ul className="space-y-2 text-[13px] text-[#334155]">
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#1D6EE3]" /><span>Paper Launch Blueprint (IMRaD)</span></li>
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#1D6EE3]" /><span>Weekly Research Reset Checklist</span></li>
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#1D6EE3]" /><span>Atomic Zettel & Literature Matrix Sheets</span></li>
+                    <li className="flex items-center gap-2"><Check className="w-4 h-4 text-[#1D6EE3]" /><span>Grant Specific Aims & Advisor 1:1 Log</span></li>
+                  </ul>
+                </div>
+
+                <div className="lg:col-span-7 rounded-[12px] border border-[#EAEAEA] overflow-hidden">
+                  <div className="px-4 py-2.5 border-b border-[#EAEAEA] bg-[#FAF9F7] flex items-center justify-between text-[13px] font-bold text-[#2F2D28]">
+                    <span>↗ Quick Capture Inbox</span>
+                    <span className="text-[11px] font-medium text-[#64748B]">Triage Queue</span>
+                  </div>
+                  <div className="divide-y divide-[#F1F1EF] text-[13px]">
+                    {[
+                      { item: 'Verify ECE bin count used in calibration baseline', tag: 'Citation to Check', tone: 'bg-[#FBF5E2] text-[#B45309]' },
+                      { item: 'Ablate entropy vs. margin as retrieval trigger', tag: 'Experiment Idea', tone: 'bg-[#F3EFFB] text-[#7C3AED]' },
+                      { item: 'Selective Classification for Deep Neural Networks', tag: 'Paper to Screen', tone: 'bg-[#EAF3FC] text-[#1D6EE3]' },
+                    ].map((row) => (
+                      <div key={row.item} className="px-4 py-2.5 flex items-center justify-between gap-3">
+                        <span className="font-medium text-[#2F2D28] truncate">{row.item}</span>
+                        <span className={`px-2 py-0.5 rounded text-[11px] font-medium shrink-0 ${row.tone}`}>
+                          {row.tag}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 02: ACTIVE MANUSCRIPTS & SECTION TRACKER */}
+          {activeTab === 'manuscripts' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                <KpiTile bg="#EAF3FC" icon={<FileText className="w-4 h-4 text-[#1D6EE3]" />} label="Drafting stage" value="58% · 4,050 / 7,000 w" />
+                <KpiTile bg="#EDF5EE" icon={<Check className="w-4 h-4 text-[#16A34A]" />} label="Sections polished" value="2 of 4 ready" />
+                <KpiTile bg="#FCECEC" icon={<Calendar className="w-4 h-4 text-[#DC2626]" />} label="Target venue" value="ACL 2027 (Feb 15)" />
+                <KpiTile bg="#FBF5E2" icon={<BookOpen className="w-4 h-4 text-[#CA8A04]" />} label="Secondary paper" value="Benchmarking (TACL)" />
+              </div>
+
+              <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
+                <table className="w-full text-left text-[13px] min-w-[580px]">
+                  <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                    <tr>
+                      <th className="py-2.5 px-4 font-medium">Section Tracker</th>
+                      <th className="py-2.5 px-4 font-medium">Status</th>
+                      <th className="py-2.5 px-4 font-medium">Words</th>
+                      <th className="py-2.5 px-4 font-medium">Target Date</th>
+                      <th className="py-2.5 px-4 font-medium text-right">Priority</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#F1F1EF]">
+                    {[
+                      { sec: '1. Abstract & Introduction', status: 'Polished', sTone: 'bg-[#EDF5EE] text-[#15803D]', words: '900 / 1000 w', date: 'Nov 20, 2026', prio: 'P2 · Active', pTone: 'bg-[#FBF5E2] text-[#B45309]' },
+                      { sec: '2. Related Work', status: 'Revising', sTone: 'bg-[#FBF5E2] text-[#B45309]', words: '1350 / 1500 w', date: 'Nov 27, 2026', prio: 'P2 · Active', pTone: 'bg-[#FBF5E2] text-[#B45309]' },
+                      { sec: '3. Methodology', status: 'Drafting', sTone: 'bg-[#EAF3FC] text-[#1D6EE3]', words: '1500 / 2000 w', date: 'Dec 8, 2026', prio: 'P1 · Urgent', pTone: 'bg-[#FCECEC] text-[#DC2626]' },
+                      { sec: '4. Experiments & Results', status: 'Outline', sTone: 'bg-[#F1F1EF] text-[#52504A]', words: '300 / 2500 w', date: 'Dec 22, 2026', prio: 'P1 · Urgent', pTone: 'bg-[#FCECEC] text-[#DC2626]' },
+                    ].map((row) => (
+                      <tr key={row.sec}>
+                        <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">{row.sec}</td>
+                        <td className="py-2.5 px-4"><span className={`px-2 py-0.5 rounded text-[11px] font-medium ${row.sTone}`}>{row.status}</span></td>
+                        <td className="py-2.5 px-4 tabular-nums text-[#475569]">{row.words}</td>
+                        <td className="py-2.5 px-4 text-[#64748B]">{row.date}</td>
+                        <td className="py-2.5 px-4 text-right"><span className={`px-2 py-0.5 rounded text-[11px] font-medium ${row.pTone}`}>{row.prio}</span></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 03: ATOMIC SYNTHESIS VAULT */}
+          {activeTab === 'synthesis' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+              {[
+                {
+                  claim: 'Expected Calibration Error as the calibration yardstick',
+                  type: 'Definition / Framework',
+                  kind: 'Paraphrase',
+                  stage: '● Refined',
+                  tone: 'bg-[#EAF3FC] text-[#1D6EE3]',
+                },
+                {
+                  claim: 'Embedding similarity is not the same as faithfulness',
+                  type: 'Counter-Argument',
+                  kind: 'My Synthesis',
+                  stage: '● Raw Note',
+                  tone: 'bg-[#FBF5E2] text-[#B45309]',
+                },
+                {
+                  claim: 'Retrieval is applied to every input, even when unnecessary',
+                  type: 'Limitation / Gap',
+                  kind: 'Critical Critique',
+                  stage: '● Refined',
+                  tone: 'bg-[#FCECEC] text-[#DC2626]',
+                },
+                {
+                  claim: 'Self-attention removes recurrence as sequential bottleneck',
+                  type: 'Core Claim',
+                  kind: 'Paraphrase',
+                  stage: '● Integrated in Draft',
+                  tone: 'bg-[#EDF5EE] text-[#15803D]',
+                },
+              ].map((card) => (
+                <div
+                  key={card.claim}
+                  className="rounded-[12px] border border-[#EAEAEA] bg-[#FAF9F7] p-3.5 space-y-2.5"
+                >
+                  <p className="text-[13px] font-semibold text-[#2F2D28] leading-snug">
+                    {card.claim}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 text-[11px] font-medium">
+                    <span className={`px-2 py-0.5 rounded ${card.tone}`}>{card.type}</span>
+                    <span className="px-2 py-0.5 rounded bg-white border border-[#EAEAEA] text-[#475569]">{card.kind}</span>
+                  </div>
+                  <p className="text-[11px] font-semibold text-[#1D6EE3]">{card.stage}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
         </div>
       </div>
     </div>
