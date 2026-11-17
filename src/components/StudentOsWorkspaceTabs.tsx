@@ -270,6 +270,312 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
             </p>
           </div>
 
+          {/* TAB 01: MAIN HUB */}
+          {activeTab === 'hub' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                <KpiTile
+                  bg="#EAF3FC"
+                  icon={<GraduationCap className="w-4 h-4 text-[#1D6EE3]" />}
+                  label="Current Term GPA"
+                  value="3.88 / 4.00"
+                />
+                <KpiTile
+                  bg="#FBF5E2"
+                  icon={<Calendar className="w-4 h-4 text-[#CA8A04]" />}
+                  label="Due this week"
+                  value="5 deliverables · 2 due soon"
+                />
+                <KpiTile
+                  bg="#EDF5EE"
+                  icon={<HeartPulse className="w-4 h-4 text-[#16A34A]" />}
+                  label="Sleep avg (7d)"
+                  value="7.3h · Mood Good"
+                />
+                <KpiTile
+                  bg="#F3EFFB"
+                  icon={<Wallet className="w-4 h-4 text-[#7C3AED]" />}
+                  label="Monthly budget"
+                  value="$600 cap · On Track (74%)"
+                />
+              </div>
+
+              <div className="border-t border-[#EAEAEA] pt-5 grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <div className="lg:col-span-6 rounded-[12px] border border-[#EAEAEA] p-4 space-y-3 bg-[#FBFBFA]">
+                  <h4 className="text-[15px] font-bold text-[#2F2D28]">
+                    Quick Capture Actions
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2 text-[12.5px]">
+                    {[
+                      { label: '+ New deliverable', bg: '#EAF3FC', text: '#1D6EE3' },
+                      { label: '+ Log an exam', bg: '#FCECEC', text: '#DC2626' },
+                      { label: '+ New lecture note', bg: '#F3EFFB', text: '#7C3AED' },
+                      { label: '+ Log study session', bg: '#EDF5EE', text: '#15803D' },
+                    ].map((btn) => (
+                      <div
+                        key={btn.label}
+                        style={{ backgroundColor: btn.bg, color: btn.text }}
+                        className="rounded-[8px] px-3 py-2 font-semibold border border-black/[0.04]"
+                      >
+                        {btn.label}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="lg:col-span-6 rounded-[12px] border border-[#EAEAEA] overflow-hidden">
+                  <div className="px-4 py-2.5 border-b border-[#EAEAEA] bg-[#FAF9F7] flex items-center justify-between text-[13px] font-bold text-[#2F2D28]">
+                    <span>↗ Goals & Milestones</span>
+                    <span className="text-[11px] font-medium text-[#64748B]">
+                      30d Countdown
+                    </span>
+                  </div>
+                  <div className="divide-y divide-[#F1F1EF] text-[13px]">
+                    {[
+                      { goal: 'Finish semester above 3.85 GPA', pct: '78%', tag: 'Academic', tone: 'bg-[#EAF3FC] text-[#1D6EE3]' },
+                      { goal: 'Sleep 7+ hrs on 5 nights / week', pct: '70%', tag: 'Health', tone: 'bg-[#EDF5EE] text-[#15803D]' },
+                      { goal: 'Land summer SWE / research role', pct: '45%', tag: 'Career', tone: 'bg-[#F3EFFB] text-[#7C3AED]' },
+                    ].map((row) => (
+                      <div key={row.goal} className="px-4 py-2.5 flex items-center justify-between gap-3">
+                        <span className="font-medium text-[#2F2D28] truncate">
+                          {row.goal}
+                        </span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${row.tone}`}>
+                            {row.tag}
+                          </span>
+                          <span className="font-semibold text-[#334155] tabular-nums text-[12px]">
+                            {row.pct}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 02: STUDY & ACADEMICS */}
+          {activeTab === 'academics' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                <KpiTile
+                  bg="#EAF3FC"
+                  icon={<BookOpen className="w-4 h-4 text-[#1D6EE3]" />}
+                  label="Active coursework"
+                  value="3 core courses"
+                />
+                <KpiTile
+                  bg="#FBF5E2"
+                  icon={<Repeat className="w-4 h-4 text-[#CA8A04]" />}
+                  label="Due for review"
+                  value="5 syllabus topics"
+                />
+                <KpiTile
+                  bg="#FCECEC"
+                  icon={<FileText className="w-4 h-4 text-[#DC2626]" />}
+                  label="Needs first pass"
+                  value="2 lecture notes"
+                />
+                <KpiTile
+                  bg="#EDF5EE"
+                  icon={<GraduationCap className="w-4 h-4 text-[#16A34A]" />}
+                  label="Weighted GPA"
+                  value="3.88 / 4.00"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <button
+                  type="button"
+                  onClick={() => setAcademicsView('review')}
+                  className={`w-full text-left rounded-[10px] px-4 py-3 text-[13px] border cursor-pointer transition-all ${
+                    academicsView === 'review'
+                      ? 'bg-[#EAF3FC] border-[#1D6EE3]/50 ring-2 ring-[#1D6EE3]/10'
+                      : 'bg-[#FAF9F7] border-[#EAEAEA]'
+                  }`}
+                >
+                  <span className="font-bold text-[#2F2D28]">Syllabus & Recall Queue</span>{' '}
+                  <span className="text-[#52504A]">— Review cadence & Cornell lecture notes</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAcademicsView('gpa')}
+                  className={`w-full text-left rounded-[10px] px-4 py-3 text-[13px] border cursor-pointer transition-all ${
+                    academicsView === 'gpa'
+                      ? 'bg-[#EDF5EE] border-[#16A34A]/45 ring-2 ring-[#16A34A]/10'
+                      : 'bg-[#FAF9F7] border-[#EAEAEA]'
+                  }`}
+                >
+                  <span className="font-bold text-[#2F2D28]">Weighted GPA Ledger</span>{' '}
+                  <span className="text-[#52504A]">— Credit-weighted scores across classes</span>
+                </button>
+              </div>
+
+              {academicsView === 'review' ? (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                  <div className="lg:col-span-6 rounded-[12px] border border-[#EAEAEA] overflow-hidden">
+                    <div className="px-4 py-2.5 border-b border-[#EAEAEA] bg-[#FAF9F7] text-[13px] font-bold text-[#2F2D28]">
+                      ↗ Syllabus & Modules (Due for Review)
+                    </div>
+                    <div className="divide-y divide-[#F1F1EF] text-[12.5px]">
+                      {[
+                        { course: 'Linear Algebra & Optimization', topic: 'Eigenvalues & Diagonalization', prio: 'High (7d)', tone: 'bg-[#EDF5EE] text-[#15803D]' },
+                        { course: 'Data Structures & Algorithms', topic: 'Dynamic Programming & Memoization', prio: 'Low (1d)', tone: 'bg-[#FCECEC] text-[#DC2626]' },
+                        { course: 'Cellular Biophysics', topic: 'Membrane Potential & Ion Channels', prio: 'Low (1d)', tone: 'bg-[#FCECEC] text-[#DC2626]' },
+                        { course: 'Data Structures & Algorithms', topic: 'Graph Traversal (BFS vs DFS)', prio: 'Medium (3d)', tone: 'bg-[#FBF5E2] text-[#B45309]' },
+                      ].map((row) => (
+                        <div key={row.topic} className="px-4 py-2.5 flex items-center justify-between gap-2">
+                          <div className="min-w-0">
+                            <p className="font-semibold text-[#2F2D28] truncate">{row.topic}</p>
+                            <p className="text-[11px] text-[#64748B] truncate">{row.course}</p>
+                          </div>
+                          <span className={`px-2 py-0.5 rounded text-[11px] font-medium shrink-0 ${row.tone}`}>
+                            {row.prio}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-6 rounded-[12px] border border-[#EAEAEA] p-4 space-y-3 bg-[#FAF9F7]">
+                    <div className="text-[13px] font-bold text-[#2F2D28]">
+                      ↗ Cornell Lecture Notes & Recall
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {[
+                        { title: 'Lecture 19: DP Memoization', course: 'Data Structures', status: 'Needs First Pass', tone: 'bg-[#FCECEC] text-[#DC2626]' },
+                        { title: 'Lab 5: Patch-Clamp Basics', course: 'Cellular Biophysics', status: 'Needs First Pass', tone: 'bg-[#FCECEC] text-[#DC2626]' },
+                        { title: 'Lecture 17: BFS vs DFS', course: 'Data Structures', status: 'Flashcards Created', tone: 'bg-[#FBF5E2] text-[#B45309]' },
+                        { title: 'Lecture 22: Diagonalization', course: 'Linear Algebra', status: 'Flashcards Created', tone: 'bg-[#FBF5E2] text-[#B45309]' },
+                      ].map((card) => (
+                        <div key={card.title} className="rounded-[9px] bg-white border border-[#EAEAEA] p-3 space-y-1.5">
+                          <p className="text-[12.5px] font-semibold text-[#2F2D28] leading-snug">
+                            {card.title}
+                          </p>
+                          <p className="text-[11px] text-[#64748B]">{card.course}</p>
+                          <span className={`inline-block px-2 py-0.5 rounded text-[10.5px] font-medium ${card.tone}`}>
+                            {card.status}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
+                  <table className="w-full text-left text-[13px] min-w-[540px]">
+                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                      <tr>
+                        <th className="py-2.5 px-4 font-medium">Course</th>
+                        <th className="py-2.5 px-4 font-medium">Credits</th>
+                        <th className="py-2.5 px-4 font-medium">Current Score</th>
+                        <th className="py-2.5 px-4 font-medium text-right">Grade Points</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#F1F1EF]">
+                      <tr>
+                        <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Data Structures & Algorithms</td>
+                        <td className="py-2.5 px-4">4.0</td>
+                        <td className="py-2.5 px-4">94.2% (A)</td>
+                        <td className="py-2.5 px-4 text-right font-semibold tabular-nums">4.00</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Linear Algebra & Optimization</td>
+                        <td className="py-2.5 px-4">4.0</td>
+                        <td className="py-2.5 px-4">91.5% (A-)</td>
+                        <td className="py-2.5 px-4 text-right font-semibold tabular-nums">3.70</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Cellular Biophysics</td>
+                        <td className="py-2.5 px-4">3.0</td>
+                        <td className="py-2.5 px-4">93.8% (A)</td>
+                        <td className="py-2.5 px-4 text-right font-semibold tabular-nums">4.00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 03: STUDY TOOLKIT & SPACED REPETITION */}
+          {activeTab === 'toolkit' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                <KpiTile
+                  bg="#FCECEC"
+                  icon={<Clock className="w-4 h-4 text-[#DC2626]" />}
+                  label="Focus timer"
+                  value="25:00 Pomodoro"
+                />
+                <KpiTile
+                  bg="#EAF3FC"
+                  icon={<Repeat className="w-4 h-4 text-[#1D6EE3]" />}
+                  label="Spaced recall"
+                  value="1d / 3d / 7d / 21d"
+                />
+                <KpiTile
+                  bg="#EDF5EE"
+                  icon={<CheckSquare className="w-4 h-4 text-[#16A34A]" />}
+                  label="Weekly study"
+                  value="18.5h logged"
+                />
+                <KpiTile
+                  bg="#FBF5E2"
+                  icon={<Layers className="w-4 h-4 text-[#CA8A04]" />}
+                  label="Deliverables"
+                  value="8 tracked"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <div className="lg:col-span-6 rounded-[12px] border border-[#EAEAEA] p-4 space-y-3 bg-[#FBFBFA]">
+                  <h4 className="text-[15px] font-bold text-[#2F2D28]">
+                    Exam Week Checklist
+                  </h4>
+                  <div className="space-y-2">
+                    {Object.entries(examChecks).map(([label, done]) => (
+                      <label
+                        key={label}
+                        className="flex items-center gap-2.5 text-[13px] text-[#37352F] cursor-pointer select-none"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={done}
+                          onChange={() => toggleExamCheck(label)}
+                          className="w-4 h-4 rounded accent-[#1D6EE3] cursor-pointer"
+                        />
+                        <span className={done ? 'line-through text-[#8E8B84]' : ''}>
+                          {label}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="lg:col-span-6 grid grid-cols-2 gap-3">
+                  {[
+                    { title: 'Pomodoro', desc: '25 min focus, 5 min break', bg: '#FCECEC' },
+                    { title: 'Active Recall', desc: 'Close the book, write from memory', bg: '#F3EFFB' },
+                    { title: 'Spaced Repetition', desc: 'Review at 1, 3, 7 & 21 days', bg: '#FBF5E2' },
+                    { title: 'Teach It', desc: 'Explain complex concepts out loud', bg: '#EAF3FC' },
+                  ].map((card) => (
+                    <div
+                      key={card.title}
+                      style={{ backgroundColor: card.bg }}
+                      className="rounded-[10px] p-3.5 border border-black/[0.04] space-y-1"
+                    >
+                      <p className="text-[13px] font-bold text-[#0F172A]">{card.title}</p>
+                      <p className="text-[12px] text-[#475569] leading-snug">{card.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
     </div>
