@@ -415,6 +415,160 @@ export const ResearcherOsWorkspaceTabs: React.FC = () => {
             </div>
           )}
 
+          {/* TAB 04: EXPERIMENTS, PROTOCOLS & DATASETS */}
+          {activeTab === 'experiments' && (
+            <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
+              <table className="w-full text-left text-[13px] min-w-[540px]">
+                <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                  <tr>
+                    <th className="py-2.5 px-4 font-medium">Run / Experiment</th>
+                    <th className="py-2.5 px-4 font-medium">Protocol SOP</th>
+                    <th className="py-2.5 px-4 font-medium">Primary Metric</th>
+                    <th className="py-2.5 px-4 font-medium text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#F1F1EF]">
+                  <tr>
+                    <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">EXP-042 · Always-On 3-Seed Baseline</td>
+                    <td className="py-2.5 px-4 text-[#475569]">Calibration v2.1</td>
+                    <td className="py-2.5 px-4 tabular-nums">ECE 0.041 / F1 84.6</td>
+                    <td className="py-2.5 px-4 text-right"><span className="px-2 py-0.5 rounded bg-[#EAF3FC] text-[#1D6EE3] text-[11px] font-medium">Running</span></td>
+                  </tr>
+                  <tr>
+                    <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">EXP-041 · Entropy vs Margin Threshold</td>
+                    <td className="py-2.5 px-4 text-[#475569]">Retrieval Trigger v1.4</td>
+                    <td className="py-2.5 px-4 tabular-nums">+3.2% EM Gain</td>
+                    <td className="py-2.5 px-4 text-right"><span className="px-2 py-0.5 rounded bg-[#EDF5EE] text-[#15803D] text-[11px] font-medium">Verified</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* TAB 05: REVIEWER COMMENTS & ACTION ITEMS */}
+          {activeTab === 'review' && (
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <button
+                  type="button"
+                  onClick={() => setReviewFilter('open')}
+                  className={`w-full text-left rounded-[10px] px-4 py-3 text-[13px] border cursor-pointer ${
+                    reviewFilter === 'open'
+                      ? 'bg-[#EAF3FC] border-[#1D6EE3]/50 ring-2 ring-[#1D6EE3]/10'
+                      : 'bg-[#FAF9F7] border-[#EAEAEA]'
+                  }`}
+                >
+                  <span className="font-bold text-[#2F2D28]">Weekly Advisor Sync</span>{' '}
+                  <span className="text-[#52504A]">— Nov 13, 2026 · Uncertainty-Aware Retrieval</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReviewFilter('paper')}
+                  className={`w-full text-left rounded-[10px] px-4 py-3 text-[13px] border cursor-pointer ${
+                    reviewFilter === 'paper'
+                      ? 'bg-[#F3EFFB] border-[#7C3AED]/45 ring-2 ring-[#7C3AED]/10'
+                      : 'bg-[#FAF9F7] border-[#EAEAEA]'
+                  }`}
+                >
+                  <span className="font-bold text-[#2F2D28]">Lab Seminar Dry Run</span>{' '}
+                  <span className="text-[#52504A]">— Nov 10, 2026 · Benchmarking Evaluation</span>
+                </button>
+              </div>
+
+              <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
+                <table className="w-full text-left text-[13px] min-w-[560px]">
+                  <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                    <tr>
+                      <th className="py-2.5 px-4 font-medium">Action Item</th>
+                      <th className="py-2.5 px-4 font-medium">Type</th>
+                      <th className="py-2.5 px-4 font-medium">Severity</th>
+                      <th className="py-2.5 px-4 font-medium text-right">Due</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#F1F1EF]">
+                    <tr>
+                      <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Re-run always-on baseline with three seeds</td>
+                      <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#EAF3FC] text-[#1D6EE3] text-[11px] font-medium">Advisor Action Item</span></td>
+                      <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#FBF5E2] text-[#B45309] text-[11px] font-medium">Minor</span></td>
+                      <td className="py-2.5 px-4 text-right text-[#64748B]">Nov 27, 2026</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Justify excluding BERTScore from eval suite</td>
+                      <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#F3EFFB] text-[#7C3AED] text-[11px] font-medium">Seminar Feedback</span></td>
+                      <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#FCECEC] text-[#DC2626] text-[11px] font-medium">Major</span></td>
+                      <td className="py-2.5 px-4 text-right text-[#64748B]">Nov 30, 2026</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Report calibration per class, not only overall</td>
+                      <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#EAF3FC] text-[#1D6EE3] text-[11px] font-medium">Advisor Action Item</span></td>
+                      <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#FCECEC] text-[#DC2626] text-[11px] font-medium">Major</span></td>
+                      <td className="py-2.5 px-4 text-right text-[#64748B]">Dec 1, 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 06: QUICK CAPTURE INBOX */}
+          {activeTab === 'inbox' && (
+            <div className="divide-y divide-[#EAEAEA] rounded-[12px] border border-[#EAEAEA] overflow-hidden text-[13px]">
+              {[
+                { title: 'Verify the ECE bin count used in the calibration baseline', tag: 'Citation to Check', status: 'Inbox' },
+                { title: 'Ablate entropy vs. margin as the retrieval trigger', tag: 'Experiment Idea', status: 'To Process' },
+                { title: 'Selective Classification for Deep Neural Networks', tag: 'Paper to Screen', status: 'Inbox' },
+              ].map((item) => (
+                <div key={item.title} className="px-4 py-3 flex items-center justify-between gap-3 bg-white">
+                  <span className="font-medium text-[#2F2D28]">{item.title}</span>
+                  <div className="flex items-center gap-2 shrink-0 text-[11.5px]">
+                    <span className="px-2 py-0.5 rounded bg-[#EAF3FC] text-[#1D6EE3] font-medium">{item.tag}</span>
+                    <span className="px-2 py-0.5 rounded bg-[#F1F1EF] text-[#475569]">{item.status}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* TAB 07: GRANTS, CFPS & COLLABORATORS */}
+          {activeTab === 'grants' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="rounded-[12px] border border-[#EAEAEA] p-4 space-y-2 bg-[#FAF9F7]">
+                <p className="text-[14px] font-bold text-[#2F2D28]">Target Venues & CFPs</p>
+                <p className="text-[13px] text-[#475569]">• ACL 2027 — Abstract Feb 15, 2027 (Double-Blind)</p>
+                <p className="text-[13px] text-[#475569]">• TACL Rolling Review — 10-page journal submission</p>
+              </div>
+              <div className="rounded-[12px] border border-[#EAEAEA] p-4 space-y-2 bg-[#FAF9F7]">
+                <p className="text-[14px] font-bold text-[#2F2D28]">Active Grants & Compute Budget</p>
+                <p className="text-[13px] text-[#475569]">• Graduate Research Fellowship ($34k / yr)</p>
+                <p className="text-[13px] text-[#475569]">• GPU Compute Credits — 62% remaining this quarter</p>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 08: SYSTEM VAULT (14 DATABASES) */}
+          {activeTab === 'system' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              {[
+                { name: '01 · Research Projects & Manuscripts', desc: 'In-flight papers, IMRaD sections & word-limit rollups.' },
+                { name: '02 · Literature Matrix & Triage Queue', desc: 'DOIs, BibTeX keys, study design, and paper gaps.' },
+                { name: '03 · Atomic Zettel Notes & Hypotheses', desc: 'Citable claim cards linked cleanly to manuscripts.' },
+                { name: '04 · Experiments, Lab Protocols & Datasets', desc: 'Trials, versioned SOPs, Zenodo DOIs & code repos.' },
+                { name: '05 · Peer Reviews & Action Items', desc: 'Advisor feedback, seminar critiques & rebuttal matrices.' },
+                { name: '06 · Grants, CFPs & Collaborators', desc: 'Fellowships, venue deadlines & CRediT author directory.' },
+              ].map((db) => (
+                <div
+                  key={db.name}
+                  className="rounded-[10px] border border-[#EAEAEA] bg-[#FAF9F7] p-3.5 flex items-start gap-2.5"
+                >
+                  <Check className="w-4 h-4 text-[#1D6EE3] shrink-0 mt-0.5" />
+                  <div className="text-[13px]">
+                    <p className="font-semibold text-[#2F2D28]">{db.name}</p>
+                    <p className="text-[#64748B]">{db.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
