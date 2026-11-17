@@ -280,6 +280,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Manuscripts', 'Target Journals & CFPs', 'Collaborators'],
       includedSubTemplates: ['IMRaD Manuscript Scaffold'],
     },
+    {
+      id: 'peer-review',
+      number: '08',
+      shortLabel: 'Peer Review',
+      title: 'Peer Review & Rebuttal Studio',
+      category: 'Publishing & Grants',
+      summary:
+        'Track every reviewer critique itemized by severity, follow-up experiment, and draft diff.',
+      whatItContains: [
+        'Itemized Comment Log — Break long review PDFs into discrete action tickets.',
+        'Follow-Up Run Links — Connect Reviewer 2 concerns directly to new validation runs.',
+        'Rebuttal Export — Organize polite responses & manuscript diff sections cleanly.',
+      ],
+      includedViews: [
+        {
+          name: 'Rebuttal Action Matrix',
+          layout: 'Table',
+          description: 'Critiques sorted by Reviewer ID & Severity.',
+        },
+        {
+          name: 'Open Critiques Queue',
+          layout: 'Board',
+          description: 'Pending -> New Trial Needed -> Drafted.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Severity triage tags (Major / Minor / Typo)',
+        'Resolved Rebuttal progress rollup',
+      ],
+      connectedDatabases: ['Peer Reviews & Rebuttals', 'Manuscripts', 'Experiments'],
+      includedSubTemplates: ['Reviewer Response Matrix'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
