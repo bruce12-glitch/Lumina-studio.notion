@@ -63,3 +63,67 @@ export interface OsSystemSpec {
   weeklyRhythm: OsWorkflowCadence[];
 }
 
+export function filterOsModules(
+  modules: OsModuleSpec[],
+  category: string,
+  searchQuery: string
+): OsModuleSpec[] {
+  const q = searchQuery.trim().toLowerCase();
+  return modules.filter((mod) => {
+    const matchesCategory = category === 'All' || mod.category === category;
+    if (!matchesCategory) return false;
+    if (!q) return true;
+    const haystack = [
+      mod.title,
+      mod.shortLabel,
+      mod.category,
+      mod.summary,
+      ...mod.whatItContains,
+      ...mod.connectedDatabases,
+      ...mod.includedSubTemplates,
+    ]
+      .join(' ')
+      .toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+export function filterOsDatabases(
+  databases: OsDatabaseSpec[],
+  searchQuery: string
+): OsDatabaseSpec[] {
+  const q = searchQuery.trim().toLowerCase();
+  if (!q) return databases;
+  return databases.filter((db) => {
+    const haystack = [
+      db.name,
+      db.category,
+      db.purpose,
+      ...db.keyProperties,
+      ...db.relations,
+      ...db.viewsIncluded,
+    ]
+      .join(' ')
+      .toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+export function getOsSpecSummaryCounts(spec: OsSystemSpec): {
+  modulesCount: number;
+  databasesCount: number;
+  totalViewsCount: number;
+  templatesCount: number;
+} {
+  const totalViewsCount = spec.modules.reduce(
+    (sum, mod) => sum + mod.includedViews.length,
+    0
+  );
+  return {
+    modulesCount: spec.modules.length,
+    databasesCount: spec.databases.length,
+    totalViewsCount,
+    templatesCount: spec.readyTemplates.length,
+  };
+}
+
