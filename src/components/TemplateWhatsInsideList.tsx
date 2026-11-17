@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Check } from 'lucide-react';
 import {
   OsSystemSpec,
   filterOsModules,
@@ -15,6 +16,17 @@ interface TemplateWhatsInsideListProps {
 
 const DATABASES_TAB = '__databases__';
 const TEMPLATES_TAB = '__templates__';
+
+function splitFeatureLine(line: string): { lead: string; rest: string | null } {
+  const idx = line.indexOf(' — ');
+  if (idx === -1) {
+    return { lead: line, rest: null };
+  }
+  return {
+    lead: line.slice(0, idx),
+    rest: line.slice(idx + 3),
+  };
+}
 
 export const TemplateWhatsInsideList: React.FC<TemplateWhatsInsideListProps> = ({
   spec,
@@ -151,8 +163,61 @@ export const TemplateWhatsInsideList: React.FC<TemplateWhatsInsideListProps> = (
         className="rounded-[24px] bg-white border border-[#E2E8F0] shadow-[0_12px_36px_-16px_rgba(15,23,42,0.06)] overflow-hidden"
       >
         {!isDatabasesView && !isTemplatesView && (
-          <div className="px-6 py-6 text-[14px] text-[#52504A]">
-            Showing {visibleModules.length} modules inside {spec.name}.
+          <div className="divide-y divide-[#F1F5F9]">
+            {visibleModules.map((mod) => (
+              <div
+                key={mod.id}
+                data-testid={`${spec.slug}-feature-row-${mod.id}`}
+                className="px-6 py-5 sm:px-8 sm:py-6 space-y-3"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5">
+                  <h4 className="font-display text-[17px] sm:text-[18.5px] font-bold tracking-[-0.02em] text-[#0F172A]">
+                    <span className="text-[#1D6EE3] font-mono text-[13.5px] mr-2 tabular-nums">
+                      {mod.number}.
+                    </span>
+                    {mod.title}
+                  </h4>
+                  <p className="text-[12.5px] font-medium text-[#64748B] tabular-nums shrink-0">
+                    {mod.category} · {mod.includedViews.length} views · {mod.connectedDatabases.length} DBs
+                  </p>
+                </div>
+
+                <p className="text-[14.5px] text-[#52504A] leading-[1.6] max-w-[780px]">
+                  {mod.summary}
+                </p>
+
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2.5 pt-1">
+                  {mod.whatItContains.map((featureLine) => {
+                    const { lead, rest } = splitFeatureLine(featureLine);
+                    return (
+                      <li
+                        key={featureLine}
+                        className="flex items-start gap-2.5 text-[13.5px] sm:text-[14px] leading-[1.55] text-[#334155]"
+                      >
+                        <Check className="w-4 h-4 text-[#1D6EE3] shrink-0 mt-0.5" />
+                        <span>
+                          <strong className="font-semibold text-[#0F172A]">
+                            {lead}
+                          </strong>
+                          {rest ? ` — ${rest}` : ''}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <p className="text-[12.5px] text-[#64748B] leading-[1.5] pt-0.5">
+                  <span className="font-medium text-[#475569]">Views:</span>{' '}
+                  {mod.includedViews.map((v) => `${v.name} (${v.layout})`).join(' · ')}
+                  <span aria-hidden="true" className="mx-2 text-[#CBD5E1]">
+                    |
+                  </span>
+                  <span className="font-medium text-[#475569]">Linked DBs:</span>{' '}
+                  {mod.connectedDatabases.join(' · ')}
+                </p>
+              </div>
+            ))}
+
           </div>
         )}
       </div>
