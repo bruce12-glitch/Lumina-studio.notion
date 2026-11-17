@@ -1227,11 +1227,11 @@ export const TemplateShowcasePage: React.FC<{
       {/* =====================================================================
           1. HERO SECTION & SHOWCASE STAGE
           ===================================================================== */}
-      <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-8 sm:pt-14 pb-16 sm:pb-22 border-b border-[#EDF2F7]">
+      <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-10 sm:pt-16 pb-16 sm:pb-24 border-b border-[#EDF2F7]">
         <div
           className={`${
-            template.slug === 'freelance-os' ? 'max-w-[1100px]' : 'max-w-[960px]'
-          } mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12`}
+            template.slug === 'freelance-os' ? 'max-w-[1200px]' : 'max-w-[960px]'
+          } mx-auto px-4 sm:px-6 space-y-10 sm:space-y-14`}
         >
           {/* Top Breadcrumb: All templates / {template.name} */}
           <nav
@@ -1254,9 +1254,9 @@ export const TemplateShowcasePage: React.FC<{
           </nav>
 
           {template.slug === 'freelance-os' ? (
-            /* Balanced 2-Column Hero Split Featuring Freelancer Mascot on the Right Side */
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-center">
-              <div className="md:col-span-6 space-y-5 lg:space-y-6">
+            /* Airy Asymmetric 2-Column Hero Split Featuring Studio Mascot */
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-center">
+              <div className="md:col-span-6 space-y-6">
                 <div>
                   <div
                     data-testid="made-for-notion-badge"
@@ -1303,27 +1303,27 @@ export const TemplateShowcasePage: React.FC<{
                   </div>
                 </div>
 
-                <h1 className="font-display text-[clamp(30px,3.8vw,50px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
+                <h1 className="font-display text-[clamp(30px,3.4vw,46px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#0F172A] text-balance">
                   {showcase.heroHeadline}
                 </h1>
 
-                <p className="text-[15.5px] sm:text-[17px] leading-[1.6] text-[#64748B]">
+                <p className="text-[16px] sm:text-[17.5px] leading-[1.65] text-[#52504A] max-w-[520px]">
                   {showcase.heroSubheadline}
                 </p>
 
-                <div className="flex flex-wrap items-baseline gap-3 pt-0.5">
-                  <span className="text-[20px] sm:text-[22px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
+                <div className="flex flex-wrap items-baseline gap-3 pt-1">
+                  <span className="text-[22px] sm:text-[24px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
                     Premium from {formatPrice(template.price)}
                   </span>
                   <span className="text-[17px] font-medium text-[#64748B] line-through tabular-nums">
                     {formatPrice(displayCompareAt)}
                   </span>
-                  <span className="text-[13.5px] text-[#64748B]">
+                  <span className="text-[14px] text-[#64748B]">
                     One-time purchase
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 pt-1">
+                <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <motion.button
                     type="button"
                     data-testid="template-primary-cta"
@@ -1331,7 +1331,7 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleOpenBuy}
-                    className="h-11 sm:h-12 px-6 sm:px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[14.5px] sm:text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors whitespace-nowrap shrink-0"
+                    className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_12px_28px_-8px_rgba(29,110,227,0.5)] cursor-pointer transition-colors whitespace-nowrap shrink-0"
                   >
                     <span>
                       {isOwned
@@ -1348,26 +1348,21 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleScrollToCloserLook}
-                    className="h-11 sm:h-12 px-5 sm:px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[14.5px] sm:text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors whitespace-nowrap shrink-0"
+                    className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors whitespace-nowrap shrink-0"
                   >
                     <span>Preview what&apos;s inside</span>
                   </motion.button>
                 </div>
 
-                <div className="space-y-1.5 pt-1">
-                  <div className="flex items-center gap-2 text-[13.5px] font-medium text-[#64748B]">
-                    <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
-                    <span>
-                      {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
-                    </span>
-                  </div>
-                  <p className="text-[13px] text-[#64748B]">
-                    1 command hub, 11 functional modules, and 18 interconnected databases.
-                  </p>
+                <div className="flex items-center gap-2 pt-2 text-[14px] font-medium text-[#64748B]">
+                  <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
+                  <span>
+                    {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings · 11 modules & 18 databases
+                  </span>
                 </div>
               </div>
 
-              {/* Right Column: Prominent Freelancer Studio Mascot Stage */}
+              {/* Right Column: Clean Single-Surface Studio Mascot Stage (Zero Inner Box Clutter) */}
               <div className="md:col-span-6">
                 <div
                   data-testid="template-device-mockup"
@@ -1380,24 +1375,15 @@ export const TemplateShowcasePage: React.FC<{
                       handleScrollToCloserLook();
                     }
                   }}
-                  className="group rounded-[24px] bg-gradient-to-br from-[#EFF6FF] via-[#F8FAFC] to-[#FFFFFF] border border-[#DCE6F3] p-4 sm:p-6 shadow-[0_20px_50px_-18px_rgba(29,110,227,0.16)] relative overflow-hidden cursor-pointer"
+                  aria-label="Preview Freelance OS interactive workspace modules"
+                  className="group rounded-[28px] bg-gradient-to-br from-[#EAF2FF] via-[#F4F8FD] to-[#FFFFFF] border border-[#DCE6F3] p-6 sm:p-10 shadow-[0_24px_60px_-24px_rgba(29,110,227,0.16)] flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] overflow-hidden cursor-pointer"
                 >
-                  <div className="rounded-[18px] bg-white/80 border border-white/90 p-2 sm:p-3 h-[280px] sm:h-[340px] lg:h-[380px] flex items-center justify-center overflow-hidden">
-                    <img
-                      src={freelancerMascotHeroImg}
-                      alt="Freelance OS studio mascot working with calendar, deliverables, and invoices"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain mix-blend-multiply scale-[1.05] transition-transform duration-500 group-hover:scale-[1.09]"
-                    />
-                  </div>
-                  <div className="pt-3.5 mt-2 border-t border-[#DCE6F3]/80 px-1 flex flex-wrap items-center justify-between gap-2 text-[12.5px] text-[#475569]">
-                    <span className="font-semibold text-[#0F172A]">
-                      Freelancer Business OS · Studio Mascot Edition
-                    </span>
-                    <span className="text-[#1D6EE3] font-semibold">
-                      13 Interactive Tabs ↓
-                    </span>
-                  </div>
+                  <img
+                    src={freelancerMascotHeroImg}
+                    alt="Freelance OS studio mascot working with calendar, deliverables, and invoices"
+                    referrerPolicy="no-referrer"
+                    className="w-full max-h-[340px] lg:max-h-[380px] object-contain mix-blend-multiply scale-[1.1] transition-transform duration-500 group-hover:scale-[1.14]"
+                  />
                 </div>
               </div>
             </div>
@@ -1739,7 +1725,7 @@ export const TemplateShowcasePage: React.FC<{
         id="template-closer-look"
         data-testid="template-closer-look"
         className={`pt-14 sm:pt-20 pb-10 sm:pb-14 ${
-          template.slug === 'freelance-os' ? 'max-w-[1100px]' : 'max-w-[960px]'
+          template.slug === 'freelance-os' ? 'max-w-[1200px]' : 'max-w-[960px]'
         } mx-auto px-4 sm:px-6`}
       >
         <div className="space-y-3 max-w-[680px] mb-8 sm:mb-10">
@@ -1790,7 +1776,7 @@ export const TemplateShowcasePage: React.FC<{
       {template.slug === 'freelance-os' ? (
         <section
           data-testid="template-cascading-pages"
-          className="py-10 sm:py-14 max-w-[1100px] mx-auto px-4 sm:px-6"
+          className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
           <FreelanceOsGallery variant="detail" />
         </section>
