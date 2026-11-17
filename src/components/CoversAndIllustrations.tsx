@@ -5,6 +5,7 @@ import {
   CATEGORY_BLUSH_ASSET,
   TemplateCategory,
 } from '../data/catalog';
+import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
 
 export const UltraHdSvgFilter: React.FC = () => (
   <svg
@@ -117,13 +118,17 @@ export const TemplateCover: React.FC<{
   className?: string;
 }> = ({
   name,
+  slug,
   category,
   pro,
   illustrationUrl,
   cardTint = '#F7F6F3',
   className = '',
 }) => {
-  const resolvedAsset = illustrationUrl || CATEGORY_BLUSH_ASSET[category];
+  const isFreelanceMascot = slug === 'freelance-os';
+  const resolvedAsset = isFreelanceMascot
+    ? freelancerMascotCardImg
+    : illustrationUrl || CATEGORY_BLUSH_ASSET[category];
 
   return (
     <div
@@ -146,13 +151,19 @@ export const TemplateCover: React.FC<{
         </div>
 
         {/* Full-Stage Ultra-HD Illustration */}
-        <div className="flex-1 p-3 sm:p-4 flex items-center justify-center overflow-hidden bg-white">
+        <div
+          className={`flex-1 flex items-center justify-center overflow-hidden bg-white ${
+            isFreelanceMascot ? 'p-1 sm:p-1.5' : 'p-3 sm:p-4'
+          }`}
+        >
           <BlushAssetImage
             src={resolvedAsset}
-            alt={`${name} Notion template`}
+            alt={isFreelanceMascot ? 'Freelance OS freelancer mascot illustration' : `${name} Notion template`}
             disableFloat
             className="w-full h-full"
-            imgClassName="max-w-full max-h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+            imgClassName={`max-w-full max-h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.04] ${
+              isFreelanceMascot ? 'scale-[1.08]' : ''
+            }`}
           />
         </div>
       </div>
