@@ -371,6 +371,39 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Student Expenses', 'Scholarships & Aid'],
       includedSubTemplates: ['Scholarship Essay Sheet'],
     },
+    {
+      id: 'student-system-core',
+      number: '11',
+      shortLabel: 'System · 12 DBs',
+      title: 'System & Support Backend',
+      category: 'Life & System',
+      summary:
+        'Central archive housing all 12 relational databases, quick-start SOPs, and templates.',
+      whatItContains: [
+        'All 12 Databases Hub — Single backend directory for safe customization.',
+        'Quick Start Checklist — Set up your term in 15 minutes.',
+        'Template Library — Copy-ready blocks across every page.',
+      ],
+      includedViews: [
+        {
+          name: 'Database Directory',
+          layout: 'Table',
+          description: 'Clean overview of all 12 core tables.',
+        },
+        {
+          name: 'Archive Filter',
+          layout: 'List',
+          description: 'Completed semesters tucked out of daily sight.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Global Semester Archive flag',
+        'Template button triggers',
+      ],
+      connectedDatabases: ['Courses', 'Assignments', 'Lecture Notes', 'Flashcards'],
+      includedSubTemplates: ['Semester Setup Checklist'],
+    },
+  ],
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
