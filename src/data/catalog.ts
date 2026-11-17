@@ -1,3 +1,7 @@
+import { buildWhatsInsideSummary } from './osSpecTypes';
+import { RESEARCHER_OS_SPEC } from './researcherOsSpec';
+import { STUDENT_OS_SPEC } from './studentOsSpec';
+
 export type Category =
   | 'All'
   | 'Health & Fitness'
@@ -148,23 +152,11 @@ const RAW_TEMPLATES: Array<{
 
 function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean): string[] {
   if (name === 'Student OS') {
-    return [
-      'Command Hub + 10 study, recall & campus modules',
-      '12 linked Notion databases (Courses, Tasks, Notes, Flashcards, Exams, GPA)',
-      'Automated Spaced Repetition (1d/3d/7d/21d) & live 4.0 GPA math',
-      '8 one-click templates (Cornell notes, lab reports, exam sprints)',
-      'Lifetime updates + Private Circle community invite',
-    ];
+    return buildWhatsInsideSummary(STUDENT_OS_SPEC);
   }
 
   if (name === 'Researcher OS') {
-    return [
-      'Research Hub + 12 synthesis, lab & publishing modules',
-      '14 linked databases (Literature, Zettels, Runs, Datasets, Manuscripts)',
-      'IMRaD draft tracker, CFP deadlines & Peer Review rebuttal matrix',
-      '8 one-click academic templates (Paper sheets, run logs, Grant Aims)',
-      'Lifetime updates + Private Circle community invite',
-    ];
+    return buildWhatsInsideSummary(RESEARCHER_OS_SPEC);
   }
 
   const base: Record<TemplateCategory, string[]> = {
