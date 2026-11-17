@@ -18,7 +18,8 @@ import { CheckoutTarget } from './CheckoutModal';
 import { TemplateCard } from './Chrome';
 import { BlushAssetImage } from './CoversAndIllustrations';
 import { FreelanceOsGallery } from './FreelanceOsGallery';
-import freelanceOsHubImg from '../assets/images/freelance_os_hub_hd_1794922765448.jpg';
+import freelancerMascotHeroImg from '../assets/images/freelancer_mascot_hero_1794923265472.jpg';
+import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
 
 interface TemplateShowcaseMetadata {
   heroHeadline: string;
@@ -1205,15 +1206,15 @@ export const TemplateShowcasePage: React.FC<{
   return (
     <div data-testid="template-showcase-page" className="pb-24 bg-white">
       {/* =====================================================================
-          1. HERO SECTION & DUAL-DEVICE NOTION MOCKUP (image_d974a805.png)
+          1. HERO SECTION & FULL-WIDTH SHOWCASE CARD (PDF Pages 1–2 Alignment)
           ===================================================================== */}
-      <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-8 sm:pt-12 pb-16 sm:pb-24 border-b border-[#EDF2F7]">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
+      <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-8 sm:pt-14 pb-16 sm:pb-24 border-b border-[#EDF2F7]">
+        <div className="max-w-[960px] mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12">
           {/* Top Breadcrumb: All templates / {template.name} */}
           <nav
             aria-label="Breadcrumb"
             data-testid="template-breadcrumb"
-            className="flex items-center gap-2 text-[14.5px] font-medium text-[#334155] mb-8 sm:mb-10"
+            className="flex items-center gap-2 text-[14.5px] font-medium text-[#334155]"
           >
             <a
               href="/templates"
@@ -1229,168 +1230,166 @@ export const TemplateShowcasePage: React.FC<{
             <span className="text-[#0F172A] font-semibold">{template.name}</span>
           </nav>
 
-          {/* 2-Column Hero Split */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Left Column: Copy, Pricing, Pill CTAs & Verified Rating */}
-            <div className="lg:col-span-6 space-y-6">
-              {/* "Made for Notion" Pill Badge */}
-              <div>
-                <div
-                  data-testid="made-for-notion-badge"
-                  className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+          {/* Single-Column Hero Copy Block (PDF Page 1) */}
+          <div className="space-y-6 max-w-[740px]">
+            {/* "Made for Notion" Pill Badge */}
+            <div>
+              <div
+                data-testid="made-for-notion-badge"
+                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="shrink-0"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden="true"
-                    className="shrink-0"
-                  >
-                    <path
-                      d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
-                      fill="#FFFFFF"
-                      stroke="#1E293B"
-                      strokeWidth="1.75"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M4.5 6.2L10.2 9.4L20.2 7.2"
-                      stroke="#1E293B"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M10.2 9.4V20.5"
-                      stroke="#1E293B"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12.7 16.7V11.8L16.8 16.2V11.1"
-                      stroke="#1E293B"
-                      strokeWidth="1.75"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="text-[13px] font-medium tracking-[-0.01em] text-[#1E293B]">
-                    Made for Notion
-                  </span>
-                </div>
-              </div>
-
-              {/* Benefit Headline */}
-              <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
-                {showcase.heroHeadline}
-              </h1>
-
-              {/* Subtitle / Description */}
-              <p className="text-[17px] sm:text-[18.5px] leading-[1.6] text-[#64748B] max-w-[540px]">
-                {showcase.heroSubheadline}
-              </p>
-
-              {/* Pricing Row */}
-              <div className="flex flex-wrap items-baseline gap-3 pt-1">
-                <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
-                  {template.price === 0
-                    ? 'Free Edition $0'
-                    : `Premium from ${formatPrice(template.price)}`}
+                  <path
+                    d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
+                    fill="#FFFFFF"
+                    stroke="#1E293B"
+                    strokeWidth="1.75"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M4.5 6.2L10.2 9.4L20.2 7.2"
+                    stroke="#1E293B"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M10.2 9.4V20.5"
+                    stroke="#1E293B"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12.7 16.7V11.8L16.8 16.2V11.1"
+                    stroke="#1E293B"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span className="text-[13px] font-medium tracking-[-0.01em] text-[#1E293B]">
+                  Made for Notion
                 </span>
-                <span className="text-[18px] font-medium text-[#64748B] line-through tabular-nums">
-                  {formatPrice(displayCompareAt)}
-                </span>
-                <span className="text-[14px] text-[#64748B]">
-                  {template.price === 0
-                    ? 'Instant Notion duplicate'
-                    : 'One-time purchase'}
-                </span>
-              </div>
-
-              {/* Dual Pill Buttons: "Get [Template] →" + "Preview what's inside" */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-1">
-                <motion.button
-                  type="button"
-                  data-testid="template-primary-cta"
-                  whileHover={{ y: -2, scale: 1.015 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                  onClick={handleOpenBuy}
-                  className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors"
-                >
-                  <span>
-                    {isOwned
-                      ? `Open ${template.name}`
-                      : `Get ${template.name}`}
-                  </span>
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
-
-                <motion.button
-                  type="button"
-                  data-testid="template-preview-inside-btn"
-                  whileHover={{ y: -2, scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                  onClick={handleScrollToCloserLook}
-                  className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors"
-                >
-                  <span>Preview what&apos;s inside</span>
-                </motion.button>
-              </div>
-
-              {/* Rating & Edition Note */}
-              <div className="space-y-2.5 pt-2">
-                <div className="flex items-center gap-2 text-[14px] font-medium text-[#64748B]">
-                  <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
-                  <span>
-                    {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
-                  </span>
-                </div>
-                <p className="text-[13.5px] text-[#64748B]">
-                  Choose your edition at checkout. Add it to your Notion workspace.
-                </p>
               </div>
             </div>
 
-            {/* Right Column: Freelance OS HD Studio Preview OR Dual-Device Notion Mockup */}
-            <div className="lg:col-span-6">
-              {template.slug === 'freelance-os' ? (
-                <div
-                  data-testid="template-device-mockup"
-                  onClick={handleScrollToCloserLook}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      handleScrollToCloserLook();
-                    }
-                  }}
-                  className="group rounded-[24px] bg-white border border-[#E2E8F0] p-3 sm:p-4 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.08)] relative overflow-hidden cursor-pointer"
-                >
-                  <div className="rounded-[16px] overflow-hidden border border-[#E2E8F0] aspect-[16/9] bg-[#F8FAFC] relative">
-                    <img
-                      src={freelanceOsHubImg}
-                      alt="Freelancer Business OS workspace overview"
-                      className="w-full h-full object-cover showcase-hd-image transition-transform duration-500 group-hover:scale-[1.015]"
-                    />
-                  </div>
-                  <div className="pt-3 px-1 flex items-center justify-between text-[12.5px] text-[#64748B]">
-                    <span className="font-semibold text-[#0F172A]">
-                      Freelancer Business OS · Resonance Studio
-                    </span>
-                    <span className="text-[#1D6EE3] font-semibold">
-                      4 HD Modules Included ↓
-                    </span>
-                  </div>
+            {/* Benefit Headline */}
+            <h1 className="font-display text-[clamp(36px,4.8vw,56px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
+              {showcase.heroHeadline}
+            </h1>
+
+            {/* Subtitle / Description */}
+            <p className="text-[17px] sm:text-[18.5px] leading-[1.6] text-[#64748B] max-w-[660px]">
+              {showcase.heroSubheadline}
+            </p>
+
+            {/* Pricing Row */}
+            <div className="flex flex-wrap items-baseline gap-3 pt-1">
+              <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
+                {template.price === 0
+                  ? 'Free Edition $0'
+                  : `Premium from ${formatPrice(template.price)}`}
+              </span>
+              <span className="text-[18px] font-medium text-[#64748B] line-through tabular-nums">
+                {formatPrice(displayCompareAt)}
+              </span>
+              <span className="text-[14px] text-[#64748B]">
+                {template.price === 0
+                  ? 'Instant Notion duplicate'
+                  : 'One-time purchase'}
+              </span>
+            </div>
+
+            {/* Dual Pill Buttons: "Get [Template] →" + "Preview what's inside" */}
+            <div className="flex flex-wrap items-center gap-3.5 pt-1">
+              <motion.button
+                type="button"
+                data-testid="template-primary-cta"
+                whileHover={{ y: -2, scale: 1.015 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                onClick={handleOpenBuy}
+                className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors"
+              >
+                <span>
+                  {isOwned
+                    ? `Open ${template.name}`
+                    : `Get ${template.name}`}
+                </span>
+                <ArrowRight className="w-4 h-4" />
+              </motion.button>
+
+              <motion.button
+                type="button"
+                data-testid="template-preview-inside-btn"
+                whileHover={{ y: -2, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                onClick={handleScrollToCloserLook}
+                className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors"
+              >
+                <span>Preview what&apos;s inside</span>
+              </motion.button>
+            </div>
+
+            {/* Rating & Edition Note */}
+            <div className="space-y-2.5 pt-2">
+              <div className="flex items-center gap-2 text-[14px] font-medium text-[#64748B]">
+                <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
+                <span>
+                  {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
+                </span>
+              </div>
+              <p className="text-[13.5px] text-[#64748B]">
+                Choose your edition at checkout. Add it to your Notion workspace.
+              </p>
+            </div>
+          </div>
+
+          {/* Full-Width Hero Showcase Card Beneath Copy (PDF Pages 1–2 Layout) */}
+          <div>
+            {template.slug === 'freelance-os' ? (
+              <div
+                data-testid="template-device-mockup"
+                onClick={handleScrollToCloserLook}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleScrollToCloserLook();
+                  }
+                }}
+                className="group rounded-[24px] bg-white border border-[#E2E8F0] p-4 sm:p-8 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.08)] relative overflow-hidden cursor-pointer"
+              >
+                <div className="rounded-[18px] overflow-hidden bg-white h-[320px] sm:h-[430px] md:h-[480px] flex items-center justify-center relative">
+                  <img
+                    src={freelancerMascotHeroImg}
+                    alt="Freelance OS studio mascot working with calendar, deliverables, and invoices"
+                    className="w-full h-full object-contain scale-[1.06] sm:scale-[1.08] transition-transform duration-500 group-hover:scale-[1.11]"
+                  />
                 </div>
-              ) : (
-                <div
-                  data-testid="template-device-mockup"
-                  className="rounded-[24px] bg-white border border-[#E2E8F0] p-5 sm:p-8 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.07)] relative overflow-hidden"
-                >
-                <div className="relative mx-auto max-w-[540px] py-2 sm:py-4 pr-6 sm:pr-12">
+                <div className="pt-4 mt-2 border-t border-[#F1F5F9] px-1 flex flex-wrap items-center justify-between gap-2 text-[13px] text-[#64748B]">
+                  <span className="font-semibold text-[#0F172A]">
+                    Freelancer Business OS · Resonance Studio
+                  </span>
+                  <span className="text-[#1D6EE3] font-semibold">
+                    4 HD Modules Included ↓
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div
+                data-testid="template-device-mockup"
+                className="rounded-[24px] bg-white border border-[#E2E8F0] p-6 sm:p-12 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.07)] relative overflow-hidden"
+              >
+                <div className="relative mx-auto max-w-[680px] py-2 sm:py-4 pr-8 sm:pr-16">
                   {/* TABLET LANDSCAPE FRAME (iPad Mockup) */}
                   <div className="rounded-[20px] bg-[#111827] p-[9px] sm:p-[12px] shadow-[0_24px_48px_-12px_rgba(15,23,42,0.24)] border border-[#334155]">
                     <div className="rounded-[12px] bg-white overflow-hidden border border-[#E2E8F0]">
@@ -1587,17 +1586,16 @@ export const TemplateShowcasePage: React.FC<{
               </div>
               )}
             </div>
-          </div>
         </div>
       </section>
 
       {/* =====================================================================
-          2. "TAKE A CLOSER LOOK — Everything has a place." (image_3bf9bf89.png)
+          2. "TAKE A CLOSER LOOK — Everything has a place." (PDF Page 2 Stacked List)
           ===================================================================== */}
       <section
         id="template-closer-look"
         data-testid="template-closer-look"
-        className="pt-16 sm:pt-24 pb-12 sm:pb-16 max-w-[1240px] mx-auto px-4 sm:px-6"
+        className="pt-16 sm:pt-24 pb-12 sm:pb-16 max-w-[960px] mx-auto px-4 sm:px-6"
       >
         <div className="space-y-3 max-w-[680px] mb-10">
           <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#64748B]">
@@ -1611,10 +1609,10 @@ export const TemplateShowcasePage: React.FC<{
           </p>
         </div>
 
-        {/* 6-Card System Modules Grid (matching image_3bf9bf89.png) */}
+        {/* Full-Width Single-Column Stacked Rows (Matching PDF Page 2) */}
         <div
           data-testid="closer-look-grid"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+          className="grid grid-cols-1 gap-3.5"
         >
           {showcase.closerLookModules.map((moduleTitle, index) => {
             const isSelected = selectedModuleIndex === index;
@@ -1622,10 +1620,10 @@ export const TemplateShowcasePage: React.FC<{
               <motion.button
                 key={moduleTitle}
                 type="button"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.99 }}
+                whileHover={{ y: -1.5 }}
+                whileTap={{ scale: 0.995 }}
                 onClick={() => setSelectedModuleIndex(index)}
-                className={`w-full text-left rounded-[16px] bg-white border px-6 py-5 flex items-center gap-3.5 transition-all duration-200 cursor-pointer ${
+                className={`w-full text-left rounded-[14px] bg-white border px-6 py-4.5 sm:py-5 flex items-center gap-3.5 transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? 'border-[#1D6EE3] shadow-[0_10px_24px_-10px_rgba(29,110,227,0.18)]'
                     : 'border-[#E2E8F0] hover:border-[#1D6EE3]/45 shadow-[0_2px_8px_-3px_rgba(15,23,42,0.04)]'
@@ -1647,14 +1645,14 @@ export const TemplateShowcasePage: React.FC<{
       {template.slug === 'freelance-os' ? (
         <section
           data-testid="template-cascading-pages"
-          className="py-10 sm:py-14 max-w-[1240px] mx-auto px-4 sm:px-6"
+          className="py-10 sm:py-14 max-w-[960px] mx-auto px-4 sm:px-6"
         >
           <FreelanceOsGallery variant="detail" />
         </section>
       ) : (
       <section
         data-testid="template-cascading-pages"
-        className="py-10 sm:py-14 max-w-[1240px] mx-auto px-4 sm:px-6"
+        className="py-10 sm:py-14 max-w-[960px] mx-auto px-4 sm:px-6"
       >
         <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <h2 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#0F172A]">
@@ -2071,7 +2069,7 @@ export const TemplateShowcasePage: React.FC<{
       {/* =====================================================================
           4. WHAT'S INCLUDED & INSTANT DUPLICATION SUMMARY CARD
           ===================================================================== */}
-      <section className="py-12 sm:py-16 max-w-[1240px] mx-auto px-4 sm:px-6">
+      <section className="py-12 sm:py-16 max-w-[960px] mx-auto px-4 sm:px-6">
         <div className="rounded-[24px] bg-[#F8FAFC] border border-[#E2E8F0] p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFF6FF] text-[#1D6EE3] text-[12px] font-semibold">
@@ -2112,12 +2110,19 @@ export const TemplateShowcasePage: React.FC<{
               </div>
             </div>
 
-            <div className="h-32 rounded-[12px] bg-[#F8FAFC] border border-[#EDF2F7] p-3 flex items-center justify-center">
+            <div className="h-44 sm:h-48 rounded-[12px] bg-[#FFFFFF] border border-[#EDF2F7] p-2.5 flex items-center justify-center overflow-hidden">
               <BlushAssetImage
-                src={template.illustrationUrl}
-                alt={`${template.name} Notion workspace illustration`}
+                src={
+                  template.slug === 'freelance-os'
+                    ? freelancerMascotCardImg
+                    : template.illustrationUrl
+                }
+                alt={`${template.name} mascot illustration`}
                 disableFloat
                 className="w-full h-full"
+                imgClassName={`max-w-full max-h-full w-auto h-auto object-contain ${
+                  template.slug === 'freelance-os' ? 'scale-[1.08]' : ''
+                }`}
               />
             </div>
 
@@ -2141,7 +2146,7 @@ export const TemplateShowcasePage: React.FC<{
           5. RELATED TEMPLATES IN THE SAME CATEGORY
           ===================================================================== */}
       {related.length > 0 && (
-        <section className="pt-8 max-w-[1240px] mx-auto px-4 sm:px-6 border-t border-[#E2E8F0]">
+        <section className="pt-8 max-w-[960px] mx-auto px-4 sm:px-6 border-t border-[#E2E8F0]">
           <div className="flex items-center justify-between mb-8 pt-8">
             <div>
               <h2 className="text-[24px] font-bold tracking-[-0.02em] text-[#0F172A]">
