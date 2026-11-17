@@ -40,7 +40,6 @@ import {
   FeatureMedia,
   UltraHdSvgFilter,
 } from './components/CoversAndIllustrations';
-import { FreelanceOsGallery } from './components/FreelanceOsGallery';
 import {
   AllAccessPage,
   AppsPage,
@@ -630,17 +629,6 @@ export default function App() {
                   ))}
                 </div>
               </div>
-            </section>
-
-            {/* 1B. FREELANCER BUSINESS OS SHOWCASE SECTION */}
-            <section
-              data-testid="home-freelance-os-section"
-              className="py-16 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#EFEFED]"
-            >
-              <FreelanceOsGallery
-                variant="home"
-                onInspectTemplate={() => navigate('/templates/freelance-os')}
-              />
             </section>
 
             {/* 2–4. CORE PRODUCT FEATURE SPLITS */}

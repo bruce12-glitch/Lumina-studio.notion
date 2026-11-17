@@ -1057,6 +1057,25 @@ function getTemplateShowcaseData(template: Template): TemplateShowcaseMetadata {
   };
 
   const base = byCategory[template.category];
+
+  if (template.slug === 'freelance-os') {
+    return {
+      ...base,
+      heroHeadline: 'Run your entire freelance studio in one calm workspace.',
+      heroSubheadline:
+        'Unify client pipelines, project delivery boards, overdue invoice tracking, time sheets, ICE ideation, contracts, and 18 connected databases inside Freelance OS.',
+      closerLookModules: [
+        'Main Hub (Freelancer Business OS)',
+        'Clients Dashboard & Pipeline CRM',
+        'Project Management (Simple, Complete, Advanced)',
+        'Finances, Invoices & Overdue Aging',
+        'Time Sheet & Profitability Logger',
+        'Ideation Hub, Growth, Legals & 18 DBs',
+      ],
+      showcaseHeading: 'Inside Freelancer Business OS',
+    };
+  }
+
   return {
     ...base,
     closerLookModules: base.defaultModules,
@@ -1206,10 +1225,14 @@ export const TemplateShowcasePage: React.FC<{
   return (
     <div data-testid="template-showcase-page" className="pb-24 bg-white">
       {/* =====================================================================
-          1. HERO SECTION & FULL-WIDTH SHOWCASE CARD (PDF Pages 1–2 Alignment)
+          1. HERO SECTION & SHOWCASE STAGE
           ===================================================================== */}
-      <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-8 sm:pt-14 pb-16 sm:pb-24 border-b border-[#EDF2F7]">
-        <div className="max-w-[960px] mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12">
+      <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-8 sm:pt-14 pb-16 sm:pb-22 border-b border-[#EDF2F7]">
+        <div
+          className={`${
+            template.slug === 'freelance-os' ? 'max-w-[1100px]' : 'max-w-[960px]'
+          } mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12`}
+        >
           {/* Top Breadcrumb: All templates / {template.name} */}
           <nav
             aria-label="Breadcrumb"
@@ -1230,362 +1253,482 @@ export const TemplateShowcasePage: React.FC<{
             <span className="text-[#0F172A] font-semibold">{template.name}</span>
           </nav>
 
-          {/* Single-Column Hero Copy Block (PDF Page 1) */}
-          <div className="space-y-6 max-w-[740px]">
-            {/* "Made for Notion" Pill Badge */}
-            <div>
-              <div
-                data-testid="made-for-notion-badge"
-                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="shrink-0"
+          {template.slug === 'freelance-os' ? (
+            /* Balanced 2-Column Hero Split Featuring Freelancer Mascot on the Right */
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              <div className="lg:col-span-6 space-y-6">
+                <div>
+                  <div
+                    data-testid="made-for-notion-badge"
+                    className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                      className="shrink-0"
+                    >
+                      <path
+                        d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
+                        fill="#FFFFFF"
+                        stroke="#1E293B"
+                        strokeWidth="1.75"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M4.5 6.2L10.2 9.4L20.2 7.2"
+                        stroke="#1E293B"
+                        strokeWidth="1.5"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M10.2 9.4V20.5"
+                        stroke="#1E293B"
+                        strokeWidth="1.5"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12.7 16.7V11.8L16.8 16.2V11.1"
+                        stroke="#1E293B"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#1E293B]">
+                      Made for Notion
+                    </span>
+                  </div>
+                </div>
+
+                <h1 className="font-display text-[clamp(34px,4.2vw,52px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
+                  {showcase.heroHeadline}
+                </h1>
+
+                <p className="text-[16.5px] sm:text-[18px] leading-[1.6] text-[#64748B]">
+                  {showcase.heroSubheadline}
+                </p>
+
+                <div className="flex flex-wrap items-baseline gap-3 pt-1">
+                  <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
+                    Premium from {formatPrice(template.price)}
+                  </span>
+                  <span className="text-[18px] font-medium text-[#64748B] line-through tabular-nums">
+                    {formatPrice(displayCompareAt)}
+                  </span>
+                  <span className="text-[14px] text-[#64748B]">
+                    One-time purchase
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3.5 pt-1">
+                  <motion.button
+                    type="button"
+                    data-testid="template-primary-cta"
+                    whileHover={{ y: -2, scale: 1.015 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                    onClick={handleOpenBuy}
+                    className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors"
+                  >
+                    <span>
+                      {isOwned
+                        ? `Open ${template.name}`
+                        : `Get ${template.name}`}
+                    </span>
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.button>
+
+                  <motion.button
+                    type="button"
+                    data-testid="template-preview-inside-btn"
+                    whileHover={{ y: -2, scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                    onClick={handleScrollToCloserLook}
+                    className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors"
+                  >
+                    <span>Preview what&apos;s inside</span>
+                  </motion.button>
+                </div>
+
+                <div className="space-y-2 pt-1">
+                  <div className="flex items-center gap-2 text-[14px] font-medium text-[#64748B]">
+                    <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
+                    <span>
+                      {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
+                    </span>
+                  </div>
+                  <p className="text-[13.5px] text-[#64748B]">
+                    1 command hub, 11 functional modules, and 18 interconnected databases.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Column: Prominent Freelancer Studio Mascot Stage */}
+              <div className="lg:col-span-6">
+                <div
+                  data-testid="template-device-mockup"
+                  onClick={handleScrollToCloserLook}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleScrollToCloserLook();
+                    }
+                  }}
+                  className="group rounded-[24px] bg-gradient-to-br from-[#EFF6FF] via-[#F8FAFC] to-[#FFFFFF] border border-[#DCE6F3] p-5 sm:p-7 shadow-[0_20px_50px_-18px_rgba(29,110,227,0.16)] relative overflow-hidden cursor-pointer"
                 >
-                  <path
-                    d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
-                    fill="#FFFFFF"
-                    stroke="#1E293B"
-                    strokeWidth="1.75"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M4.5 6.2L10.2 9.4L20.2 7.2"
-                    stroke="#1E293B"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10.2 9.4V20.5"
-                    stroke="#1E293B"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M12.7 16.7V11.8L16.8 16.2V11.1"
-                    stroke="#1E293B"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="text-[13px] font-medium tracking-[-0.01em] text-[#1E293B]">
-                  Made for Notion
-                </span>
-              </div>
-            </div>
-
-            {/* Benefit Headline */}
-            <h1 className="font-display text-[clamp(36px,4.8vw,56px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
-              {showcase.heroHeadline}
-            </h1>
-
-            {/* Subtitle / Description */}
-            <p className="text-[17px] sm:text-[18.5px] leading-[1.6] text-[#64748B] max-w-[660px]">
-              {showcase.heroSubheadline}
-            </p>
-
-            {/* Pricing Row */}
-            <div className="flex flex-wrap items-baseline gap-3 pt-1">
-              <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
-                {template.price === 0
-                  ? 'Free Edition $0'
-                  : `Premium from ${formatPrice(template.price)}`}
-              </span>
-              <span className="text-[18px] font-medium text-[#64748B] line-through tabular-nums">
-                {formatPrice(displayCompareAt)}
-              </span>
-              <span className="text-[14px] text-[#64748B]">
-                {template.price === 0
-                  ? 'Instant Notion duplicate'
-                  : 'One-time purchase'}
-              </span>
-            </div>
-
-            {/* Dual Pill Buttons: "Get [Template] →" + "Preview what's inside" */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-1">
-              <motion.button
-                type="button"
-                data-testid="template-primary-cta"
-                whileHover={{ y: -2, scale: 1.015 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                onClick={handleOpenBuy}
-                className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors"
-              >
-                <span>
-                  {isOwned
-                    ? `Open ${template.name}`
-                    : `Get ${template.name}`}
-                </span>
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
-
-              <motion.button
-                type="button"
-                data-testid="template-preview-inside-btn"
-                whileHover={{ y: -2, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                onClick={handleScrollToCloserLook}
-                className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors"
-              >
-                <span>Preview what&apos;s inside</span>
-              </motion.button>
-            </div>
-
-            {/* Rating & Edition Note */}
-            <div className="space-y-2.5 pt-2">
-              <div className="flex items-center gap-2 text-[14px] font-medium text-[#64748B]">
-                <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
-                <span>
-                  {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
-                </span>
-              </div>
-              <p className="text-[13.5px] text-[#64748B]">
-                Choose your edition at checkout. Add it to your Notion workspace.
-              </p>
-            </div>
-          </div>
-
-          {/* Full-Width Hero Showcase Card Beneath Copy (PDF Pages 1–2 Layout) */}
-          <div>
-            {template.slug === 'freelance-os' ? (
-              <div
-                data-testid="template-device-mockup"
-                onClick={handleScrollToCloserLook}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleScrollToCloserLook();
-                  }
-                }}
-                className="group rounded-[24px] bg-white border border-[#E2E8F0] p-4 sm:p-8 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.08)] relative overflow-hidden cursor-pointer"
-              >
-                <div className="rounded-[18px] overflow-hidden bg-white h-[320px] sm:h-[430px] md:h-[480px] flex items-center justify-center relative">
-                  <img
-                    src={freelancerMascotHeroImg}
-                    alt="Freelance OS studio mascot working with calendar, deliverables, and invoices"
-                    className="w-full h-full object-contain scale-[1.06] sm:scale-[1.08] transition-transform duration-500 group-hover:scale-[1.11]"
-                  />
-                </div>
-                <div className="pt-4 mt-2 border-t border-[#F1F5F9] px-1 flex flex-wrap items-center justify-between gap-2 text-[13px] text-[#64748B]">
-                  <span className="font-semibold text-[#0F172A]">
-                    Freelancer Business OS · Resonance Studio
-                  </span>
-                  <span className="text-[#1D6EE3] font-semibold">
-                    4 HD Modules Included ↓
-                  </span>
+                  <div className="rounded-[18px] bg-white/75 border border-white/80 p-3 sm:p-4 h-[300px] sm:h-[380px] flex items-center justify-center overflow-hidden">
+                    <img
+                      src={freelancerMascotHeroImg}
+                      alt="Freelance OS studio mascot working with calendar, deliverables, and invoices"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-contain mix-blend-multiply scale-[1.06] transition-transform duration-500 group-hover:scale-[1.1]"
+                    />
+                  </div>
+                  <div className="pt-4 mt-2 border-t border-[#DCE6F3]/80 px-1 flex flex-wrap items-center justify-between gap-2 text-[13px] text-[#475569]">
+                    <span className="font-semibold text-[#0F172A]">
+                      Freelancer Business OS · Studio Mascot Edition
+                    </span>
+                    <span className="text-[#1D6EE3] font-semibold">
+                      13 Interactive Tabs ↓
+                    </span>
+                  </div>
                 </div>
               </div>
-            ) : (
-              <div
-                data-testid="template-device-mockup"
-                className="rounded-[24px] bg-white border border-[#E2E8F0] p-6 sm:p-12 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.07)] relative overflow-hidden"
-              >
-                <div className="relative mx-auto max-w-[680px] py-2 sm:py-4 pr-8 sm:pr-16">
-                  {/* TABLET LANDSCAPE FRAME (iPad Mockup) */}
-                  <div className="rounded-[20px] bg-[#111827] p-[9px] sm:p-[12px] shadow-[0_24px_48px_-12px_rgba(15,23,42,0.24)] border border-[#334155]">
-                    <div className="rounded-[12px] bg-white overflow-hidden border border-[#E2E8F0]">
-                      {/* Notion Top Bar inside Tablet */}
-                      <div className="px-4 pt-3.5 pb-2 border-b border-[#F1F5F9] flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-[6px] bg-[#EFF6FF] text-[#1D6EE3] font-bold text-[13px]">
-                            ∞
-                          </span>
-                          <span className="text-[14px] sm:text-[15px] font-bold tracking-[-0.02em] text-[#0F172A]">
-                            {template.name}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-[10px] text-[#64748B] font-mono">
-                          <span className="px-1.5 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
-                            {template.databaseCount} DBs
-                          </span>
-                          <span className="px-1.5 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
-                            {template.version}
-                          </span>
-                        </div>
-                      </div>
+            </div>
+          ) : (
+            <>
+              {/* Single-Column Hero Copy Block (Non-Freelance Templates) */}
+              <div className="space-y-6 max-w-[740px]">
+                {/* "Made for Notion" Pill Badge */}
+                <div>
+                  <div
+                    data-testid="made-for-notion-badge"
+                    className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden="true"
+                      className="shrink-0"
+                    >
+                      <path
+                        d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
+                        fill="#FFFFFF"
+                        stroke="#1E293B"
+                        strokeWidth="1.75"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M4.5 6.2L10.2 9.4L20.2 7.2"
+                        stroke="#1E293B"
+                        strokeWidth="1.5"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M10.2 9.4V20.5"
+                        stroke="#1E293B"
+                        strokeWidth="1.5"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12.7 16.7V11.8L16.8 16.2V11.1"
+                        stroke="#1E293B"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#1E293B]">
+                      Made for Notion
+                    </span>
+                  </div>
+                </div>
 
-                      {/* Tablet Interior: Left Quick-Action Sidebar + Right Life Areas Grid */}
-                      <div className="grid grid-cols-12 p-3 sm:p-4 gap-3 sm:gap-4 bg-white min-h-[250px] sm:min-h-[280px]">
-                        {/* Left Sidebar: Quick Action + Productivity Links */}
-                        <div className="col-span-4 space-y-3 border-r border-[#F1F5F9] pr-2.5">
-                          <div>
-                            <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#0F172A] mb-1.5">
-                              Quick Action
-                            </p>
-                            <div className="space-y-1">
-                              {[
-                                'New Task',
-                                'New Note',
-                                'New Project',
-                                'New Goal',
-                                'New Reference',
-                                'Add Agenda',
-                              ].map((action) => (
-                                <div
-                                  key={action}
-                                  className="px-2 py-1 rounded-[5px] border border-[#E2E8F0] bg-[#FFFFFF] text-[8.5px] font-medium text-[#334155] flex items-center gap-1 shadow-[0_1px_1px_rgba(15,23,42,0.02)]"
-                                >
-                                  <span className="w-2.5 h-2.5 rounded-full bg-[#EFF6FF] text-[#1D6EE3] inline-flex items-center justify-center text-[7px] font-bold">
-                                    +
-                                  </span>
-                                  <span className="truncate">{action}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
+                {/* Benefit Headline */}
+                <h1 className="font-display text-[clamp(36px,4.8vw,56px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
+                  {showcase.heroHeadline}
+                </h1>
 
-                          <div>
-                            <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#0F172A] mb-1.5">
-                              Productivity
-                            </p>
-                            <div className="space-y-1 text-[8.5px] font-medium text-[#475569]">
-                              {[
-                                'Inbox',
-                                'Life Areas',
-                                'Goals',
-                                'Projects & Tasks',
-                                'References & Notes',
-                              ].map((navItem) => (
-                                <div
-                                  key={navItem}
-                                  className="flex items-center gap-1.5 py-0.5 truncate"
-                                >
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3] shrink-0" />
-                                  <span className="truncate underline decoration-[#CBD5E1] underline-offset-2">
-                                    {navItem}
-                                  </span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
+                {/* Subtitle / Description */}
+                <p className="text-[17px] sm:text-[18.5px] leading-[1.6] text-[#64748B] max-w-[660px]">
+                  {showcase.heroSubheadline}
+                </p>
 
-                        {/* Right Main Area: Life Areas 3x2 Gallery Grid */}
-                        <div className="col-span-8 space-y-2">
-                          <div className="flex items-center justify-between">
-                            <p className="text-[10px] font-bold text-[#0F172A]">
-                              Life Areas
-                            </p>
-                            <span className="text-[8.5px] text-[#64748B] font-medium">
-                              ⊞ Areas
+                {/* Pricing Row */}
+                <div className="flex flex-wrap items-baseline gap-3 pt-1">
+                  <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
+                    {template.price === 0
+                      ? 'Free Edition $0'
+                      : `Premium from ${formatPrice(template.price)}`}
+                  </span>
+                  <span className="text-[18px] font-medium text-[#64748B] line-through tabular-nums">
+                    {formatPrice(displayCompareAt)}
+                  </span>
+                  <span className="text-[14px] text-[#64748B]">
+                    {template.price === 0
+                      ? 'Instant Notion duplicate'
+                      : 'One-time purchase'}
+                  </span>
+                </div>
+
+                {/* Dual Pill Buttons: "Get [Template] →" + "Preview what's inside" */}
+                <div className="flex flex-wrap items-center gap-3.5 pt-1">
+                  <motion.button
+                    type="button"
+                    data-testid="template-primary-cta"
+                    whileHover={{ y: -2, scale: 1.015 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                    onClick={handleOpenBuy}
+                    className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors"
+                  >
+                    <span>
+                      {isOwned
+                        ? `Open ${template.name}`
+                        : `Get ${template.name}`}
+                    </span>
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.button>
+
+                  <motion.button
+                    type="button"
+                    data-testid="template-preview-inside-btn"
+                    whileHover={{ y: -2, scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                    onClick={handleScrollToCloserLook}
+                    className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors"
+                  >
+                    <span>Preview what&apos;s inside</span>
+                  </motion.button>
+                </div>
+
+                {/* Rating & Edition Note */}
+                <div className="space-y-2.5 pt-2">
+                  <div className="flex items-center gap-2 text-[14px] font-medium text-[#64748B]">
+                    <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
+                    <span>
+                      {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
+                    </span>
+                  </div>
+                  <p className="text-[13.5px] text-[#64748B]">
+                    Choose your edition at checkout. Add it to your Notion workspace.
+                  </p>
+                </div>
+              </div>
+
+              {/* Full-Width Hero Showcase Card Beneath Copy (PDF Pages 1–2 Layout) */}
+              <div>
+                <div
+                  data-testid="template-device-mockup"
+                  className="rounded-[24px] bg-white border border-[#E2E8F0] p-6 sm:p-12 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.07)] relative overflow-hidden"
+                >
+                  <div className="relative mx-auto max-w-[680px] py-2 sm:py-4 pr-8 sm:pr-16">
+                    {/* TABLET LANDSCAPE FRAME (iPad Mockup) */}
+                    <div className="rounded-[20px] bg-[#111827] p-[9px] sm:p-[12px] shadow-[0_24px_48px_-12px_rgba(15,23,42,0.24)] border border-[#334155]">
+                      <div className="rounded-[12px] bg-white overflow-hidden border border-[#E2E8F0]">
+                        {/* Notion Top Bar inside Tablet */}
+                        <div className="px-4 pt-3.5 pb-2 border-b border-[#F1F5F9] flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-[6px] bg-[#EFF6FF] text-[#1D6EE3] font-bold text-[13px]">
+                              ∞
+                            </span>
+                            <span className="text-[14px] sm:text-[15px] font-bold tracking-[-0.02em] text-[#0F172A]">
+                              {template.name}
                             </span>
                           </div>
+                          <div className="flex items-center gap-1.5 text-[10px] text-[#64748B] font-mono">
+                            <span className="px-1.5 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
+                              {template.databaseCount} DBs
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
+                              {template.version}
+                            </span>
+                          </div>
+                        </div>
 
-                          <div className="grid grid-cols-3 gap-2">
-                            {showcase.lifeAreas.map((area) => (
-                              <div
-                                key={area.title}
-                                className="rounded-[8px] border border-[#E2E8F0] bg-[#FFFFFF] overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
-                              >
-                                <div className="h-12 sm:h-14 bg-[#F8FAFC] border-b border-[#F1F5F9] flex items-center justify-center">
-                                  <AreaGeometricArt pattern={area.pattern} />
-                                </div>
-                                <div className="p-1.5 space-y-0.5">
-                                  <p className="text-[8.5px] font-semibold text-[#0F172A] truncate">
-                                    {area.title}
-                                  </p>
-                                  <div className="flex flex-col gap-0.5">
-                                    <span className="text-[7px] text-[#1D6EE3] bg-[#EFF6FF] px-1 rounded w-fit">
-                                      {area.projectsCount}
+                        {/* Tablet Interior: Left Quick-Action Sidebar + Right Life Areas Grid */}
+                        <div className="grid grid-cols-12 p-3 sm:p-4 gap-3 sm:gap-4 bg-white min-h-[250px] sm:min-h-[280px]">
+                          {/* Left Sidebar: Quick Action + Productivity Links */}
+                          <div className="col-span-4 space-y-3 border-r border-[#F1F5F9] pr-2.5">
+                            <div>
+                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#0F172A] mb-1.5">
+                                Quick Action
+                              </p>
+                              <div className="space-y-1">
+                                {[
+                                  'New Task',
+                                  'New Note',
+                                  'New Project',
+                                  'New Goal',
+                                  'New Reference',
+                                  'Add Agenda',
+                                ].map((action) => (
+                                  <div
+                                    key={action}
+                                    className="px-2 py-1 rounded-[5px] border border-[#E2E8F0] bg-[#FFFFFF] text-[8.5px] font-medium text-[#334155] flex items-center gap-1 shadow-[0_1px_1px_rgba(15,23,42,0.02)]"
+                                  >
+                                    <span className="w-2.5 h-2.5 rounded-full bg-[#EFF6FF] text-[#1D6EE3] inline-flex items-center justify-center text-[7px] font-bold">
+                                      +
                                     </span>
-                                    <span className="text-[7px] text-[#64748B] px-1">
-                                      {area.notesCount}
+                                    <span className="truncate">{action}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div>
+                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#0F172A] mb-1.5">
+                                Productivity
+                              </p>
+                              <div className="space-y-1 text-[8.5px] font-medium text-[#475569]">
+                                {[
+                                  'Inbox',
+                                  'Life Areas',
+                                  'Goals',
+                                  'Projects & Tasks',
+                                  'References & Notes',
+                                ].map((navItem) => (
+                                  <div
+                                    key={navItem}
+                                    className="flex items-center gap-1.5 py-0.5 truncate"
+                                  >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3] shrink-0" />
+                                    <span className="truncate underline decoration-[#CBD5E1] underline-offset-2">
+                                      {navItem}
                                     </span>
                                   </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Right Main Area: Life Areas 3x2 Gallery Grid */}
+                          <div className="col-span-8 space-y-2">
+                            <div className="flex items-center justify-between">
+                              <p className="text-[10px] font-bold text-[#0F172A]">
+                                Life Areas
+                              </p>
+                              <span className="text-[8.5px] text-[#64748B] font-medium">
+                                ⊞ Areas
+                              </span>
+                            </div>
+
+                            <div className="grid grid-cols-3 gap-2">
+                              {showcase.lifeAreas.map((area) => (
+                                <div
+                                  key={area.title}
+                                  className="rounded-[8px] border border-[#E2E8F0] bg-[#FFFFFF] overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                                >
+                                  <div className="h-12 sm:h-14 bg-[#F8FAFC] border-b border-[#F1F5F9] flex items-center justify-center">
+                                    <AreaGeometricArt pattern={area.pattern} />
+                                  </div>
+                                  <div className="p-1.5 space-y-0.5">
+                                    <p className="text-[8.5px] font-semibold text-[#0F172A] truncate">
+                                      {area.title}
+                                    </p>
+                                    <div className="flex flex-col gap-0.5">
+                                      <span className="text-[7px] text-[#1D6EE3] bg-[#EFF6FF] px-1 rounded w-fit">
+                                        {area.projectsCount}
+                                      </span>
+                                      <span className="text-[7px] text-[#64748B] px-1">
+                                        {area.notesCount}
+                                      </span>
+                                    </div>
+                                  </div>
                                 </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* OVERLAPPING MOBILE PORTRAIT FRAME (iPhone Mockup on Right) */}
+                    <div className="w-[150px] sm:w-[178px] rounded-[24px] bg-[#111827] p-[6px] sm:p-[7px] shadow-[-12px_20px_38px_rgba(15,23,42,0.25)] border border-[#334155] absolute right-0 bottom-0 z-10">
+                      <div className="rounded-[19px] bg-white overflow-hidden border border-[#E2E8F0]">
+                        {/* Phone Status Bar + Dynamic Island */}
+                        <div className="px-3 pt-2 pb-1 flex items-center justify-between text-[8px] font-semibold text-[#0F172A]">
+                          <span>11:20</span>
+                          <span className="w-10 h-2.5 rounded-full bg-[#0F172A]" />
+                          <span>5G 100%</span>
+                        </div>
+
+                        {/* Mobile Notion Header */}
+                        <div className="px-3 py-1.5 border-b border-[#F1F5F9] flex items-center justify-between text-[8px] text-[#64748B]">
+                          <span className="truncate font-medium text-[#0F172A]">
+                            ‹ ∞ {template.name}
+                          </span>
+                          <span>•••</span>
+                        </div>
+
+                        {/* Mobile Notion Body */}
+                        <div className="p-3 space-y-2.5">
+                          <p className="text-[11px] font-bold text-[#0F172A] leading-tight truncate">
+                            {template.name}
+                          </p>
+
+                          <div className="space-y-1">
+                            <p className="text-[8.5px] font-bold text-[#0F172A]">
+                              Quick Action
+                            </p>
+                            {[
+                              'New Task',
+                              'New Note',
+                              'New Project',
+                              'New Goal',
+                              'New Reference',
+                            ].map((act) => (
+                              <div
+                                key={act}
+                                className="px-2 py-1 rounded-[5px] border border-[#E2E8F0] bg-white text-[8px] font-medium text-[#1E293B] flex items-center gap-1.5"
+                              >
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#EFF6FF] text-[#1D6EE3] inline-flex items-center justify-center text-[7px] font-bold">
+                                  +
+                                </span>
+                                <span className="truncate">{act}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="space-y-1 pt-0.5">
+                            <p className="text-[8.5px] font-bold text-[#0F172A]">
+                              Productivity
+                            </p>
+                            {['Inbox', 'Life Areas', 'Goals'].map((item) => (
+                              <div
+                                key={item}
+                                className="flex items-center gap-1.5 text-[8px] font-medium text-[#334155]"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3]" />
+                                <span>{item}</span>
                               </div>
                             ))}
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* OVERLAPPING MOBILE PORTRAIT FRAME (iPhone Mockup on Right) */}
-                  <div className="w-[150px] sm:w-[178px] rounded-[24px] bg-[#111827] p-[6px] sm:p-[7px] shadow-[-12px_20px_38px_rgba(15,23,42,0.25)] border border-[#334155] absolute right-0 bottom-0 z-10">
-                    <div className="rounded-[19px] bg-white overflow-hidden border border-[#E2E8F0]">
-                      {/* Phone Status Bar + Dynamic Island */}
-                      <div className="px-3 pt-2 pb-1 flex items-center justify-between text-[8px] font-semibold text-[#0F172A]">
-                        <span>11:20</span>
-                        <span className="w-10 h-2.5 rounded-full bg-[#0F172A]" />
-                        <span>5G 100%</span>
-                      </div>
-
-                      {/* Mobile Notion Header */}
-                      <div className="px-3 py-1.5 border-b border-[#F1F5F9] flex items-center justify-between text-[8px] text-[#64748B]">
-                        <span className="truncate font-medium text-[#0F172A]">
-                          ‹ ∞ {template.name}
-                        </span>
-                        <span>•••</span>
-                      </div>
-
-                      {/* Mobile Notion Body */}
-                      <div className="p-3 space-y-2.5">
-                        <p className="text-[11px] font-bold text-[#0F172A] leading-tight truncate">
-                          {template.name}
-                        </p>
-
-                        <div className="space-y-1">
-                          <p className="text-[8.5px] font-bold text-[#0F172A]">
-                            Quick Action
-                          </p>
-                          {[
-                            'New Task',
-                            'New Note',
-                            'New Project',
-                            'New Goal',
-                            'New Reference',
-                          ].map((act) => (
-                            <div
-                              key={act}
-                              className="px-2 py-1 rounded-[5px] border border-[#E2E8F0] bg-white text-[8px] font-medium text-[#1E293B] flex items-center gap-1.5"
-                            >
-                              <span className="w-2.5 h-2.5 rounded-full bg-[#EFF6FF] text-[#1D6EE3] inline-flex items-center justify-center text-[7px] font-bold">
-                                +
-                              </span>
-                              <span className="truncate">{act}</span>
-                            </div>
-                          ))}
+                        {/* Mobile Bottom Navigation Bar */}
+                        <div className="px-3 py-1.5 border-t border-[#F1F5F9] bg-[#F8FAFC] flex items-center justify-around text-[#64748B]">
+                          <LayoutGrid className="w-3 h-3" />
+                          <Search className="w-3 h-3" />
+                          <Inbox className="w-3 h-3 text-[#1D6EE3]" />
+                          <Plus className="w-3 h-3" />
                         </div>
-
-                        <div className="space-y-1 pt-0.5">
-                          <p className="text-[8.5px] font-bold text-[#0F172A]">
-                            Productivity
-                          </p>
-                          {['Inbox', 'Life Areas', 'Goals'].map((item) => (
-                            <div
-                              key={item}
-                              className="flex items-center gap-1.5 text-[8px] font-medium text-[#334155]"
-                            >
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3]" />
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Mobile Bottom Navigation Bar */}
-                      <div className="px-3 py-1.5 border-t border-[#F1F5F9] bg-[#F8FAFC] flex items-center justify-around text-[#64748B]">
-                        <LayoutGrid className="w-3 h-3" />
-                        <Search className="w-3 h-3" />
-                        <Inbox className="w-3 h-3 text-[#1D6EE3]" />
-                        <Plus className="w-3 h-3" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              )}
-            </div>
+            </>
+          )}
         </div>
       </section>
 
