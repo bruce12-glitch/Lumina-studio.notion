@@ -195,3 +195,29 @@ test('testimonials include 4 attributable reviews linked to valid catalog templa
   }
 });
 
+test('Student OS and Researcher OS specification integrity and filters work deterministically', () => {
+  assert.equal(validateOsSpecIntegrity(STUDENT_OS_SPEC), true);
+  assert.equal(validateOsSpecIntegrity(RESEARCHER_OS_SPEC), true);
+
+  const studentCounts = getOsSpecSummaryCounts(STUDENT_OS_SPEC);
+  assert.equal(studentCounts.modulesCount, 11);
+  assert.equal(studentCounts.databasesCount, 12);
+  assert.equal(studentCounts.templatesCount, 8);
+  assert.ok(studentCounts.totalViewsCount >= 22);
+
+  const researcherCounts = getOsSpecSummaryCounts(RESEARCHER_OS_SPEC);
+  assert.equal(researcherCounts.modulesCount, 12);
+  assert.equal(researcherCounts.databasesCount, 14);
+  assert.equal(researcherCounts.templatesCount, 8);
+  assert.ok(researcherCounts.totalViewsCount >= 24);
+
+  const filteredGpa = filterOsModules(STUDENT_OS_SPEC.modules, 'All', 'GPA');
+  assert.equal(filteredGpa.length, 1);
+  assert.equal(filteredGpa[0].id, 'gpa-grades');
+
+  const filteredProtocols = filterOsDatabases(RESEARCHER_OS_SPEC.databases, 'Protocol');
+  assert.ok(filteredProtocols.length >= 2);
+});
+
+
+
