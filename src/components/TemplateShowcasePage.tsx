@@ -17,6 +17,8 @@ import { formatPrice } from '../utils/storeLogic';
 import { CheckoutTarget } from './CheckoutModal';
 import { TemplateCard } from './Chrome';
 import { BlushAssetImage } from './CoversAndIllustrations';
+import { FreelanceOsGallery } from './FreelanceOsGallery';
+import freelanceOsHubImg from '../assets/images/freelance_os_hub_hd_1794922765448.jpg';
 
 interface TemplateShowcaseMetadata {
   heroHeadline: string;
@@ -1351,12 +1353,43 @@ export const TemplateShowcasePage: React.FC<{
               </div>
             </div>
 
-            {/* Right Column: Dual-Device Tablet + Phone Notion Mockup Card */}
+            {/* Right Column: Freelance OS HD Studio Preview OR Dual-Device Notion Mockup */}
             <div className="lg:col-span-6">
-              <div
-                data-testid="template-device-mockup"
-                className="rounded-[24px] bg-white border border-[#E2E8F0] p-5 sm:p-8 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.07)] relative overflow-hidden"
-              >
+              {template.slug === 'freelance-os' ? (
+                <div
+                  data-testid="template-device-mockup"
+                  onClick={handleScrollToCloserLook}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleScrollToCloserLook();
+                    }
+                  }}
+                  className="group rounded-[24px] bg-white border border-[#E2E8F0] p-3 sm:p-4 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.08)] relative overflow-hidden cursor-pointer"
+                >
+                  <div className="rounded-[16px] overflow-hidden border border-[#E2E8F0] aspect-[16/9] bg-[#F8FAFC] relative">
+                    <img
+                      src={freelanceOsHubImg}
+                      alt="Freelancer Business OS workspace overview"
+                      className="w-full h-full object-cover showcase-hd-image transition-transform duration-500 group-hover:scale-[1.015]"
+                    />
+                  </div>
+                  <div className="pt-3 px-1 flex items-center justify-between text-[12.5px] text-[#64748B]">
+                    <span className="font-semibold text-[#0F172A]">
+                      Freelancer Business OS · Resonance Studio
+                    </span>
+                    <span className="text-[#1D6EE3] font-semibold">
+                      4 HD Modules Included ↓
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  data-testid="template-device-mockup"
+                  className="rounded-[24px] bg-white border border-[#E2E8F0] p-5 sm:p-8 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.07)] relative overflow-hidden"
+                >
                 <div className="relative mx-auto max-w-[540px] py-2 sm:py-4 pr-6 sm:pr-12">
                   {/* TABLET LANDSCAPE FRAME (iPad Mockup) */}
                   <div className="rounded-[20px] bg-[#111827] p-[9px] sm:p-[12px] shadow-[0_24px_48px_-12px_rgba(15,23,42,0.24)] border border-[#334155]">
@@ -1552,6 +1585,7 @@ export const TemplateShowcasePage: React.FC<{
                   </div>
                 </div>
               </div>
+              )}
             </div>
           </div>
         </div>
@@ -1608,9 +1642,16 @@ export const TemplateShowcasePage: React.FC<{
       </section>
 
       {/* =====================================================================
-          3. "Master Your Productivity" — 3-PAGE CASCADING NOTION SHOWCASE
-             (image_49ed9109.png)
+          3. "Master Your Productivity" — FREELANCE OS HD GALLERY OR 3-PAGE CASCADING SHOWCASE
           ===================================================================== */}
+      {template.slug === 'freelance-os' ? (
+        <section
+          data-testid="template-cascading-pages"
+          className="py-10 sm:py-14 max-w-[1240px] mx-auto px-4 sm:px-6"
+        >
+          <FreelanceOsGallery variant="detail" />
+        </section>
+      ) : (
       <section
         data-testid="template-cascading-pages"
         className="py-10 sm:py-14 max-w-[1240px] mx-auto px-4 sm:px-6"
@@ -2025,6 +2066,7 @@ export const TemplateShowcasePage: React.FC<{
           </div>
         </div>
       </section>
+      )}
 
       {/* =====================================================================
           4. WHAT'S INCLUDED & INSTANT DUPLICATION SUMMARY CARD
