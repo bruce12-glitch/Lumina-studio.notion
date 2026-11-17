@@ -27,6 +27,19 @@ export const UltraHdSvgFilter: React.FC = () => (
           <feFuncB type="linear" slope="1.03" intercept="-0.015" />
         </feComponentTransfer>
       </filter>
+      <filter id="resonance-showcase-hd" colorInterpolationFilters="sRGB">
+        <feConvolveMatrix
+          order="3 3"
+          preserveAlpha="true"
+          kernelMatrix="0 -0.18 0 -0.18 1.72 -0.18 0 -0.18 0"
+          result="crisp"
+        />
+        <feComponentTransfer in="crisp">
+          <feFuncR type="linear" slope="1.04" intercept="-0.02" />
+          <feFuncG type="linear" slope="1.04" intercept="-0.02" />
+          <feFuncB type="linear" slope="1.04" intercept="-0.02" />
+        </feComponentTransfer>
+      </filter>
     </defs>
   </svg>
 );

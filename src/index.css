@@ -128,6 +128,14 @@ body {
   filter: url(#lumina-ultra-hd) contrast(1.06) saturate(1.08);
 }
 
+/* Crisp High-Clarity Rendering for Studio Workspace Showcase Renders */
+.showcase-hd-image {
+  image-rendering: -webkit-optimize-contrast;
+  filter: url(#resonance-showcase-hd) contrast(1.025) saturate(1.03);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 /* Subtle reveal & ambient asset motion keyframes */
 @keyframes fadeUp {
   from {
