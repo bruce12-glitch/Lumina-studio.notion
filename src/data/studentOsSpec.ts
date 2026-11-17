@@ -307,6 +307,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Reading Library', 'Citations Vault', 'Courses'],
       includedSubTemplates: ['Book & Paper Summary'],
     },
+    {
+      id: 'campus-habits',
+      number: '09',
+      shortLabel: 'Campus & Habits',
+      title: 'Daily Habits, Clubs & Career',
+      category: 'Life & System',
+      summary:
+        'Balance deep study blocks, sleep logs, internship applications, and faculty office hours.',
+      whatItContains: [
+        'Study Session Timer Log — Track deep-work minutes per subject.',
+        'Career & Internships Board — Wishlist, Applied, OA, Interview, Offer stages.',
+        'Faculty Directory — Emails, rooms, office hours, and courses.',
+      ],
+      includedViews: [
+        {
+          name: 'Daily Focus Log',
+          layout: 'Table',
+          description: 'Study hours & daily wellness check-ins.',
+        },
+        {
+          name: 'Internships Pipeline',
+          layout: 'Board',
+          description: 'Application stages with deadlines.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Weekly deep-work hour totals',
+        '7-day sleep & habit consistency score',
+      ],
+      connectedDatabases: ['Study Sessions', 'Campus & Internships'],
+      includedSubTemplates: ['Daily Wellness Check-In'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
