@@ -1236,6 +1236,7 @@ export const TemplateShowcasePage: React.FC<{
   const [whatsInsideFilter, setWhatsInsideFilter] =
     useState<WhatsInsideFilter>('All');
 
+
   const related = TEMPLATES.filter(
     (t) => t.category === template.category && t.slug !== template.slug
   ).slice(0, 3);
@@ -1262,6 +1263,37 @@ export const TemplateShowcasePage: React.FC<{
     const el = document.getElementById('template-closer-look');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleSelectCloserLookModule = (index: number) => {
+    setSelectedModuleIndex(index);
+    if (template.slug === 'student-os') {
+      const mapping: WhatsInsideFilter[] = [
+        'Core Hub',
+        'Courses & Notes',
+        'Core Hub',
+        'Recall & Exams',
+        'Recall & Exams',
+        '__databases__',
+      ];
+      setWhatsInsideFilter(mapping[index] || 'All');
+      document
+        .getElementById('template-whats-inside')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (template.slug === 'researcher-os') {
+      const mapping: WhatsInsideFilter[] = [
+        'Command & Synthesis',
+        'Command & Synthesis',
+        'Command & Synthesis',
+        'Lab & Experiments',
+        'Publishing & Grants',
+        '__databases__',
+      ];
+      setWhatsInsideFilter(mapping[index] || 'All');
+      document
+        .getElementById('template-whats-inside')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -1790,7 +1822,7 @@ export const TemplateShowcasePage: React.FC<{
       <section
         id="template-closer-look"
         data-testid="template-closer-look"
-        className={`pt-14 sm:pt-20 pb-10 sm:pb-14 ${
+        className={`scroll-mt-24 pt-14 sm:pt-20 pb-10 sm:pb-14 ${
           template.slug === 'freelance-os' ||
           template.slug === 'student-os' ||
           template.slug === 'researcher-os'
@@ -1823,7 +1855,7 @@ export const TemplateShowcasePage: React.FC<{
                 type="button"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.99 }}
-                onClick={() => setSelectedModuleIndex(index)}
+                onClick={() => handleSelectCloserLookModule(index)}
                 className={`w-full h-full text-left rounded-[14px] bg-white border px-5 py-4 flex items-center gap-3 transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? 'border-[#1D6EE3] shadow-[0_10px_24px_-10px_rgba(29,110,227,0.18)]'
