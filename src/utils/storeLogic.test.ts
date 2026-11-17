@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { TEMPLATES, FAQ_ITEMS, APPS } from '../data/catalog';
 import {
+  buildWhatsInsideSummary,
   filterOsDatabases,
   filterOsModules,
   getOsSpecSummaryCounts,
@@ -217,6 +218,18 @@ test('Student OS and Researcher OS specification integrity and filters work dete
 
   const filteredProtocols = filterOsDatabases(RESEARCHER_OS_SPEC.databases, 'Protocol');
   assert.ok(filteredProtocols.length >= 2);
+
+  const studentInside = buildWhatsInsideSummary(STUDENT_OS_SPEC);
+  const researcherInside = buildWhatsInsideSummary(RESEARCHER_OS_SPEC);
+  assert.equal(studentInside.length, 6);
+  assert.equal(researcherInside.length, 6);
+  assert.ok(studentInside[1].includes('12 interconnected databases'));
+  assert.ok(researcherInside[1].includes('14 interconnected databases'));
+
+  const studentCatalogEntry = TEMPLATES.find((t) => t.slug === 'student-os');
+  const researcherCatalogEntry = TEMPLATES.find((t) => t.slug === 'researcher-os');
+  assert.deepEqual(studentCatalogEntry?.whatsInside, studentInside);
+  assert.deepEqual(researcherCatalogEntry?.whatsInside, researcherInside);
 });
 
 
