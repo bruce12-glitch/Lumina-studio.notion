@@ -404,7 +404,6 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       includedSubTemplates: ['Semester Setup Checklist'],
     },
   ],
-  ],
   databaseCountLabel: 'All 12 Interconnected Student OS Databases',
   databases: [
     { id: 'db-courses', name: 'Courses & Syllabi', category: 'Core Academics', purpose: 'Classes, credits, instructors & syllabus topics.', keyProperties: ['Code', 'Credits', 'GPA'], relations: ['Assignments', 'Notes'], viewsIncluded: ['Active Grid'] },
@@ -420,6 +419,76 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
     { id: 'db-expenses', name: 'Student Budgets & Expenses', category: 'Finance', purpose: 'Monthly caps, income, and expense ledger.', keyProperties: ['Amount', 'Flow'], relations: ['Months'], viewsIncluded: ['Monthly Ledger'] },
     { id: 'db-scholarships', name: 'Scholarships & Aid Tracker', category: 'Finance', purpose: 'Grants, fellowships, and essay deadlines.', keyProperties: ['Amount', 'Deadline'], relations: ['Expenses'], viewsIncluded: ['Award Board'] },
   ],
-  readyTemplates: [],
-  weeklyRhythm: [],
+  readyTemplates: [
+    {
+      id: 'tpl-cornell',
+      title: 'Cornell Lecture Sheet',
+      triggerContext: 'Lecture Notes',
+      contains: 'Cue prompts, class notes column, summary & recall toggle.',
+    },
+    {
+      id: 'tpl-syllabus',
+      title: 'Course Syllabus Setup',
+      triggerContext: 'Courses',
+      contains: 'Office hours card, grading table & weekly reading list.',
+    },
+    {
+      id: 'tpl-essay',
+      title: 'Research Essay Outline',
+      triggerContext: 'Assignments',
+      contains: 'Thesis statement, evidence blocks & citation checklist.',
+    },
+    {
+      id: 'tpl-lab',
+      title: 'Science Lab Report',
+      triggerContext: 'Assignments',
+      contains: 'Hypothesis, materials, data table & error analysis.',
+    },
+    {
+      id: 'tpl-exam-sprint',
+      title: '14-Day Exam Sprint',
+      triggerContext: 'Exams',
+      contains: 'Topic checklist, weak-area focus & practice exam log.',
+    },
+    {
+      id: 'tpl-book-summary',
+      title: 'Textbook Chapter Brief',
+      triggerContext: 'Reading Library',
+      contains: 'Key concepts, formulas, quotes & flashcard prompts.',
+    },
+    {
+      id: 'tpl-scholarship',
+      title: 'Scholarship Packet',
+      triggerContext: 'Scholarships',
+      contains: 'Prompt outline, referee details & transcript checklist.',
+    },
+    {
+      id: 'tpl-sunday-reset',
+      title: 'Sunday Weekly Reset',
+      triggerContext: 'Main Hub',
+      contains: 'Clear overdue tasks, sync deadlines & queue flashcards.',
+    },
+  ],
+  weeklyRhythm: [
+    {
+      day: 'Daily · 15 Min',
+      focus: 'Capture & Recall',
+      checklist: 'Log class notes and clear today’s Spaced Repetition queue.',
+    },
+    {
+      day: 'Wed · Midweek Check',
+      focus: 'Deadlines & Readings',
+      checklist: 'Review 7-day deliverables and finish assigned chapters.',
+    },
+    {
+      day: 'Fri · Wrap-Up',
+      focus: 'Update Grades & Budget',
+      checklist: 'Record new quiz scores and log weekly expenses.',
+    },
+    {
+      day: 'Sun · Reset Ritual',
+      focus: 'Plan Next Week',
+      checklist: 'Schedule study sprints, clear inbox & check Monday tasks.',
+    },
+  ],
 };
