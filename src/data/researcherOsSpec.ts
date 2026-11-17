@@ -179,6 +179,43 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Hypotheses & Claims', 'Research Projects', 'Experiments'],
       includedSubTemplates: ['Hypothesis Card'],
     },
+    {
+      id: 'experiments-protocols',
+      number: '05',
+      shortLabel: 'Experiments',
+      title: 'Experiments & Lab Protocols',
+      category: 'Lab & Experiments',
+      summary:
+        'Auditable run notebook with versioned SOP protocols, anomalies, and reproducibility checks.',
+      whatItContains: [
+        'Experiment Run Log — Record seeds, reagents, metrics, and runtime anomalies.',
+        'Versioned Lab Protocols — Store reusable SOPs (v1.0 -> v2.4) safely.',
+        'Reproducibility Sign-Off — Track replicate runs, controls, and random seeds.',
+      ],
+      includedViews: [
+        {
+          name: 'Active Runs Board',
+          layout: 'Board',
+          description: 'Queued -> Running -> Analyzing -> Verified.',
+        },
+        {
+          name: 'Run Ledger',
+          layout: 'Table',
+          description: 'All trials chronologically with metrics.',
+        },
+        {
+          name: 'Lab SOP Protocols',
+          layout: 'Gallery',
+          description: 'Standard experimental recipes & safety notes.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Run ID auto-numbering',
+        'Reproducibility checklist rollups',
+      ],
+      connectedDatabases: ['Experiments & Runs', 'Lab Protocols', 'Datasets'],
+      includedSubTemplates: ['Reproducible Run Log'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
