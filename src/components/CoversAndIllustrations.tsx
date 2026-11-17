@@ -6,6 +6,8 @@ import {
   TemplateCategory,
 } from '../data/catalog';
 import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
+import studentOsMascotImg from '../assets/images/student_os_mascot_hero_1794933584495.jpg';
+import researcherOsMascotImg from '../assets/images/researcher_os_mascot_hero_1794933583291.jpg';
 
 export const UltraHdSvgFilter: React.FC = () => (
   <svg
@@ -125,10 +127,19 @@ export const TemplateCover: React.FC<{
   cardTint = '#F7F6F3',
   className = '',
 }) => {
-  const isFreelanceMascot = slug === 'freelance-os';
-  const resolvedAsset = isFreelanceMascot
-    ? freelancerMascotCardImg
-    : illustrationUrl || CATEGORY_BLUSH_ASSET[category];
+  const isCustomMascot =
+    slug === 'freelance-os' ||
+    slug === 'student-os' ||
+    slug === 'researcher-os';
+
+  const resolvedAsset =
+    slug === 'freelance-os'
+      ? freelancerMascotCardImg
+      : slug === 'student-os'
+      ? studentOsMascotImg
+      : slug === 'researcher-os'
+      ? researcherOsMascotImg
+      : illustrationUrl || CATEGORY_BLUSH_ASSET[category];
 
   return (
     <div
@@ -153,16 +164,24 @@ export const TemplateCover: React.FC<{
         {/* Full-Stage Ultra-HD Illustration */}
         <div
           className={`flex-1 flex items-center justify-center overflow-hidden bg-white ${
-            isFreelanceMascot ? 'p-1 sm:p-1.5' : 'p-3 sm:p-4'
+            isCustomMascot ? 'p-1 sm:p-1.5' : 'p-3 sm:p-4'
           }`}
         >
           <BlushAssetImage
             src={resolvedAsset}
-            alt={isFreelanceMascot ? 'Freelance OS freelancer mascot illustration' : `${name} Notion template`}
+            alt={
+              slug === 'freelance-os'
+                ? 'Freelance OS freelancer mascot illustration'
+                : slug === 'student-os'
+                ? 'Student OS academic mascot illustration'
+                : slug === 'researcher-os'
+                ? 'Researcher OS lab scholar mascot illustration'
+                : `${name} Notion template`
+            }
             disableFloat
             className="w-full h-full"
             imgClassName={`max-w-full max-h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.04] ${
-              isFreelanceMascot ? 'scale-[1.08]' : ''
+              isCustomMascot ? 'scale-[1.06]' : ''
             }`}
           />
         </div>
