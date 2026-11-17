@@ -576,6 +576,204 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
             </div>
           )}
 
+          {/* TAB 04: CAREER & INTERNSHIPS */}
+          {activeTab === 'career' && (
+            <div className="space-y-5">
+              <div className="overflow-x-auto pb-2">
+                <div className="grid grid-cols-5 gap-3 min-w-[740px]">
+                  {[
+                    {
+                      stage: 'Wishlist',
+                      pillBg: '#F1F1EF',
+                      pillText: '#52504A',
+                      cardBg: '#FAF9F7',
+                      items: [{ role: 'Library Desk Assistant', org: 'University Library', tag: 'Backup', tagBg: '#EDF5EE' }],
+                    },
+                    {
+                      stage: 'Applied',
+                      pillBg: '#E1EFFB',
+                      pillText: '#1D6EE3',
+                      cardBg: '#F5FAFE',
+                      items: [{ role: 'Undergraduate Research (UROP)', org: 'Biophysics Lab', tag: 'Strong', tagBg: '#FBF5E2' }],
+                    },
+                    {
+                      stage: 'OA / Challenge',
+                      pillBg: '#FBF0D6',
+                      pillText: '#92400E',
+                      cardBg: '#FCF9F0',
+                      items: [],
+                    },
+                    {
+                      stage: 'Interviewing',
+                      pillBg: '#FCECEC',
+                      pillText: '#DC2626',
+                      cardBg: '#FEF7F7',
+                      items: [{ role: 'Software Engineering Intern', org: 'Orbit Labs', tag: 'Dream', tagBg: '#FCECEC' }],
+                    },
+                    {
+                      stage: 'Offer',
+                      pillBg: '#E3F2E8',
+                      pillText: '#15803D',
+                      cardBg: '#F5FAF6',
+                      items: [],
+                    },
+                  ].map((col) => (
+                    <div
+                      key={col.stage}
+                      style={{ backgroundColor: col.cardBg }}
+                      className="rounded-[10px] p-2.5 border border-black/[0.05] space-y-2"
+                    >
+                      <span
+                        style={{ backgroundColor: col.pillBg, color: col.pillText }}
+                        className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold"
+                      >
+                        ● {col.stage}
+                      </span>
+                      {col.items.map((item) => (
+                        <div
+                          key={item.role}
+                          className="rounded-[8px] bg-white border border-[#EAEAEA] p-2.5 space-y-1.5"
+                        >
+                          <p className="text-[12.5px] font-semibold text-[#2F2D28] leading-snug">
+                            {item.role}
+                          </p>
+                          <span
+                            style={{ backgroundColor: item.tagBg }}
+                            className="inline-block px-1.5 py-0.5 rounded text-[10.5px] font-medium text-[#37352F]"
+                          >
+                            {item.tag}
+                          </span>
+                          <p className="text-[11px] text-[#64748B]">{item.org}</p>
+                        </div>
+                      ))}
+                      <div className="rounded-[7px] border border-dashed border-[#D8D6D0] px-2.5 py-1.5 text-[11.5px] text-[#64748B]">
+                        + New page
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 05: HEALTH & WELLNESS */}
+          {activeTab === 'wellness' && (
+            <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
+              <table className="w-full text-left text-[13px] min-w-[540px]">
+                <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                  <tr>
+                    <th className="py-2.5 px-4 font-medium">Date</th>
+                    <th className="py-2.5 px-4 font-medium">Mood</th>
+                    <th className="py-2.5 px-4 font-medium">Sleep (hrs)</th>
+                    <th className="py-2.5 px-4 font-medium">Water</th>
+                    <th className="py-2.5 px-4 font-medium">Highlight Note</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#F1F1EF]">
+                  {[
+                    { date: 'Nov 15, 2026', mood: 'Good', tone: 'bg-[#EAF3FC] text-[#1D6EE3]', sleep: '8.5', water: '8', note: 'Rested and caught up on notes' },
+                    { date: 'Nov 14, 2026', mood: 'Great', tone: 'bg-[#EDF5EE] text-[#15803D]', sleep: '7.5', water: '7', note: 'Weekend plans with friends' },
+                    { date: 'Nov 13, 2026', mood: 'Good', tone: 'bg-[#EAF3FC] text-[#1D6EE3]', sleep: '7.0', water: '7', note: 'Lab report submitted' },
+                    { date: 'Nov 11, 2026', mood: 'Okay', tone: 'bg-[#FBF5E2] text-[#B45309]', sleep: '6.0', water: '5', note: 'Good study group session' },
+                  ].map((r) => (
+                    <tr key={r.date}>
+                      <td className="py-2.5 px-4 font-medium text-[#2F2D28]">{r.date}</td>
+                      <td className="py-2.5 px-4">
+                        <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${r.tone}`}>{r.mood}</span>
+                      </td>
+                      <td className="py-2.5 px-4 tabular-nums">{r.sleep}h</td>
+                      <td className="py-2.5 px-4 tabular-nums">{r.water} glasses</td>
+                      <td className="py-2.5 px-4 text-[#64748B]">{r.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* TAB 06: STUDENT FINANCE */}
+          {activeTab === 'finance' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { month: 'November 2026', cap: '$600.00', spent: '$441', left: '$159', health: 'On Track (74%)', rate: 'Saving 12%' },
+                { month: 'October 2026', cap: '$600.00', spent: '$335', left: '$265', health: 'On Track (56%)', rate: 'Saving 33%' },
+              ].map((m) => (
+                <div key={m.month} className="rounded-[12px] border border-[#EAEAEA] p-4 space-y-2 bg-[#FAF9F7]">
+                  <p className="text-[14px] font-bold text-[#2F2D28]">{m.month}</p>
+                  <div className="grid grid-cols-3 gap-2 text-[12px] pt-1">
+                    <div><p className="text-[#64748B]">Budget</p><p className="font-semibold tabular-nums">{m.cap}</p></div>
+                    <div><p className="text-[#64748B]">Spent</p><p className="font-semibold tabular-nums">{m.spent}</p></div>
+                    <div><p className="text-[#64748B]">Left</p><p className="font-semibold text-[#15803D] tabular-nums">{m.left}</p></div>
+                  </div>
+                  <div className="flex items-center gap-3 pt-1 text-[11.5px] font-medium text-[#15803D]">
+                    <span>● {m.health}</span>
+                    <span className="text-[#B45309]">● {m.rate}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* TAB 07: CONTACTS & FACULTY */}
+          {activeTab === 'faculty' && (
+            <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
+              <table className="w-full text-left text-[13px] min-w-[540px]">
+                <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                  <tr>
+                    <th className="py-2.5 px-4 font-medium">Name</th>
+                    <th className="py-2.5 px-4 font-medium">Role</th>
+                    <th className="py-2.5 px-4 font-medium">Department / Org</th>
+                    <th className="py-2.5 px-4 font-medium">Office Hours</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#F1F1EF]">
+                  <tr>
+                    <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Dr. Anika Rao</td>
+                    <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#F3EFFB] text-[#7C3AED] text-[11px] font-medium">Professor</span></td>
+                    <td className="py-2.5 px-4 text-[#475569]">Computer Science</td>
+                    <td className="py-2.5 px-4 text-[#64748B]">Tue 3:00–5:00 PM, Room 310</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Prof. Marcus Lee</td>
+                    <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#F3EFFB] text-[#7C3AED] text-[11px] font-medium">Professor</span></td>
+                    <td className="py-2.5 px-4 text-[#475569]">Mathematics</td>
+                    <td className="py-2.5 px-4 text-[#64748B]">Thu 1:00–2:30 PM, Hall 112</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Priya Nair</td>
+                    <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#EDF5EE] text-[#15803D] text-[11px] font-medium">Recruiter / Mentor</span></td>
+                    <td className="py-2.5 px-4 text-[#475569]">Orbit Labs</td>
+                    <td className="py-2.5 px-4 text-[#64748B]">SWE Intern referral</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* TAB 08: SYSTEM VAULT (12 DATABASES) */}
+          {activeTab === 'system' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              {[
+                { name: '01 · Courses & Syllabi', desc: 'Classes, credit hours, office hours, and grading weights.' },
+                { name: '02 · Assignments & Deliverables', desc: '7-day queue, weights, and status kanban.' },
+                { name: '03 · Cornell Lecture Notes & Flashcards', desc: 'Cue/summary sheets & 1d/3d/7d/21d spaced repetition.' },
+                { name: '04 · Exams, Gradebook & Weighted GPA', desc: '14-day exam sprints & live 4.0 GPA math.' },
+                { name: '05 · Reading Library & Citations Vault', desc: 'Assigned chapters & APA/MLA/BibTeX entries.' },
+                { name: '06 · Career, Wellness, Finance & Faculty', desc: 'Internships, sleep logs, budgets, scholarships & contacts.' },
+              ].map((db) => (
+                <div
+                  key={db.name}
+                  className="rounded-[10px] border border-[#EAEAEA] bg-[#FAF9F7] p-3.5 flex items-start gap-2.5"
+                >
+                  <Check className="w-4 h-4 text-[#1D6EE3] shrink-0 mt-0.5" />
+                  <div className="text-[13px]">
+                    <p className="font-semibold text-[#2F2D28]">{db.name}</p>
+                    <p className="text-[#64748B]">{db.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
