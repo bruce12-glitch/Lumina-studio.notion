@@ -147,6 +147,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Atomic Zettel Notes', 'Literature Papers', 'Manuscripts'],
       includedSubTemplates: ['Atomic Zettel Claim Card'],
     },
+    {
+      id: 'hypotheses-questions',
+      number: '04',
+      shortLabel: 'Hypotheses',
+      title: 'Research Questions & Hypotheses',
+      category: 'Command & Synthesis',
+      summary:
+        'Track falsifiable H1/H0 predictions alongside independent variables and experiment results.',
+      whatItContains: [
+        'Falsifiable Claims Register — Document predicted effect sizes and null outcomes.',
+        'Linked Trial Results — Connect hypotheses directly to lab runs and p-values.',
+        'Variable Matrix — Track IVs, DVs, and confounders clearly.',
+      ],
+      includedViews: [
+        {
+          name: 'Validation Status Board',
+          layout: 'Board',
+          description: 'Open -> Testing -> Supported / Refuted.',
+        },
+        {
+          name: 'Variable Matrix',
+          layout: 'Table',
+          description: 'Compare IVs, DVs & pre-registration links.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Validation Verdict status',
+        'Pre-registration link field',
+      ],
+      connectedDatabases: ['Hypotheses & Claims', 'Research Projects', 'Experiments'],
+      includedSubTemplates: ['Hypothesis Card'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
