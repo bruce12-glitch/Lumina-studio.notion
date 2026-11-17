@@ -344,6 +344,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Grants & RFPs', 'Research Projects', 'Collaborators'],
       includedSubTemplates: ['Grant Specific Aims 1-Pager'],
     },
+    {
+      id: 'collaborators-conferences',
+      number: '10',
+      shortLabel: 'Collaborators & Talks',
+      title: 'Collaborators, Advisors & Talks',
+      category: 'Publishing & Grants',
+      summary:
+        'Co-author ORCID directory, weekly PI/advisor 1:1 agendas, and conference CFP deadlines.',
+      whatItContains: [
+        'Co-Author CRM — Institutions, ORCIDs, emails, and CRediT author roles.',
+        'Advisor 1:1 Log — Weekly plot reviews, blockers, and next-step decisions.',
+        'CFP Venue Calendar — Track abstract, full-paper, and camera-ready dates.',
+      ],
+      includedViews: [
+        {
+          name: 'CFP Deadlines Calendar',
+          layout: 'Calendar',
+          description: 'Top journals & conference submission windows.',
+        },
+        {
+          name: 'Co-Author Directory',
+          layout: 'Table',
+          description: 'Linked papers, affiliations & ORCIDs.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Double-blind policy indicator',
+        'Days until CFP cutoff',
+      ],
+      connectedDatabases: ['Collaborators', 'Target Journals & CFPs', 'Manuscripts'],
+      includedSubTemplates: ['Advisor 1:1 Agenda'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
