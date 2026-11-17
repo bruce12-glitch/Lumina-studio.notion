@@ -376,6 +376,38 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Collaborators', 'Target Journals & CFPs', 'Manuscripts'],
       includedSubTemplates: ['Advisor 1:1 Agenda'],
     },
+    {
+      id: 'reading-triage',
+      number: '11',
+      shortLabel: 'Reading Queue',
+      title: 'arXiv & Journal Triage Queue',
+      category: 'Command & Synthesis',
+      summary:
+        'Keep daily paper alerts organized—5-minute skims stay separate from deep matrix extraction.',
+      whatItContains: [
+        'Quick Alert Inbox — Drop arXiv & Google Scholar alerts without polluting Literature Matrix.',
+        '5-Minute Skim Tagging — Read abstracts fast and promote only relevant papers.',
+        'Weekly Digest Feed — Batch new PDFs once or twice a week calmly.',
+      ],
+      includedViews: [
+        {
+          name: 'Triage Funnel Board',
+          layout: 'Board',
+          description: 'Inbox -> Skimmed -> Deep Read -> Archived.',
+        },
+        {
+          name: 'Weekly Reading List',
+          layout: 'List',
+          description: 'Priority PDFs queued for this week.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Promote-to-Matrix checkbox',
+        'Estimated read minutes',
+      ],
+      connectedDatabases: ['Reading Triage Queue', 'Literature Papers'],
+      includedSubTemplates: ['Paper Triage Card'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
