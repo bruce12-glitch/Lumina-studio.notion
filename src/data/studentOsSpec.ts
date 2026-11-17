@@ -179,6 +179,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Lecture Notes', 'Courses', 'Flashcards'],
       includedSubTemplates: ['Cornell Lecture Sheet'],
     },
+    {
+      id: 'spaced-repetition',
+      number: '05',
+      shortLabel: 'Spaced Repetition',
+      title: 'Spaced Repetition & Flashcards',
+      category: 'Recall & Exams',
+      summary:
+        'Active recall engine using Notion toggles and 1d, 3d, 7d, 21d, 45d review intervals.',
+      whatItContains: [
+        'Toggle Q&A Cards — Question header with answer tucked inside.',
+        'Automated Next-Review Date — Schedules intervals from Again / Hard / Good / Easy.',
+        'Weak Card Filter — Isolate hard formulas by class or exam.',
+      ],
+      includedViews: [
+        {
+          name: 'Today’s Review Queue',
+          layout: 'Table',
+          description: 'Cards where Next Review <= Today.',
+        },
+        {
+          name: 'Difficult Cards Board',
+          layout: 'Board',
+          description: 'Grouped by Recall Confidence score.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Dynamic interval dateAdd() formula',
+        'Confidence rating selector',
+      ],
+      connectedDatabases: ['Flashcards', 'Lecture Notes', 'Exams', 'Courses'],
+      includedSubTemplates: ['Recall Deck Entry'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
