@@ -275,6 +275,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Gradebook', 'Courses', 'Assignments'],
       includedSubTemplates: ['Grade Weight Entry'],
     },
+    {
+      id: 'reading-citations',
+      number: '08',
+      shortLabel: 'Readings & Citations',
+      title: 'Reading Vault & Citations',
+      category: 'Courses & Notes',
+      summary:
+        'Capture textbooks, journal PDFs, page notes, and formatted bibliography citations.',
+      whatItContains: [
+        'Reading Status Board — Queue Required chapters from Unread to Annotated.',
+        'Citation Snippet Store — Pre-formatted APA, MLA, and BibTeX references.',
+        'Course Links — Connect sources directly to essays and seminars.',
+      ],
+      includedViews: [
+        {
+          name: 'Required Readings List',
+          layout: 'List',
+          description: 'Weekly assigned readings by class.',
+        },
+        {
+          name: 'Citations Ledger',
+          layout: 'Table',
+          description: 'Authors, DOIs, and formatted references.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Citation style tag (APA / MLA / IEEE)',
+        'Priority reading flag',
+      ],
+      connectedDatabases: ['Reading Library', 'Citations Vault', 'Courses'],
+      includedSubTemplates: ['Book & Paper Summary'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
