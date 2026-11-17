@@ -78,6 +78,38 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Courses', 'Assignments', 'Flashcards', 'Exams'],
       includedSubTemplates: ['Quick Task Entry', 'Sunday Weekly Reset'],
     },
+    {
+      id: 'courses-syllabi',
+      number: '02',
+      shortLabel: 'Courses & Syllabi',
+      title: 'Courses & Syllabi Tracker',
+      category: 'Courses & Notes',
+      summary:
+        'Class homepages storing professor office hours, textbook links, grading weights, and topics.',
+      whatItContains: [
+        'Course Workspace Pages — Linked syllabus units, reading list, and lecture notes.',
+        'Grading Weight Table — Tracks exam, lab, and homework percentage weights.',
+        'Syllabus Progress Rollup — Auto-calculates % of topics completed.',
+      ],
+      includedViews: [
+        {
+          name: 'Active Semester Grid',
+          layout: 'Gallery',
+          description: 'All active courses grouped by term.',
+        },
+        {
+          name: 'Course Timeline',
+          layout: 'Timeline',
+          description: '16-week term milestones per class.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Weighted progress rollup across syllabus units',
+        'Course code & credit hours metadata',
+      ],
+      connectedDatabases: ['Courses', 'Assignments', 'Lecture Notes', 'Exams'],
+      includedSubTemplates: ['Course Syllabus Setup'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
