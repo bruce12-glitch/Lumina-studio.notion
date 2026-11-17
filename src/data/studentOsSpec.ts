@@ -41,6 +41,43 @@ export const STUDENT_OS_SPEC: OsSystemSpec = {
     'Life & System',
   ],
   modules: [
+    {
+      id: 'student-hub',
+      number: '01',
+      shortLabel: 'Main Hub',
+      title: 'Student Command Hub',
+      category: 'Core Hub',
+      summary:
+        'Your daily cockpit showing classes, due-soon tasks, recall cards, and quick-capture buttons.',
+      whatItContains: [
+        'Quick Capture Bar — Add deliverables, lecture notes, flashcards, or sessions in one click.',
+        '7-Day Deadline Radar — Flags tasks due today or within 72 hours automatically.',
+        'Weekly Review Checklist — 5-step Sunday reset to clear inbox and prep next week.',
+      ],
+      includedViews: [
+        {
+          name: 'This Week’s Deliverables',
+          layout: 'Table',
+          description: 'Active tasks sorted by due date and course.',
+        },
+        {
+          name: 'Courses Grid',
+          layout: 'Gallery',
+          description: 'Enrolled classes with live grade & progress.',
+        },
+        {
+          name: 'Master Semester Calendar',
+          layout: 'Calendar',
+          description: 'Deadlines, labs, exams, and study blocks.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        '7-Day urgency flags (Overdue / Due Soon)',
+        'Spaced recall queue filter (Review <= Today)',
+      ],
+      connectedDatabases: ['Courses', 'Assignments', 'Flashcards', 'Exams'],
+      includedSubTemplates: ['Quick Task Entry', 'Sunday Weekly Reset'],
+    },
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
