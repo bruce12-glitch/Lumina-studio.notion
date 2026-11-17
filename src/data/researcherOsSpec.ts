@@ -408,6 +408,39 @@ export const RESEARCHER_OS_SPEC: OsSystemSpec = {
       connectedDatabases: ['Reading Triage Queue', 'Literature Papers'],
       includedSubTemplates: ['Paper Triage Card'],
     },
+    {
+      id: 'researcher-system-core',
+      number: '12',
+      shortLabel: 'System · 14 DBs',
+      title: 'System Core, IRB & Onboarding',
+      category: 'System Backend',
+      summary:
+        'Central backend uniting all 14 connected tables, ethics checklists, and pre-built templates.',
+      whatItContains: [
+        '14-Table Database Registry — Inspect relations and rollups safely.',
+        'IRB & Double-Blind Checklist — Metadata scrub and open-data prep.',
+        'One-Click Templates — Reusable scaffolds across every research page.',
+      ],
+      includedViews: [
+        {
+          name: 'Backend Registry',
+          layout: 'Table',
+          description: 'All 14 tables organized by function.',
+        },
+        {
+          name: 'Thesis Archive',
+          layout: 'List',
+          description: 'Completed studies stored out of daily view.',
+        },
+      ],
+      keyFormulasAndProperties: [
+        'Archive & study status flags',
+        'Double-blind readiness checks',
+      ],
+      connectedDatabases: ['Research Projects', 'Literature Papers', 'Experiments', 'Manuscripts'],
+      includedSubTemplates: ['IRB & Double-Blind Checklist'],
+    },
+  ],
   ],
   databaseCountLabel: 'Database Overview',
   databases: [],
