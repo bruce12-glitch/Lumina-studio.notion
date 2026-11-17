@@ -142,6 +142,8 @@ const RAW_TEMPLATES: Array<{
   { name: 'Recipe Manager', price: 0, category: 'Health & Fitness' },
   { name: 'Student Dashboard', price: 0, category: 'School' },
   { name: 'Notes Dashboard', price: 0, category: 'School' },
+  { name: 'Student OS', price: 39, category: 'School' },
+  { name: 'Researcher OS', price: 49, category: 'School' },
 ];
 
 function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean): string[] {
@@ -628,4 +630,3 @@ export const TESTIMONIALS: Testimonial[] = [
     illustrationUrl: BLUSH_ASSETS.executiveSofaStrategy,
   },
 ];
-
