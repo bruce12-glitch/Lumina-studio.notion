@@ -325,11 +325,11 @@ export default function App() {
       <main id="main-content" className="flex-1">
         {pathname === '/' && (
           <div>
-            {/* 1. CLEAN EDITORIAL HERO SECTION WITH ATMOSPHERIC WASH */}
-            <section className="relative bg-gradient-to-b from-[#F3F6FB] via-[#F8FAFC] to-[#FFFFFF] border-b border-[#E9E9E7]/80">
+            {/* 1. CLEAN EDITORIAL HERO SECTION WITH WARM NOTION PAPER WASH */}
+            <section className="relative bg-gradient-to-b from-[#FAF9F6] via-[#FDFCFB] to-[#FFFFFF] border-b border-[#E9E9E7]">
               <div className="pt-10 pb-16 sm:pt-16 sm:pb-22 max-w-[1200px] mx-auto px-4 sm:px-6">
                 <div className="max-w-[780px] mx-auto text-center space-y-7">
-                  {/* Notion Pill Badge (Reference Image 1) */}
+                  {/* Notion Mark Tag */}
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -338,17 +338,17 @@ export default function App() {
                   >
                     <div
                       data-testid="hero-notion-pill"
-                      className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_2px_6px_rgba(15,23,42,0.04)] text-[13.5px] sm:text-[14px] font-medium text-[#334155]"
+                      className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-[10px] bg-white border border-[#E9E9E7] shadow-[0_1px_4px_rgba(55,53,47,0.04)] text-[13px] sm:text-[13.5px] font-medium text-[#52504A]"
                     >
                       {/* Notion 3D Cube Mark */}
                       <svg
-                        width="17"
-                        height="17"
+                        width="16"
+                        height="16"
                         viewBox="0 0 24 24"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
-                        className="shrink-0 text-[#1E293B]"
+                        className="shrink-0 text-[#37352F]"
                       >
                         <path
                           d="M4.5 5.2L15.8 4.2L19.5 6.8V18.8L8.2 19.8L4.5 17.2V5.2Z"
@@ -384,13 +384,13 @@ export default function App() {
                       whileHover={{ y: -4, rotate: -2, scale: 1.02 }}
                       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                       onClick={() => navigate('/templates/habit-tracker')}
-                      className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E2E8F0] bg-white/90 p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(15,23,42,0.07)] cursor-pointer"
+                      className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E9E9E7] bg-white p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(55,53,47,0.07)] cursor-pointer"
                     >
-                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#64748B] mb-1.5">
+                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#6E6D68] mb-1.5">
                         <span>01 · Focus</span>
                         <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
                       </div>
-                      <div className="rounded-[10px] bg-[#F8FAFC] border border-[#EDF2F7] p-2 h-20 sm:h-28 flex items-center justify-center">
+                      <div className="rounded-[10px] bg-[#EFF7F3] border border-[#E5E4E0] p-2 h-20 sm:h-28 flex items-center justify-center">
                         <BlushAssetImage
                           src={BLUSH_ASSETS.mindfulMeditationClock}
                           alt="Minimalist daily habits illustration"
@@ -407,7 +407,7 @@ export default function App() {
                       whileHover={{ y: -5, scale: 1.03 }}
                       transition={{ duration: 0.45, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
                       onClick={() => navigate('/templates/second-brain')}
-                      className="w-[144px] sm:w-[190px] rounded-[18px] border border-[#D8E1EC] bg-white p-3 sm:p-4 shadow-[0_16px_36px_-10px_rgba(15,23,42,0.10)] z-10 cursor-pointer"
+                      className="w-[144px] sm:w-[190px] rounded-[18px] border border-[#D3D1CB] bg-white p-3 sm:p-4 shadow-[0_16px_36px_-10px_rgba(55,53,47,0.10)] z-10 cursor-pointer"
                     >
                       <div className="flex items-center justify-between gap-1 text-[8.5px] sm:text-[10.5px] font-mono uppercase tracking-[0.04em] sm:tracking-[0.06em] text-[#37352F] font-semibold mb-2 whitespace-nowrap">
                         <span>02 · System</span>
@@ -416,7 +416,7 @@ export default function App() {
                           PARA
                         </span>
                       </div>
-                      <div className="rounded-[12px] bg-[#F7F6F3] border border-[#EFEFED] p-2.5 h-24 sm:h-32 flex items-center justify-center">
+                      <div className="rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] p-2.5 h-24 sm:h-32 flex items-center justify-center">
                         <BlushAssetImage
                           src={BLUSH_ASSETS.secondBrainMazeBulb}
                           alt="Second Brain PARA system illustration"
@@ -433,13 +433,13 @@ export default function App() {
                       whileHover={{ y: -4, rotate: 2, scale: 1.02 }}
                       transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
                       onClick={() => navigate('/templates/finance-tracker')}
-                      className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E2E8F0] bg-white/90 p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(15,23,42,0.07)] cursor-pointer"
+                      className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E9E9E7] bg-white p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(55,53,47,0.07)] cursor-pointer"
                     >
-                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#64748B] mb-1.5">
+                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#6E6D68] mb-1.5">
                         <span>03 · Clarity</span>
                         <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
                       </div>
-                      <div className="rounded-[10px] bg-[#F8FAFC] border border-[#EDF2F7] p-2 h-20 sm:h-28 flex items-center justify-center">
+                      <div className="rounded-[10px] bg-[#EFF5FB] border border-[#E5E4E0] p-2 h-20 sm:h-28 flex items-center justify-center">
                         <BlushAssetImage
                           src={BLUSH_ASSETS.mobilePiggyPortfolio}
                           alt="Finance Tracker illustration"
@@ -511,14 +511,14 @@ export default function App() {
                         e.preventDefault();
                         navigate(card.href);
                       }}
-                      className="group rounded-[16px] bg-white border border-[#E2E8F0] hover:border-[#2383E2]/45 px-6 py-5 shadow-[0_2px_10px_-3px_rgba(15,23,42,0.04)] hover:shadow-[0_14px_30px_-10px_rgba(35,131,226,0.12)] transition-all duration-200 flex items-center justify-between gap-4"
+                      className="group rounded-[16px] bg-white border border-[#E9E9E7] hover:border-[#2383E2]/45 px-6 py-5 shadow-[0_2px_10px_-3px_rgba(55,53,47,0.04)] hover:shadow-[0_14px_30px_-10px_rgba(35,131,226,0.12)] transition-all duration-200 flex items-center justify-between gap-4"
                     >
                       <div className="flex items-center gap-4 min-w-0">
-                        <div className="text-[#1D6EE3] flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
+                        <div className="w-10 h-10 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
                           {card.id === 'life' && (
                             <svg
-                              width="24"
-                              height="24"
+                              width="20"
+                              height="20"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -534,8 +534,8 @@ export default function App() {
                           )}
                           {card.id === 'work' && (
                             <svg
-                              width="24"
-                              height="24"
+                              width="20"
+                              height="20"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -552,8 +552,8 @@ export default function App() {
                           )}
                           {card.id === 'idea' && (
                             <svg
-                              width="24"
-                              height="24"
+                              width="20"
+                              height="20"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -568,15 +568,15 @@ export default function App() {
                           )}
                         </div>
                         <div className="min-w-0 text-left space-y-0.5">
-                          <h2 className="text-[17px] sm:text-[18px] font-semibold tracking-[-0.02em] text-[#1E293B] leading-snug">
+                          <h2 className="text-[17px] sm:text-[18px] font-semibold tracking-[-0.02em] text-[#37352F] leading-snug">
                             {card.title}
                           </h2>
-                          <p className="text-[14px] text-[#64748B] leading-snug truncate">
+                          <p className="text-[14px] text-[#6E6D68] leading-snug truncate">
                             {card.subtitle}
                           </p>
                         </div>
                       </div>
-                      <ArrowUpRight className="w-4 h-4 text-[#1D6EE3] shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="w-4 h-4 text-[#2383E2] shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </motion.a>
                   ))}
                 </div>
@@ -643,15 +643,12 @@ export default function App() {
                       split.mediaFirst ? 'lg:order-2' : 'order-2 lg:order-1'
                     }`}
                   >
-                    <span
-                      style={{
-                        backgroundColor: split.eyebrowTint,
-                        color: split.eyebrowInk,
-                      }}
-                      className="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-semibold tracking-[-0.01em]"
+                    <p
+                      style={{ color: split.eyebrowInk }}
+                      className="text-[12px] font-bold uppercase tracking-[0.08em]"
                     >
                       {split.eyebrow}
-                    </span>
+                    </p>
                     <h2 className="font-display text-[clamp(28px,3.4vw,40px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#37352F] text-balance">
                       {split.title}
                     </h2>
