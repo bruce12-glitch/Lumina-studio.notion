@@ -1132,7 +1132,7 @@ function getTemplateShowcaseData(template: Template): TemplateShowcaseMetadata {
  * Verified Scalloped Blue Check Badge (matching image_d974a805.png & image_3bf9bf89.png)
  */
 const VerifiedBadgeIcon: React.FC<{ className?: string }> = ({
-  className = 'w-5 h-5 text-[#1D6EE3]',
+  className = 'w-5 h-5 text-[#2383E2]',
 }) => (
   <svg
     viewBox="0 0 24 24"
@@ -1168,7 +1168,7 @@ const AreaGeometricArt: React.FC<{
     <svg
       viewBox="0 0 48 48"
       fill="none"
-      className="w-8 h-8 sm:w-9 sm:h-9 text-[#1E293B]"
+      className="w-8 h-8 sm:w-9 sm:h-9 text-[#37352F]"
       aria-hidden="true"
     >
       {pattern === 'spiral' && (
@@ -1312,7 +1312,7 @@ export const TemplateShowcasePage: React.FC<{
       {/* =====================================================================
           1. HERO SECTION & SHOWCASE STAGE
           ===================================================================== */}
-      <section className="bg-gradient-to-b from-[#F4F7FB] via-[#F8FAFC] to-[#FFFFFF] pt-10 sm:pt-16 pb-16 sm:pb-24 border-b border-[#EDF2F7]">
+      <section className="bg-gradient-to-b from-[#FAF9F6] via-[#FDFCFB] to-[#FFFFFF] pt-10 sm:pt-16 pb-16 sm:pb-24 border-b border-[#E9E9E7]">
         <div
           className={`${
             template.slug === 'freelance-os' ||
@@ -1326,7 +1326,7 @@ export const TemplateShowcasePage: React.FC<{
           <nav
             aria-label="Breadcrumb"
             data-testid="template-breadcrumb"
-            className="flex items-center gap-2 text-[14.5px] font-medium text-[#334155]"
+            className="flex items-center gap-2 text-[14.5px] font-medium text-[#52504A]"
           >
             <a
               href="/templates"
@@ -1334,12 +1334,12 @@ export const TemplateShowcasePage: React.FC<{
                 e.preventDefault();
                 onNavigate('/templates');
               }}
-              className="text-[#475569] hover:text-[#0F172A] transition-colors cursor-pointer"
+              className="text-[#6E6D68] hover:text-[#37352F] transition-colors cursor-pointer"
             >
               All templates
             </a>
-            <span className="text-[#94A3B8]">/</span>
-            <span className="text-[#0F172A] font-semibold">{template.name}</span>
+            <span className="text-[#9B9A97]">/</span>
+            <span className="text-[#37352F] font-semibold">{template.name}</span>
           </nav>
 
           {template.slug === 'freelance-os' ||
@@ -1351,7 +1351,7 @@ export const TemplateShowcasePage: React.FC<{
                 <div>
                   <div
                     data-testid="made-for-notion-badge"
-                    className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                    className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-[8px] bg-white border border-[#E9E9E7] shadow-[0_1px_2px_rgba(55,53,47,0.04)]"
                   >
                     <svg
                       width="16"
@@ -1364,37 +1364,37 @@ export const TemplateShowcasePage: React.FC<{
                       <path
                         d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
                         fill="#FFFFFF"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.75"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M4.5 6.2L10.2 9.4L20.2 7.2"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.5"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M10.2 9.4V20.5"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.5"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M12.7 16.7V11.8L16.8 16.2V11.1"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.75"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#1E293B]">
+                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#37352F]">
                       Made for Notion
                     </span>
                   </div>
                 </div>
 
-                <h1 className="font-display text-[clamp(30px,3.4vw,46px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#0F172A] text-balance">
+                <h1 className="font-display text-[clamp(30px,3.4vw,46px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#37352F] text-balance">
                   {showcase.heroHeadline}
                 </h1>
 
@@ -1403,13 +1403,13 @@ export const TemplateShowcasePage: React.FC<{
                 </p>
 
                 <div className="flex flex-wrap items-baseline gap-3 pt-1">
-                  <span className="text-[22px] sm:text-[24px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
+                  <span className="text-[22px] sm:text-[24px] font-bold tracking-[-0.02em] text-[#37352F] tabular-nums">
                     Premium from {formatPrice(template.price)}
                   </span>
-                  <span className="text-[17px] font-medium text-[#64748B] line-through tabular-nums">
+                  <span className="text-[17px] font-medium text-[#6E6D68] line-through tabular-nums">
                     {formatPrice(displayCompareAt)}
                   </span>
-                  <span className="text-[14px] text-[#64748B]">
+                  <span className="text-[14px] text-[#6E6D68]">
                     One-time purchase
                   </span>
                 </div>
@@ -1422,7 +1422,7 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleOpenBuy}
-                    className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_12px_28px_-8px_rgba(29,110,227,0.5)] cursor-pointer transition-colors whitespace-nowrap shrink-0"
+                    className="h-12 px-7 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(35,131,226,0.45)] cursor-pointer transition-colors whitespace-nowrap shrink-0"
                   >
                     <span>
                       {isOwned
@@ -1439,14 +1439,14 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleScrollToCloserLook}
-                    className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors whitespace-nowrap shrink-0"
+                    className="h-12 px-6 rounded-[10px] bg-white hover:bg-[#F7F6F3] text-[#37352F] border border-[#D3D1CB] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(55,53,47,0.04)] transition-colors whitespace-nowrap shrink-0"
                   >
                     <span>Preview what&apos;s inside</span>
                   </motion.button>
                 </div>
 
-                <div className="flex items-center gap-2 pt-2 text-[14px] font-medium text-[#64748B]">
-                  <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
+                <div className="flex items-center gap-2 pt-2 text-[14px] font-medium text-[#6E6D68]">
+                  <VerifiedBadgeIcon className="w-5 h-5 text-[#2383E2] shrink-0" />
                   <span>
                     {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings ·{' '}
                     {template.slug === 'freelance-os'
@@ -1472,7 +1472,7 @@ export const TemplateShowcasePage: React.FC<{
                     }
                   }}
                   aria-label={`Preview ${template.name} interactive modules and database details`}
-                  className="group rounded-[28px] bg-gradient-to-br from-[#EAF2FF] via-[#F4F8FD] to-[#FFFFFF] border border-[#DCE6F3] p-6 sm:p-10 shadow-[0_24px_60px_-24px_rgba(29,110,227,0.16)] flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] overflow-hidden cursor-pointer"
+                  className="group rounded-[28px] bg-gradient-to-br from-[#EFF5FB] via-[#F7F6F3] to-[#FFFFFF] border border-[#E5E4E0] p-6 sm:p-10 shadow-[0_24px_60px_-24px_rgba(55,53,47,0.12)] flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] overflow-hidden cursor-pointer"
                 >
                   <img
                     src={
@@ -1499,11 +1499,11 @@ export const TemplateShowcasePage: React.FC<{
             <>
               {/* Single-Column Hero Copy Block (Non-Freelance Templates) */}
               <div className="space-y-6 max-w-[740px]">
-                {/* "Made for Notion" Pill Badge */}
+                {/* "Made for Notion" Badge */}
                 <div>
                   <div
                     data-testid="made-for-notion-badge"
-                    className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                    className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-[8px] bg-white border border-[#E9E9E7] shadow-[0_1px_2px_rgba(55,53,47,0.04)]"
                   >
                     <svg
                       width="16"
@@ -1516,64 +1516,64 @@ export const TemplateShowcasePage: React.FC<{
                       <path
                         d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
                         fill="#FFFFFF"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.75"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M4.5 6.2L10.2 9.4L20.2 7.2"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.5"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M10.2 9.4V20.5"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.5"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M12.7 16.7V11.8L16.8 16.2V11.1"
-                        stroke="#1E293B"
+                        stroke="#37352F"
                         strokeWidth="1.75"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#1E293B]">
+                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#37352F]">
                       Made for Notion
                     </span>
                   </div>
                 </div>
 
                 {/* Benefit Headline */}
-                <h1 className="font-display text-[clamp(36px,4.8vw,56px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#0F172A] text-balance">
+                <h1 className="font-display text-[clamp(36px,4.8vw,56px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#37352F] text-balance">
                   {showcase.heroHeadline}
                 </h1>
 
                 {/* Subtitle / Description */}
-                <p className="text-[17px] sm:text-[18.5px] leading-[1.6] text-[#64748B] max-w-[660px]">
+                <p className="text-[17px] sm:text-[18.5px] leading-[1.6] text-[#52504A] max-w-[660px]">
                   {showcase.heroSubheadline}
                 </p>
 
                 {/* Pricing Row */}
                 <div className="flex flex-wrap items-baseline gap-3 pt-1">
-                  <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#0F172A] tabular-nums">
+                  <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#37352F] tabular-nums">
                     {template.price === 0
                       ? 'Free Edition $0'
                       : `Premium from ${formatPrice(template.price)}`}
                   </span>
-                  <span className="text-[18px] font-medium text-[#64748B] line-through tabular-nums">
+                  <span className="text-[18px] font-medium text-[#6E6D68] line-through tabular-nums">
                     {formatPrice(displayCompareAt)}
                   </span>
-                  <span className="text-[14px] text-[#64748B]">
+                  <span className="text-[14px] text-[#6E6D68]">
                     {template.price === 0
                       ? 'Instant Notion duplicate'
                       : 'One-time purchase'}
                   </span>
                 </div>
 
-                {/* Dual Pill Buttons: "Get [Template] →" + "Preview what's inside" */}
+                {/* Dual Action Buttons: "Get [Template] →" + "Preview what's inside" */}
                 <div className="flex flex-wrap items-center gap-3.5 pt-1">
                   <motion.button
                     type="button"
@@ -1582,7 +1582,7 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleOpenBuy}
-                    className="h-12 px-7 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(29,110,227,0.55)] cursor-pointer transition-colors"
+                    className="h-12 px-7 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(35,131,226,0.45)] cursor-pointer transition-colors"
                   >
                     <span>
                       {isOwned
@@ -1599,7 +1599,7 @@ export const TemplateShowcasePage: React.FC<{
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                     onClick={handleScrollToCloserLook}
-                    className="h-12 px-6 rounded-full bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-colors"
+                    className="h-12 px-6 rounded-[10px] bg-white hover:bg-[#F7F6F3] text-[#37352F] border border-[#D3D1CB] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(55,53,47,0.04)] transition-colors"
                   >
                     <span>Preview what&apos;s inside</span>
                   </motion.button>
@@ -1607,13 +1607,13 @@ export const TemplateShowcasePage: React.FC<{
 
                 {/* Rating & Edition Note */}
                 <div className="space-y-2.5 pt-2">
-                  <div className="flex items-center gap-2 text-[14px] font-medium text-[#64748B]">
-                    <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
+                  <div className="flex items-center gap-2 text-[14px] font-medium text-[#6E6D68]">
+                    <VerifiedBadgeIcon className="w-5 h-5 text-[#2383E2] shrink-0" />
                     <span>
                       {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
                     </span>
                   </div>
-                  <p className="text-[13.5px] text-[#64748B]">
+                  <p className="text-[13.5px] text-[#6E6D68]">
                     Choose your edition at checkout. Add it to your Notion workspace.
                   </p>
                 </div>
@@ -1623,27 +1623,27 @@ export const TemplateShowcasePage: React.FC<{
               <div>
                 <div
                   data-testid="template-device-mockup"
-                  className="rounded-[24px] bg-white border border-[#E2E8F0] p-6 sm:p-12 shadow-[0_14px_40px_-14px_rgba(15,23,42,0.07)] relative overflow-hidden"
+                  className="rounded-[24px] bg-white border border-[#E9E9E7] p-6 sm:p-12 shadow-[0_14px_40px_-14px_rgba(55,53,47,0.07)] relative overflow-hidden"
                 >
                   <div className="relative mx-auto max-w-[680px] py-2 sm:py-4 pr-8 sm:pr-16">
                     {/* TABLET LANDSCAPE FRAME (iPad Mockup) */}
-                    <div className="rounded-[20px] bg-[#111827] p-[9px] sm:p-[12px] shadow-[0_24px_48px_-12px_rgba(15,23,42,0.24)] border border-[#334155]">
-                      <div className="rounded-[12px] bg-white overflow-hidden border border-[#E2E8F0]">
+                    <div className="rounded-[20px] bg-[#1F1E1B] p-[9px] sm:p-[12px] shadow-[0_24px_48px_-12px_rgba(55,53,47,0.24)] border border-[#37352F]">
+                      <div className="rounded-[12px] bg-white overflow-hidden border border-[#E9E9E7]">
                         {/* Notion Top Bar inside Tablet */}
-                        <div className="px-4 pt-3.5 pb-2 border-b border-[#F1F5F9] flex items-center justify-between">
+                        <div className="px-4 pt-3.5 pb-2 border-b border-[#F1F1EF] flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-[6px] bg-[#EFF6FF] text-[#1D6EE3] font-bold text-[13px]">
+                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-[6px] bg-[#EBF3FC] text-[#2383E2] font-bold text-[13px]">
                               ∞
                             </span>
-                            <span className="text-[14px] sm:text-[15px] font-bold tracking-[-0.02em] text-[#0F172A]">
+                            <span className="text-[14px] sm:text-[15px] font-bold tracking-[-0.02em] text-[#37352F]">
                               {template.name}
                             </span>
                           </div>
-                          <div className="flex items-center gap-1.5 text-[10px] text-[#64748B] font-mono">
-                            <span className="px-1.5 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
+                          <div className="flex items-center gap-1.5 text-[10px] text-[#6E6D68] font-mono">
+                            <span className="px-1.5 py-0.5 rounded bg-[#F7F6F3] border border-[#E9E9E7]">
                               {template.databaseCount} DBs
                             </span>
-                            <span className="px-1.5 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
+                            <span className="px-1.5 py-0.5 rounded bg-[#F7F6F3] border border-[#E9E9E7]">
                               {template.version}
                             </span>
                           </div>
@@ -1652,9 +1652,9 @@ export const TemplateShowcasePage: React.FC<{
                         {/* Tablet Interior: Left Quick-Action Sidebar + Right Life Areas Grid */}
                         <div className="grid grid-cols-12 p-3 sm:p-4 gap-3 sm:gap-4 bg-white min-h-[250px] sm:min-h-[280px]">
                           {/* Left Sidebar: Quick Action + Productivity Links */}
-                          <div className="col-span-4 space-y-3 border-r border-[#F1F5F9] pr-2.5">
+                          <div className="col-span-4 space-y-3 border-r border-[#F1F1EF] pr-2.5">
                             <div>
-                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#0F172A] mb-1.5">
+                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#37352F] mb-1.5">
                                 Quick Action
                               </p>
                               <div className="space-y-1">
@@ -1668,9 +1668,9 @@ export const TemplateShowcasePage: React.FC<{
                                 ].map((action) => (
                                   <div
                                     key={action}
-                                    className="px-2 py-1 rounded-[5px] border border-[#E2E8F0] bg-[#FFFFFF] text-[8.5px] font-medium text-[#334155] flex items-center gap-1 shadow-[0_1px_1px_rgba(15,23,42,0.02)]"
+                                    className="px-2 py-1 rounded-[5px] border border-[#E9E9E7] bg-[#FFFFFF] text-[8.5px] font-medium text-[#52504A] flex items-center gap-1 shadow-[0_1px_1px_rgba(55,53,47,0.02)]"
                                   >
-                                    <span className="w-2.5 h-2.5 rounded-full bg-[#EFF6FF] text-[#1D6EE3] inline-flex items-center justify-center text-[7px] font-bold">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-[#EBF3FC] text-[#2383E2] inline-flex items-center justify-center text-[7px] font-bold">
                                       +
                                     </span>
                                     <span className="truncate">{action}</span>
@@ -1680,10 +1680,10 @@ export const TemplateShowcasePage: React.FC<{
                             </div>
 
                             <div>
-                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#0F172A] mb-1.5">
+                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#37352F] mb-1.5">
                                 Productivity
                               </p>
-                              <div className="space-y-1 text-[8.5px] font-medium text-[#475569]">
+                              <div className="space-y-1 text-[8.5px] font-medium text-[#52504A]">
                                 {[
                                   'Inbox',
                                   'Life Areas',
@@ -1695,8 +1695,8 @@ export const TemplateShowcasePage: React.FC<{
                                     key={navItem}
                                     className="flex items-center gap-1.5 py-0.5 truncate"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3] shrink-0" />
-                                    <span className="truncate underline decoration-[#CBD5E1] underline-offset-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2] shrink-0" />
+                                    <span className="truncate underline decoration-[#D3D1CB] underline-offset-2">
                                       {navItem}
                                     </span>
                                   </div>
@@ -1708,10 +1708,10 @@ export const TemplateShowcasePage: React.FC<{
                           {/* Right Main Area: Life Areas 3x2 Gallery Grid */}
                           <div className="col-span-8 space-y-2">
                             <div className="flex items-center justify-between">
-                              <p className="text-[10px] font-bold text-[#0F172A]">
+                              <p className="text-[10px] font-bold text-[#37352F]">
                                 Life Areas
                               </p>
-                              <span className="text-[8.5px] text-[#64748B] font-medium">
+                              <span className="text-[8.5px] text-[#6E6D68] font-medium">
                                 ⊞ Areas
                               </span>
                             </div>
@@ -1720,20 +1720,20 @@ export const TemplateShowcasePage: React.FC<{
                               {showcase.lifeAreas.map((area) => (
                                 <div
                                   key={area.title}
-                                  className="rounded-[8px] border border-[#E2E8F0] bg-[#FFFFFF] overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                                  className="rounded-[8px] border border-[#E9E9E7] bg-[#FFFFFF] overflow-hidden shadow-[0_1px_2px_rgba(55,53,47,0.03)]"
                                 >
-                                  <div className="h-12 sm:h-14 bg-[#F8FAFC] border-b border-[#F1F5F9] flex items-center justify-center">
+                                  <div className="h-12 sm:h-14 bg-[#F7F6F3] border-b border-[#F1F1EF] flex items-center justify-center">
                                     <AreaGeometricArt pattern={area.pattern} />
                                   </div>
                                   <div className="p-1.5 space-y-0.5">
-                                    <p className="text-[8.5px] font-semibold text-[#0F172A] truncate">
+                                    <p className="text-[8.5px] font-semibold text-[#37352F] truncate">
                                       {area.title}
                                     </p>
                                     <div className="flex flex-col gap-0.5">
-                                      <span className="text-[7px] text-[#1D6EE3] bg-[#EFF6FF] px-1 rounded w-fit">
+                                      <span className="text-[7px] text-[#2383E2] bg-[#EBF3FC] px-1 rounded w-fit">
                                         {area.projectsCount}
                                       </span>
-                                      <span className="text-[7px] text-[#64748B] px-1">
+                                      <span className="text-[7px] text-[#6E6D68] px-1">
                                         {area.notesCount}
                                       </span>
                                     </div>
@@ -1747,18 +1747,18 @@ export const TemplateShowcasePage: React.FC<{
                     </div>
 
                     {/* OVERLAPPING MOBILE PORTRAIT FRAME (iPhone Mockup on Right) */}
-                    <div className="w-[150px] sm:w-[178px] rounded-[24px] bg-[#111827] p-[6px] sm:p-[7px] shadow-[-12px_20px_38px_rgba(15,23,42,0.25)] border border-[#334155] absolute right-0 bottom-0 z-10">
-                      <div className="rounded-[19px] bg-white overflow-hidden border border-[#E2E8F0]">
+                    <div className="w-[150px] sm:w-[178px] rounded-[24px] bg-[#1F1E1B] p-[6px] sm:p-[7px] shadow-[-12px_20px_38px_rgba(55,53,47,0.25)] border border-[#37352F] absolute right-0 bottom-0 z-10">
+                      <div className="rounded-[19px] bg-white overflow-hidden border border-[#E9E9E7]">
                         {/* Phone Status Bar + Dynamic Island */}
-                        <div className="px-3 pt-2 pb-1 flex items-center justify-between text-[8px] font-semibold text-[#0F172A]">
+                        <div className="px-3 pt-2 pb-1 flex items-center justify-between text-[8px] font-semibold text-[#37352F]">
                           <span>11:20</span>
-                          <span className="w-10 h-2.5 rounded-full bg-[#0F172A]" />
+                          <span className="w-10 h-2.5 rounded-full bg-[#1F1E1B]" />
                           <span>5G 100%</span>
                         </div>
 
                         {/* Mobile Notion Header */}
-                        <div className="px-3 py-1.5 border-b border-[#F1F5F9] flex items-center justify-between text-[8px] text-[#64748B]">
-                          <span className="truncate font-medium text-[#0F172A]">
+                        <div className="px-3 py-1.5 border-b border-[#F1F1EF] flex items-center justify-between text-[8px] text-[#6E6D68]">
+                          <span className="truncate font-medium text-[#37352F]">
                             ‹ ∞ {template.name}
                           </span>
                           <span>•••</span>
@@ -1766,12 +1766,12 @@ export const TemplateShowcasePage: React.FC<{
 
                         {/* Mobile Notion Body */}
                         <div className="p-3 space-y-2.5">
-                          <p className="text-[11px] font-bold text-[#0F172A] leading-tight truncate">
+                          <p className="text-[11px] font-bold text-[#37352F] leading-tight truncate">
                             {template.name}
                           </p>
 
                           <div className="space-y-1">
-                            <p className="text-[8.5px] font-bold text-[#0F172A]">
+                            <p className="text-[8.5px] font-bold text-[#37352F]">
                               Quick Action
                             </p>
                             {[
@@ -1783,9 +1783,9 @@ export const TemplateShowcasePage: React.FC<{
                             ].map((act) => (
                               <div
                                 key={act}
-                                className="px-2 py-1 rounded-[5px] border border-[#E2E8F0] bg-white text-[8px] font-medium text-[#1E293B] flex items-center gap-1.5"
+                                className="px-2 py-1 rounded-[5px] border border-[#E9E9E7] bg-white text-[8px] font-medium text-[#37352F] flex items-center gap-1.5"
                               >
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#EFF6FF] text-[#1D6EE3] inline-flex items-center justify-center text-[7px] font-bold">
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#EBF3FC] text-[#2383E2] inline-flex items-center justify-center text-[7px] font-bold">
                                   +
                                 </span>
                                 <span className="truncate">{act}</span>
@@ -1794,15 +1794,15 @@ export const TemplateShowcasePage: React.FC<{
                           </div>
 
                           <div className="space-y-1 pt-0.5">
-                            <p className="text-[8.5px] font-bold text-[#0F172A]">
+                            <p className="text-[8.5px] font-bold text-[#37352F]">
                               Productivity
                             </p>
                             {['Inbox', 'Life Areas', 'Goals'].map((item) => (
                               <div
                                 key={item}
-                                className="flex items-center gap-1.5 text-[8px] font-medium text-[#334155]"
+                                className="flex items-center gap-1.5 text-[8px] font-medium text-[#52504A]"
                               >
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3]" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
                                 <span>{item}</span>
                               </div>
                             ))}
@@ -1810,10 +1810,10 @@ export const TemplateShowcasePage: React.FC<{
                         </div>
 
                         {/* Mobile Bottom Navigation Bar */}
-                        <div className="px-3 py-1.5 border-t border-[#F1F5F9] bg-[#F8FAFC] flex items-center justify-around text-[#64748B]">
+                        <div className="px-3 py-1.5 border-t border-[#F1F1EF] bg-[#F7F6F3] flex items-center justify-around text-[#6E6D68]">
                           <LayoutGrid className="w-3 h-3" />
                           <Search className="w-3 h-3" />
-                          <Inbox className="w-3 h-3 text-[#1D6EE3]" />
+                          <Inbox className="w-3 h-3 text-[#2383E2]" />
                           <Plus className="w-3 h-3" />
                         </div>
                       </div>
@@ -1841,13 +1841,13 @@ export const TemplateShowcasePage: React.FC<{
         } mx-auto px-4 sm:px-6`}
       >
         <div className="space-y-3 max-w-[680px] mb-8 sm:mb-10">
-          <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#64748B]">
+          <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
             TAKE A CLOSER LOOK
           </p>
-          <h2 className="font-display text-[clamp(30px,3.8vw,44px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#0F172A]">
+          <h2 className="font-display text-[clamp(30px,3.8vw,44px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#37352F]">
             Everything has a place.
           </h2>
-          <p className="text-[16.5px] sm:text-[18px] text-[#64748B] leading-[1.55]">
+          <p className="text-[16.5px] sm:text-[18px] text-[#52504A] leading-[1.55]">
             Explore the key parts of the system. Edition details are shown at checkout.
           </p>
         </div>
@@ -1868,12 +1868,12 @@ export const TemplateShowcasePage: React.FC<{
                 onClick={() => handleSelectCloserLookModule(index)}
                 className={`w-full h-full text-left rounded-[14px] bg-white border px-5 py-4 flex items-center gap-3 transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? 'border-[#1D6EE3] shadow-[0_10px_24px_-10px_rgba(29,110,227,0.18)]'
-                    : 'border-[#E2E8F0] hover:border-[#1D6EE3]/45 shadow-[0_2px_8px_-3px_rgba(15,23,42,0.04)]'
+                    ? 'border-[#2383E2] shadow-[0_10px_24px_-10px_rgba(35,131,226,0.18)]'
+                    : 'border-[#E9E9E7] hover:border-[#2383E2]/45 shadow-[0_2px_8px_-3px_rgba(55,53,47,0.04)]'
                 }`}
               >
-                <VerifiedBadgeIcon className="w-5 h-5 text-[#1D6EE3] shrink-0" />
-                <span className="text-[15px] sm:text-[15.5px] font-semibold tracking-[-0.015em] text-[#0F172A] leading-snug">
+                <VerifiedBadgeIcon className="w-5 h-5 text-[#2383E2] shrink-0" />
+                <span className="text-[15px] sm:text-[15.5px] font-semibold tracking-[-0.015em] text-[#37352F] leading-snug">
                   {moduleTitle}
                 </span>
               </motion.button>
@@ -1918,16 +1918,16 @@ export const TemplateShowcasePage: React.FC<{
         className="py-10 sm:py-14 max-w-[960px] mx-auto px-4 sm:px-6"
       >
         <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <h2 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#0F172A]">
+          <h2 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#37352F]">
             {showcase.showcaseHeading}
           </h2>
-          <p className="text-[14px] text-[#64748B]">
-            Inside the <span className="font-semibold text-[#0F172A]">{template.name}</span> Notion workspace · {template.databaseCount} interlinked databases & {template.viewsCount} pre-built views
+          <p className="text-[14px] text-[#6E6D68]">
+            Inside the <span className="font-semibold text-[#37352F]">{template.name}</span> Notion workspace · {template.databaseCount} interlinked databases & {template.viewsCount} pre-built views
           </p>
         </div>
 
-        {/* Light-Slate Stage Container with 3 Overlapping/Cascading Notion Pages */}
-        <div className="rounded-[28px] bg-[#F1F5F9]/85 border border-[#E2E8F0] pt-8 sm:pt-14 px-4 sm:px-8 lg:px-8 pb-8 lg:pb-0 overflow-hidden">
+        {/* Warm Notion Stage Container with 3 Overlapping/Cascading Notion Pages */}
+        <div className="rounded-[28px] bg-[#F7F6F3] border border-[#E9E9E7] pt-8 sm:pt-14 px-4 sm:px-8 lg:px-8 pb-8 lg:pb-0 overflow-hidden">
           <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-6 lg:gap-0">
             {/* -----------------------------------------------------------------
                 PAGE 1 (Left / Lower-Left Card): Goals Overview
@@ -1936,21 +1936,21 @@ export const TemplateShowcasePage: React.FC<{
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.05 }}
-              className="w-full lg:w-[30%] shrink-0 lg:mt-44 z-10 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E2E8F0] shadow-[0_20px_50px_-15px_rgba(15,23,42,0.12)] p-5 sm:p-6 space-y-4"
+              className="w-full lg:w-[30%] shrink-0 lg:mt-44 z-10 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E9E9E7] shadow-[0_20px_50px_-15px_rgba(55,53,47,0.12)] p-5 sm:p-6 space-y-4"
             >
               {/* Page Icon + Title */}
               <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-[10px] bg-[#EFF6FF] text-[#1D6EE3] flex items-center justify-center">
+                <div className="w-9 h-9 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center">
                   <Target className="w-5 h-5" />
                 </div>
-                <h3 className="text-[22px] font-bold tracking-[-0.02em] text-[#0F172A]">
+                <h3 className="text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
                   {showcase.page1Title}
                 </h3>
               </div>
 
               {/* Notion Callout Banner */}
-              <div className="rounded-[8px] bg-[#F8FAFC] border border-[#E2E8F0] p-3 flex items-start gap-2 text-[11.5px] leading-[1.5] text-[#475569]">
-                <span className="text-[#1D6EE3] font-bold shrink-0 mt-0.5">ⓘ</span>
+              <div className="rounded-[8px] bg-[#F7F6F3] border border-[#E9E9E7] p-3 flex items-start gap-2 text-[11.5px] leading-[1.5] text-[#52504A]">
+                <span className="text-[#2383E2] font-bold shrink-0 mt-0.5">ⓘ</span>
                 <p>
                   {showcase.page1Callout}
                 </p>
@@ -1958,7 +1958,7 @@ export const TemplateShowcasePage: React.FC<{
 
               {/* Back To Dashboard Button */}
               <div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-[#E2E8F0] bg-white text-[10.5px] font-medium text-[#334155]">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-[#E9E9E7] bg-white text-[10.5px] font-medium text-[#52504A]">
                   <span>↩</span>
                   <span>Back To Dashboard</span>
                 </span>
@@ -1966,14 +1966,14 @@ export const TemplateShowcasePage: React.FC<{
 
               {/* Goals Overview Database */}
               <div className="space-y-2.5 pt-1">
-                <p className="text-[13.5px] font-bold text-[#0F172A]">
+                <p className="text-[13.5px] font-bold text-[#37352F]">
                   {showcase.page1Title} Overview
                 </p>
 
                 {/* Notion View Tabs */}
-                <div className="flex items-center gap-3 border-b border-[#E2E8F0] pb-1.5 text-[10.5px] font-medium text-[#64748B]">
+                <div className="flex items-center gap-3 border-b border-[#E9E9E7] pb-1.5 text-[10.5px] font-medium text-[#6E6D68]">
                   <span>📥 Inbox</span>
-                  <span className="text-[#0F172A] font-semibold border-b-2 border-[#0F172A] pb-1 -mb-1.5">
+                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1.5">
                     ✔ Active {showcase.page1Title}
                   </span>
                   <span>Completed</span>
@@ -1984,20 +1984,20 @@ export const TemplateShowcasePage: React.FC<{
                   {showcase.page1Items.map((goal) => (
                     <div
                       key={goal.title}
-                      className="rounded-[10px] border border-[#E2E8F0] bg-white p-3 space-y-2 shadow-[0_1px_3px_rgba(15,23,42,0.03)]"
+                      className="rounded-[10px] border border-[#E9E9E7] bg-white p-3 space-y-2 shadow-[0_1px_3px_rgba(55,53,47,0.03)]"
                     >
-                      <p className="text-[11px] font-semibold text-[#0F172A] leading-snug">
+                      <p className="text-[11px] font-semibold text-[#37352F] leading-snug">
                         ◎ {goal.title}
                       </p>
                       <div>
-                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1D6EE3] text-[9.5px] font-medium">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3]" />
+                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#EBF3FC] text-[#2383E2] text-[9.5px] font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
                           {goal.status}
                         </span>
                       </div>
-                      <p className="text-[9.5px] text-[#64748B]">{goal.date}</p>
+                      <p className="text-[9.5px] text-[#6E6D68]">{goal.date}</p>
                       <div className="flex flex-wrap gap-1">
-                        <span className="px-1.5 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0] text-[9px] text-[#334155]">
+                        <span className="px-1.5 py-0.5 rounded bg-[#F7F6F3] border border-[#E9E9E7] text-[9px] text-[#52504A]">
                           {goal.area}
                         </span>
                         <span className="px-1.5 py-0.5 rounded bg-[#FEF3C7]/60 text-[#92400E] text-[9px]">
@@ -2006,13 +2006,13 @@ export const TemplateShowcasePage: React.FC<{
                       </div>
                       {/* Progress Bar */}
                       <div className="flex items-center gap-2 pt-1">
-                        <span className="text-[9.5px] font-semibold text-[#334155] tabular-nums">
+                        <span className="text-[9.5px] font-semibold text-[#52504A] tabular-nums">
                           {goal.progress}%
                         </span>
-                        <div className="flex-1 h-1.5 rounded-full bg-[#E2E8F0] overflow-hidden">
+                        <div className="flex-1 h-1.5 rounded-full bg-[#E9E9E7] overflow-hidden">
                           <div
                             style={{ width: `${goal.progress}%` }}
-                            className="h-full rounded-full bg-[#1D6EE3]"
+                            className="h-full rounded-full bg-[#2383E2]"
                           />
                         </div>
                       </div>
@@ -2029,20 +2029,20 @@ export const TemplateShowcasePage: React.FC<{
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.12 }}
-              className="w-full lg:w-[34%] shrink-0 lg:-ml-6 lg:mt-20 z-20 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E2E8F0] shadow-[-10px_20px_50px_-15px_rgba(15,23,42,0.16)] p-5 sm:p-6 space-y-4"
+              className="w-full lg:w-[34%] shrink-0 lg:-ml-6 lg:mt-20 z-20 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E9E9E7] shadow-[-10px_20px_50px_-15px_rgba(55,53,47,0.16)] p-5 sm:p-6 space-y-4"
             >
               {/* Page Icon + Title */}
               <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-[10px] bg-[#EFF6FF] text-[#1D6EE3] flex items-center justify-center">
+                <div className="w-9 h-9 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center">
                   <FileText className="w-5 h-5" />
                 </div>
-                <h3 className="text-[22px] font-bold tracking-[-0.02em] text-[#0F172A]">
+                <h3 className="text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
                   {showcase.page2Title}
                 </h3>
               </div>
 
               <div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-[#E2E8F0] bg-white text-[10.5px] font-medium text-[#334155]">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-[#E9E9E7] bg-white text-[10.5px] font-medium text-[#52504A]">
                   <span>↩</span>
                   <span>Back To Dashboard</span>
                 </span>
@@ -2050,11 +2050,11 @@ export const TemplateShowcasePage: React.FC<{
 
               {/* References Overview Database */}
               <div className="space-y-2.5">
-                <p className="text-[13.5px] font-bold text-[#0F172A]">
+                <p className="text-[13.5px] font-bold text-[#37352F]">
                   References Overview
                 </p>
-                <div className="flex items-center gap-2.5 border-b border-[#E2E8F0] pb-1.5 text-[10px] font-medium text-[#64748B] overflow-x-auto no-scrollbar">
-                  <span className="text-[#0F172A] font-semibold border-b-2 border-[#0F172A] pb-1 -mb-1.5 whitespace-nowrap">
+                <div className="flex items-center gap-2.5 border-b border-[#E9E9E7] pb-1.5 text-[10px] font-medium text-[#6E6D68] overflow-x-auto no-scrollbar">
+                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1.5 whitespace-nowrap">
                     ⊞ References
                   </span>
                   <span className="whitespace-nowrap">Recently</span>
@@ -2067,21 +2067,21 @@ export const TemplateShowcasePage: React.FC<{
                   {showcase.page2References.map((refItem) => (
                     <div
                       key={refItem.title}
-                      className="rounded-[9px] border border-[#E2E8F0] bg-white p-2.5 space-y-1.5"
+                      className="rounded-[9px] border border-[#E9E9E7] bg-white p-2.5 space-y-1.5"
                     >
-                      <p className="text-[10px] font-semibold text-[#0F172A] leading-snug line-clamp-2">
+                      <p className="text-[10px] font-semibold text-[#37352F] leading-snug line-clamp-2">
                         📄 {refItem.title}
                       </p>
-                      <p className="text-[9px] text-[#64748B]">{refItem.date}</p>
-                      <div className="flex items-center gap-1 text-[9px] text-[#1D6EE3]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3]" />
+                      <p className="text-[9px] text-[#6E6D68]">{refItem.date}</p>
+                      <div className="flex items-center gap-1 text-[9px] text-[#2383E2]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
                         <span>Inbox</span>
                       </div>
                       <div className="flex flex-wrap gap-1">
                         {refItem.tags.map((t) => (
                           <span
                             key={t}
-                            className="px-1.5 py-0.5 rounded bg-[#F1F5F9] text-[8.5px] text-[#475569]"
+                            className="px-1.5 py-0.5 rounded bg-[#F1F1EF] text-[8.5px] text-[#52504A]"
                           >
                             {t}
                           </span>
@@ -2089,27 +2089,27 @@ export const TemplateShowcasePage: React.FC<{
                       </div>
                     </div>
                   ))}
-                  <div className="rounded-[9px] border border-dashed border-[#CBD5E1] bg-[#F8FAFC]/60 p-2.5 flex items-center justify-center text-[10px] font-medium text-[#64748B]">
+                  <div className="rounded-[9px] border border-dashed border-[#D3D1CB] bg-[#F7F6F3] p-2.5 flex items-center justify-center text-[10px] font-medium text-[#6E6D68]">
                     + New
                   </div>
                 </div>
               </div>
 
               {/* Callout Banner */}
-              <div className="rounded-[8px] bg-[#F8FAFC] border border-[#E2E8F0] p-2.5 flex items-start gap-2 text-[10.5px] leading-[1.45] text-[#475569]">
-                <span className="text-[#1D6EE3] font-bold shrink-0">ⓘ</span>
+              <div className="rounded-[8px] bg-[#F7F6F3] border border-[#E9E9E7] p-2.5 flex items-start gap-2 text-[10.5px] leading-[1.45] text-[#52504A]">
+                <span className="text-[#2383E2] font-bold shrink-0">ⓘ</span>
                 <p>{showcase.page2Callout}</p>
               </div>
 
               {/* Notes Overview */}
               <div className="space-y-2 pt-1">
-                <p className="text-[13px] font-bold text-[#0F172A]">
+                <p className="text-[13px] font-bold text-[#37352F]">
                   Notes Overview
                 </p>
-                <div className="flex items-center gap-2.5 border-b border-[#E2E8F0] pb-1 text-[9.5px] text-[#64748B]">
+                <div className="flex items-center gap-2.5 border-b border-[#E9E9E7] pb-1 text-[9.5px] text-[#6E6D68]">
                   <span>Inbox</span>
                   <span>In Review</span>
-                  <span className="text-[#0F172A] font-semibold border-b-2 border-[#0F172A] pb-1 -mb-1">
+                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1">
                     ★ Favourite
                   </span>
                 </div>
@@ -2117,12 +2117,12 @@ export const TemplateShowcasePage: React.FC<{
                   {showcase.page2Notes.map((note) => (
                     <div
                       key={note.title}
-                      className="rounded-[8px] border border-[#E2E8F0] bg-[#FFFFFF] p-2.5 space-y-1"
+                      className="rounded-[8px] border border-[#E9E9E7] bg-[#FFFFFF] p-2.5 space-y-1"
                     >
-                      <p className="text-[9.5px] text-[#64748B] line-clamp-2">
+                      <p className="text-[9.5px] text-[#6E6D68] line-clamp-2">
                         {note.excerpt}
                       </p>
-                      <p className="text-[9.5px] font-semibold text-[#0F172A] line-clamp-2">
+                      <p className="text-[9.5px] font-semibold text-[#37352F] line-clamp-2">
                         📝 {note.title}
                       </p>
                     </div>
@@ -2138,39 +2138,39 @@ export const TemplateShowcasePage: React.FC<{
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.18 }}
-              className="w-full lg:w-[42%] shrink-0 lg:-ml-6 z-30 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E2E8F0] shadow-[-16px_24px_60px_-15px_rgba(15,23,42,0.20)] p-5 sm:p-7 space-y-4"
+              className="w-full lg:w-[42%] shrink-0 lg:-ml-6 z-30 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E9E9E7] shadow-[-16px_24px_60px_-15px_rgba(55,53,47,0.20)] p-5 sm:p-7 space-y-4"
             >
               {/* Page Icon + Title */}
               <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-[10px] bg-[#EFF6FF] text-[#1D6EE3] flex items-center justify-center">
+                <div className="w-9 h-9 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center">
                   <Folder className="w-5 h-5" />
                 </div>
-                <h3 className="text-[23px] font-bold tracking-[-0.02em] text-[#0F172A]">
+                <h3 className="text-[23px] font-bold tracking-[-0.02em] text-[#37352F]">
                   {showcase.page3Title}
                 </h3>
               </div>
 
               {/* Action Bar: Back To Dashboard | New Project | New Task */}
               <div className="grid grid-cols-3 gap-2 pt-0.5">
-                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E2E8F0] bg-white text-[10px] font-medium text-[#334155] text-center truncate">
+                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E9E9E7] bg-white text-[10px] font-medium text-[#52504A] text-center truncate">
                   ↩ Back To Dashboard
                 </span>
-                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E2E8F0] bg-white text-[10px] font-medium text-[#1D6EE3] text-center truncate">
+                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E9E9E7] bg-white text-[10px] font-medium text-[#2383E2] text-center truncate">
                   📁 New Project
                 </span>
-                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E2E8F0] bg-white text-[10px] font-medium text-[#1D6EE3] text-center truncate">
+                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E9E9E7] bg-white text-[10px] font-medium text-[#2383E2] text-center truncate">
                   ✔ New Task
                 </span>
               </div>
 
               {/* 1. Projects Overview Gallery */}
               <div className="space-y-2">
-                <p className="text-[13.5px] font-bold text-[#0F172A]">
+                <p className="text-[13.5px] font-bold text-[#37352F]">
                   Projects Overview
                 </p>
-                <div className="flex items-center gap-3 border-b border-[#E2E8F0] pb-1.5 text-[10px] font-medium text-[#64748B]">
+                <div className="flex items-center gap-3 border-b border-[#E9E9E7] pb-1.5 text-[10px] font-medium text-[#6E6D68]">
                   <span>Inbox</span>
-                  <span className="text-[#0F172A] font-semibold border-b-2 border-[#0F172A] pb-1 -mb-1.5">
+                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1.5">
                     ⊞ Working On
                   </span>
                   <span>Upcoming</span>
@@ -2181,29 +2181,29 @@ export const TemplateShowcasePage: React.FC<{
                   {showcase.page3Projects.map((proj) => (
                     <div
                       key={proj.title}
-                      className="rounded-[9px] border border-[#E2E8F0] bg-white p-2.5 space-y-1.5"
+                      className="rounded-[9px] border border-[#E9E9E7] bg-white p-2.5 space-y-1.5"
                     >
-                      <p className="text-[10px] font-semibold text-[#0F172A] leading-snug truncate">
+                      <p className="text-[10px] font-semibold text-[#37352F] leading-snug truncate">
                         📁 {proj.title}
                       </p>
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1D6EE3] text-[8.5px] font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#1D6EE3]" />
+                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#EBF3FC] text-[#2383E2] text-[8.5px] font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
                         {proj.status}
                       </span>
-                      <p className="text-[8.5px] text-[#64748B] truncate">
+                      <p className="text-[8.5px] text-[#6E6D68] truncate">
                         {proj.date}
                       </p>
-                      <p className="text-[8.5px] text-[#334155] font-medium truncate">
+                      <p className="text-[8.5px] text-[#52504A] font-medium truncate">
                         ◎ {proj.area}
                       </p>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[8.5px] text-[#64748B]">
+                        <span className="text-[8.5px] text-[#6E6D68]">
                           {proj.progress}%
                         </span>
-                        <div className="flex-1 h-1 rounded-full bg-[#E2E8F0] overflow-hidden">
+                        <div className="flex-1 h-1 rounded-full bg-[#E9E9E7] overflow-hidden">
                           <div
                             style={{ width: `${proj.progress}%` }}
-                            className="h-full bg-[#1D6EE3]"
+                            className="h-full bg-[#2383E2]"
                           />
                         </div>
                       </div>
@@ -2213,24 +2213,24 @@ export const TemplateShowcasePage: React.FC<{
               </div>
 
               {/* Callout Block */}
-              <div className="rounded-[8px] bg-[#F8FAFC] border border-[#E2E8F0] p-2.5 flex items-start gap-2 text-[10px] leading-[1.45] text-[#475569]">
-                <span className="text-[#1D6EE3] font-bold shrink-0">ⓘ</span>
+              <div className="rounded-[8px] bg-[#F7F6F3] border border-[#E9E9E7] p-2.5 flex items-start gap-2 text-[10px] leading-[1.45] text-[#52504A]">
+                <span className="text-[#2383E2] font-bold shrink-0">ⓘ</span>
                 <p>{showcase.page3Callout}</p>
               </div>
 
               {/* 2. Projects Timeline (Gantt View matching image_49ed9109.png) */}
               <div className="space-y-2 pt-1">
                 <div className="flex items-center justify-between">
-                  <p className="text-[13px] font-bold text-[#0F172A]">
+                  <p className="text-[13px] font-bold text-[#37352F]">
                     Projects Timeline
                   </p>
-                  <span className="text-[9.5px] text-[#64748B] px-2 py-0.5 rounded border border-[#E2E8F0] bg-[#F8FAFC]">
+                  <span className="text-[9.5px] text-[#6E6D68] px-2 py-0.5 rounded border border-[#E9E9E7] bg-[#F7F6F3]">
                     📅 Open in Calendar · Month
                   </span>
                 </div>
 
-                <div className="rounded-[10px] border border-[#E2E8F0] bg-[#FFFFFF] p-3 space-y-2 overflow-hidden">
-                  <div className="flex items-center justify-between text-[9px] font-semibold text-[#64748B] border-b border-[#F1F5F9] pb-1.5">
+                <div className="rounded-[10px] border border-[#E9E9E7] bg-[#FFFFFF] p-3 space-y-2 overflow-hidden">
+                  <div className="flex items-center justify-between text-[9px] font-semibold text-[#6E6D68] border-b border-[#F1F1EF] pb-1.5">
                     <span>‹ June 2026</span>
                     <span>July</span>
                     <span className="font-mono text-[8px] tracking-widest hidden sm:inline">
@@ -2246,21 +2246,21 @@ export const TemplateShowcasePage: React.FC<{
                             marginLeft: `${bar.offsetPct}%`,
                             width: `${bar.widthPct}%`,
                           }}
-                          className="px-2 py-1 rounded-[6px] border border-[#E2E8F0] bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] flex items-center gap-1.5 truncate"
+                          className="px-2 py-1 rounded-[6px] border border-[#E9E9E7] bg-white shadow-[0_1px_2px_rgba(55,53,47,0.04)] flex items-center gap-1.5 truncate"
                         >
-                          <span className="text-[8.5px] font-semibold text-[#0F172A] truncate">
+                          <span className="text-[8.5px] font-semibold text-[#37352F] truncate">
                             📁 {bar.title}
                           </span>
                           <span
                             className={`px-1 py-0.2 rounded text-[7.5px] font-medium shrink-0 ${
                               bar.status === 'Completed'
-                                ? 'bg-[#ECFDF5] text-[#059669]'
-                                : 'bg-[#EFF6FF] text-[#1D6EE3]'
+                                ? 'bg-[#E7F4F0] text-[#0F7B6C]'
+                                : 'bg-[#EBF3FC] text-[#2383E2]'
                             }`}
                           >
                             ● {bar.status}
                           </span>
-                          <span className="text-[7.5px] text-[#64748B] shrink-0">
+                          <span className="text-[7.5px] text-[#6E6D68] shrink-0">
                             {bar.progress}
                           </span>
                         </div>
@@ -2273,16 +2273,16 @@ export const TemplateShowcasePage: React.FC<{
               {/* 3. Tasks Manager Overview (Weekly Calendar Columns) */}
               <div className="space-y-2 pt-1">
                 <div className="flex items-center justify-between">
-                  <p className="text-[13px] font-bold text-[#0F172A]">
+                  <p className="text-[13px] font-bold text-[#37352F]">
                     Tasks Manager Overview
                   </p>
-                  <span className="text-[9px] text-[#64748B]">July 2026</span>
+                  <span className="text-[9px] text-[#6E6D68]">July 2026</span>
                 </div>
 
-                <div className="flex items-center gap-3 border-b border-[#E2E8F0] pb-1 text-[9.5px] text-[#64748B]">
+                <div className="flex items-center gap-3 border-b border-[#E9E9E7] pb-1 text-[9.5px] text-[#6E6D68]">
                   <span>Inbox</span>
                   <span>Today&apos;s Tasks</span>
-                  <span className="text-[#0F172A] font-semibold border-b-2 border-[#0F172A] pb-1 -mb-1">
+                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1">
                     📅 Weekly Tasks
                   </span>
                   <span>☑ Completed</span>
@@ -2292,15 +2292,15 @@ export const TemplateShowcasePage: React.FC<{
                   {showcase.page3WeeklyTasks.map((col) => (
                     <div
                       key={col.day}
-                      className="rounded-[8px] border border-[#E2E8F0] bg-[#F8FAFC]/60 p-1.5 min-h-[78px] space-y-1.5"
+                      className="rounded-[8px] border border-[#E9E9E7] bg-[#F7F6F3] p-1.5 min-h-[78px] space-y-1.5"
                     >
-                      <div className="flex items-center justify-between text-[8.5px] text-[#64748B]">
+                      <div className="flex items-center justify-between text-[8.5px] text-[#6E6D68]">
                         <span>{col.day}</span>
                         <span
                           className={
                             col.isToday
-                              ? 'w-4 h-4 rounded-full bg-[#EF4444] text-white font-bold inline-flex items-center justify-center text-[8px]'
-                              : 'font-semibold text-[#334155]'
+                              ? 'w-4 h-4 rounded-full bg-[#E03E3E] text-white font-bold inline-flex items-center justify-center text-[8px]'
+                              : 'font-semibold text-[#52504A]'
                           }
                         >
                           {col.dateNum}
@@ -2308,12 +2308,12 @@ export const TemplateShowcasePage: React.FC<{
                       </div>
 
                       {col.taskTitle && (
-                        <div className="rounded-[6px] bg-white border border-[#E2E8F0] p-1.5 space-y-1 shadow-[0_1px_2px_rgba(15,23,42,0.03)]">
-                          <p className="text-[8px] font-semibold text-[#0F172A] leading-tight line-clamp-3">
+                        <div className="rounded-[6px] bg-white border border-[#E9E9E7] p-1.5 space-y-1 shadow-[0_1px_2px_rgba(55,53,47,0.03)]">
+                          <p className="text-[8px] font-semibold text-[#37352F] leading-tight line-clamp-3">
                             ✔ {col.taskTitle}
                           </p>
                           {col.priority && (
-                            <span className="inline-block px-1 py-0.2 rounded bg-[#FEF2F2] text-[#DC2626] text-[7px] font-medium">
+                            <span className="inline-block px-1 py-0.2 rounded bg-[#FDECEC] text-[#E03E3E] text-[7px] font-medium">
                               {col.priority}
                             </span>
                           )}
@@ -2337,47 +2337,47 @@ export const TemplateShowcasePage: React.FC<{
           isFlagshipOs ? 'max-w-[1200px]' : 'max-w-[960px]'
         } mx-auto px-4 sm:px-6`}
       >
-        <div className="rounded-[24px] bg-[#F8FAFC] border border-[#E2E8F0] p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="rounded-[24px] bg-[#F7F6F3] border border-[#E9E9E7] p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFF6FF] text-[#1D6EE3] text-[12px] font-semibold">
+            <p className="inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Included in {template.name} ({template.version})</span>
-            </span>
-            <h3 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#0F172A]">
+            </p>
+            <h3 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#37352F]">
               Ready to duplicate into your Notion workspace in 60 seconds.
             </h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {template.whatsInside.map((bullet) => (
                 <li
                   key={bullet}
-                  className="flex items-start gap-2.5 text-[14px] text-[#334155] leading-[1.5]"
+                  className="flex items-start gap-2.5 text-[14px] text-[#52504A] leading-[1.5]"
                 >
-                  <Check className="w-4 h-4 text-[#1D6EE3] shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-0.5" />
                   <span>{bullet}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-5 rounded-[18px] bg-white border border-[#E2E8F0] p-6 space-y-5 shadow-[0_8px_24px_-10px_rgba(15,23,42,0.06)]">
+          <div className="lg:col-span-5 rounded-[18px] bg-white border border-[#E9E9E7] p-6 space-y-5 shadow-[0_8px_24px_-10px_rgba(55,53,47,0.06)]">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#64748B]">
+                <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#6E6D68]">
                   {template.category}
                 </p>
-                <p className="text-[20px] font-bold text-[#0F172A]">
+                <p className="text-[20px] font-bold text-[#37352F]">
                   {template.name}
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-[24px] font-bold text-[#0F172A] tabular-nums">
+                <p className="text-[24px] font-bold text-[#37352F] tabular-nums">
                   {formatPrice(template.price)}
                 </p>
-                <p className="text-[12px] text-[#64748B]">Lifetime updates</p>
+                <p className="text-[12px] text-[#6E6D68]">Lifetime updates</p>
               </div>
             </div>
 
-            <div className="h-44 sm:h-48 rounded-[12px] bg-[#FFFFFF] border border-[#EDF2F7] p-2.5 flex items-center justify-center overflow-hidden">
+            <div className="h-44 sm:h-48 rounded-[12px] bg-[#FFFFFF] border border-[#E9E9E7] p-2.5 flex items-center justify-center overflow-hidden">
               <BlushAssetImage
                 src={
                   template.slug === 'freelance-os'
@@ -2404,7 +2404,7 @@ export const TemplateShowcasePage: React.FC<{
             <button
               type="button"
               onClick={handleOpenBuy}
-              className="w-full h-12 px-6 rounded-full bg-[#1D6EE3] hover:bg-[#155BC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_8px_20px_-6px_rgba(29,110,227,0.45)] cursor-pointer transition-colors"
+              className="w-full h-12 px-6 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_8px_20px_-6px_rgba(35,131,226,0.45)] cursor-pointer transition-colors"
             >
               <span>
                 {isOwned
@@ -2424,14 +2424,14 @@ export const TemplateShowcasePage: React.FC<{
         <section
           className={`pt-8 ${
             isFlagshipOs ? 'max-w-[1200px]' : 'max-w-[960px]'
-          } mx-auto px-4 sm:px-6 border-t border-[#E2E8F0]`}
+          } mx-auto px-4 sm:px-6 border-t border-[#E9E9E7]`}
         >
           <div className="flex items-center justify-between mb-8 pt-8">
             <div>
-              <h2 className="text-[24px] font-bold tracking-[-0.02em] text-[#0F172A]">
+              <h2 className="text-[24px] font-bold tracking-[-0.02em] text-[#37352F]">
                 More in {template.category}
               </h2>
-              <p className="text-[14.5px] text-[#64748B]">
+              <p className="text-[14.5px] text-[#6E6D68]">
                 Explore other minimalist Notion systems in this category.
               </p>
             </div>
@@ -2442,7 +2442,7 @@ export const TemplateShowcasePage: React.FC<{
                   `/templates?category=${encodeURIComponent(template.category)}`
                 )
               }
-              className="text-[14px] font-semibold text-[#1D6EE3] hover:text-[#155BC2] inline-flex items-center gap-1.5 hover:underline cursor-pointer"
+              className="text-[14px] font-semibold text-[#2383E2] hover:text-[#1B6EC2] inline-flex items-center gap-1.5 hover:underline cursor-pointer"
             >
               <span>View All</span>
               <ArrowRight className="w-4 h-4" />
