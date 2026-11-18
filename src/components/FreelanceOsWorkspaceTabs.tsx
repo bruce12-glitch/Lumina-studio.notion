@@ -177,11 +177,11 @@ const NOTION_QUICK_NAV: Array<{
   icon: React.ReactNode;
 }> = [
   { id: 'hub', label: 'Home', accent: 'text-[#9A6700]', icon: <Home className="w-3.5 h-3.5" /> },
-  { id: 'clients', label: 'Clients', accent: 'text-[#1D6EE3]', icon: <Users className="w-3.5 h-3.5" /> },
+  { id: 'clients', label: 'Clients', accent: 'text-[#2383E2]', icon: <Users className="w-3.5 h-3.5" /> },
   { id: 'projects', label: 'Projects', accent: 'text-[#2563EB]', icon: <Folder className="w-3.5 h-3.5" /> },
   { id: 'ideas', label: 'Ideas', accent: 'text-[#D97706]', icon: <Lightbulb className="w-3.5 h-3.5" /> },
-  { id: 'legals', label: 'Legals', accent: 'text-[#64748B]', icon: <Scale className="w-3.5 h-3.5" /> },
-  { id: 'time', label: 'Time', accent: 'text-[#475569]', icon: <Clock className="w-3.5 h-3.5" /> },
+  { id: 'legals', label: 'Legals', accent: 'text-[#6E6D68]', icon: <Scale className="w-3.5 h-3.5" /> },
+  { id: 'time', label: 'Time', accent: 'text-[#52504A]', icon: <Clock className="w-3.5 h-3.5" /> },
   { id: 'growth', label: 'Growth', accent: 'text-[#16A34A]', icon: <Sprout className="w-3.5 h-3.5" /> },
   { id: 'finances', label: 'Finances', accent: 'text-[#CA8A04]', icon: <Wallet className="w-3.5 h-3.5" /> },
 ];
@@ -196,7 +196,7 @@ const KpiTile: React.FC<{
     style={{ backgroundColor: bg }}
     className="rounded-[10px] px-4 py-3.5 space-y-1.5 border border-black/[0.04]"
   >
-    <div className="flex items-center gap-2 text-[13px] font-semibold text-[#1E293B]">
+    <div className="flex items-center gap-2 text-[13px] font-semibold text-[#37352F]">
       <span className="shrink-0">{icon}</span>
       <span className="truncate">{label}</span>
     </div>
@@ -222,7 +222,7 @@ const NotionSectionCallout: React.FC<{
       style={{ backgroundColor: bg }}
       className={`w-full text-left rounded-[10px] px-4 py-3 flex items-start gap-2.5 text-[13px] leading-[1.45] border transition-all ${
         active
-          ? 'border-[#1D6EE3]/50 ring-2 ring-[#1D6EE3]/10'
+          ? 'border-[#2383E2]/50 ring-2 ring-[#2383E2]/10'
           : 'border-black/[0.04]'
       } ${onClick ? 'cursor-pointer hover:brightness-[0.985]' : ''}`}
     >
@@ -284,8 +284,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`px-3 py-2 rounded-[10px] text-[12.5px] font-semibold border inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
-                  : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
+                  ? 'bg-[#37352F] text-white border-[#37352F] shadow-[0_6px_16px_-6px_rgba(55,53,47,0.35)]'
+                  : 'bg-white text-[#52504A] border-[#E9E9E7] hover:bg-[#F7F6F3] hover:text-[#37352F]'
               }`}
             >
               <span className="opacity-70 text-[11px] font-mono">
@@ -303,21 +303,21 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
         data-testid={`fos-tabpanel-${activeTab}`}
         role="tabpanel"
         aria-label={currentMeta.pageTitle}
-        className="rounded-[24px] bg-white border border-[#E2E8F0] shadow-[0_16px_44px_-18px_rgba(15,23,42,0.10)] overflow-hidden"
+        className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_16px_44px_-18px_rgba(55,53,47,0.10)] overflow-hidden"
       >
         {/* Subtle Notion Top Chrome */}
-        <div className="px-5 py-3 border-b border-[#F1F5F9] bg-[#FBFBFA] flex flex-wrap items-center justify-between gap-2 text-[12px] text-[#64748B]">
+        <div className="px-5 py-3 border-b border-[#F1F1EF] bg-[#FBFBFA] flex flex-wrap items-center justify-between gap-2 text-[12px] text-[#6E6D68]">
           <div className="flex items-center gap-2 font-medium text-[#37352F]">
-            <span className="inline-flex items-center gap-1 text-[#64748B]">
+            <span className="inline-flex items-center gap-1 text-[#6E6D68]">
               <span>Freelancer Business OS</span>
               <span>/</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 font-semibold text-[#0F172A]">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-[#37352F]">
               {currentMeta.icon}
               <span>{currentMeta.pageTitle}</span>
             </span>
           </div>
-          <span className="text-[11.5px] font-medium text-[#64748B]">
+          <span className="text-[11.5px] font-medium text-[#6E6D68]">
             Interactive Notion Workspace Preview
           </span>
         </div>
@@ -340,7 +340,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                   onClick={() => setActiveTab(nav.id)}
                   className={`px-3.5 py-2.5 rounded-[8px] border text-left text-[13px] font-medium inline-flex items-center gap-2 transition-colors cursor-pointer ${
                     selected
-                      ? 'bg-[#F4F3F1] border-[#D8D6D0] text-[#0F172A] font-semibold'
+                      ? 'bg-[#F4F3F1] border-[#D8D6D0] text-[#37352F] font-semibold'
                       : 'bg-white border-[#EAEAEA] text-[#52504A] hover:bg-[#FAF9F7]'
                   }`}
                 >
@@ -359,7 +359,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
 
           {/* Notion Callout Banner */}
           <div className="rounded-[10px] bg-[#F6F5F3] border border-[#EAE8E3] px-4 py-3.5 flex items-start gap-3 text-[13.5px] leading-[1.5] text-[#37352F]">
-            <span className="mt-0.5 text-[#1D6EE3] shrink-0">
+            <span className="mt-0.5 text-[#2383E2] shrink-0">
               {currentMeta.icon}
             </span>
             <p>
@@ -415,7 +415,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                           type="checkbox"
                           checked={done}
                           onChange={() => toggleFridayCheck(label)}
-                          className="w-4 h-4 rounded accent-[#1D6EE3] cursor-pointer"
+                          className="w-4 h-4 rounded accent-[#2383E2] cursor-pointer"
                         />
                         <span className={done ? 'line-through text-[#8E8B84]' : ''}>
                           {label}
@@ -428,7 +428,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                 <div className="lg:col-span-7 rounded-[12px] border border-[#EAEAEA] overflow-hidden">
                   <div className="px-4 py-2.5 border-b border-[#EAEAEA] bg-[#FAF9F7] flex items-center justify-between text-[13px] font-bold text-[#2F2D28]">
                     <span>↗ Weekly Priority Actions</span>
-                    <span className="text-[11px] font-medium text-[#64748B]">
+                    <span className="text-[11px] font-medium text-[#6E6D68]">
                       Mon Plan → Fri Review
                     </span>
                   </div>
@@ -436,7 +436,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                     {[
                       { task: 'Chase overdue invoice INV-2026-036', area: 'Finances', status: 'Urgent', tone: 'bg-[#FCECEC] text-[#DC2626]' },
                       { task: 'Send Kirana Cloud Speed Sprint SOW', area: 'Legals', status: 'Due Today', tone: 'bg-[#FBF5E2] text-[#B45309]' },
-                      { task: 'Score Q4 productized offer ideas (ICE)', area: 'Ideation Hub', status: 'In Progress', tone: 'bg-[#EAF3FC] text-[#1D6EE3]' },
+                      { task: 'Score Q4 productized offer ideas (ICE)', area: 'Ideation Hub', status: 'In Progress', tone: 'bg-[#EBF3FC] text-[#2383E2]' },
                       { task: 'Verify P2 Nova Labs billable hours', area: 'Time Sheet', status: 'Ready', tone: 'bg-[#EDF5EE] text-[#15803D]' },
                     ].map((row) => (
                       <div key={row.task} className="px-4 py-2.5 flex items-center justify-between gap-3">
@@ -444,7 +444,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                           {row.task}
                         </span>
                         <div className="flex items-center gap-2 shrink-0">
-                          <span className="text-[11.5px] text-[#64748B] hidden sm:inline">
+                          <span className="text-[11.5px] text-[#6E6D68] hidden sm:inline">
                             {row.area}
                           </span>
                           <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${row.tone}`}>
@@ -467,7 +467,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile
                   bg="#EDF5EE"
-                  icon={<Users className="w-4 h-4 text-[#1D6EE3]" />}
+                  icon={<Users className="w-4 h-4 text-[#2383E2]" />}
                   label="Active clients"
                   value="4 relationships"
                 />
@@ -498,8 +498,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <NotionSectionCallout
-                    bg="#EAF3FC"
-                    icon={<BarChart3 className="w-4 h-4 text-[#1D6EE3]" />}
+                    bg="#EBF3FC"
+                    icon={<BarChart3 className="w-4 h-4 text-[#2383E2]" />}
                     title="Pipeline Board"
                     subtitle="Drag to move deals"
                     active={clientsView === 'board'}
@@ -519,7 +519,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                   <div className="space-y-2.5 pt-1">
                     <div className="flex items-center justify-between text-[15px] font-bold text-[#2F2D28]">
                       <span>↗ Clients</span>
-                      <span className="px-2.5 py-1 rounded-[6px] bg-[#1D6EE3] text-white text-[11.5px] font-semibold">
+                      <span className="px-2.5 py-1 rounded-[6px] bg-[#2383E2] text-white text-[11.5px] font-semibold">
                         New
                       </span>
                     </div>
@@ -538,7 +538,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                           {
                             stage: 'Contacted',
                             pillBg: '#E1EFFB',
-                            pillText: '#1D6EE3',
+                            pillText: '#2383E2',
                             cardBg: '#F5FAFE',
                             items: [],
                           },
@@ -585,7 +585,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                             {col.items.map((item) => (
                               <div
                                 key={item.name}
-                                className="rounded-[8px] bg-white border border-[#EAEAEA] p-2.5 space-y-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                                className="rounded-[8px] bg-white border border-[#EAEAEA] p-2.5 space-y-1.5 shadow-[0_1px_2px_rgba(55,53,47,0.03)]"
                               >
                                 <p className="text-[12.5px] font-semibold text-[#2F2D28]">
                                   {item.name}
@@ -601,12 +601,12 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                                     {item.val}
                                   </span>
                                 </div>
-                                <p className="text-[10.5px] text-[#64748B]">
+                                <p className="text-[10.5px] text-[#6E6D68]">
                                   {item.date}
                                 </p>
                               </div>
                             ))}
-                            <div className="rounded-[7px] border border-dashed border-[#D8D6D0] px-2.5 py-1.5 text-[11.5px] text-[#64748B]">
+                            <div className="rounded-[7px] border border-dashed border-[#D8D6D0] px-2.5 py-1.5 text-[11.5px] text-[#6E6D68]">
                               + New page
                             </div>
                           </div>
@@ -617,7 +617,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                 ) : (
                   <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                     <table className="w-full text-left text-[13px] min-w-[540px]">
-                      <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                      <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                         <tr>
                           <th className="py-2.5 px-4 font-medium">Client</th>
                           <th className="py-2.5 px-4 font-medium">Tier</th>
@@ -638,7 +638,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                                 {c.tier}
                               </span>
                             </td>
-                            <td className="py-2.5 px-4 text-[#64748B]">{c.contact}</td>
+                            <td className="py-2.5 px-4 text-[#6E6D68]">{c.contact}</td>
                             <td className="py-2.5 px-4 text-right font-semibold tabular-nums">{c.ltv}</td>
                           </tr>
                         ))}
@@ -657,8 +657,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile
-                  bg="#EAF3FC"
-                  icon={<FileText className="w-4 h-4 text-[#475569]" />}
+                  bg="#EBF3FC"
+                  icon={<FileText className="w-4 h-4 text-[#52504A]" />}
                   label="Active projects"
                   value="4"
                 />
@@ -689,8 +689,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
                   <NotionSectionCallout
-                    bg="#EAF3FC"
-                    icon={<FileText className="w-4 h-4 text-[#1D6EE3]" />}
+                    bg="#EBF3FC"
+                    icon={<FileText className="w-4 h-4 text-[#2383E2]" />}
                     title="Projects Board"
                     subtitle="Kanban by status (Simple, Complete, Advanced)"
                     active={projectsView === 'board'}
@@ -716,7 +716,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
 
                 <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                   <table className="w-full text-left text-[13px] min-w-[600px]">
-                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                       <tr>
                         <th className="py-2.5 px-4 font-medium">Project</th>
                         <th className="py-2.5 px-4 font-medium">Client</th>
@@ -737,7 +737,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                             <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">{row.name}</td>
                             <td className="py-2.5 px-4 text-[#52504A]">{row.client}</td>
                             <td className="py-2.5 px-4">
-                              <span className="px-2 py-0.5 rounded bg-[#EAF3FC] text-[11px] font-medium text-[#1D6EE3]">
+                              <span className="px-2 py-0.5 rounded bg-[#EBF3FC] text-[11px] font-medium text-[#2383E2]">
                                 {row.mode}
                               </span>
                             </td>
@@ -784,8 +784,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                   value="₹2,68,600"
                 />
                 <KpiTile
-                  bg="#EAF3FC"
-                  icon={<TrendingUp className="w-4 h-4 text-[#1D6EE3]" />}
+                  bg="#EBF3FC"
+                  icon={<TrendingUp className="w-4 h-4 text-[#2383E2]" />}
                   label="Net realized profit"
                   value="₹4,69,320"
                 />
@@ -794,12 +794,12 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
               <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                 <div className="px-4 py-2.5 bg-[#FAF9F7] border-b border-[#EAEAEA] flex items-center justify-between text-[13px] font-bold text-[#2F2D28]">
                   <span>↗ Unpaid & Overdue Aging Tracker</span>
-                  <span className="text-[11px] font-medium text-[#64748B]">
+                  <span className="text-[11px] font-medium text-[#6E6D68]">
                     Paid ledger & monthly P&L linked
                   </span>
                 </div>
                 <table className="w-full text-left text-[13px] min-w-[600px]">
-                  <thead className="border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                  <thead className="border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                     <tr>
                       <th className="py-2.5 px-4 font-medium">Invoice</th>
                       <th className="py-2.5 px-4 font-medium">Client</th>
@@ -811,8 +811,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                   <tbody className="divide-y divide-[#F1F1EF]">
                     {[
                       { id: 'INV-2026-036', client: 'Studio Mosaic', status: 'Partial', sBg: '#FBF5E2', sInk: '#B45309', bal: '₹62,100', bucket: '31–60d Overdue', bInk: 'text-[#DC2626]' },
-                      { id: 'INV-2026-035', client: 'Nova Labs', status: 'Sent', sBg: '#EAF3FC', sInk: '#1D6EE3', bal: '₹70,800', bucket: '16–30d Overdue', bInk: 'text-[#D97706]' },
-                      { id: 'INV-2026-034', client: 'Kirana Cloud', status: 'Sent', sBg: '#EAF3FC', sInk: '#1D6EE3', bal: '₹88,500', bucket: '1–15d Due', bInk: 'text-[#CA8A04]' },
+                      { id: 'INV-2026-035', client: 'Nova Labs', status: 'Sent', sBg: '#EBF3FC', sInk: '#2383E2', bal: '₹70,800', bucket: '16–30d Overdue', bInk: 'text-[#D97706]' },
+                      { id: 'INV-2026-034', client: 'Kirana Cloud', status: 'Sent', sBg: '#EBF3FC', sInk: '#2383E2', bal: '₹88,500', bucket: '1–15d Due', bInk: 'text-[#CA8A04]' },
                       { id: 'INV-2026-031', client: 'Bloom Health', status: 'Paid', sBg: '#EDF5EE', sInk: '#15803D', bal: '₹0', bucket: 'Settled', bInk: 'text-[#16A34A]' },
                     ].map((inv) => (
                       <tr key={inv.id}>
@@ -843,8 +843,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile
-                  bg="#EAF3FC"
-                  icon={<Clock className="w-4 h-4 text-[#475569]" />}
+                  bg="#EBF3FC"
+                  icon={<Clock className="w-4 h-4 text-[#52504A]" />}
                   label="Hours this week"
                   value="25 h"
                 />
@@ -874,8 +874,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                 </h4>
 
                 <NotionSectionCallout
-                  bg="#EAF3FC"
-                  icon={<Calendar className="w-4 h-4 text-[#1D6EE3]" />}
+                  bg="#EBF3FC"
+                  icon={<Calendar className="w-4 h-4 text-[#2383E2]" />}
                   title="This Week"
                   subtitle="Entries Mon–Sun, sorted by date"
                 />
@@ -883,14 +883,14 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-[15px] font-bold text-[#2F2D28]">
                     <span>↗ Time Entries</span>
-                    <span className="px-2.5 py-1 rounded-[6px] bg-[#1D6EE3] text-white text-[11.5px] font-semibold">
+                    <span className="px-2.5 py-1 rounded-[6px] bg-[#2383E2] text-white text-[11.5px] font-semibold">
                       New
                     </span>
                   </div>
 
                   <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                     <table className="w-full text-left text-[13px] min-w-[640px]">
-                      <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                      <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                         <tr>
                           <th className="py-2.5 px-4 font-medium">Aa Name</th>
                           <th className="py-2.5 px-4 font-medium">↗ Project</th>
@@ -913,7 +913,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                             <td className="py-2.5 px-4 text-[#52504A]">{entry.date}</td>
                             <td className="py-2.5 px-4 text-right tabular-nums">{entry.hours}</td>
                             <td className="py-2.5 px-4 text-center">
-                              <input type="checkbox" defaultChecked aria-label={`Billable ${entry.name}`} className="w-4 h-4 accent-[#1D6EE3]" />
+                              <input type="checkbox" defaultChecked aria-label={`Billable ${entry.name}`} className="w-4 h-4 accent-[#2383E2]" />
                             </td>
                             <td className="py-2.5 px-4 text-center">
                               <input
@@ -921,7 +921,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                                 checked={Boolean(timeInvoicedIds[entry.id])}
                                 onChange={() => toggleTimeInvoiced(entry.id)}
                                 aria-label={`Invoiced ${entry.name}`}
-                                className="w-4 h-4 accent-[#1D6EE3] cursor-pointer"
+                                className="w-4 h-4 accent-[#2383E2] cursor-pointer"
                               />
                             </td>
                           </tr>
@@ -953,8 +953,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                   value="8.7"
                 />
                 <KpiTile
-                  bg="#EAF3FC"
-                  icon={<span className="text-[#475569]">🛠️</span>}
+                  bg="#EBF3FC"
+                  icon={<span className="text-[#52504A]">🛠️</span>}
                   label="Building"
                   value="1"
                 />
@@ -989,7 +989,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                     onClick={() => setIdeasView('scored')}
                   />
                   <NotionSectionCallout
-                    bg="#EAF3FC"
+                    bg="#EBF3FC"
                     icon={<span>🧊</span>}
                     title="Parked"
                     subtitle="Quarterly resurrection review"
@@ -1001,7 +1001,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                 {ideasView === 'scored' ? (
                   <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                     <table className="w-full text-left text-[13px] min-w-[520px]">
-                      <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                      <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                         <tr>
                           <th className="py-2.5 px-4 font-medium">Idea</th>
                           <th className="py-2.5 px-4 font-medium">Category</th>
@@ -1019,7 +1019,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                           <tr key={row.name}>
                             <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">{row.name}</td>
                             <td className="py-2.5 px-4 text-[#52504A]">{row.cat}</td>
-                            <td className="py-2.5 px-4 text-[#1D6EE3] font-medium">{row.stage}</td>
+                            <td className="py-2.5 px-4 text-[#2383E2] font-medium">{row.stage}</td>
                             <td className="py-2.5 px-4 text-right font-bold tabular-nums">{row.ice}</td>
                           </tr>
                         ))}
@@ -1040,7 +1040,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                         {
                           stage: 'Researching 🔍',
                           pillBg: '#DCEBFA',
-                          pillInk: '#1D6EE3',
+                          pillInk: '#2383E2',
                           bg: '#F4F9FD',
                           cards: [{ title: 'Invoice reminder automation', tag: 'Automation', tagBg: '#EFEAFB', score: '7.7' }],
                         },
@@ -1083,7 +1083,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                           {col.cards.map((card) => (
                             <div
                               key={card.title}
-                              className="rounded-[8px] bg-white border border-[#EAEAEA] p-2.5 space-y-2 shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
+                              className="rounded-[8px] bg-white border border-[#EAEAEA] p-2.5 space-y-2 shadow-[0_1px_2px_rgba(55,53,47,0.03)]"
                             >
                               <p className="text-[12px] font-semibold text-[#2F2D28] leading-snug">
                                 {card.title}
@@ -1101,7 +1101,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                               </div>
                             </div>
                           ))}
-                          <div className="rounded-[7px] border border-dashed border-[#D8D6D0] px-2.5 py-1.5 text-[11px] text-[#64748B]">
+                          <div className="rounded-[7px] border border-dashed border-[#D8D6D0] px-2.5 py-1.5 text-[11px] text-[#6E6D68]">
                             + New page
                           </div>
                         </div>
@@ -1120,7 +1120,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile bg="#EDF5EE" icon={<span>💵</span>} label="Revenue goal" value="62% · ₹7.4L / ₹12L" />
-                <KpiTile bg="#EAF3FC" icon={<Users className="w-4 h-4 text-[#1D6EE3]" />} label="Active clients" value="63% · 5 / 8" />
+                <KpiTile bg="#EBF3FC" icon={<Users className="w-4 h-4 text-[#2383E2]" />} label="Active clients" value="63% · 5 / 8" />
                 <KpiTile bg="#FDF1E8" icon={<span>📝</span>} label="Case studies" value="33% · 4 / 12" />
                 <KpiTile bg="#F3EFFB" icon={<span>📦</span>} label="Productized offer" value="0% · 0 / 1" />
               </div>
@@ -1139,7 +1139,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
 
                 <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                   <table className="w-full text-left text-[13px] min-w-[660px]">
-                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                       <tr>
                         <th className="py-2.5 px-4 font-medium">Aa Name</th>
                         <th className="py-2.5 px-4 font-medium">Type</th>
@@ -1208,8 +1208,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                     subtitle="Within 30 days"
                   />
                   <NotionSectionCallout
-                    bg="#EAF3FC"
-                    icon={<Users className="w-4 h-4 text-[#1D6EE3]" />}
+                    bg="#EBF3FC"
+                    icon={<Users className="w-4 h-4 text-[#2383E2]" />}
                     title="By Client"
                     subtitle="Grouped by relationship"
                   />
@@ -1217,7 +1217,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
 
                 <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                   <table className="w-full text-left text-[13px] min-w-[620px]">
-                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                       <tr>
                         <th className="py-2.5 px-4 font-medium">Aa Name</th>
                         <th className="py-2.5 px-4 font-medium">Type</th>
@@ -1230,8 +1230,8 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                       {[
                         { name: 'Nova Labs · MSA', type: 'MSA', tBg: '#DCEBFA', client: 'Nova Labs', expiry: 'December 8, 2026', alert: '⚠ Renew soon', aInk: 'text-[#B45309]' },
                         { name: 'Nova Labs · Dashboard SOW', type: 'SOW', tBg: '#E3F2E8', client: 'Nova Labs', expiry: 'January 12, 2027', alert: '● Active', aInk: 'text-[#15803D]' },
-                        { name: 'Finch Finance · NDA', type: 'NDA', tBg: '#EFEAFB', client: 'Finch Finance', expiry: 'Draft', alert: '● Draft', aInk: 'text-[#64748B]' },
-                        { name: 'Kirana Cloud · Speed Sprint SOW', type: 'SOW', tBg: '#E3F2E8', client: 'Kirana Cloud', expiry: 'December 28, 2026', alert: '● Sent', aInk: 'text-[#1D6EE3]' },
+                        { name: 'Finch Finance · NDA', type: 'NDA', tBg: '#EFEAFB', client: 'Finch Finance', expiry: 'Draft', alert: '● Draft', aInk: 'text-[#6E6D68]' },
+                        { name: 'Kirana Cloud · Speed Sprint SOW', type: 'SOW', tBg: '#E3F2E8', client: 'Kirana Cloud', expiry: 'December 28, 2026', alert: '● Sent', aInk: 'text-[#2383E2]' },
                       ].map((row) => (
                         <tr key={row.name}>
                           <td className="py-2.5 px-4 font-medium text-[#2F2D28]">{row.name}</td>
@@ -1258,7 +1258,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
           {activeTab === 'email' && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                <KpiTile bg="#EAF3FC" icon={<Mail className="w-4 h-4 text-[#1D6EE3]" />} label="Contacts segmented" value="142 verified" />
+                <KpiTile bg="#EBF3FC" icon={<Mail className="w-4 h-4 text-[#2383E2]" />} label="Contacts segmented" value="142 verified" />
                 <KpiTile bg="#EDF5EE" icon={<Check className="w-4 h-4 text-[#16A34A]" />} label="Active campaigns" value="2 sequences" />
                 <KpiTile bg="#F3EFFB" icon={<TrendingUp className="w-4 h-4 text-[#7C3AED]" />} label="Avg. open rate" value="54.2%" />
                 <KpiTile bg="#FBF5E2" icon={<Users className="w-4 h-4 text-[#CA8A04]" />} label="Warm replies" value="11 this month" />
@@ -1266,7 +1266,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
 
               <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                 <table className="w-full text-left text-[13px] min-w-[540px]">
-                  <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                  <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                     <tr>
                       <th className="py-2.5 px-4 font-medium">Segment / Campaign</th>
                       <th className="py-2.5 px-4 font-medium">Audience</th>
@@ -1283,7 +1283,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                       <tr key={row.name}>
                         <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">{row.name}</td>
                         <td className="py-2.5 px-4 text-[#52504A]">{row.aud}</td>
-                        <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#EAF3FC] text-[#1D6EE3] text-[11px] font-medium">{row.status}</span></td>
+                        <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#EBF3FC] text-[#2383E2] text-[11px] font-medium">{row.status}</span></td>
                         <td className="py-2.5 px-4 text-right font-medium tabular-nums">{row.val}</td>
                       </tr>
                     ))}
@@ -1300,14 +1300,14 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile bg="#EDF5EE" icon={<KeyRound className="w-4 h-4 text-[#16A34A]" />} label="Cataloged services" value="18 tools" />
-                <KpiTile bg="#EAF3FC" icon={<Check className="w-4 h-4 text-[#1D6EE3]" />} label="2FA enforced" value="100% protected" />
+                <KpiTile bg="#EBF3FC" icon={<Check className="w-4 h-4 text-[#2383E2]" />} label="2FA enforced" value="100% protected" />
                 <KpiTile bg="#FBF5E2" icon={<Calendar className="w-4 h-4 text-[#CA8A04]" />} label="Renewals (30d)" value="3 subscriptions" />
                 <KpiTile bg="#F3EFFB" icon={<Wallet className="w-4 h-4 text-[#7C3AED]" />} label="Security policy" value="Zero raw passwords" />
               </div>
 
               <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                 <table className="w-full text-left text-[13px] min-w-[560px]">
-                  <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                  <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                     <tr>
                       <th className="py-2.5 px-4 font-medium">Service</th>
                       <th className="py-2.5 px-4 font-medium">Login URL</th>
@@ -1324,10 +1324,10 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                     ].map((a) => (
                       <tr key={a.svc}>
                         <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">{a.svc}</td>
-                        <td className="py-2.5 px-4 text-[#1D6EE3] font-mono text-[12px]">{a.url}</td>
+                        <td className="py-2.5 px-4 text-[#2383E2] font-mono text-[12px]">{a.url}</td>
                         <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#EDF5EE] text-[#15803D] text-[11px] font-medium">{a.mfa}</span></td>
                         <td className="py-2.5 px-4 text-[#52504A]">{a.ren}</td>
-                        <td className="py-2.5 px-4 text-[#64748B] font-mono text-[11.5px]">{a.vault}</td>
+                        <td className="py-2.5 px-4 text-[#6E6D68] font-mono text-[11.5px]">{a.vault}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -1343,7 +1343,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile bg="#EDF5EE" icon={<TrendingUp className="w-4 h-4 text-[#16A34A]" />} label="12-month target" value="₹12,00,000" />
-                <KpiTile bg="#EAF3FC" icon={<Briefcase className="w-4 h-4 text-[#1D6EE3]" />} label="Offer ladder" value="3 core tiers" />
+                <KpiTile bg="#EBF3FC" icon={<Briefcase className="w-4 h-4 text-[#2383E2]" />} label="Offer ladder" value="3 core tiers" />
                 <KpiTile bg="#FCECEC" icon={<AlertTriangle className="w-4 h-4 text-[#DC2626]" />} label="Risk register" value="4 mitigated risks" />
                 <KpiTile bg="#FBF5E2" icon={<Target className="w-4 h-4 text-[#CA8A04]" />} label="90-day action plan" value="Q4 launch sprint" />
               </div>
@@ -1355,10 +1355,10 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                   { tier: 'Tier 03 · Retainer', offer: 'Monthly Embedded Design Ops Partner', price: '₹1,50,000 / mo', goal: 'Predictable recurring baseline' },
                 ].map((o) => (
                   <div key={o.tier} className="rounded-[12px] border border-[#EAEAEA] bg-[#FAF9F7] p-4 space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.06em] text-[#1D6EE3]">{o.tier}</span>
+                    <span className="text-[11px] font-bold uppercase tracking-[0.06em] text-[#2383E2]">{o.tier}</span>
                     <h5 className="text-[15px] font-bold text-[#2F2D28]">{o.offer}</h5>
-                    <p className="text-[14px] font-semibold text-[#0F172A] tabular-nums">{o.price}</p>
-                    <p className="text-[12.5px] text-[#64748B]">{o.goal}</p>
+                    <p className="text-[14px] font-semibold text-[#37352F] tabular-nums">{o.price}</p>
+                    <p className="text-[12.5px] text-[#6E6D68]">{o.goal}</p>
                   </div>
                 ))}
               </div>
@@ -1392,14 +1392,14 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
               ].map((card) => (
                 <div key={card.title} className="rounded-[12px] border border-[#EAEAEA] bg-white p-5 space-y-2.5 flex flex-col justify-between">
                   <div className="space-y-1.5">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.06em] text-[#1D6EE3]">{card.eyebrow}</p>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.06em] text-[#2383E2]">{card.eyebrow}</p>
                     <h5 className="text-[16px] font-bold text-[#2F2D28] flex items-center justify-between">
                       <span>{card.title}</span>
-                      <ArrowUpRight className="w-4 h-4 text-[#94A3B8]" />
+                      <ArrowUpRight className="w-4 h-4 text-[#9B9A97]" />
                     </h5>
                     <p className="text-[13px] text-[#52504A] leading-relaxed">{card.desc}</p>
                   </div>
-                  <p className="pt-2 border-t border-[#F1F1EF] text-[12px] font-medium text-[#64748B]">
+                  <p className="pt-2 border-t border-[#F1F1EF] text-[12px] font-medium text-[#6E6D68]">
                     {card.meta}
                   </p>
                 </div>
@@ -1414,7 +1414,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
                 {
-                  icon: <Compass className="w-4 h-4 text-[#1D6EE3]" />,
+                  icon: <Compass className="w-4 h-4 text-[#2383E2]" />,
                   title: 'Quick Actions & SOPs',
                   items: [
                     '15-minute Monday Planning SOP',
@@ -1449,7 +1449,7 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
                   <ul className="space-y-1.5 text-[13px] text-[#52504A]">
                     {block.items.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 text-[#1D6EE3] shrink-0 mt-1" />
+                        <Check className="w-3.5 h-3.5 text-[#2383E2] shrink-0 mt-1" />
                         <span>{item}</span>
                       </li>
                     ))}

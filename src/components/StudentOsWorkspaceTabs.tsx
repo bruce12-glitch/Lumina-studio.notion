@@ -120,12 +120,12 @@ const STUDENT_QUICK_NAV: Array<{
 }> = [
   { id: 'hub', label: 'Home', accent: 'text-[#9A6700]', icon: <Home className="w-3.5 h-3.5" /> },
   { id: 'toolkit', label: 'Study Toolkit', accent: 'text-[#DC2626]', icon: <Timer className="w-3.5 h-3.5" /> },
-  { id: 'academics', label: 'Academics', accent: 'text-[#1D6EE3]', icon: <BookOpen className="w-3.5 h-3.5" /> },
+  { id: 'academics', label: 'Academics', accent: 'text-[#2383E2]', icon: <BookOpen className="w-3.5 h-3.5" /> },
   { id: 'career', label: 'Career', accent: 'text-[#7C3AED]', icon: <Briefcase className="w-3.5 h-3.5" /> },
   { id: 'wellness', label: 'Wellness', accent: 'text-[#16A34A]', icon: <HeartPulse className="w-3.5 h-3.5" /> },
   { id: 'finance', label: 'Finance', accent: 'text-[#CA8A04]', icon: <Wallet className="w-3.5 h-3.5" /> },
-  { id: 'faculty', label: 'Faculty', accent: 'text-[#475569]', icon: <Users className="w-3.5 h-3.5" /> },
-  { id: 'system', label: '12 Databases', accent: 'text-[#0F172A]', icon: <Database className="w-3.5 h-3.5" /> },
+  { id: 'faculty', label: 'Faculty', accent: 'text-[#52504A]', icon: <Users className="w-3.5 h-3.5" /> },
+  { id: 'system', label: '12 Databases', accent: 'text-[#37352F]', icon: <Database className="w-3.5 h-3.5" /> },
 ];
 
 const KpiTile: React.FC<{
@@ -138,7 +138,7 @@ const KpiTile: React.FC<{
     style={{ backgroundColor: bg }}
     className="rounded-[10px] px-4 py-3.5 space-y-1.5 border border-black/[0.04]"
   >
-    <div className="flex items-center gap-2 text-[13px] font-semibold text-[#1E293B]">
+    <div className="flex items-center gap-2 text-[13px] font-semibold text-[#37352F]">
       <span className="shrink-0">{icon}</span>
       <span className="truncate">{label}</span>
     </div>
@@ -185,8 +185,8 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`px-3 py-2 rounded-[10px] text-[12.5px] font-semibold border inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
-                  : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
+                  ? 'bg-[#37352F] text-white border-[#37352F] shadow-[0_6px_16px_-6px_rgba(55,53,47,0.35)]'
+                  : 'bg-white text-[#52504A] border-[#E9E9E7] hover:bg-[#F7F6F3] hover:text-[#37352F]'
               }`}
             >
               <span className="opacity-70 text-[11px] font-mono">
@@ -204,21 +204,21 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
         data-testid={`sos-tabpanel-${activeTab}`}
         role="tabpanel"
         aria-label={currentMeta.pageTitle}
-        className="rounded-[24px] bg-white border border-[#E2E8F0] shadow-[0_16px_44px_-18px_rgba(15,23,42,0.10)] overflow-hidden"
+        className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_16px_44px_-18px_rgba(55,53,47,0.10)] overflow-hidden"
       >
         {/* Top Notion Chrome Bar */}
-        <div className="px-5 py-3 border-b border-[#F1F5F9] bg-[#FBFBFA] flex flex-wrap items-center justify-between gap-2 text-[12px] text-[#64748B]">
+        <div className="px-5 py-3 border-b border-[#F1F1EF] bg-[#FBFBFA] flex flex-wrap items-center justify-between gap-2 text-[12px] text-[#6E6D68]">
           <div className="flex items-center gap-2 font-medium text-[#37352F]">
-            <span className="inline-flex items-center gap-1 text-[#64748B]">
+            <span className="inline-flex items-center gap-1 text-[#6E6D68]">
               <span>Student OS Pro</span>
               <span>/</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 font-semibold text-[#0F172A]">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-[#37352F]">
               {currentMeta.icon}
               <span>{currentMeta.pageTitle}</span>
             </span>
           </div>
-          <span className="text-[11.5px] font-medium text-[#64748B]">
+          <span className="text-[11.5px] font-medium text-[#6E6D68]">
             Interactive Notion Workspace Preview
           </span>
         </div>
@@ -240,7 +240,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                   onClick={() => setActiveTab(nav.id)}
                   className={`px-3.5 py-2.5 rounded-[8px] border text-left text-[13px] font-medium inline-flex items-center gap-2 transition-colors cursor-pointer ${
                     selected
-                      ? 'bg-[#F4F3F1] border-[#D8D6D0] text-[#0F172A] font-semibold'
+                      ? 'bg-[#F4F3F1] border-[#D8D6D0] text-[#37352F] font-semibold'
                       : 'bg-white border-[#EAEAEA] text-[#52504A] hover:bg-[#FAF9F7]'
                   }`}
                 >
@@ -261,7 +261,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
 
           {/* Notion Callout Banner */}
           <div className="rounded-[10px] bg-[#F6F5F3] border border-[#EAE8E3] px-4 py-3.5 flex items-start gap-3 text-[13.5px] leading-[1.5] text-[#37352F]">
-            <span className="mt-0.5 text-[#1D6EE3] shrink-0">
+            <span className="mt-0.5 text-[#2383E2] shrink-0">
               {currentMeta.icon}
             </span>
             <p>
@@ -275,8 +275,8 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile
-                  bg="#EAF3FC"
-                  icon={<GraduationCap className="w-4 h-4 text-[#1D6EE3]" />}
+                  bg="#EBF3FC"
+                  icon={<GraduationCap className="w-4 h-4 text-[#2383E2]" />}
                   label="Current Term GPA"
                   value="3.88 / 4.00"
                 />
@@ -307,7 +307,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                   </h4>
                   <div className="grid grid-cols-2 gap-2 text-[12.5px]">
                     {[
-                      { label: '+ New deliverable', bg: '#EAF3FC', text: '#1D6EE3' },
+                      { label: '+ New deliverable', bg: '#EBF3FC', text: '#2383E2' },
                       { label: '+ Log an exam', bg: '#FCECEC', text: '#DC2626' },
                       { label: '+ New lecture note', bg: '#F3EFFB', text: '#7C3AED' },
                       { label: '+ Log study session', bg: '#EDF5EE', text: '#15803D' },
@@ -326,13 +326,13 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                 <div className="lg:col-span-6 rounded-[12px] border border-[#EAEAEA] overflow-hidden">
                   <div className="px-4 py-2.5 border-b border-[#EAEAEA] bg-[#FAF9F7] flex items-center justify-between text-[13px] font-bold text-[#2F2D28]">
                     <span>↗ Goals & Milestones</span>
-                    <span className="text-[11px] font-medium text-[#64748B]">
+                    <span className="text-[11px] font-medium text-[#6E6D68]">
                       30d Countdown
                     </span>
                   </div>
                   <div className="divide-y divide-[#F1F1EF] text-[13px]">
                     {[
-                      { goal: 'Finish semester above 3.85 GPA', pct: '78%', tag: 'Academic', tone: 'bg-[#EAF3FC] text-[#1D6EE3]' },
+                      { goal: 'Finish semester above 3.85 GPA', pct: '78%', tag: 'Academic', tone: 'bg-[#EBF3FC] text-[#2383E2]' },
                       { goal: 'Sleep 7+ hrs on 5 nights / week', pct: '70%', tag: 'Health', tone: 'bg-[#EDF5EE] text-[#15803D]' },
                       { goal: 'Land summer SWE / research role', pct: '45%', tag: 'Career', tone: 'bg-[#F3EFFB] text-[#7C3AED]' },
                     ].map((row) => (
@@ -344,7 +344,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                           <span className={`px-2 py-0.5 rounded text-[11px] font-medium ${row.tone}`}>
                             {row.tag}
                           </span>
-                          <span className="font-semibold text-[#334155] tabular-nums text-[12px]">
+                          <span className="font-semibold text-[#52504A] tabular-nums text-[12px]">
                             {row.pct}
                           </span>
                         </div>
@@ -361,8 +361,8 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                 <KpiTile
-                  bg="#EAF3FC"
-                  icon={<BookOpen className="w-4 h-4 text-[#1D6EE3]" />}
+                  bg="#EBF3FC"
+                  icon={<BookOpen className="w-4 h-4 text-[#2383E2]" />}
                   label="Active coursework"
                   value="3 core courses"
                 />
@@ -392,7 +392,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                   onClick={() => setAcademicsView('review')}
                   className={`w-full text-left rounded-[10px] px-4 py-3 text-[13px] border cursor-pointer transition-all ${
                     academicsView === 'review'
-                      ? 'bg-[#EAF3FC] border-[#1D6EE3]/50 ring-2 ring-[#1D6EE3]/10'
+                      ? 'bg-[#EBF3FC] border-[#2383E2]/50 ring-2 ring-[#2383E2]/10'
                       : 'bg-[#FAF9F7] border-[#EAEAEA]'
                   }`}
                 >
@@ -429,7 +429,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                         <div key={row.topic} className="px-4 py-2.5 flex items-center justify-between gap-2">
                           <div className="min-w-0">
                             <p className="font-semibold text-[#2F2D28] truncate">{row.topic}</p>
-                            <p className="text-[11px] text-[#64748B] truncate">{row.course}</p>
+                            <p className="text-[11px] text-[#6E6D68] truncate">{row.course}</p>
                           </div>
                           <span className={`px-2 py-0.5 rounded text-[11px] font-medium shrink-0 ${row.tone}`}>
                             {row.prio}
@@ -454,7 +454,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                           <p className="text-[12.5px] font-semibold text-[#2F2D28] leading-snug">
                             {card.title}
                           </p>
-                          <p className="text-[11px] text-[#64748B]">{card.course}</p>
+                          <p className="text-[11px] text-[#6E6D68]">{card.course}</p>
                           <span className={`inline-block px-2 py-0.5 rounded text-[10.5px] font-medium ${card.tone}`}>
                             {card.status}
                           </span>
@@ -466,7 +466,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
               ) : (
                 <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
                   <table className="w-full text-left text-[13px] min-w-[540px]">
-                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                    <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                       <tr>
                         <th className="py-2.5 px-4 font-medium">Course</th>
                         <th className="py-2.5 px-4 font-medium">Credits</th>
@@ -511,8 +511,8 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                   value="25:00 Pomodoro"
                 />
                 <KpiTile
-                  bg="#EAF3FC"
-                  icon={<Repeat className="w-4 h-4 text-[#1D6EE3]" />}
+                  bg="#EBF3FC"
+                  icon={<Repeat className="w-4 h-4 text-[#2383E2]" />}
                   label="Spaced recall"
                   value="1d / 3d / 7d / 21d"
                 />
@@ -545,7 +545,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                           type="checkbox"
                           checked={done}
                           onChange={() => toggleExamCheck(label)}
-                          className="w-4 h-4 rounded accent-[#1D6EE3] cursor-pointer"
+                          className="w-4 h-4 rounded accent-[#2383E2] cursor-pointer"
                         />
                         <span className={done ? 'line-through text-[#8E8B84]' : ''}>
                           {label}
@@ -560,15 +560,15 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                     { title: 'Pomodoro', desc: '25 min focus, 5 min break', bg: '#FCECEC' },
                     { title: 'Active Recall', desc: 'Close the book, write from memory', bg: '#F3EFFB' },
                     { title: 'Spaced Repetition', desc: 'Review at 1, 3, 7 & 21 days', bg: '#FBF5E2' },
-                    { title: 'Teach It', desc: 'Explain complex concepts out loud', bg: '#EAF3FC' },
+                    { title: 'Teach It', desc: 'Explain complex concepts out loud', bg: '#EBF3FC' },
                   ].map((card) => (
                     <div
                       key={card.title}
                       style={{ backgroundColor: card.bg }}
                       className="rounded-[10px] p-3.5 border border-black/[0.04] space-y-1"
                     >
-                      <p className="text-[13px] font-bold text-[#0F172A]">{card.title}</p>
-                      <p className="text-[12px] text-[#475569] leading-snug">{card.desc}</p>
+                      <p className="text-[13px] font-bold text-[#37352F]">{card.title}</p>
+                      <p className="text-[12px] text-[#52504A] leading-snug">{card.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -592,7 +592,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                     {
                       stage: 'Applied',
                       pillBg: '#E1EFFB',
-                      pillText: '#1D6EE3',
+                      pillText: '#2383E2',
                       cardBg: '#F5FAFE',
                       items: [{ role: 'Undergraduate Research (UROP)', org: 'Biophysics Lab', tag: 'Strong', tagBg: '#FBF5E2' }],
                     },
@@ -643,10 +643,10 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                           >
                             {item.tag}
                           </span>
-                          <p className="text-[11px] text-[#64748B]">{item.org}</p>
+                          <p className="text-[11px] text-[#6E6D68]">{item.org}</p>
                         </div>
                       ))}
-                      <div className="rounded-[7px] border border-dashed border-[#D8D6D0] px-2.5 py-1.5 text-[11.5px] text-[#64748B]">
+                      <div className="rounded-[7px] border border-dashed border-[#D8D6D0] px-2.5 py-1.5 text-[11.5px] text-[#6E6D68]">
                         + New page
                       </div>
                     </div>
@@ -660,7 +660,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
           {activeTab === 'wellness' && (
             <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
               <table className="w-full text-left text-[13px] min-w-[540px]">
-                <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                   <tr>
                     <th className="py-2.5 px-4 font-medium">Date</th>
                     <th className="py-2.5 px-4 font-medium">Mood</th>
@@ -671,9 +671,9 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                 </thead>
                 <tbody className="divide-y divide-[#F1F1EF]">
                   {[
-                    { date: 'Nov 15, 2026', mood: 'Good', tone: 'bg-[#EAF3FC] text-[#1D6EE3]', sleep: '8.5', water: '8', note: 'Rested and caught up on notes' },
+                    { date: 'Nov 15, 2026', mood: 'Good', tone: 'bg-[#EBF3FC] text-[#2383E2]', sleep: '8.5', water: '8', note: 'Rested and caught up on notes' },
                     { date: 'Nov 14, 2026', mood: 'Great', tone: 'bg-[#EDF5EE] text-[#15803D]', sleep: '7.5', water: '7', note: 'Weekend plans with friends' },
-                    { date: 'Nov 13, 2026', mood: 'Good', tone: 'bg-[#EAF3FC] text-[#1D6EE3]', sleep: '7.0', water: '7', note: 'Lab report submitted' },
+                    { date: 'Nov 13, 2026', mood: 'Good', tone: 'bg-[#EBF3FC] text-[#2383E2]', sleep: '7.0', water: '7', note: 'Lab report submitted' },
                     { date: 'Nov 11, 2026', mood: 'Okay', tone: 'bg-[#FBF5E2] text-[#B45309]', sleep: '6.0', water: '5', note: 'Good study group session' },
                   ].map((r) => (
                     <tr key={r.date}>
@@ -683,7 +683,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                       </td>
                       <td className="py-2.5 px-4 tabular-nums">{r.sleep}h</td>
                       <td className="py-2.5 px-4 tabular-nums">{r.water} glasses</td>
-                      <td className="py-2.5 px-4 text-[#64748B]">{r.note}</td>
+                      <td className="py-2.5 px-4 text-[#6E6D68]">{r.note}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -701,9 +701,9 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                 <div key={m.month} className="rounded-[12px] border border-[#EAEAEA] p-4 space-y-2 bg-[#FAF9F7]">
                   <p className="text-[14px] font-bold text-[#2F2D28]">{m.month}</p>
                   <div className="grid grid-cols-3 gap-2 text-[12px] pt-1">
-                    <div><p className="text-[#64748B]">Budget</p><p className="font-semibold tabular-nums">{m.cap}</p></div>
-                    <div><p className="text-[#64748B]">Spent</p><p className="font-semibold tabular-nums">{m.spent}</p></div>
-                    <div><p className="text-[#64748B]">Left</p><p className="font-semibold text-[#15803D] tabular-nums">{m.left}</p></div>
+                    <div><p className="text-[#6E6D68]">Budget</p><p className="font-semibold tabular-nums">{m.cap}</p></div>
+                    <div><p className="text-[#6E6D68]">Spent</p><p className="font-semibold tabular-nums">{m.spent}</p></div>
+                    <div><p className="text-[#6E6D68]">Left</p><p className="font-semibold text-[#15803D] tabular-nums">{m.left}</p></div>
                   </div>
                   <div className="flex items-center gap-3 pt-1 text-[11.5px] font-medium text-[#15803D]">
                     <span>● {m.health}</span>
@@ -718,7 +718,7 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
           {activeTab === 'faculty' && (
             <div className="rounded-[12px] border border-[#EAEAEA] overflow-x-auto">
               <table className="w-full text-left text-[13px] min-w-[540px]">
-                <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#64748B] text-[12px]">
+                <thead className="bg-[#FAF9F7] border-b border-[#EAEAEA] text-[#6E6D68] text-[12px]">
                   <tr>
                     <th className="py-2.5 px-4 font-medium">Name</th>
                     <th className="py-2.5 px-4 font-medium">Role</th>
@@ -730,20 +730,20 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                   <tr>
                     <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Dr. Anika Rao</td>
                     <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#F3EFFB] text-[#7C3AED] text-[11px] font-medium">Professor</span></td>
-                    <td className="py-2.5 px-4 text-[#475569]">Computer Science</td>
-                    <td className="py-2.5 px-4 text-[#64748B]">Tue 3:00–5:00 PM, Room 310</td>
+                    <td className="py-2.5 px-4 text-[#52504A]">Computer Science</td>
+                    <td className="py-2.5 px-4 text-[#6E6D68]">Tue 3:00–5:00 PM, Room 310</td>
                   </tr>
                   <tr>
                     <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Prof. Marcus Lee</td>
                     <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#F3EFFB] text-[#7C3AED] text-[11px] font-medium">Professor</span></td>
-                    <td className="py-2.5 px-4 text-[#475569]">Mathematics</td>
-                    <td className="py-2.5 px-4 text-[#64748B]">Thu 1:00–2:30 PM, Hall 112</td>
+                    <td className="py-2.5 px-4 text-[#52504A]">Mathematics</td>
+                    <td className="py-2.5 px-4 text-[#6E6D68]">Thu 1:00–2:30 PM, Hall 112</td>
                   </tr>
                   <tr>
                     <td className="py-2.5 px-4 font-semibold text-[#2F2D28]">Priya Nair</td>
                     <td className="py-2.5 px-4"><span className="px-2 py-0.5 rounded bg-[#EDF5EE] text-[#15803D] text-[11px] font-medium">Recruiter / Mentor</span></td>
-                    <td className="py-2.5 px-4 text-[#475569]">Orbit Labs</td>
-                    <td className="py-2.5 px-4 text-[#64748B]">SWE Intern referral</td>
+                    <td className="py-2.5 px-4 text-[#52504A]">Orbit Labs</td>
+                    <td className="py-2.5 px-4 text-[#6E6D68]">SWE Intern referral</td>
                   </tr>
                 </tbody>
               </table>
@@ -765,10 +765,10 @@ export const StudentOsWorkspaceTabs: React.FC = () => {
                   key={db.name}
                   className="rounded-[10px] border border-[#EAEAEA] bg-[#FAF9F7] p-3.5 flex items-start gap-2.5"
                 >
-                  <Check className="w-4 h-4 text-[#1D6EE3] shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-0.5" />
                   <div className="text-[13px]">
                     <p className="font-semibold text-[#2F2D28]">{db.name}</p>
-                    <p className="text-[#64748B]">{db.desc}</p>
+                    <p className="text-[#6E6D68]">{db.desc}</p>
                   </div>
                 </div>
               ))}
