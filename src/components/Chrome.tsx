@@ -37,12 +37,12 @@ export const LuminaLogo: React.FC<{ size?: number; className?: string }> = ({
 }) => (
   <span
     aria-label="Resonance"
-    className={`font-display text-[22px] sm:text-[23px] font-extrabold tracking-[-0.045em] leading-none text-[#0F172A] inline-flex items-baseline select-none ${className}`}
+    className={`font-display text-[22px] sm:text-[23px] font-extrabold tracking-[-0.045em] leading-none text-[#37352F] inline-flex items-baseline select-none ${className}`}
   >
     <span>Res</span>
-    <span className="text-[#1D6EE3]">o</span>
+    <span className="text-[#2383E2]">o</span>
     <span>nance</span>
-    <span className="text-[#1D6EE3] ml-[1px]">.</span>
+    <span className="text-[#2383E2] ml-[1px]">.</span>
   </span>
 );
 

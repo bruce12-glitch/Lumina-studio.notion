@@ -285,9 +285,9 @@ const ALL_30_TEMPLATE_ILLUSTRATIONS: string[] = [
 
 const ALL_CARD_TINTS: string[] = [
   '#F7F6F3',
-  '#F2F6FB',
-  '#F2F7F4',
-  '#F5F4F8',
+  '#EFF5FB',
+  '#EFF7F3',
+  '#F5F3FA',
 ];
 
 function resolveTemplateAsset(_slug: string, _category: TemplateCategory, idx: number): string {
@@ -296,12 +296,12 @@ function resolveTemplateAsset(_slug: string, _category: TemplateCategory, idx: n
 
 function resolveTemplateTint(slug: string, _category: TemplateCategory, idx: number): string {
   if (slug === 'second-brain') return '#F7F6F3';
-  if (slug === 'finance-tracker') return '#F2F6FB';
-  if (slug === 'habit-tracker') return '#F2F7F4';
-  if (slug === 'freelance-os') return '#F5F4F8';
-  if (slug === 'student-os') return '#F2F6FB';
-  if (slug === 'researcher-os') return '#F5F4F8';
-  if (slug === 'content-os') return '#F2F6FB';
+  if (slug === 'finance-tracker') return '#EFF5FB';
+  if (slug === 'habit-tracker') return '#EFF7F3';
+  if (slug === 'freelance-os') return '#F5F3FA';
+  if (slug === 'student-os') return '#EFF5FB';
+  if (slug === 'researcher-os') return '#F5F3FA';
+  if (slug === 'content-os') return '#EFF5FB';
   return ALL_CARD_TINTS[idx % ALL_CARD_TINTS.length];
 }
 
