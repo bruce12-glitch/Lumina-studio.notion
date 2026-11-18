@@ -25,7 +25,10 @@
   --card-tint-cream: #F7F6F3;
   --card-tint-gray: #F1F1EF;
 
-  /* Notion Semantic Tokens (WCAG AA on White & #F7F6F3) */
+  /* Notion Semantic & Brand Accent Tokens (WCAG AA on White & #F7F6F3) */
+  --accent: #2383E2;
+  --accent-hover: #1B6EC2;
+  --accent-soft: #EBF3FC;
   --success: #0F7B6C;
   --warning: #B45309;
   --danger: #C43B3B;
@@ -80,7 +83,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #37352F;
+  outline: 2px solid #2383E2;
   outline-offset: 3px;
 }
 
@@ -111,29 +114,22 @@ body {
   text-wrap: balance;
 }
 
-/* Ultra-HD Crisp Vector Illustration Rendering — Melts White PNG Backgrounds & Sharpens Edges */
+/* Crisp Editorial Illustration Rendering — Melts White Backgrounds Reliably */
 .blush-illustration {
   mix-blend-mode: multiply;
-  image-rendering: -webkit-optimize-contrast;
-  filter: url(#lumina-ultra-hd) contrast(1.04) saturate(1.04);
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  filter: contrast(1.02) saturate(1.03);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .group:hover .blush-illustration,
 .blush-illustration:hover {
-  filter: url(#lumina-ultra-hd) contrast(1.06) saturate(1.08);
+  filter: contrast(1.04) saturate(1.06);
 }
 
 /* Crisp High-Clarity Rendering for Studio Workspace Showcase Renders */
 .showcase-hd-image {
-  image-rendering: -webkit-optimize-contrast;
-  filter: url(#resonance-showcase-hd) contrast(1.025) saturate(1.03);
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  filter: contrast(1.015) saturate(1.02);
 }
 
 /* Subtle reveal & ambient asset motion keyframes */

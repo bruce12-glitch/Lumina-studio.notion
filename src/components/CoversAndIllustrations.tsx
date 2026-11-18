@@ -85,7 +85,7 @@ export const BlushAssetImage: React.FC<{
         alt={alt}
         referrerPolicy="no-referrer"
         loading="eager"
-        decoding="async"
+        decoding="sync"
         onError={() => setFailed(true)}
         animate={
           disableFloat
@@ -146,25 +146,17 @@ export const TemplateCover: React.FC<{
       style={{ backgroundColor: cardTint }}
       className={`relative aspect-[16/10] w-full border-b border-[#E9E9E7] p-3.5 sm:p-4 overflow-hidden select-none ${className}`}
     >
-      <div className="w-full h-full rounded-[12px] bg-white border border-[#E9E9E7] shadow-[0_2px_10px_rgba(55,53,47,0.04)] overflow-hidden flex flex-col">
-        {/* Minimal Window Header */}
-        <div className="h-6 px-3 bg-[#FBFBFA] border-b border-[#EFEFED] flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#D3D1CB]" />
-            <span className="w-2 h-2 rounded-full bg-[#E5E4E0]" />
-            <span className="w-2 h-2 rounded-full bg-[#E5E4E0]" />
-          </div>
-          {pro && (
-            <span className="px-1.5 py-0.5 rounded-[4px] bg-[#37352F] text-white text-[8.5px] font-bold uppercase tracking-[0.06em] leading-none">
-              PRO
-            </span>
-          )}
-        </div>
+      <div className="relative w-full h-full rounded-[12px] bg-white border border-[#E9E9E7] shadow-[0_2px_10px_rgba(55,53,47,0.04)] overflow-hidden flex flex-col">
+        {pro && (
+          <span className="absolute top-2.5 right-2.5 z-10 px-1.5 py-0.5 rounded-[4px] bg-[#37352F] text-white text-[8.5px] font-bold uppercase tracking-[0.06em] leading-none">
+            PRO
+          </span>
+        )}
 
-        {/* Full-Stage Ultra-HD Illustration */}
+        {/* Full-Stage Crisp Editorial Illustration */}
         <div
           className={`flex-1 flex items-center justify-center overflow-hidden bg-white ${
-            isCustomMascot ? 'p-1 sm:p-1.5' : 'p-3 sm:p-4'
+            isCustomMascot ? 'p-1.5 sm:p-2' : 'p-3.5 sm:p-4'
           }`}
         >
           <BlushAssetImage
