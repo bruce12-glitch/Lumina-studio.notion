@@ -114,10 +114,10 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
     <div data-testid="researcher-os-details-showcase" className="space-y-10">
       {/* Header Row Matching Freelancer OS */}
       <div className="space-y-3">
-        <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#1D6EE3]">
+        <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
           Inside Researcher OS · Interactive Workspace
         </p>
-        <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#0F172A] text-balance">
+        <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
           1 Research Hub, 12 Modules, 14 Interconnected Databases
         </h2>
         <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
@@ -132,13 +132,13 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
       <div
         id="researcher-os-studio-views"
         data-testid="researcher-os-studio-views"
-        className="scroll-mt-24 space-y-6 pt-4 border-t border-[#E2E8F0]"
+        className="scroll-mt-24 space-y-6 pt-4 border-t border-[#E9E9E7]"
       >
         <div className="space-y-1">
-          <h3 className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] text-[#0F172A]">
+          <h3 className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] text-[#37352F]">
             Studio Workspace Views
           </h3>
-          <p className="text-[14.5px] text-[#64748B]">
+          <p className="text-[14.5px] text-[#6E6D68]">
             Click the workspace preview below to inspect the full-screen layout.
           </p>
         </div>
@@ -157,8 +157,8 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
             onClick={() => setFilterId('all')}
             className={`px-3.5 py-2 rounded-[10px] text-[13px] font-semibold border transition-all whitespace-nowrap shrink-0 cursor-pointer ${
               filterId === 'all'
-                ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
-                : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
+                ? 'bg-[#37352F] text-white border-[#37352F] shadow-[0_6px_16px_-6px_rgba(55,53,47,0.28)]'
+                : 'bg-white text-[#52504A] border-[#E9E9E7] hover:bg-[#F7F6F3] hover:text-[#37352F]'
             }`}
           >
             All Views (12 Modules)
@@ -176,8 +176,8 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
                 onClick={() => setFilterId(group.id)}
                 className={`px-3.5 py-2 rounded-[10px] text-[13px] font-semibold border transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                   isActive
-                    ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-[0_6px_16px_-6px_rgba(15,23,42,0.35)]'
-                    : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC] hover:text-[#0F172A]'
+                    ? 'bg-[#37352F] text-white border-[#37352F] shadow-[0_6px_16px_-6px_rgba(55,53,47,0.28)]'
+                    : 'bg-white text-[#52504A] border-[#E9E9E7] hover:bg-[#F7F6F3] hover:text-[#37352F]'
                 }`}
               >
                 {group.label}
@@ -189,14 +189,14 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
         {/* Single Clean Studio Card Matching Freelancer OS */}
         <article
           data-testid="researcher-os-card-overview"
-          className="rounded-[24px] bg-white border border-[#E2E8F0] shadow-[0_12px_36px_-16px_rgba(15,23,42,0.08)] overflow-hidden"
+          className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_12px_36px_-16px_rgba(55,53,47,0.08)] overflow-hidden"
         >
-          <div className="bg-[#F8FAFC] p-3 sm:p-5 border-b border-[#E2E8F0]">
+          <div className="bg-[#F7F6F3] p-3 sm:p-5 border-b border-[#E9E9E7]">
             <button
               type="button"
               onClick={() => setLightboxOpen(true)}
               aria-label="Inspect Researcher OS workspace overview preview"
-              className="group relative w-full rounded-[16px] overflow-hidden border border-[#E2E8F0] bg-white aspect-[16/9] cursor-zoom-in block text-left"
+              className="group relative w-full rounded-[16px] overflow-hidden border border-[#E9E9E7] bg-white aspect-[16/9] cursor-zoom-in block text-left"
             >
               <img
                 src="/assets/aistudio/image_1a6c6ccd.png"
@@ -209,14 +209,14 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
 
           <div className="p-6 sm:p-8 space-y-6">
             <div className="space-y-2">
-              <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#1D6EE3]">
+              <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#2383E2]">
                 <span>01 · End-to-End Academic Workspace</span>
-                <span aria-hidden="true" className="text-[#94A3B8]">·</span>
-                <span className="text-[#64748B] font-medium">
+                <span aria-hidden="true" className="text-[#9B9A97]">·</span>
+                <span className="text-[#6E6D68] font-medium">
                   Synthesis, Lab & Manuscripts
                 </span>
               </div>
-              <h3 className="font-display text-[21px] sm:text-[25px] font-bold tracking-[-0.025em] text-[#0F172A] leading-snug">
+              <h3 className="font-display text-[21px] sm:text-[25px] font-bold tracking-[-0.025em] text-[#37352F] leading-snug">
                 Literature Synthesis, Atomic Vault, Active Manuscripts & Peer Review
               </h3>
               <p className="text-[15px] text-[#52504A] leading-[1.6] max-w-[760px]">
@@ -224,15 +224,15 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
               </p>
             </div>
 
-            <div className="space-y-3 pt-2 border-t border-[#F1F5F9]">
+            <div className="space-y-3 pt-2 border-t border-[#F1F1EF]">
               {visibleItems.map((mod) => (
                 <div
                   key={mod.title}
-                  className="rounded-[12px] bg-[#F8FAFC] border border-[#E2E8F0]/80 px-4 py-3.5 flex items-start gap-3"
+                  className="rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] px-4 py-3.5 flex items-start gap-3"
                 >
-                  <Check className="w-4 h-4 text-[#1D6EE3] shrink-0 mt-1" />
-                  <div className="text-[14px] sm:text-[14.5px] leading-[1.55] text-[#334155]">
-                    <span className="font-semibold text-[#0F172A]">
+                  <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-1" />
+                  <div className="text-[14px] sm:text-[14.5px] leading-[1.55] text-[#52504A]">
+                    <span className="font-semibold text-[#37352F]">
                       {mod.title}:
                     </span>{' '}
                     <span>{mod.details}</span>
@@ -252,18 +252,18 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
           aria-label="Researcher OS studio overview full-resolution preview"
           data-testid="researcher-os-lightbox"
           onClick={() => setLightboxOpen(false)}
-          className="fixed inset-0 z-[100] bg-[#0F172A]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-[100] bg-[#1F1E1B]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[1280px] rounded-[20px] bg-white border border-[#E2E8F0] shadow-2xl overflow-hidden flex flex-col"
+            className="w-full max-w-[1280px] rounded-[20px] bg-white border border-[#E9E9E7] shadow-2xl overflow-hidden flex flex-col"
           >
-            <div className="px-5 py-3.5 border-b border-[#E2E8F0] flex items-center justify-between gap-4 bg-[#F8FAFC]">
+            <div className="px-5 py-3.5 border-b border-[#E9E9E7] flex items-center justify-between gap-4 bg-[#F7F6F3]">
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#1D6EE3]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#2383E2]">
                   Researcher OS · Complete Academic Workspace
                 </p>
-                <h3 className="text-[16px] font-bold text-[#0F172A] truncate">
+                <h3 className="text-[16px] font-bold text-[#37352F] truncate">
                   Visual Insights, Active Manuscripts, Atomic Synthesis & Peer Review
                 </h3>
               </div>
@@ -271,13 +271,13 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
                 type="button"
                 aria-label="Close full-resolution preview"
                 onClick={() => setLightboxOpen(false)}
-                className="w-9 h-9 rounded-[9px] border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] text-[#0F172A] inline-flex items-center justify-center cursor-pointer shrink-0"
+                className="w-9 h-9 rounded-[9px] border border-[#E9E9E7] bg-white hover:bg-[#F1F1EF] text-[#37352F] inline-flex items-center justify-center cursor-pointer shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="bg-[#0F172A] p-2 sm:p-4 flex items-center justify-center max-h-[80vh]">
+            <div className="bg-[#1F1E1B] p-2 sm:p-4 flex items-center justify-center max-h-[80vh]">
               <img
                 src="/assets/aistudio/image_1a6c6ccd.png"
                 alt="Researcher OS studio overview"
