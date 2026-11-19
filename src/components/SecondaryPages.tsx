@@ -69,18 +69,19 @@ export const AllAccessPage: React.FC<{
 
   return (
     <div className="pb-20">
-      <section className="py-20 sm:py-24 max-w-[1200px] mx-auto px-4 sm:px-6">
-        <div className="max-w-[680px] space-y-4">
-          <span className="rounded-[4px] bg-[#37352F] text-white text-[11px] font-bold uppercase tracking-[0.08em] px-2 py-1 inline-block">
-            COMPLETE PRO BUNDLE
-          </span>
-          <h1 className="text-[clamp(32px,4.5vw,48px)] font-semibold tracking-[-0.03em] leading-[1.1] text-[#37352F]">
-            All Access Bundle
+      <section className="py-16 sm:py-22 max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="max-w-[720px] space-y-5">
+          <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
+            Complete PRO Bundle · One-Time Purchase
+          </p>
+          <h1 className="font-display text-[clamp(32px,4.5vw,50px)] font-bold tracking-[-0.03em] leading-[1.08] text-[#37352F] text-balance">
+            All Access{' '}
+            <span className="font-editorial italic font-medium">Bundle</span>
           </h1>
-          <p className="text-[18px] text-[#52504A] leading-[1.55]">
+          <p className="text-[17.5px] text-[#52504A] leading-[1.6]">
             One purchase, every PRO template. Unlock all {stats.proCount} premium Notion systems (${stats.individualTotal} individual value) plus lifetime updates for {formatPrice(ALL_ACCESS_PRICE)}.
           </p>
-          <div className="pt-3 flex flex-wrap items-center gap-4">
+          <div className="pt-2 flex flex-wrap items-center gap-4">
             <motion.button
               type="button"
               whileHover={{ y: -2, scale: 1.015 }}
@@ -105,13 +106,41 @@ export const AllAccessPage: React.FC<{
               <span>Get All Access — {formatPrice(ALL_ACCESS_PRICE)}</span>
               <ArrowRight className="w-4 h-4 btn-arrow-slide" />
             </motion.button>
-            <span className="text-[14px] text-[#6E6D68] tabular-nums">
+            <span className="text-[14px] font-medium text-[#0F7B6C] tabular-nums">
               Save ${stats.savings} vs buying individually
             </span>
           </div>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Architectural Bundle Value Summary Row */}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 rounded-[14px] border border-[#E9E9E7] bg-[#FAF9F6] divide-y sm:divide-y-0 sm:divide-x divide-[#E9E9E7]">
+          <div className="px-6 py-4 space-y-0.5">
+            <p className="text-[12px] font-mono uppercase tracking-[0.06em] text-[#6E6D68]">
+              Included Systems
+            </p>
+            <p className="text-[20px] font-bold text-[#37352F] tabular-nums">
+              {stats.proCount} PRO Templates
+            </p>
+          </div>
+          <div className="px-6 py-4 space-y-0.5">
+            <p className="text-[12px] font-mono uppercase tracking-[0.06em] text-[#6E6D68]">
+              Total Individual Value
+            </p>
+            <p className="text-[20px] font-bold text-[#37352F] tabular-nums">
+              ${stats.individualTotal} USD
+            </p>
+          </div>
+          <div className="px-6 py-4 space-y-0.5">
+            <p className="text-[12px] font-mono uppercase tracking-[0.06em] text-[#6E6D68]">
+              Updates &amp; Licensing
+            </p>
+            <p className="text-[20px] font-bold text-[#37352F]">
+              Lifetime · All Future Releases
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {proTemplates.map((item) => (
             <TemplateCard
               key={item.slug}
@@ -170,15 +199,14 @@ export const AppsPage: React.FC<{
             </p>
             <div
               style={{ backgroundColor: app.cardTint }}
-              className="rounded-[16px] border border-[#E9E9E7] p-4 max-w-[380px]"
+              className="rounded-[14px] border border-[#E9E9E7] p-5 h-48 max-w-[380px] flex items-center justify-center"
             >
-              <div className="rounded-[12px] bg-white border border-[#E9E9E7] p-3 h-44 flex items-center justify-center">
-                <BlushAssetImage
-                  src={app.illustrationUrl}
-                  alt={`${app.name} workspace illustration`}
-                  className="w-full h-full"
-                />
-              </div>
+              <BlushAssetImage
+                src={app.illustrationUrl}
+                alt={`${app.name} workspace illustration`}
+                disableFloat
+                className="w-full h-full"
+              />
             </div>
             <div className="pt-2 flex items-center gap-3">
               <motion.button

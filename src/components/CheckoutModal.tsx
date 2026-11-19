@@ -299,8 +299,8 @@ export const CheckoutModal: React.FC<{
                     {target?.name}
                   </h3>
                   {target?.pro && (
-                    <span className="rounded-[4px] bg-[#37352F] text-white text-[10px] font-bold uppercase tracking-[0.08em] px-[7px] py-[3px] leading-none">
-                      PRO
+                    <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-[#2383E2]">
+                      · PRO
                     </span>
                   )}
                 </div>
