@@ -59,8 +59,7 @@ export const BlushAssetImage: React.FC<{
   alt,
   className = '',
   imgClassName = 'max-w-full max-h-full w-auto h-auto object-contain',
-  floatDelay = 0,
-  disableFloat = false,
+  disableFloat = true,
 }) => {
   const [failed, setFailed] = useState(false);
 
@@ -75,38 +74,21 @@ export const BlushAssetImage: React.FC<{
   }
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.02, y: -2 }}
-      transition={{ type: 'spring', stiffness: 280, damping: 24 }}
+    <div
       className={`group/asset relative flex items-center justify-center overflow-hidden select-none ${className}`}
     >
-      <motion.img
+      <img
         src={src}
         alt={alt}
         referrerPolicy="no-referrer"
         loading="eager"
-        decoding="sync"
+        decoding="async"
         onError={() => setFailed(true)}
-        animate={
-          disableFloat
-            ? undefined
-            : {
-                y: [0, -3, 0],
-              }
-        }
-        transition={
-          disableFloat
-            ? undefined
-            : {
-                duration: 5.2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: floatDelay,
-              }
-        }
-        className={`blush-illustration ${imgClassName}`}
+        className={`blush-illustration transition-transform duration-200 ease-out ${
+          disableFloat ? '' : 'animate-float-slow'
+        } ${imgClassName}`}
       />
-    </motion.div>
+    </div>
   );
 };
 
@@ -122,7 +104,6 @@ export const TemplateCover: React.FC<{
   name,
   slug,
   category,
-  pro,
   illustrationUrl,
   cardTint = '#F7F6F3',
   className = '',
@@ -144,92 +125,76 @@ export const TemplateCover: React.FC<{
   return (
     <div
       style={{ backgroundColor: cardTint }}
-      className={`relative aspect-[16/10] w-full border-b border-[#E9E9E7] p-3.5 sm:p-4 overflow-hidden select-none ${className}`}
+      className={`relative aspect-[16/10] w-full border-b border-[#E9E9E7] overflow-hidden select-none flex items-center justify-center ${
+        isCustomMascot ? 'p-3 sm:p-4' : 'p-5 sm:p-7'
+      } ${className}`}
     >
-      <div className="relative w-full h-full rounded-[12px] bg-white border border-[#E9E9E7] shadow-[0_2px_10px_rgba(55,53,47,0.04)] overflow-hidden flex flex-col">
-        {pro && (
-          <span className="absolute top-2.5 right-2.5 z-10 px-1.5 py-0.5 rounded-[4px] bg-[#37352F] text-white text-[8.5px] font-bold uppercase tracking-[0.06em] leading-none">
-            PRO
-          </span>
-        )}
-
-        {/* Full-Stage Crisp Editorial Illustration */}
-        <div
-          className={`flex-1 flex items-center justify-center overflow-hidden bg-white ${
-            isCustomMascot ? 'p-1.5 sm:p-2' : 'p-3.5 sm:p-4'
-          }`}
-        >
-          <BlushAssetImage
-            src={resolvedAsset}
-            alt={
-              slug === 'freelance-os'
-                ? 'Freelance OS freelancer mascot illustration'
-                : slug === 'student-os'
-                ? 'Student OS academic mascot illustration'
-                : slug === 'researcher-os'
-                ? 'Researcher OS lab scholar mascot illustration'
-                : `${name} Notion template`
-            }
-            disableFloat
-            className="w-full h-full"
-            imgClassName={`max-w-full max-h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.04] ${
-              isCustomMascot ? 'scale-[1.06]' : ''
-            }`}
-          />
-        </div>
-      </div>
+      <BlushAssetImage
+        src={resolvedAsset}
+        alt={
+          slug === 'freelance-os'
+            ? 'Freelance OS freelancer mascot illustration'
+            : slug === 'student-os'
+            ? 'Student OS academic mascot illustration'
+            : slug === 'researcher-os'
+            ? 'Researcher OS lab scholar mascot illustration'
+            : `${name} Notion template`
+        }
+        disableFloat
+        className="w-full h-full"
+        imgClassName={`max-w-full max-h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.04] ${
+          isCustomMascot ? 'scale-[1.08]' : ''
+        }`}
+      />
     </div>
   );
 };
 
 /**
- * Clean Editorial Feature Media Showcases for the 3 Homepage Feature Splits
+ * Clean Architectural Feature Media Showcases for the 3 Homepage Feature Splits
  */
 export const FeatureMedia: React.FC<{
   kind: 'second-brain' | 'finance' | 'minimalism';
 }> = ({ kind }) => {
   if (kind === 'second-brain') {
     return (
-      <div className="w-full rounded-[20px] border border-[#E9E9E7] bg-[#F7F6F3] p-5 sm:p-6 shadow-[0_10px_28px_-10px_rgba(55,53,47,0.06)]">
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
-          <div className="sm:col-span-7 rounded-[14px] bg-white border border-[#E9E9E7] p-5 flex flex-col justify-between">
-            <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68] mb-2">
+      <div className="w-full rounded-[18px] border border-[#E9E9E7] bg-white overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-12 divide-y sm:divide-y-0 sm:divide-x divide-[#E9E9E7]">
+          <div className="sm:col-span-7 bg-[#FAF9F6] p-6 flex flex-col justify-between gap-4">
+            <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68]">
               <span>PARA System</span>
               <span className="font-mono text-[#37352F]">Second Brain</span>
             </div>
             <BlushAssetImage
               src={BLUSH_ASSETS.strategicMazeThinker}
               alt="Second Brain PARA Notion workspace illustration"
-              floatDelay={0.1}
               className="w-full h-52 sm:h-60"
             />
-            <p className="pt-3 border-t border-[#EFEFED] text-[12.5px] font-medium text-[#37352F]">
+            <p className="pt-3 border-t border-[#E9E9E7] text-[12.5px] font-medium text-[#37352F]">
               Projects · Areas · Resources · Archives
             </p>
           </div>
 
-          <div className="sm:col-span-5 flex flex-col gap-4">
-            <div className="flex-1 rounded-[14px] bg-white border border-[#E9E9E7] p-4 flex flex-col justify-between">
+          <div className="sm:col-span-5 flex flex-col divide-y divide-[#E9E9E7] bg-white">
+            <div className="flex-1 p-5 flex flex-col justify-between gap-3">
               <span className="text-[11.5px] font-medium text-[#6E6D68]">
                 Daily Focus
               </span>
               <BlushAssetImage
                 src={BLUSH_ASSETS.developerCodeDesk}
                 alt="Focused daily work illustration"
-                floatDelay={0.35}
                 className="w-full h-36"
               />
-              <p className="text-[12px] text-[#52504A]">
+              <p className="text-[12.5px] text-[#52504A] leading-snug">
                 Quick capture for tasks, notes, and active projects.
               </p>
             </div>
 
-            <div className="rounded-[14px] bg-white border border-[#E9E9E7] p-4 flex items-center gap-3.5">
+            <div className="p-5 flex items-center gap-3.5 bg-[#FAF9F6]/60">
               <BlushAssetImage
                 src={BLUSH_ASSETS.clockCalendarPlanner}
                 alt="Weekly review planner illustration"
-                floatDelay={0.6}
-                className="w-16 h-16 shrink-0"
+                className="w-14 h-14 shrink-0"
               />
               <div className="min-w-0">
                 <p className="text-[13px] font-semibold text-[#37352F]">
@@ -248,46 +213,43 @@ export const FeatureMedia: React.FC<{
 
   if (kind === 'finance') {
     return (
-      <div className="w-full rounded-[20px] border border-[#E9E9E7] bg-[#EEF5FC] p-5 sm:p-6 shadow-[0_10px_28px_-10px_rgba(55,53,47,0.06)]">
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
-          <div className="sm:col-span-7 rounded-[14px] bg-white border border-[#E9E9E7] p-5 flex flex-col justify-between">
-            <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68] mb-2">
+      <div className="w-full rounded-[18px] border border-[#E9E9E7] bg-white overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-12 divide-y sm:divide-y-0 sm:divide-x divide-[#E9E9E7]">
+          <div className="sm:col-span-7 bg-[#F4F8FC] p-6 flex flex-col justify-between gap-4">
+            <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68]">
               <span>Finance Tracker</span>
               <span className="font-mono text-[#37352F]">Monthly Overview</span>
             </div>
             <BlushAssetImage
               src={BLUSH_ASSETS.savingsJarsCalendar}
               alt="Savings and budget allocation illustration"
-              floatDelay={0.15}
               className="w-full h-52 sm:h-60"
             />
-            <p className="pt-3 border-t border-[#EFEFED] text-[12.5px] font-medium text-[#37352F]">
+            <p className="pt-3 border-t border-[#E3ECF5] text-[12.5px] font-medium text-[#37352F]">
               Income · Expenses · Budgets · Savings Goals
             </p>
           </div>
 
-          <div className="sm:col-span-5 flex flex-col gap-4">
-            <div className="flex-1 rounded-[14px] bg-white border border-[#E9E9E7] p-4 flex flex-col justify-between">
+          <div className="sm:col-span-5 flex flex-col divide-y divide-[#E9E9E7] bg-white">
+            <div className="flex-1 p-5 flex flex-col justify-between gap-3">
               <span className="text-[11.5px] font-medium text-[#6E6D68]">
                 Budget Breakdown
               </span>
               <BlushAssetImage
                 src={BLUSH_ASSETS.boardroomPieChart}
                 alt="Financial budget breakdown illustration"
-                floatDelay={0.4}
                 className="w-full h-36"
               />
-              <p className="text-[12px] text-[#52504A]">
+              <p className="text-[12.5px] text-[#52504A] leading-snug">
                 Clear monthly spending categories and net-worth tracking.
               </p>
             </div>
 
-            <div className="rounded-[14px] bg-white border border-[#E9E9E7] p-4 flex items-center gap-3.5">
+            <div className="p-5 flex items-center gap-3.5 bg-[#FAF9F6]/60">
               <BlushAssetImage
                 src={BLUSH_ASSETS.expenseReceiptAlert}
                 alt="Subscription tracker illustration"
-                floatDelay={0.7}
-                className="w-16 h-16 shrink-0"
+                className="w-14 h-14 shrink-0"
               />
               <div className="min-w-0">
                 <p className="text-[13px] font-semibold text-[#37352F]">
@@ -305,36 +267,34 @@ export const FeatureMedia: React.FC<{
   }
 
   return (
-    <div className="w-full rounded-[20px] border border-[#E9E9E7] bg-[#EEF7F1] p-5 sm:p-6 shadow-[0_10px_28px_-10px_rgba(55,53,47,0.06)]">
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-stretch">
-        <div className="sm:col-span-6 rounded-[14px] bg-white border border-[#E9E9E7] p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68] mb-2">
+    <div className="w-full rounded-[18px] border border-[#E9E9E7] bg-white overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-12 divide-y sm:divide-y-0 sm:divide-x divide-[#E9E9E7]">
+        <div className="sm:col-span-6 bg-[#F3F8F5] p-6 flex flex-col justify-between gap-4">
+          <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68]">
             <span>Minimalist Setup</span>
             <span className="font-mono text-[#37352F]">Daily Habits</span>
           </div>
           <BlushAssetImage
             src={BLUSH_ASSETS.dualDeskStudio}
             alt="Minimalist desk setup illustration"
-            floatDelay={0.2}
             className="w-full h-48 sm:h-56"
           />
-          <p className="pt-3 border-t border-[#EFEFED] text-[12.5px] font-medium text-[#37352F]">
+          <p className="pt-3 border-t border-[#DFECE5] text-[12.5px] font-medium text-[#37352F]">
             Distraction-free layouts for daily planning and routines.
           </p>
         </div>
 
-        <div className="sm:col-span-6 rounded-[14px] bg-white border border-[#E9E9E7] p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68] mb-2">
+        <div className="sm:col-span-6 bg-white p-6 flex flex-col justify-between gap-4">
+          <div className="flex items-center justify-between text-[11.5px] font-medium text-[#6E6D68]">
             <span>Free Collection</span>
             <span className="font-mono text-[#37352F]">22 Templates</span>
           </div>
           <BlushAssetImage
             src={BLUSH_ASSETS.onlineCourseLecture}
             alt="Study and reading notes illustration"
-            floatDelay={0.45}
             className="w-full h-48 sm:h-56"
           />
-          <p className="pt-3 border-t border-[#EFEFED] text-[12.5px] font-medium text-[#37352F]">
+          <p className="pt-3 border-t border-[#E9E9E7] text-[12.5px] font-medium text-[#37352F]">
             Free Notion trackers for habits, reading lists, and study notes.
           </p>
         </div>
