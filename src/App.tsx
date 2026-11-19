@@ -327,20 +327,14 @@ export default function App() {
           <div>
             {/* 1. CLEAN EDITORIAL HERO SECTION WITH WARM NOTION PAPER WASH */}
             <section className="relative bg-gradient-to-b from-[#FAF9F6] via-[#FDFCFB] to-[#FFFFFF] border-b border-[#E9E9E7]">
-              <div className="pt-10 pb-16 sm:pt-16 sm:pb-22 max-w-[1200px] mx-auto px-4 sm:px-6">
+              <div className="pt-10 pb-14 sm:pt-14 sm:pb-20 max-w-[1200px] mx-auto px-4 sm:px-6">
                 <div className="max-w-[780px] mx-auto text-center space-y-7">
-                  {/* Notion Mark Tag */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex justify-center"
-                  >
+                  {/* Unboxed Notion Editorial Kicker */}
+                  <div className="flex justify-center">
                     <div
                       data-testid="hero-notion-pill"
-                      className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-[10px] bg-white border border-[#E9E9E7] shadow-[0_1px_4px_rgba(55,53,47,0.04)] text-[13px] sm:text-[13.5px] font-medium text-[#52504A]"
+                      className="inline-flex items-center gap-2 text-[13.5px] font-medium text-[#52504A]"
                     >
-                      {/* Notion 3D Cube Mark */}
                       <svg
                         width="16"
                         height="16"
@@ -373,24 +367,25 @@ export default function App() {
                       </svg>
                       <span>Your life. Your work. In Notion.</span>
                     </div>
-                  </motion.div>
+                  </div>
 
-                  {/* 3-Card Illustration Triptych */}
+                  {/* 3-Card Illustration Triptych (Accessible Native Buttons, Single-Surface Stages) */}
                   <div className="flex items-center justify-center gap-3 sm:gap-5 pb-1">
                     {/* Left Card: Focus */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 12, rotate: -4 }}
-                      animate={{ opacity: 1, y: 0, rotate: -4 }}
-                      whileHover={{ y: -4, rotate: -2, scale: 1.02 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    <motion.button
+                      type="button"
+                      initial={{ opacity: 1, rotate: -3.5 }}
+                      whileHover={{ y: -4, rotate: -1.5, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                       onClick={() => navigate('/templates/habit-tracker')}
-                      className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E9E9E7] bg-white p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(55,53,47,0.07)] cursor-pointer"
+                      aria-label="Inspect Habit Tracker template"
+                      className="w-[116px] sm:w-[158px] rounded-[14px] border border-[#DCE8E1] bg-[#EFF7F3] p-3 sm:p-3.5 shadow-[0_10px_24px_-12px_rgba(55,53,47,0.12)] cursor-pointer text-left"
                     >
-                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#6E6D68] mb-1.5">
-                        <span>01 · Focus</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
+                      <div className="text-[9.5px] sm:text-[10.5px] font-mono uppercase tracking-[0.06em] text-[#52504A] mb-2 whitespace-nowrap">
+                        01 · Focus
                       </div>
-                      <div className="rounded-[10px] bg-[#EFF7F3] border border-[#E5E4E0] p-2 h-20 sm:h-28 flex items-center justify-center">
+                      <div className="h-20 sm:h-28 flex items-center justify-center">
                         <BlushAssetImage
                           src={BLUSH_ASSETS.mindfulMeditationClock}
                           alt="Minimalist daily habits illustration"
@@ -398,25 +393,23 @@ export default function App() {
                           className="w-full h-full"
                         />
                       </div>
-                    </motion.div>
+                    </motion.button>
 
                     {/* Center Card: System (PARA) */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      whileHover={{ y: -5, scale: 1.03 }}
-                      transition={{ duration: 0.45, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    <motion.button
+                      type="button"
+                      whileHover={{ y: -5, scale: 1.025 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                       onClick={() => navigate('/templates/second-brain')}
-                      className="w-[144px] sm:w-[190px] rounded-[18px] border border-[#D3D1CB] bg-white p-3 sm:p-4 shadow-[0_16px_36px_-10px_rgba(55,53,47,0.10)] z-10 cursor-pointer"
+                      aria-label="Inspect Second Brain PARA system template"
+                      className="w-[144px] sm:w-[192px] rounded-[16px] border border-[#D3D1CB] bg-white p-3.5 sm:p-4 shadow-[0_16px_36px_-14px_rgba(55,53,47,0.14)] z-10 cursor-pointer text-left"
                     >
-                      <div className="flex items-center justify-between gap-1 text-[8.5px] sm:text-[10.5px] font-mono uppercase tracking-[0.04em] sm:tracking-[0.06em] text-[#37352F] font-semibold mb-2 whitespace-nowrap">
+                      <div className="flex items-center justify-between gap-1 text-[9px] sm:text-[10.5px] font-mono uppercase tracking-[0.05em] text-[#37352F] font-semibold mb-2 whitespace-nowrap">
                         <span>02 · System</span>
-                        <span className="inline-flex items-center gap-1 text-[8.5px] sm:text-[9px] text-[#0F7B6C] shrink-0">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#0F7B6C]" />
-                          PARA
-                        </span>
+                        <span className="text-[#0F7B6C] shrink-0">PARA</span>
                       </div>
-                      <div className="rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] p-2.5 h-24 sm:h-32 flex items-center justify-center">
+                      <div className="h-24 sm:h-32 flex items-center justify-center">
                         <BlushAssetImage
                           src={BLUSH_ASSETS.secondBrainMazeBulb}
                           alt="Second Brain PARA system illustration"
@@ -424,22 +417,23 @@ export default function App() {
                           className="w-full h-full"
                         />
                       </div>
-                    </motion.div>
+                    </motion.button>
 
                     {/* Right Card: Calm / Finance */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 12, rotate: 4 }}
-                      animate={{ opacity: 1, y: 0, rotate: 4 }}
-                      whileHover={{ y: -4, rotate: 2, scale: 1.02 }}
-                      transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    <motion.button
+                      type="button"
+                      initial={{ opacity: 1, rotate: 3.5 }}
+                      whileHover={{ y: -4, rotate: 1.5, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                       onClick={() => navigate('/templates/finance-tracker')}
-                      className="w-[115px] sm:w-[155px] rounded-[16px] border border-[#E9E9E7] bg-white p-2.5 sm:p-3.5 shadow-[0_10px_24px_-8px_rgba(55,53,47,0.07)] cursor-pointer"
+                      aria-label="Inspect Finance Tracker template"
+                      className="w-[116px] sm:w-[158px] rounded-[14px] border border-[#DAE6F3] bg-[#EFF5FB] p-3 sm:p-3.5 shadow-[0_10px_24px_-12px_rgba(55,53,47,0.12)] cursor-pointer text-left"
                     >
-                      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.06em] text-[#6E6D68] mb-1.5">
-                        <span>03 · Clarity</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
+                      <div className="text-[9.5px] sm:text-[10.5px] font-mono uppercase tracking-[0.06em] text-[#52504A] mb-2 whitespace-nowrap">
+                        03 · Clarity
                       </div>
-                      <div className="rounded-[10px] bg-[#EFF5FB] border border-[#E5E4E0] p-2 h-20 sm:h-28 flex items-center justify-center">
+                      <div className="h-20 sm:h-28 flex items-center justify-center">
                         <BlushAssetImage
                           src={BLUSH_ASSETS.mobilePiggyPortfolio}
                           alt="Finance Tracker illustration"
@@ -447,24 +441,27 @@ export default function App() {
                           className="w-full h-full"
                         />
                       </div>
-                    </motion.div>
+                    </motion.button>
                   </div>
 
                   {/* Headline & Subtitle */}
                   <div className="space-y-4">
-                    <h1 className="font-display text-[clamp(44px,6.2vw,72px)] font-bold tracking-[-0.04em] leading-[1.02] text-[#37352F] text-balance">
-                      Notion Templates
+                    <h1 className="font-display text-[clamp(44px,6vw,70px)] font-bold tracking-[-0.035em] leading-[1.03] text-[#37352F] text-balance">
+                      Notion{' '}
+                      <span className="font-editorial italic font-medium tracking-[-0.02em]">
+                        Templates
+                      </span>
                     </h1>
-                    <p className="text-[18px] sm:text-[20px] font-normal leading-[1.55] tracking-[-0.01em] text-[#52504A] max-w-[520px] mx-auto">
-                      Discover 41 minimalist Notion templates to organize your work, research, study, and daily life.
+                    <p className="text-[17.5px] sm:text-[19.5px] font-normal leading-[1.55] tracking-[-0.01em] text-[#52504A] max-w-[540px] mx-auto">
+                      Discover 41 minimalist Notion systems to organize your work, academic research, study, and daily life.
                     </p>
                   </div>
 
-                  {/* Primary & Secondary CTAs with Tactile Spring Motion */}
+                  {/* Primary & Secondary CTAs */}
                   <div className="pt-1 flex flex-wrap items-center justify-center gap-3.5">
                     <motion.a
                       href="/templates"
-                      whileHover={{ y: -2, scale: 1.018 }}
+                      whileHover={{ y: -2, scale: 1.015 }}
                       whileTap={{ y: 0.5, scale: 0.975 }}
                       transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                       onClick={(e) => {
@@ -490,95 +487,97 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* 3-Column Hero Pathway Cards (Reference Image 2: For your life / For your work / For your next idea) */}
+                {/* 3-Column Hero Pathway Cards */}
                 <div
                   data-testid="hero-pathway-cards"
                   className="mt-12 sm:mt-14 max-w-[1060px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5"
                 >
-                  {HERO_PATHWAY_CARDS.map((card, idx) => (
-                    <motion.a
-                      key={card.id}
-                      href={card.href}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      whileHover={{ y: -3 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: 0.1 + idx * 0.06,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate(card.href);
-                      }}
-                      className="group rounded-[16px] bg-white border border-[#E9E9E7] hover:border-[#2383E2]/45 px-6 py-5 shadow-[0_2px_10px_-3px_rgba(55,53,47,0.04)] hover:shadow-[0_14px_30px_-10px_rgba(35,131,226,0.12)] transition-all duration-200 flex items-center justify-between gap-4"
-                    >
-                      <div className="flex items-center gap-4 min-w-0">
-                        <div className="w-10 h-10 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
-                          {card.id === 'life' && (
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.9"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
-                              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
-                              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
-                            </svg>
-                          )}
-                          {card.id === 'work' && (
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.9"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                            >
-                              <rect x="3" y="7" width="18" height="13" rx="2.5" />
-                              <path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7" />
-                              <path d="M3 12.5c3 1.8 6 2.5 9 2.5s6-.7 9-2.5" />
-                              <line x1="12" y1="12" x2="12.01" y2="12" />
-                            </svg>
-                          )}
-                          {card.id === 'idea' && (
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.9"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M2 4.5C2 3.67 2.67 3 3.5 3H8c2.2 0 4 1.8 4 4v13.5c0-1.66-1.34-3-3-3H3.5A1.5 1.5 0 0 1 2 16V4.5Z" />
-                              <path d="M22 4.5C22 3.67 21.33 3 20.5 3H16c-2.2 0-4 1.8-4 4v13.5c0-1.66 1.34-3 3-3h5.5a1.5 1.5 0 0 0 1.5-1.5V4.5Z" />
-                            </svg>
-                          )}
+                  {HERO_PATHWAY_CARDS.map((card) => {
+                    const iconTone =
+                      card.id === 'life'
+                        ? 'bg-[#E6F4EC] text-[#0F7B6C]'
+                        : card.id === 'work'
+                        ? 'bg-[#EBF3FC] text-[#2383E2]'
+                        : 'bg-[#FDF4E7] text-[#B45309]';
+                    return (
+                      <a
+                        key={card.id}
+                        href={card.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(card.href);
+                        }}
+                        className="group card-editorial-surface rounded-[14px] bg-white border border-[#E9E9E7] px-5 py-4.5 flex items-center justify-between gap-4"
+                      >
+                        <div className="flex items-center gap-3.5 min-w-0">
+                          <div
+                            className={`w-10 h-10 rounded-[10px] ${iconTone} flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105`}
+                          >
+                            {card.id === 'life' && (
+                              <svg
+                                width="19"
+                                height="19"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.9"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+                                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
+                                <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
+                              </svg>
+                            )}
+                            {card.id === 'work' && (
+                              <svg
+                                width="19"
+                                height="19"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.9"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                              >
+                                <rect x="3" y="7" width="18" height="13" rx="2.5" />
+                                <path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7" />
+                                <path d="M3 12.5c3 1.8 6 2.5 9 2.5s6-.7 9-2.5" />
+                                <line x1="12" y1="12" x2="12.01" y2="12" />
+                              </svg>
+                            )}
+                            {card.id === 'idea' && (
+                              <svg
+                                width="19"
+                                height="19"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.9"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path d="M2 4.5C2 3.67 2.67 3 3.5 3H8c2.2 0 4 1.8 4 4v13.5c0-1.66-1.34-3-3-3H3.5A1.5 1.5 0 0 1 2 16V4.5Z" />
+                                <path d="M22 4.5C22 3.67 21.33 3 20.5 3H16c-2.2 0-4 1.8-4 4v13.5c0-1.66 1.34-3 3-3h5.5a1.5 1.5 0 0 0 1.5-1.5V4.5Z" />
+                              </svg>
+                            )}
+                          </div>
+                          <div className="min-w-0 text-left space-y-0.5">
+                            <h2 className="text-[16.5px] font-semibold tracking-[-0.015em] text-[#37352F] leading-snug">
+                              {card.title}
+                            </h2>
+                            <p className="text-[13.5px] text-[#6E6D68] leading-snug truncate">
+                              {card.subtitle}
+                            </p>
+                          </div>
                         </div>
-                        <div className="min-w-0 text-left space-y-0.5">
-                          <h2 className="text-[17px] sm:text-[18px] font-semibold tracking-[-0.02em] text-[#37352F] leading-snug">
-                            {card.title}
-                          </h2>
-                          <p className="text-[14px] text-[#6E6D68] leading-snug truncate">
-                            {card.subtitle}
-                          </p>
-                        </div>
-                      </div>
-                      <ArrowUpRight className="w-4 h-4 text-[#2383E2] shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </motion.a>
-                  ))}
+                        <ArrowUpRight className="w-4 h-4 text-[#6E6D68] group-hover:text-[#2383E2] shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </section>
@@ -608,24 +607,14 @@ export default function App() {
                   </a>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {featuredTemplates.map((template, idx) => (
-                    <motion.div
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                  {featuredTemplates.map((template) => (
+                    <TemplateCard
                       key={template.slug}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: 0.05 + idx * 0.05,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                    >
-                      <TemplateCard
-                        template={template}
-                        onNavigate={navigate}
-                        isPurchased={purchasedSlugs.has(template.slug)}
-                      />
-                    </motion.div>
+                      template={template}
+                      onNavigate={navigate}
+                      isPurchased={purchasedSlugs.has(template.slug)}
+                    />
                   ))}
                 </div>
               </div>
@@ -744,13 +733,19 @@ export default function App() {
             />
 
             {/* 1. Page Head */}
-            <section className="pt-12 pb-10 sm:pt-16 sm:pb-12 max-w-[1200px] mx-auto px-4 sm:px-6">
-              <div className="max-w-[640px] space-y-3">
-                <h1 className="font-display text-[clamp(34px,4.5vw,48px)] font-bold tracking-[-0.035em] leading-[1.08] text-[#37352F]">
-                  Notion Templates
+            <section className="pt-12 pb-8 sm:pt-16 sm:pb-12 max-w-[1200px] mx-auto px-4 sm:px-6">
+              <div className="max-w-[680px] space-y-3">
+                <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
+                  {TEMPLATES.length} Curated Systems · Free &amp; PRO
+                </p>
+                <h1 className="font-display text-[clamp(34px,4.5vw,50px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#37352F]">
+                  Notion{' '}
+                  <span className="font-editorial italic font-medium text-[#2383E2]">
+                    Templates
+                  </span>
                 </h1>
-                <p className="text-[18px] text-[#52504A] leading-[1.55]">
-                  Get started with ready-made Notion setups to organize your work and life.
+                <p className="text-[17px] sm:text-[18px] text-[#52504A] leading-[1.55]">
+                  Get started with ready-made Notion setups to organize your work, research, and daily routines.
                 </p>
               </div>
             </section>
@@ -761,7 +756,7 @@ export default function App() {
                 <div
                   role="tablist"
                   aria-label="Template categories"
-                  className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5"
+                  className="flex flex-wrap md:flex-nowrap items-center gap-1.5 sm:gap-2 md:overflow-x-auto no-scrollbar py-0.5"
                 >
                   {CATEGORIES.map((cat, idx) => {
                     const active = category === cat;
@@ -793,7 +788,7 @@ export default function App() {
                             tabRefs.current[prevIdx]?.focus();
                           }
                         }}
-                        className={`px-[14px] py-[7px] rounded-[8px] text-[13.5px] font-semibold border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                        className={`px-3 py-1.5 sm:px-[14px] sm:py-[7px] rounded-[8px] text-[12.5px] sm:text-[13.5px] font-semibold border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                           active
                             ? 'bg-[#37352F] text-white border-[#37352F] shadow-[0_4px_12px_rgba(55,53,47,0.18)]'
                             : 'bg-white text-[#52504A] border-[#E9E9E7] hover:bg-[#F7F6F3] hover:text-[#37352F]'
@@ -829,24 +824,45 @@ export default function App() {
               </div>
             </div>
 
-            {/* 3. Grid of 41 Cards */}
+            {/* 3. Grid of 41 Cards (+ Empty State) */}
             <section
               aria-label={`${category} Notion templates (${categoryCounts[category]})`}
               className="py-12 sm:py-16 max-w-[1200px] mx-auto px-4 sm:px-6"
             >
-              <div
-                data-testid="template-grid"
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {filteredCatalog.map((template) => (
-                  <TemplateCard
-                    key={template.slug}
-                    template={template}
-                    onNavigate={navigate}
-                    isPurchased={purchasedSlugs.has(template.slug)}
-                  />
-                ))}
-              </div>
+              {filteredCatalog.length === 0 ? (
+                <div className="rounded-[16px] border border-[#E9E9E7] bg-[#FAF9F6] py-16 px-6 text-center space-y-4">
+                  <p className="text-[18px] font-semibold text-[#37352F]">
+                    No templates match &ldquo;{searchQuery}&rdquo;
+                  </p>
+                  <p className="text-[14.5px] text-[#6E6D68] max-w-[420px] mx-auto">
+                    Try a different keyword or reset the active category filter to browse all {TEMPLATES.length} templates.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery('');
+                      selectCategory('All');
+                    }}
+                    className="h-10 px-5 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[13.5px] font-semibold cursor-pointer"
+                  >
+                    Reset search &amp; filters
+                  </button>
+                </div>
+              ) : (
+                <div
+                  data-testid="template-grid"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
+                >
+                  {filteredCatalog.map((template) => (
+                    <TemplateCard
+                      key={template.slug}
+                      template={template}
+                      onNavigate={navigate}
+                      isPurchased={purchasedSlugs.has(template.slug)}
+                    />
+                  ))}
+                </div>
+              )}
             </section>
 
             {/* 4. FAQ Accordion */}
