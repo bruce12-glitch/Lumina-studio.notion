@@ -147,46 +147,50 @@ export const Header: React.FC<NavigationProps> = ({
         }`}
       >
         <div className="max-w-[1200px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between gap-8">
-          {/* Zone 1: Brand Logo + Wordmark + Primary Nav Links */}
-          <div className="flex items-center gap-8">
-            <a
-              href="/"
-              onClick={(e) => handleLink(e, '/')}
-              className="group inline-flex items-center whitespace-nowrap shrink-0 transition-opacity hover:opacity-85"
-            >
-              <LuminaLogo />
-            </a>
+          {/* Zone 1: Brand Wordmark */}
+          <a
+            href="/"
+            onClick={(e) => handleLink(e, '/')}
+            className="group inline-flex items-center whitespace-nowrap shrink-0 transition-opacity hover:opacity-85"
+          >
+            <LuminaLogo />
+          </a>
 
-            <nav
-              aria-label="Primary"
-              className="hidden md:flex items-center gap-6 text-[14px] font-medium"
-            >
-              {[
-                { label: 'Apps', path: '/apps' },
-                { label: 'Templates', path: '/templates' },
-                { label: 'Blog', path: '/blog' },
-              ].map((item) => {
-                const active = isNavActive(item.path);
-                return (
-                  <a
-                    key={item.path}
-                    href={item.path}
-                    onClick={(e) => handleLink(e, item.path)}
-                    aria-current={active ? 'page' : undefined}
-                    className={`whitespace-nowrap shrink-0 transition-colors duration-150 ${
-                      active
-                        ? 'text-[#37352F] underline decoration-2 underline-offset-[6px]'
-                        : 'text-[#6E6D68] hover:text-[#37352F]'
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
-            </nav>
-          </div>
+          {/* Zone 2: Concise Single-Line Navigation Links */}
+          <nav
+            aria-label="Primary"
+            className="hidden md:flex items-center gap-7 text-[14px] font-medium"
+          >
+            {[
+              { label: 'Templates', path: '/templates' },
+              { label: 'Second Brain', path: '/second-brain' },
+              { label: 'Apps', path: '/apps' },
+              { label: 'Blog', path: '/blog' },
+            ].map((item) => {
+              const active =
+                item.path === '/second-brain'
+                  ? currentPath === '/second-brain' ||
+                    currentPath === '/templates/second-brain'
+                  : isNavActive(item.path);
+              return (
+                <a
+                  key={item.path}
+                  href={item.path}
+                  onClick={(e) => handleLink(e, item.path)}
+                  aria-current={active ? 'page' : undefined}
+                  className={`whitespace-nowrap shrink-0 transition-colors duration-150 ${
+                    active
+                      ? 'text-[#37352F] underline decoration-2 underline-offset-[6px]'
+                      : 'text-[#6E6D68] hover:text-[#37352F]'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+          </nav>
 
-          {/* Zone 3: Right Actions */}
+          {/* Zone 3: Primary Action (+ Downloads when owned) */}
           <div className="hidden md:flex items-center gap-2.5 shrink-0">
             {purchasesCount > 0 && (
               <motion.button
@@ -433,8 +437,8 @@ export const Footer: React.FC<{
                       >
                         <span>{item.label}</span>
                         {item.badge ? (
-                          <span className="text-[10px] font-semibold uppercase tracking-[0.05em] px-1.5 py-0.5 rounded-[4px] bg-[#F1F1EF] text-[#37352F]">
-                            {item.badge}
+                          <span className="text-[11px] font-mono text-[#6E6D68]">
+                            · {item.badge}
                           </span>
                         ) : (
                           <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 group-hover/link:opacity-100 group-hover/link:translate-y-0 transition-all" />
@@ -516,7 +520,7 @@ export const TemplateCard: React.FC<{
     <a
       href={`/templates/${template.slug}`}
       onClick={handleClick}
-      className="group card-editorial-surface block rounded-[16px] border border-[#E9E9E7] bg-white overflow-hidden"
+      className="group card-editorial-surface flex flex-col rounded-[16px] border border-[#E9E9E7] bg-white overflow-hidden"
     >
       <TemplateCover
         name={template.name}
@@ -526,13 +530,13 @@ export const TemplateCard: React.FC<{
         illustrationUrl={template.illustrationUrl}
         cardTint={template.cardTint}
       />
-      <div className="p-4 flex flex-col gap-2">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-3">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
             <p className="text-[11.5px] font-medium text-[#6E6D68] truncate">
               {template.category}
             </p>
-            <h3 className="text-[16px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#37352F] truncate mt-0.5 group-hover:text-[#1F1E1B]">
+            <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.015em] text-[#37352F] truncate mt-0.5 group-hover:text-[#1F1E1B]">
               {template.name}
             </h3>
           </div>
@@ -543,7 +547,7 @@ export const TemplateCard: React.FC<{
           )}
         </div>
 
-        <div className="flex items-center justify-between pt-1 border-t border-[#F1F1EF]">
+        <div className="flex items-center justify-between pt-2.5 border-t border-[#F1F1EF]">
           <div className="flex items-center gap-1.5 tabular-nums text-[14.5px] font-semibold leading-none">
             {template.compareAt !== undefined && (
               <span className="text-[#9B9A97] line-through">
@@ -552,13 +556,13 @@ export const TemplateCard: React.FC<{
             )}
             <span className="text-[#37352F]">{formatPrice(template.price)}</span>
             {template.pro && (
-              <span className="ml-1 text-[10px] font-mono font-bold uppercase tracking-[0.07em] text-[#6E6D68]">
+              <span className="ml-1 text-[10.5px] font-mono font-semibold uppercase tracking-[0.06em] text-[#2383E2]">
                 · PRO
               </span>
             )}
           </div>
 
-          <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#52504A] group-hover:text-[#37352F] transition-colors">
+          <span className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#52504A] group-hover:text-[#37352F] transition-colors">
             <span>Inspect</span>
             <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
           </span>
@@ -573,7 +577,7 @@ export const AppCard: React.FC<{
   index?: number;
   onNavigate: (path: string) => void;
   showPrice?: boolean;
-}> = ({ app, index = 0, onNavigate, showPrice = false }) => {
+}> = ({ app, onNavigate, showPrice = false }) => {
   return (
     <a
       href={`/apps/${app.slug}`}
@@ -581,7 +585,7 @@ export const AppCard: React.FC<{
         e.preventDefault();
         onNavigate(`/apps/${app.slug}`);
       }}
-      className="group p-5 rounded-[18px] border border-[#E9E9E7] bg-white hover:-translate-y-[3px] hover:border-[#D3D1CB] hover:shadow-[0_14px_30px_-8px_rgba(55,53,47,0.09)] transition-all duration-200 flex flex-col justify-between gap-4"
+      className="group card-editorial-surface p-5 rounded-[16px] border border-[#E9E9E7] bg-white flex flex-col justify-between gap-4"
     >
       <div className="flex items-center justify-between">
         <AppIconGlyph icon={app.icon} />
@@ -590,21 +594,20 @@ export const AppCard: React.FC<{
 
       <div
         style={{ backgroundColor: app.cardTint }}
-        className="rounded-[12px] border border-[#E9E9E7] p-2.5 flex items-center justify-center"
+        className="rounded-[12px] border border-[#E9E9E7]/80 p-3.5 h-40 flex items-center justify-center overflow-hidden"
       >
-        <div className="w-full h-36 rounded-[9px] bg-white border border-[#EFEFED] p-2 flex items-center justify-center">
-          <BlushAssetImage
-            src={app.illustrationUrl}
-            alt={`${app.name} — ${app.tagline} illustration`}
-            floatDelay={index * 0.25}
-            className="w-full h-full"
-          />
-        </div>
+        <BlushAssetImage
+          src={app.illustrationUrl}
+          alt={`${app.name} — ${app.tagline} illustration`}
+          disableFloat
+          className="w-full h-full"
+          imgClassName="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
+        />
       </div>
 
       <div className="space-y-1 pt-0.5">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.01em] text-[#37352F]">
+          <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.015em] text-[#37352F]">
             {app.name}
           </h3>
           {showPrice && (
@@ -867,36 +870,29 @@ export const TestimonialsSection: React.FC<{
         </div>
       </div>
 
-      {/* Cards Container: Responsive 4-Column Grid */}
+      {/* Cards Container: Responsive 4-Column Grid (Zero-Latency Immediate Render) */}
       <div
         data-testid="testimonials-track"
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
       >
-        {TESTIMONIALS.map((item, idx) => (
-          <motion.article
+        {TESTIMONIALS.map((item) => (
+          <article
             key={item.id}
             data-testimonial-card
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{
-              duration: 0.45,
-              delay: idx * 0.07,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            whileHover={{ y: -3 }}
             style={{ backgroundColor: item.surfaceTint }}
-            className="group w-full rounded-[16px] border border-[#E9E9E7] p-6 flex flex-col justify-between gap-6 transition-shadow duration-300 hover:border-[#D3D1CB] hover:shadow-[0_12px_28px_-6px_rgba(55,53,47,0.08)]"
+            className="group card-editorial-surface w-full rounded-[16px] border border-[#E9E9E7] p-5 sm:p-6 flex flex-col justify-between gap-5"
           >
             <div className="space-y-4">
-              {/* Prominent Storyset Workspace Illustration */}
-              <BlushAssetImage
-                src={item.illustrationUrl}
-                alt={`${item.author} workspace illustration`}
-                floatDelay={idx * 0.4}
-                className="h-36 w-full rounded-[12px] bg-white border border-[#E9E9E7] p-3"
-                imgClassName="max-h-full max-w-full object-contain"
-              />
+              {/* Seamless Illustration Stage (Melts directly onto surface tint) */}
+              <div className="h-32 w-full flex items-center justify-center border-b border-[#E9E9E7]/80 pb-3">
+                <BlushAssetImage
+                  src={item.illustrationUrl}
+                  alt={`${item.author} workspace illustration`}
+                  disableFloat
+                  className="h-full w-full"
+                  imgClassName="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                />
+              </div>
 
               {/* Quiet Unboxed Outcome & System Metadata */}
               <div className="flex flex-col gap-1 text-[12px] text-[#52504A] border-b border-[#E9E9E7] pb-3.5">
@@ -909,7 +905,7 @@ export const TestimonialsSection: React.FC<{
                     e.preventDefault();
                     onNavigate(`/templates/${item.templateSlug}`);
                   }}
-                  className="inline-flex items-center gap-1 font-medium text-[#6E6D68] hover:text-[#37352F] hover:underline underline-offset-4 w-fit"
+                  className="inline-flex items-center gap-1 font-medium text-[#2383E2] hover:text-[#1B6EC2] hover:underline underline-offset-4 w-fit"
                 >
                   <span>{item.templateUsed}</span>
                   <ArrowUpRight className="w-3 h-3 shrink-0" />
@@ -917,28 +913,28 @@ export const TestimonialsSection: React.FC<{
               </div>
 
               {/* Editorial Review Quote */}
-              <blockquote className="text-[14.5px] leading-[1.65] text-[#37352F] font-normal">
+              <blockquote className="text-[14.5px] leading-[1.6] text-[#37352F] font-normal">
                 “{item.quote}”
               </blockquote>
             </div>
 
             {/* Creator Photo & Attribution Footer */}
-            <footer className="flex items-center gap-3 pt-2">
+            <footer className="flex items-center gap-3 pt-2 border-t border-[#E9E9E7]/70">
               <CreatorAvatar
                 id={item.id}
                 src={item.avatarUrl}
                 author={item.author}
               />
               <div className="min-w-0">
-                <p className="text-[14px] font-semibold text-[#37352F] leading-snug">
+                <p className="text-[13.5px] font-semibold text-[#37352F] leading-snug truncate">
                   {item.author}
                 </p>
-                <p className="text-[12px] text-[#6E6D68] leading-[1.35]">
+                <p className="text-[12px] text-[#6E6D68] leading-[1.35] truncate">
                   {item.role} · {item.organization}
                 </p>
               </div>
             </footer>
-          </motion.article>
+          </article>
         ))}
       </div>
     </section>
