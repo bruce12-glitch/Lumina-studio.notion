@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Check, FileText } from 'lucide-react';
 import { ResearcherOsWorkspaceTabs } from './ResearcherOsWorkspaceTabs';
-import { ResearcherOsStudioSpread } from './ResearcherOsStudioSpread';
+import { RESEARCHER_OS_SPEC } from '../data/researcherOsSpec';
 
 export type ResearcherStudioFilterId = 'all' | 'synthesis' | 'lab-grants';
 
@@ -20,34 +20,34 @@ export const RESEARCHER_OS_SLIDES: ResearcherOsSlide[] = [
     label: '01 · Command, Synthesis & Manuscripts',
     badge: 'Capture -> Screen -> Write',
     title:
-      'Research Command Hub, Atomic Vault & Active Manuscripts Writing Progress',
+      'Research Command Hub, Atomic Vault & Active Manuscripts Pipeline',
     description:
-      'Move seamlessly from raw arXiv inbox capture and literature screening to citable Zettelkasten notes, live word-count pacing, and IMRaD drafting milestones.',
+      'Move cleanly from arXiv reading triage and literature screening to citable Zettelkasten notes and section-by-section IMRaD drafting.',
     includedModules: [
       {
         title: 'Research Command Hub',
         details:
-          'Capture → Screen → Synthesize → Experiment → Write → Review toolbar with live manuscript counts, open reviewer comments, and reading queue.',
+          'Capture → Screen → Synthesize → Experiment → Write → Review cockpit with reading queue and venue countdowns.',
       },
       {
         title: 'Literature Review Synthesis Matrix',
         details:
-          'Compare methodology, datasets, sample sizes, key empirical findings, and research gaps across 50+ papers with BibTeX & DOI links.',
+          'Compare methodology, sample size, key empirical findings, limitations, DOIs, and BibTeX across papers.',
       },
       {
         title: 'Atomic Synthesis Vault (Zettelkasten)',
         details:
-          'One claim per note (Definition, Counter-Argument, Limitation, Core Claim) linked directly to source papers and manuscript sections.',
+          'One modular claim card per note linked directly to source papers and target manuscript sections.',
       },
       {
-        title: 'Active Manuscripts & IMRaD Writing Progress',
+        title: 'Active Manuscripts & IMRaD Drafts',
         details:
-          'Tracks word-count progress bars, venue cutoffs (ACL, TACL, NeurIPS), and section states from Outline to Polished.',
+          'Track word-count pacing, co-author sign-offs, Overleaf links, and section status from Outline to Polished.',
       },
       {
-        title: 'Visual Insights & Quick Capture Inbox',
+        title: 'Quick Capture & Reading Triage',
         details:
-          'Word-count progress bars, Goal Health status ring, and a fast triage inbox for citations, ablation ideas, and preprints.',
+          'Fast inbox separating 5-minute paper skims from deep synthesis reads.',
       },
     ],
   },
@@ -58,7 +58,7 @@ export const RESEARCHER_OS_SLIDES: ResearcherOsSlide[] = [
     title:
       'Experiments Workbench, Peer Review Rebuttals, Grants & 14 Databases',
     description:
-      'Keep every random seed, SOP protocol, reviewer critique, advisor 1:1 action item, and funding CFP cutoff synchronized across one reproducible academic backend.',
+      'Keep falsifiable hypotheses, versioned lab protocols, dataset hashes, reviewer critiques, and funding RFPs linked cleanly in one backend.',
     includedModules: [
       {
         title: 'Hypotheses & Claims Register',
@@ -66,24 +66,24 @@ export const RESEARCHER_OS_SLIDES: ResearcherOsSlide[] = [
           'Falsifiable H1/H0 predictions with independent/dependent variables and pre-registration links.',
       },
       {
-        title: 'Experiments & Versioned Lab Protocols',
+        title: 'Experiments & Versioned Protocols',
         details:
-          'Auditable run log tracking random seeds, parameters, anomalies, and versioned SOPs.',
+          'Auditable trial run ledger capturing parameters, metrics, anomalies, and versioned SOPs.',
       },
       {
         title: 'Datasets, Code Repos & Baselines',
         details:
-          'Provenance catalog recording splits, licenses, Zenodo DOIs, Git commit SHAs, and SOTA benchmarks.',
+          'Provenance catalog tracking splits, licenses, Zenodo DOIs, Git commit SHAs, and SOTA benchmarks.',
       },
       {
-        title: 'Reviewer Comments & Action Items',
+        title: 'Peer Reviews & Rebuttals',
         details:
-          'Weekly Advisor Sync, Lab Seminar Dry Run agendas, and itemized reviewer severity matrix linked to follow-up runs.',
+          'Point-by-point reviewer severity tracker assigning critiques directly to control runs and draft edits.',
       },
       {
-        title: 'Grants, CFP Venues & 14 Connected Databases',
+        title: 'Grants, CFP Venues & Collaborators',
         details:
-          'RFPs, compute/travel budgets, co-author ORCID directory, Paper Launch Blueprint, and Weekly Research Reset templates.',
+          'Funding pipelines, conference CFP deadlines, blind-review policies, and co-author ORCID directory.',
       },
     ],
   },
@@ -107,7 +107,6 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
 }) => {
   const [internalFilter, setInternalFilter] =
     useState<ResearcherStudioFilterId>('all');
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filterId = activeViewFilter ?? internalFilter;
   const setFilterId = (next: ResearcherStudioFilterId) => {
@@ -122,34 +121,6 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
     filterId === 'all'
       ? RESEARCHER_OS_SLIDES
       : RESEARCHER_OS_SLIDES.filter((slide) => slide.id === filterId);
-
-  const lightboxSlide =
-    lightboxIndex !== null ? RESEARCHER_OS_SLIDES[lightboxIndex] : null;
-
-  useEffect(() => {
-    if (lightboxIndex === null) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        setLightboxIndex(null);
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        setLightboxIndex((prev) =>
-          prev === null ? 0 : (prev + 1) % RESEARCHER_OS_SLIDES.length
-        );
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        setLightboxIndex((prev) =>
-          prev === null
-            ? 0
-            : (prev - 1 + RESEARCHER_OS_SLIDES.length) %
-              RESEARCHER_OS_SLIDES.length
-        );
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [lightboxIndex]);
 
   return (
     <div data-testid="researcher-os-details-showcase" className="space-y-10">
@@ -169,7 +140,7 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
       {/* Interactive Notion Workspace Explorer */}
       <ResearcherOsWorkspaceTabs />
 
-      {/* Studio Workspace Views Section (Matching FreelanceOsGallery & StudentOsShowcase) */}
+      {/* What Researcher OS Consists Of (Clean Structured Breakdown, No Images) */}
       <div
         id="researcher-os-studio-views"
         data-testid="researcher-os-studio-views"
@@ -177,17 +148,17 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
       >
         <div className="space-y-1">
           <h3 className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] text-[#37352F]">
-            Studio Workspace Views
+            What&apos;s Included Inside Researcher OS
           </h3>
           <p className="text-[14.5px] text-[#6E6D68]">
-            Click any workspace preview below to inspect the full-screen layout.
+            A clear overview of every core module, connected database, and ready-to-use academic template.
           </p>
         </div>
 
         {/* Interactive Filter Tabs */}
         <div
           role="tablist"
-          aria-label="Researcher OS Studio Previews"
+          aria-label="Researcher OS Modules & Templates"
           className="flex flex-wrap items-center gap-2"
         >
           <button
@@ -202,7 +173,7 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
                 : 'bg-white text-[#52504A] border-[#E9E9E7] hover:bg-[#F7F6F3] hover:text-[#37352F]'
             }`}
           >
-            All 2 Views (12 Modules)
+            All Modules &amp; Templates
           </button>
 
           {RESEARCHER_OS_SLIDES.map((slide) => {
@@ -227,149 +198,102 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
           })}
         </div>
 
-        {/* Vertically Stacked Studio Cards */}
+        {/* Module Breakdown Cards */}
         <div
           data-testid="researcher-os-all-images"
-          className="flex flex-col gap-8"
+          className="flex flex-col gap-6"
         >
-          {visibleSlides.map((slide) => {
-            const slideIndex = RESEARCHER_OS_SLIDES.findIndex(
-              (item) => item.id === slide.id
-            );
-
-            return (
-              <article
-                key={slide.id}
-                data-testid={`researcher-os-card-${slide.id}`}
-                className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_12px_36px_-16px_rgba(55,53,47,0.08)] overflow-hidden"
-              >
-                <div className="bg-[#F7F6F3] p-3 sm:p-5 border-b border-[#E9E9E7]">
-                  <button
-                    type="button"
-                    onClick={() => setLightboxIndex(slideIndex)}
-                    aria-label={`Inspect ${slide.title} workspace preview`}
-                    className="group relative w-full rounded-[16px] overflow-hidden border border-[#E9E9E7] bg-[#DDD5C8] aspect-[16/9] cursor-zoom-in block text-left"
-                  >
-                    <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.012]">
-                      <ResearcherOsStudioSpread variant={slide.id} />
-                    </div>
-                  </button>
+          {visibleSlides.map((slide) => (
+            <article
+              key={slide.id}
+              data-testid={`researcher-os-card-${slide.id}`}
+              className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_12px_36px_-16px_rgba(55,53,47,0.08)] p-6 sm:p-8 space-y-5"
+            >
+              <div className="space-y-2">
+                <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#2383E2]">
+                  <span>{slide.label}</span>
+                  <span aria-hidden="true" className="text-[#9B9A97]">
+                    ·
+                  </span>
+                  <span className="text-[#6E6D68] font-medium">
+                    {slide.badge}
+                  </span>
                 </div>
-
-                <div className="p-6 sm:p-8 space-y-6">
-                  <div className="space-y-2">
-                    <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#2383E2]">
-                      <span>{slide.label}</span>
-                      <span aria-hidden="true" className="text-[#9B9A97]">
-                        ·
-                      </span>
-                      <span className="text-[#6E6D68] font-medium">
-                        {slide.badge}
-                      </span>
-                    </div>
-                    <h3 className="font-display text-[21px] sm:text-[25px] font-bold tracking-[-0.025em] text-[#37352F] leading-snug">
-                      {slide.title}
-                    </h3>
-                    <p className="text-[15px] text-[#52504A] leading-[1.6] max-w-[760px]">
-                      {slide.description}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3 pt-2 border-t border-[#F1F1EF]">
-                    {slide.includedModules.map((mod) => (
-                      <div
-                        key={mod.title}
-                        className="rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] px-4 py-3.5 flex items-start gap-3"
-                      >
-                        <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-1" />
-                        <div className="text-[14px] sm:text-[14.5px] leading-[1.55] text-[#52504A]">
-                          <span className="font-semibold text-[#37352F]">
-                            {mod.title}:
-                          </span>{' '}
-                          <span>{mod.details}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Full-Resolution Lightbox Modal */}
-      {lightboxSlide && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${lightboxSlide.title} full-resolution preview`}
-          data-testid="researcher-os-lightbox"
-          onClick={() => setLightboxIndex(null)}
-          className="fixed inset-0 z-[100] bg-[#1F1E1B]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[1280px] rounded-[20px] bg-white border border-[#E9E9E7] shadow-2xl overflow-hidden flex flex-col"
-          >
-            <div className="px-5 py-3.5 border-b border-[#E9E9E7] flex items-center justify-between gap-4 bg-[#F7F6F3]">
-              <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#2383E2]">
-                  {lightboxSlide.label} · {lightboxSlide.badge}
-                </p>
-                <h3 className="text-[16px] font-bold text-[#37352F] truncate">
-                  {lightboxSlide.title}
+                <h3 className="font-display text-[21px] sm:text-[24px] font-bold tracking-[-0.025em] text-[#37352F] leading-snug">
+                  {slide.title}
                 </h3>
+                <p className="text-[15px] text-[#52504A] leading-[1.6] max-w-[760px]">
+                  {slide.description}
+                </p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  type="button"
-                  aria-label="Previous image"
-                  onClick={() =>
-                    setLightboxIndex((prev) =>
-                      prev === null
-                        ? 0
-                        : (prev - 1 + RESEARCHER_OS_SLIDES.length) %
-                          RESEARCHER_OS_SLIDES.length
-                    )
-                  }
-                  className="w-9 h-9 rounded-[9px] border border-[#E9E9E7] bg-white hover:bg-[#F1F1EF] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Next image"
-                  onClick={() =>
-                    setLightboxIndex((prev) =>
-                      prev === null
-                        ? 0
-                        : (prev + 1) % RESEARCHER_OS_SLIDES.length
-                    )
-                  }
-                  className="w-9 h-9 rounded-[9px] border border-[#E9E9E7] bg-white hover:bg-[#F1F1EF] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Close full-resolution preview"
-                  onClick={() => setLightboxIndex(null)}
-                  className="w-9 h-9 rounded-[9px] border border-[#E9E9E7] bg-white hover:bg-[#F1F1EF] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
 
-            <div className="bg-[#1F1E1B] p-2 sm:p-4 flex items-center justify-center max-h-[82vh]">
-              <div className="w-full max-w-[1180px] aspect-[16/9] rounded-[10px] overflow-hidden shadow-2xl">
-                <ResearcherOsStudioSpread variant={lightboxSlide.id} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-[#F1F1EF]">
+                {slide.includedModules.map((mod, idx) => (
+                  <div
+                    key={mod.title}
+                    className={`rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] px-4 py-3.5 flex items-start gap-3 ${
+                      idx === slide.includedModules.length - 1 &&
+                      slide.includedModules.length % 2 === 1
+                        ? 'md:col-span-2'
+                        : ''
+                    }`}
+                  >
+                    <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-1" />
+                    <div className="text-[14px] leading-[1.55] text-[#52504A]">
+                      <span className="font-semibold text-[#37352F]">
+                        {mod.title}:
+                      </span>{' '}
+                      <span>{mod.details}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
+            </article>
+          ))}
+        </div>
+
+        {/* 8 Ready-to-Use Academic Page Templates Included */}
+        <div
+          data-testid="researcher-os-templates-included"
+          className="rounded-[24px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-8 space-y-5"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <p className="text-[11.5px] font-bold uppercase tracking-[0.07em] text-[#2383E2]">
+                One-Click Notion Templates
+              </p>
+              <h4 className="font-display text-[20px] sm:text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
+                8 Ready-to-Use Templates Inside Researcher OS
+              </h4>
             </div>
+            <span className="text-[13px] font-semibold text-[#52504A] bg-white border border-[#E9E9E7] px-3 py-1 rounded-[8px] self-start sm:self-auto">
+              Works on Notion Free
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {RESEARCHER_OS_SPEC.readyTemplates.map((tpl) => (
+              <div
+                key={tpl.id}
+                className="rounded-[14px] bg-white border border-[#E9E9E7] p-4 space-y-1.5"
+              >
+                <div className="flex items-center gap-2 text-[#37352F]">
+                  <FileText className="w-4 h-4 text-[#2383E2] shrink-0" />
+                  <h5 className="text-[14px] font-semibold leading-snug">
+                    {tpl.title}
+                  </h5>
+                </div>
+                <p className="text-[11.5px] font-semibold text-[#6E6D68]">
+                  In {tpl.triggerContext}
+                </p>
+                <p className="text-[13px] text-[#52504A] leading-[1.45]">
+                  {tpl.contains}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
