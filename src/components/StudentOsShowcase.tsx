@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Check, FileText } from 'lucide-react';
 import { StudentOsWorkspaceTabs } from './StudentOsWorkspaceTabs';
-import { StudentOsStudioSpread } from './StudentOsStudioSpread';
+import { STUDENT_OS_SPEC } from '../data/studentOsSpec';
 
 export type StudentStudioFilterId = 'all' | 'hub-career' | 'toolkit-wellness';
 
@@ -21,68 +21,68 @@ export const STUDENT_OS_SLIDES: StudentOsSlide[] = [
     badge: 'Command & Life Systems',
     title: 'Student Command Hub, Career Pipeline, Contacts & Student Finance',
     description:
-      'Navigate seamlessly across classes, assignments, internship applications, professor office hours, and monthly budgets from one calm cockpit.',
+      'Manage classes, assignments, internship applications, faculty contacts, and monthly student budgets from one connected workspace.',
     includedModules: [
       {
         title: 'Main Hub (Student OS Pro)',
         details:
-          'Quick Nav bar for Home, Career & Internships, Study & Academics, Health & Wellness, Student Finance, and Contacts & Faculty alongside live status pills.',
+          'Quick Nav links, 7-Day deadline alerts, enrolled course progress, and a Sunday weekly review checklist.',
+      },
+      {
+        title: 'Courses, Syllabi & Deliverables',
+        details:
+          'Dedicated course hubs linking grading weights, reading lists, and deadlines automatically.',
       },
       {
         title: 'Career & Internships Kanban',
         details:
-          'Track roles across Wishlist, Applied, OA / Challenge, Interviewing, and Offer with strength priority tags and deadline sorting.',
+          'Track applications across Wishlist, Applied, OA / Challenge, Interviewing, and Offer.',
       },
       {
         title: 'Contacts & Faculty Directory',
         details:
-          'Stores professor emails, departments, office hours, recruiters, and linked courses or opportunities in one lookup table.',
+          'Store professor office hours, departments, emails, recruiters, and linked courses.',
       },
       {
-        title: 'Health & Wellness Tracker',
+        title: 'Student Finance & Wellness',
         details:
-          'Pairs Reading & Habit Library with a daily Wellness Log (mood, sleep hours trend chart, water glasses, and exercise check-ins).',
-      },
-      {
-        title: 'Student Finance & Budgets',
-        details:
-          'Monitors monthly spending caps, savings percentages, On Track health rollups, and categorized campus transactions.',
+          'Monthly spending caps, scholarship deadlines, daily sleep check-ins, and habit tracking.',
       },
     ],
   },
   {
     id: 'toolkit-wellness',
-    label: '02 · Study Toolkit, Recall & Insights',
-    badge: 'Focus, Exams & Insights',
+    label: '02 · Study Toolkit, Recall & Templates',
+    badge: 'Focus, Exams & Notes',
     title:
-      'Pomodoro Study Toolkit, Visual Insights, Spaced Repetition & Life Systems',
+      'Study Toolkit, Cornell Lecture Notes, Spaced Repetition & Weighted GPA',
     description:
-      'Time deep-work blocks with the built-in Pomodoro timer, stay ahead of exams with proven active-recall workflows, and monitor study minutes, deliverables, and spending charts.',
+      'Pair active-recall flashcards and exam sprints with deep-work study timers and automatic credit-weighted GPA calculations.',
     includedModules: [
       {
-        title: 'Visual Insights Dashboard',
+        title: 'Cornell Lecture Notes',
         details:
-          'Live charts for Focus & Study Sessions per course, Master Deliverables status rings, and Finance Transactions category breakdowns.',
+          'Cue prompts, lecture takeaways, and First Pass / Quiz Ready review tracking.',
       },
       {
-        title: 'Study Toolkit & Focus Timer',
+        title: 'Spaced Repetition Flashcards',
         details:
-          'Embedded 25:00 Pomodoro timer, visual Study Techniques cards (Pomodoro, Active Recall, Spaced Repetition 1/3/7/21d, Teach It), and an Exam Week Checklist.',
+          'Automated 1 · 3 · 7 · 21 day recall queue filtered to topics due today.',
       },
       {
-        title: 'Spaced Repetition & Courses',
+        title: 'Study Toolkit & Exam Sprints',
         details:
-          'Link lecture notes and deliverables directly to study logs so every completed session updates your course analytics automatically.',
+          '25/5 Pomodoro focus blocks, active recall checklists, and 14-day exam readiness trackers.',
       },
       {
-        title: 'Life & Wellness Routines',
+        title: 'Weighted Gradebook & GPA Rollup',
         details:
-          'Combines active habits, reading reflections, daily sleep trend lines, and weekly review check-ins to prevent mid-semester burnout.',
+          'Credit-weighted course score formulas rolling up into live term and cumulative GPA.',
       },
       {
-        title: 'System Vault (12 Connected Databases)',
+        title: '12 Connected Databases + 8 Templates',
         details:
-          'Includes 8 one-click Notion templates (Cornell notes, lab reports, essays, exam sprints, and Sunday weekly resets) compatible with Notion Free.',
+          'Everything works on the Notion Free plan across desktop, tablet, and mobile.',
       },
     ],
   },
@@ -99,7 +99,6 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
 }) => {
   const [internalFilter, setInternalFilter] =
     useState<StudentStudioFilterId>('all');
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filterId = activeViewFilter ?? internalFilter;
   const setFilterId = (next: StudentStudioFilterId) => {
@@ -114,33 +113,6 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
     filterId === 'all'
       ? STUDENT_OS_SLIDES
       : STUDENT_OS_SLIDES.filter((s) => s.id === filterId);
-
-  const lightboxSlide =
-    lightboxIndex !== null ? STUDENT_OS_SLIDES[lightboxIndex] : null;
-
-  useEffect(() => {
-    if (lightboxIndex === null) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        setLightboxIndex(null);
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        setLightboxIndex((prev) =>
-          prev === null ? 0 : (prev + 1) % STUDENT_OS_SLIDES.length
-        );
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        setLightboxIndex((prev) =>
-          prev === null
-            ? 0
-            : (prev - 1 + STUDENT_OS_SLIDES.length) % STUDENT_OS_SLIDES.length
-        );
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [lightboxIndex]);
 
   return (
     <div data-testid="student-os-details-showcase" className="space-y-10">
@@ -160,7 +132,7 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
       {/* Interactive Notion Workspace Explorer */}
       <StudentOsWorkspaceTabs />
 
-      {/* Studio Workspace Views Section (Matching FreelanceOsGallery & ResearcherOsShowcase) */}
+      {/* What Student OS Consists Of (Clean Structured Breakdown, No Images) */}
       <div
         id="student-os-studio-views"
         data-testid="student-os-studio-views"
@@ -168,17 +140,17 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
       >
         <div className="space-y-1">
           <h3 className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.025em] text-[#37352F]">
-            Studio Workspace Views
+            What&apos;s Included Inside Student OS
           </h3>
           <p className="text-[14.5px] text-[#6E6D68]">
-            Click any workspace preview below to inspect the full-screen layout.
+            A clear overview of every core module, connected database, and ready-to-use Notion template.
           </p>
         </div>
 
         {/* Interactive Filter Tabs */}
         <div
           role="tablist"
-          aria-label="Student OS Studio Previews"
+          aria-label="Student OS Modules & Templates"
           className="flex flex-wrap items-center gap-2"
         >
           <button
@@ -193,7 +165,7 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
                 : 'bg-white text-[#52504A] border-[#E9E9E7] hover:bg-[#F7F6F3] hover:text-[#37352F]'
             }`}
           >
-            All 2 Views (10 Modules)
+            All Modules &amp; Templates
           </button>
 
           {STUDENT_OS_SLIDES.map((slide) => {
@@ -218,146 +190,102 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
           })}
         </div>
 
-        {/* Vertically Stacked Studio Cards */}
+        {/* Module Breakdown Cards */}
         <div
           data-testid="student-os-all-images"
-          className="flex flex-col gap-8"
+          className="flex flex-col gap-6"
         >
-          {visibleSlides.map((slide) => {
-            const slideIndex = STUDENT_OS_SLIDES.findIndex(
-              (item) => item.id === slide.id
-            );
-            return (
-              <article
-                key={slide.id}
-                data-testid={`student-os-card-${slide.id}`}
-                className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_12px_36px_-16px_rgba(55,53,47,0.08)] overflow-hidden"
-              >
-                <div className="bg-[#F7F6F3] p-3 sm:p-5 border-b border-[#E9E9E7]">
-                  <button
-                    type="button"
-                    onClick={() => setLightboxIndex(slideIndex)}
-                    aria-label={`Inspect ${slide.title} workspace preview`}
-                    className="group relative w-full rounded-[16px] overflow-hidden border border-[#E9E9E7] bg-[#DDD5C8] aspect-[16/9] cursor-zoom-in block text-left"
-                  >
-                    <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.012]">
-                      <StudentOsStudioSpread variant={slide.id} />
-                    </div>
-                  </button>
+          {visibleSlides.map((slide) => (
+            <article
+              key={slide.id}
+              data-testid={`student-os-card-${slide.id}`}
+              className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_12px_36px_-16px_rgba(55,53,47,0.08)] p-6 sm:p-8 space-y-5"
+            >
+              <div className="space-y-2">
+                <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#2383E2]">
+                  <span>{slide.label}</span>
+                  <span aria-hidden="true" className="text-[#9B9A97]">
+                    ·
+                  </span>
+                  <span className="text-[#6E6D68] font-medium">
+                    {slide.badge}
+                  </span>
                 </div>
-
-                <div className="p-6 sm:p-8 space-y-6">
-                  <div className="space-y-2">
-                    <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#2383E2]">
-                      <span>{slide.label}</span>
-                      <span aria-hidden="true" className="text-[#9B9A97]">
-                        ·
-                      </span>
-                      <span className="text-[#6E6D68] font-medium">
-                        {slide.badge}
-                      </span>
-                    </div>
-                    <h3 className="font-display text-[21px] sm:text-[25px] font-bold tracking-[-0.025em] text-[#37352F] leading-snug">
-                      {slide.title}
-                    </h3>
-                    <p className="text-[15px] text-[#52504A] leading-[1.6] max-w-[760px]">
-                      {slide.description}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3 pt-2 border-t border-[#F1F1EF]">
-                    {slide.includedModules.map((mod) => (
-                      <div
-                        key={mod.title}
-                        className="rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] px-4 py-3.5 flex items-start gap-3"
-                      >
-                        <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-1" />
-                        <div className="text-[14px] sm:text-[14.5px] leading-[1.55] text-[#52504A]">
-                          <span className="font-semibold text-[#37352F]">
-                            {mod.title}:
-                          </span>{' '}
-                          <span>{mod.details}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Full-Resolution Lightbox Modal */}
-      {lightboxSlide && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${lightboxSlide.title} full-resolution preview`}
-          data-testid="student-os-lightbox"
-          onClick={() => setLightboxIndex(null)}
-          className="fixed inset-0 z-[100] bg-[#1F1E1B]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[1280px] rounded-[20px] bg-white border border-[#E9E9E7] shadow-2xl overflow-hidden flex flex-col"
-          >
-            <div className="px-5 py-3.5 border-b border-[#E9E9E7] flex items-center justify-between gap-4 bg-[#F7F6F3]">
-              <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#2383E2]">
-                  {lightboxSlide.label} · {lightboxSlide.badge}
-                </p>
-                <h3 className="text-[16px] font-bold text-[#37352F] truncate">
-                  {lightboxSlide.title}
+                <h3 className="font-display text-[21px] sm:text-[24px] font-bold tracking-[-0.025em] text-[#37352F] leading-snug">
+                  {slide.title}
                 </h3>
+                <p className="text-[15px] text-[#52504A] leading-[1.6] max-w-[760px]">
+                  {slide.description}
+                </p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  type="button"
-                  aria-label="Previous image"
-                  onClick={() =>
-                    setLightboxIndex((prev) =>
-                      prev === null
-                        ? 0
-                        : (prev - 1 + STUDENT_OS_SLIDES.length) %
-                          STUDENT_OS_SLIDES.length
-                    )
-                  }
-                  className="w-9 h-9 rounded-[9px] border border-[#E9E9E7] bg-white hover:bg-[#F1F1EF] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Next image"
-                  onClick={() =>
-                    setLightboxIndex((prev) =>
-                      prev === null ? 0 : (prev + 1) % STUDENT_OS_SLIDES.length
-                    )
-                  }
-                  className="w-9 h-9 rounded-[9px] border border-[#E9E9E7] bg-white hover:bg-[#F1F1EF] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Close full-resolution preview"
-                  onClick={() => setLightboxIndex(null)}
-                  className="w-9 h-9 rounded-[9px] border border-[#E9E9E7] bg-white hover:bg-[#F1F1EF] text-[#37352F] inline-flex items-center justify-center cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
 
-            <div className="bg-[#1F1E1B] p-2 sm:p-4 flex items-center justify-center max-h-[82vh]">
-              <div className="w-full max-w-[1180px] aspect-[16/9] rounded-[10px] overflow-hidden shadow-2xl">
-                <StudentOsStudioSpread variant={lightboxSlide.id} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-[#F1F1EF]">
+                {slide.includedModules.map((mod, idx) => (
+                  <div
+                    key={mod.title}
+                    className={`rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] px-4 py-3.5 flex items-start gap-3 ${
+                      idx === slide.includedModules.length - 1 &&
+                      slide.includedModules.length % 2 === 1
+                        ? 'md:col-span-2'
+                        : ''
+                    }`}
+                  >
+                    <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-1" />
+                    <div className="text-[14px] leading-[1.55] text-[#52504A]">
+                      <span className="font-semibold text-[#37352F]">
+                        {mod.title}:
+                      </span>{' '}
+                      <span>{mod.details}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
+            </article>
+          ))}
+        </div>
+
+        {/* 8 Ready-to-Use Page Templates Included */}
+        <div
+          data-testid="student-os-templates-included"
+          className="rounded-[24px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-8 space-y-5"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <p className="text-[11.5px] font-bold uppercase tracking-[0.07em] text-[#2383E2]">
+                One-Click Notion Templates
+              </p>
+              <h4 className="font-display text-[20px] sm:text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
+                8 Ready-to-Use Templates Inside Student OS
+              </h4>
             </div>
+            <span className="text-[13px] font-semibold text-[#52504A] bg-white border border-[#E9E9E7] px-3 py-1 rounded-[8px] self-start sm:self-auto">
+              Works on Notion Free
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {STUDENT_OS_SPEC.readyTemplates.map((tpl) => (
+              <div
+                key={tpl.id}
+                className="rounded-[14px] bg-white border border-[#E9E9E7] p-4 space-y-1.5"
+              >
+                <div className="flex items-center gap-2 text-[#37352F]">
+                  <FileText className="w-4 h-4 text-[#2383E2] shrink-0" />
+                  <h5 className="text-[14px] font-semibold leading-snug">
+                    {tpl.title}
+                  </h5>
+                </div>
+                <p className="text-[11.5px] font-semibold text-[#6E6D68]">
+                  In {tpl.triggerContext}
+                </p>
+                <p className="text-[13px] text-[#52504A] leading-[1.45]">
+                  {tpl.contains}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
