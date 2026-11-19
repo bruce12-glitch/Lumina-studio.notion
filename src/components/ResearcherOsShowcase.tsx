@@ -207,7 +207,7 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
             <article
               key={slide.id}
               data-testid={`researcher-os-card-${slide.id}`}
-              className="rounded-[24px] bg-white border border-[#E9E9E7] shadow-[0_12px_36px_-16px_rgba(55,53,47,0.08)] p-6 sm:p-8 space-y-5"
+              className="rounded-[20px] bg-white border border-[#E9E9E7] p-6 sm:p-8 space-y-5"
             >
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#2383E2]">
@@ -227,11 +227,11 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-[#F1F1EF]">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-[#F1F1EF]">
                 {slide.includedModules.map((mod, idx) => (
                   <div
                     key={mod.title}
-                    className={`rounded-[12px] bg-[#F7F6F3] border border-[#E9E9E7] px-4 py-3.5 flex items-start gap-3 ${
+                    className={`rounded-[12px] bg-[#FAF9F6] border border-[#E9E9E7] px-4 py-3.5 flex items-start gap-3 ${
                       idx === slide.includedModules.length - 1 &&
                       slide.includedModules.length % 2 === 1
                         ? 'md:col-span-2'
@@ -255,7 +255,7 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
         {/* 8 Ready-to-Use Academic Page Templates Included */}
         <div
           data-testid="researcher-os-templates-included"
-          className="rounded-[24px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-8 space-y-5"
+          className="rounded-[20px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-8 space-y-5"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
@@ -266,8 +266,8 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
                 8 Ready-to-Use Templates Inside Researcher OS
               </h4>
             </div>
-            <span className="text-[13px] font-semibold text-[#52504A] bg-white border border-[#E9E9E7] px-3 py-1 rounded-[8px] self-start sm:self-auto">
-              Works on Notion Free
+            <span className="text-[13px] font-medium text-[#6E6D68]">
+              Works on Notion Free plan
             </span>
           </div>
 
@@ -275,7 +275,7 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
             {RESEARCHER_OS_SPEC.readyTemplates.map((tpl) => (
               <div
                 key={tpl.id}
-                className="rounded-[14px] bg-white border border-[#E9E9E7] p-4 space-y-1.5"
+                className="rounded-[12px] bg-white border border-[#E9E9E7] hover:border-[#C7C5BE] transition-colors p-4 space-y-1.5"
               >
                 <div className="flex items-center gap-2 text-[#37352F]">
                   <FileText className="w-4 h-4 text-[#2383E2] shrink-0" />
@@ -283,7 +283,7 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
                     {tpl.title}
                   </h5>
                 </div>
-                <p className="text-[11.5px] font-semibold text-[#6E6D68]">
+                <p className="text-[11.5px] font-mono text-[#6E6D68]">
                   In {tpl.triggerContext}
                 </p>
                 <p className="text-[13px] text-[#52504A] leading-[1.45]">

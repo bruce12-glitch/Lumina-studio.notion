@@ -9,7 +9,6 @@ import {
   LayoutGrid,
   Plus,
   Search,
-  Sparkles,
   Target,
 } from 'lucide-react';
 import { TEMPLATES, Template, TemplateCategory } from '../data/catalog';
@@ -1351,11 +1350,11 @@ export const TemplateShowcasePage: React.FC<{
                 <div>
                   <div
                     data-testid="made-for-notion-badge"
-                    className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-[8px] bg-white border border-[#E9E9E7] shadow-[0_1px_2px_rgba(55,53,47,0.04)]"
+                    className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-[#52504A]"
                   >
                     <svg
-                      width="16"
-                      height="16"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
                       fill="none"
                       aria-hidden="true"
@@ -1388,9 +1387,7 @@ export const TemplateShowcasePage: React.FC<{
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#37352F]">
-                      Made for Notion
-                    </span>
+                    <span>Made for Notion</span>
                   </div>
                 </div>
 
@@ -1458,21 +1455,14 @@ export const TemplateShowcasePage: React.FC<{
                 </div>
               </div>
 
-              {/* Right Column: Clean Single-Surface Studio Mascot Stage (Zero Inner Box Clutter) */}
+              {/* Right Column: Clean Architectural Paper Mascot Stage */}
               <div className="md:col-span-6">
-                <div
+                <button
+                  type="button"
                   data-testid="template-device-mockup"
                   onClick={handleScrollToCloserLook}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      handleScrollToCloserLook();
-                    }
-                  }}
                   aria-label={`Preview ${template.name} interactive modules and database details`}
-                  className="group rounded-[28px] bg-gradient-to-br from-[#EFF5FB] via-[#F7F6F3] to-[#FFFFFF] border border-[#E5E4E0] p-6 sm:p-10 shadow-[0_24px_60px_-24px_rgba(55,53,47,0.12)] flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[420px] overflow-hidden cursor-pointer"
+                  className="group w-full rounded-[22px] bg-[#FAF9F6] bg-editorial-grid border border-[#E9E9E7] hover:border-[#C7C5BE] p-6 sm:p-10 transition-colors duration-200 flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[410px] overflow-hidden cursor-pointer"
                 >
                   <img
                     src={
@@ -1490,9 +1480,9 @@ export const TemplateShowcasePage: React.FC<{
                         : 'Researcher OS scholar mascot analyzing papers, microscope experiments, and datasets'
                     }
                     referrerPolicy="no-referrer"
-                    className="w-full max-h-[340px] lg:max-h-[380px] object-contain mix-blend-multiply scale-[1.08] transition-transform duration-500 group-hover:scale-[1.12]"
+                    className="w-full max-h-[340px] lg:max-h-[380px] object-contain mix-blend-multiply scale-[1.06] transition-transform duration-300 group-hover:scale-[1.10]"
                   />
-                </div>
+                </button>
               </div>
             </div>
           ) : (
@@ -1503,11 +1493,11 @@ export const TemplateShowcasePage: React.FC<{
                 <div>
                   <div
                     data-testid="made-for-notion-badge"
-                    className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-[8px] bg-white border border-[#E9E9E7] shadow-[0_1px_2px_rgba(55,53,47,0.04)]"
+                    className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-[#52504A]"
                   >
                     <svg
-                      width="16"
-                      height="16"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
                       fill="none"
                       aria-hidden="true"
@@ -1540,9 +1530,7 @@ export const TemplateShowcasePage: React.FC<{
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className="text-[13px] font-medium tracking-[-0.01em] text-[#37352F]">
-                      Made for Notion
-                    </span>
+                    <span>Made for Notion</span>
                   </div>
                 </div>
 
@@ -1852,31 +1840,36 @@ export const TemplateShowcasePage: React.FC<{
           </p>
         </div>
 
-        {/* Horizontal 3-Column / 2-Column Grid */}
+        {/* Horizontal 3-Column / 2-Column Numbered Module Grid */}
         <div
           data-testid="closer-look-grid"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4"
         >
           {showcase.closerLookModules.map((moduleTitle, index) => {
             const isSelected = selectedModuleIndex === index;
+            const indexLabel = String(index + 1).padStart(2, '0');
             return (
-              <motion.button
+              <button
                 key={moduleTitle}
                 type="button"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.99 }}
                 onClick={() => handleSelectCloserLookModule(index)}
-                className={`w-full h-full text-left rounded-[14px] bg-white border px-5 py-4 flex items-center gap-3 transition-all duration-200 cursor-pointer ${
+                className={`w-full h-full text-left rounded-[12px] bg-white border px-4 py-4 flex items-center gap-3.5 transition-all duration-150 cursor-pointer ${
                   isSelected
-                    ? 'border-[#2383E2] shadow-[0_10px_24px_-10px_rgba(35,131,226,0.18)]'
-                    : 'border-[#E9E9E7] hover:border-[#2383E2]/45 shadow-[0_2px_8px_-3px_rgba(55,53,47,0.04)]'
+                    ? 'border-[#2383E2] bg-[#F7FAFE] shadow-[0_6px_18px_-8px_rgba(35,131,226,0.22)]'
+                    : 'border-[#E9E9E7] hover:border-[#C7C5BE] hover:bg-[#FAF9F6]'
                 }`}
               >
-                <VerifiedBadgeIcon className="w-5 h-5 text-[#2383E2] shrink-0" />
-                <span className="text-[15px] sm:text-[15.5px] font-semibold tracking-[-0.015em] text-[#37352F] leading-snug">
+                <span
+                  className={`font-mono text-[11.5px] font-semibold tabular-nums shrink-0 ${
+                    isSelected ? 'text-[#2383E2]' : 'text-[#6E6D68]'
+                  }`}
+                >
+                  {indexLabel}
+                </span>
+                <span className="text-[14.5px] sm:text-[15px] font-semibold tracking-[-0.015em] text-[#37352F] leading-snug">
                   {moduleTitle}
                 </span>
-              </motion.button>
+              </button>
             );
           })}
         </div>
@@ -2337,13 +2330,12 @@ export const TemplateShowcasePage: React.FC<{
           isFlagshipOs ? 'max-w-[1200px]' : 'max-w-[960px]'
         } mx-auto px-4 sm:px-6`}
       >
-        <div className="rounded-[24px] bg-[#F7F6F3] border border-[#E9E9E7] p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="rounded-[20px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <p className="inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Included in {template.name} ({template.version})</span>
+            <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
+              Included in {template.name} · {template.version}
             </p>
-            <h3 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#37352F]">
+            <h3 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#37352F] text-balance">
               Ready to duplicate into your Notion workspace in 60 seconds.
             </h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -2359,7 +2351,7 @@ export const TemplateShowcasePage: React.FC<{
             </ul>
           </div>
 
-          <div className="lg:col-span-5 rounded-[18px] bg-white border border-[#E9E9E7] p-6 space-y-5 shadow-[0_8px_24px_-10px_rgba(55,53,47,0.06)]">
+          <div className="lg:col-span-5 rounded-[16px] bg-white border border-[#E9E9E7] p-6 space-y-5">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#6E6D68]">
@@ -2377,7 +2369,7 @@ export const TemplateShowcasePage: React.FC<{
               </div>
             </div>
 
-            <div className="h-44 sm:h-48 rounded-[12px] bg-[#FFFFFF] border border-[#E9E9E7] p-2.5 flex items-center justify-center overflow-hidden">
+            <div className="h-44 sm:h-48 border-y border-[#F1F1EF] py-3 flex items-center justify-center overflow-hidden">
               <BlushAssetImage
                 src={
                   template.slug === 'freelance-os'
