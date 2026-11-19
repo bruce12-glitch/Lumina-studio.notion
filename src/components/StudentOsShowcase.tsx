@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { StudentOsWorkspaceTabs } from './StudentOsWorkspaceTabs';
+import { StudentOsStudioSpread } from './StudentOsStudioSpread';
 
 export type StudentStudioFilterId = 'all' | 'hub-career' | 'toolkit-wellness';
 
@@ -10,7 +11,6 @@ export interface StudentOsSlide {
   badge: string;
   title: string;
   description: string;
-  image: string;
   includedModules: { title: string; details: string }[];
 }
 
@@ -22,7 +22,6 @@ export const STUDENT_OS_SLIDES: StudentOsSlide[] = [
     title: 'Student Command Hub, Career Pipeline, Contacts & Student Finance',
     description:
       'Navigate seamlessly across classes, assignments, internship applications, professor office hours, and monthly budgets from one calm cockpit.',
-    image: '/assets/aistudio/image_b97dc4dd.png',
     includedModules: [
       {
         title: 'Main Hub (Student OS Pro)',
@@ -55,10 +54,10 @@ export const STUDENT_OS_SLIDES: StudentOsSlide[] = [
     id: 'toolkit-wellness',
     label: '02 · Study Toolkit, Recall & Insights',
     badge: 'Focus, Exams & Insights',
-    title: 'Pomodoro Study Toolkit, Visual Insights, Spaced Repetition & Life Systems',
+    title:
+      'Pomodoro Study Toolkit, Visual Insights, Spaced Repetition & Life Systems',
     description:
       'Time deep-work blocks with the built-in Pomodoro timer, stay ahead of exams with proven active-recall workflows, and monitor study minutes, deliverables, and spending charts.',
-    image: '/assets/aistudio/image_70835d84.png',
     includedModules: [
       {
         title: 'Visual Insights Dashboard',
@@ -98,7 +97,8 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
   activeViewFilter,
   onViewFilterChange,
 }) => {
-  const [internalFilter, setInternalFilter] = useState<StudentStudioFilterId>('all');
+  const [internalFilter, setInternalFilter] =
+    useState<StudentStudioFilterId>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filterId = activeViewFilter ?? internalFilter;
@@ -160,7 +160,7 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
       {/* Interactive Notion Workspace Explorer */}
       <StudentOsWorkspaceTabs />
 
-      {/* Studio Workspace Views Section (Matching FreelanceOsGallery) */}
+      {/* Studio Workspace Views Section (Matching FreelanceOsGallery & ResearcherOsShowcase) */}
       <div
         id="student-os-studio-views"
         data-testid="student-os-studio-views"
@@ -171,7 +171,7 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
             Studio Workspace Views
           </h3>
           <p className="text-[14.5px] text-[#6E6D68]">
-            Click any preview below to inspect the full-screen layout.
+            Click any workspace preview below to inspect the full-screen layout.
           </p>
         </div>
 
@@ -238,14 +238,11 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
                     type="button"
                     onClick={() => setLightboxIndex(slideIndex)}
                     aria-label={`Inspect ${slide.title} workspace preview`}
-                    className="group relative w-full rounded-[16px] overflow-hidden border border-[#E9E9E7] bg-white aspect-[16/9] cursor-zoom-in block text-left"
+                    className="group relative w-full rounded-[16px] overflow-hidden border border-[#E9E9E7] bg-[#DDD5C8] aspect-[16/9] cursor-zoom-in block text-left"
                   >
-                    <img
-                      src={slide.image}
-                      alt={slide.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover showcase-hd-image transition-transform duration-500 group-hover:scale-[1.012]"
-                    />
+                    <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.012]">
+                      <StudentOsStudioSpread variant={slide.id} />
+                    </div>
                   </button>
                 </div>
 
@@ -253,8 +250,12 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#2383E2]">
                       <span>{slide.label}</span>
-                      <span aria-hidden="true" className="text-[#9B9A97]">·</span>
-                      <span className="text-[#6E6D68] font-medium">{slide.badge}</span>
+                      <span aria-hidden="true" className="text-[#9B9A97]">
+                        ·
+                      </span>
+                      <span className="text-[#6E6D68] font-medium">
+                        {slide.badge}
+                      </span>
                     </div>
                     <h3 className="font-display text-[21px] sm:text-[25px] font-bold tracking-[-0.025em] text-[#37352F] leading-snug">
                       {slide.title}
@@ -349,12 +350,10 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
               </div>
             </div>
 
-            <div className="bg-[#1F1E1B] p-2 sm:p-4 flex items-center justify-center max-h-[80vh]">
-              <img
-                src={lightboxSlide.image}
-                alt={lightboxSlide.title}
-                className="max-w-full max-h-[74vh] w-auto h-auto rounded-[10px] showcase-hd-image object-contain"
-              />
+            <div className="bg-[#1F1E1B] p-2 sm:p-4 flex items-center justify-center max-h-[82vh]">
+              <div className="w-full max-w-[1180px] aspect-[16/9] rounded-[10px] overflow-hidden shadow-2xl">
+                <StudentOsStudioSpread variant={lightboxSlide.id} />
+              </div>
             </div>
           </div>
         </div>
