@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import {
   ArrowRight,
@@ -16,7 +16,10 @@ import { formatPrice } from '../utils/storeLogic';
 import { CheckoutTarget } from './CheckoutModal';
 import { TemplateCard } from './Chrome';
 import { BlushAssetImage } from './CoversAndIllustrations';
-import { FreelanceOsGallery } from './FreelanceOsGallery';
+import {
+  FreelanceOsGallery,
+  FreelanceStudioFilterId,
+} from './FreelanceOsGallery';
 import {
   StudentOsShowcase,
   StudentStudioFilterId,
@@ -1237,14 +1240,38 @@ export const TemplateShowcasePage: React.FC<{
   const showcase = getTemplateShowcaseData(template);
   const isOwned = purchasedSlugs.has(template.slug);
   const [selectedModuleIndex, setSelectedModuleIndex] = useState<number>(0);
+  const [freelanceViewFilter, setFreelanceViewFilter] =
+    useState<FreelanceStudioFilterId>('hub');
   const [studentViewFilter, setStudentViewFilter] =
-    useState<StudentStudioFilterId>('all');
+    useState<StudentStudioFilterId>('hub-career');
   const [researcherViewFilter, setResearcherViewFilter] =
-    useState<ResearcherStudioFilterId>('all');
+    useState<ResearcherStudioFilterId>('synthesis');
+  const [showStickyBuyBar, setShowStickyBuyBar] = useState(false);
+
   const isFlagshipOs =
     template.slug === 'freelance-os' ||
     template.slug === 'student-os' ||
     template.slug === 'researcher-os';
+
+  useEffect(() => {
+    setSelectedModuleIndex(0);
+    setFreelanceViewFilter('hub');
+    setStudentViewFilter('hub-career');
+    setResearcherViewFilter('synthesis');
+  }, [template.slug]);
+
+  useEffect(() => {
+    if (!isFlagshipOs) {
+      setShowStickyBuyBar(false);
+      return;
+    }
+    const onScroll = () => {
+      setShowStickyBuyBar(window.scrollY > 480);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isFlagshipOs]);
 
   const related = TEMPLATES.filter(
     (t) => t.category === template.category && t.slug !== template.slug
@@ -1277,29 +1304,42 @@ export const TemplateShowcasePage: React.FC<{
 
   const handleSelectCloserLookModule = (index: number) => {
     setSelectedModuleIndex(index);
-    if (template.slug === 'student-os') {
+    if (template.slug === 'freelance-os') {
+      const mapping: FreelanceStudioFilterId[] = [
+        'hub',
+        'clients',
+        'hub',
+        'finances',
+        'growth',
+        'clients',
+      ];
+      setFreelanceViewFilter(mapping[index] || 'hub');
+      document
+        .getElementById('freelance-os-studio-views')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (template.slug === 'student-os') {
       const mapping: StudentStudioFilterId[] = [
         'hub-career',
         'toolkit-wellness',
-        'hub-career',
+        'gpa-courses',
         'toolkit-wellness',
-        'toolkit-wellness',
+        'career-finance',
         'all',
       ];
-      setStudentViewFilter(mapping[index] || 'all');
+      setStudentViewFilter(mapping[index] || 'hub-career');
       document
         .getElementById('student-os-studio-views')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (template.slug === 'researcher-os') {
       const mapping: ResearcherStudioFilterId[] = [
         'synthesis',
-        'synthesis',
-        'synthesis',
+        'atomic-vault',
+        'manuscripts',
         'lab-grants',
         'lab-grants',
         'all',
       ];
-      setResearcherViewFilter(mapping[index] || 'all');
+      setResearcherViewFilter(mapping[index] || 'synthesis');
       document
         .getElementById('researcher-os-studio-views')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1321,30 +1361,63 @@ export const TemplateShowcasePage: React.FC<{
               : 'max-w-[960px]'
           } mx-auto px-4 sm:px-6 space-y-10 sm:space-y-14`}
         >
-          {/* Top Breadcrumb: All templates / {template.name} */}
-          <nav
-            aria-label="Breadcrumb"
-            data-testid="template-breadcrumb"
-            className="flex items-center gap-2 text-[14.5px] font-medium text-[#52504A]"
-          >
-            <a
-              href="/templates"
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigate('/templates');
-              }}
-              className="text-[#6E6D68] hover:text-[#37352F] transition-colors cursor-pointer"
+          {/* Top Breadcrumb + Flagship OS Suite Switcher */}
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <nav
+              aria-label="Breadcrumb"
+              data-testid="template-breadcrumb"
+              className="flex items-center gap-2 text-[14.5px] font-medium text-[#52504A]"
             >
-              All templates
-            </a>
-            <span className="text-[#9B9A97]">/</span>
-            <span className="text-[#37352F] font-semibold">{template.name}</span>
-          </nav>
+              <a
+                href="/templates"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('/templates');
+                }}
+                className="text-[#6E6D68] hover:text-[#37352F] transition-colors cursor-pointer"
+              >
+                All templates
+              </a>
+              <span className="text-[#9B9A97]">/</span>
+              <span className="text-[#37352F] font-semibold">{template.name}</span>
+            </nav>
+
+            {isFlagshipOs && (
+              <div
+                aria-label="Switch flagship OS"
+                data-testid="flagship-os-switcher"
+                className="inline-flex items-center gap-1 p-1 rounded-[10px] bg-white border border-[#E9E9E7]"
+              >
+                {[
+                  { slug: 'freelance-os', label: 'Freelance OS' },
+                  { slug: 'student-os', label: 'Student OS' },
+                  { slug: 'researcher-os', label: 'Researcher OS' },
+                ].map((os) => {
+                  const active = template.slug === os.slug;
+                  return (
+                    <button
+                      key={os.slug}
+                      type="button"
+                      onClick={() => onNavigate(`/templates/${os.slug}`)}
+                      className={`px-3 py-1 rounded-[7px] text-[12.5px] font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                        active
+                          ? 'bg-[#37352F] text-white'
+                          : 'text-[#52504A] hover:text-[#37352F] hover:bg-[#FAF9F6]'
+                      }`}
+                    >
+                      {os.label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
 
           {template.slug === 'freelance-os' ||
           template.slug === 'student-os' ||
           template.slug === 'researcher-os' ? (
-            /* Airy Asymmetric 2-Column Hero Split Featuring Flagship OS Mascot */
+            <>
+            {/* Airy Asymmetric 2-Column Hero Split Featuring Flagship OS Mascot */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-center">
               <div className="md:col-span-6 space-y-6">
                 <div>
@@ -1485,6 +1558,42 @@ export const TemplateShowcasePage: React.FC<{
                 </button>
               </div>
             </div>
+
+            {/* Full-Width 3-Column Architectural Value Proof Strip */}
+            <div
+              data-testid="flagship-value-strip"
+              className="rounded-[14px] bg-white border border-[#E9E9E7] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#E9E9E7]"
+            >
+              <div className="px-5 py-4 space-y-0.5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
+                  Complete Architecture
+                </p>
+                <p className="text-[15px] font-bold text-[#37352F] tabular-nums">
+                  {template.slug === 'freelance-os'
+                    ? '11 Modules · 18 Connected Databases'
+                    : template.slug === 'student-os'
+                    ? '10 Modules · 12 Connected Databases'
+                    : '12 Modules · 14 Connected Databases'}
+                </p>
+              </div>
+              <div className="px-5 py-4 space-y-0.5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
+                  Notion Plan Compatibility
+                </p>
+                <p className="text-[15px] font-bold text-[#37352F]">
+                  100% Notion Free Plan · Desktop &amp; Mobile
+                </p>
+              </div>
+              <div className="px-5 py-4 space-y-0.5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
+                  Delivery &amp; Ownership
+                </p>
+                <p className="text-[15px] font-bold text-[#37352F]">
+                  60-Second Duplicate · Free Lifetime Updates
+                </p>
+              </div>
+            </div>
+            </>
           ) : (
             <>
               {/* Single-Column Hero Copy Block (Non-Freelance Templates) */}
@@ -1883,7 +1992,15 @@ export const TemplateShowcasePage: React.FC<{
           data-testid="template-cascading-pages"
           className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
-          <FreelanceOsGallery variant="detail" />
+          <FreelanceOsGallery
+            variant="detail"
+            activeViewFilter={freelanceViewFilter}
+            onViewFilterChange={setFreelanceViewFilter}
+            onOpenBuy={handleOpenBuy}
+            isOwned={isOwned}
+            price={template.price}
+            compareAt={displayCompareAt}
+          />
         </section>
       ) : template.slug === 'student-os' ? (
         <section
@@ -1893,6 +2010,10 @@ export const TemplateShowcasePage: React.FC<{
           <StudentOsShowcase
             activeViewFilter={studentViewFilter}
             onViewFilterChange={setStudentViewFilter}
+            onOpenBuy={handleOpenBuy}
+            isOwned={isOwned}
+            price={template.price}
+            compareAt={displayCompareAt}
           />
         </section>
       ) : template.slug === 'researcher-os' ? (
@@ -1903,6 +2024,10 @@ export const TemplateShowcasePage: React.FC<{
           <ResearcherOsShowcase
             activeViewFilter={researcherViewFilter}
             onViewFilterChange={setResearcherViewFilter}
+            onOpenBuy={handleOpenBuy}
+            isOwned={isOwned}
+            price={template.price}
+            compareAt={displayCompareAt}
           />
         </section>
       ) : (
@@ -2451,6 +2576,48 @@ export const TemplateShowcasePage: React.FC<{
             ))}
           </div>
         </section>
+      )}
+      {/* Slim Sticky Purchase Bar for Flagship OS Pages (Appears After Scrolling Past Hero) */}
+      {isFlagshipOs && showStickyBuyBar && (
+        <div
+          data-testid="flagship-sticky-buy-bar"
+          className="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-[#E9E9E7] shadow-[0_-8px_24px_-12px_rgba(55,53,47,0.12)]"
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="font-display text-[15px] font-bold text-[#37352F] truncate">
+                {template.name}
+              </span>
+              <span className="hidden sm:inline text-[13px] text-[#6E6D68]">
+                · Instant Notion duplicate · Lifetime updates
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="hidden xs:flex items-baseline gap-1.5 tabular-nums">
+                <span className="text-[16px] font-bold text-[#37352F]">
+                  {formatPrice(template.price)}
+                </span>
+                <span className="text-[13px] text-[#9B9A97] line-through">
+                  {formatPrice(displayCompareAt)}
+                </span>
+              </div>
+              <button
+                type="button"
+                data-testid="flagship-sticky-buy-cta"
+                onClick={handleOpenBuy}
+                className="h-9 px-4 sm:px-5 rounded-[9px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[13.5px] font-semibold inline-flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              >
+                <span>
+                  {isOwned
+                    ? `Open ${template.name}`
+                    : `Get ${template.name} — ${formatPrice(template.price)}`}
+                </span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
