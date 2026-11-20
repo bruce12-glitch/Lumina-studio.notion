@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  ArrowUpRight,
   BookOpen,
   Calendar,
   Check,
@@ -10,7 +11,6 @@ import {
   Inbox,
   Layers,
   MessageSquare,
-  Sparkles,
   Users,
 } from 'lucide-react';
 
@@ -59,7 +59,7 @@ export const RESEARCHER_OS_TABS: ResearcherTabMeta[] = [
     calloutTitle: 'Atomic Synthesis Vault',
     calloutBody:
       'One claim per note, linked directly to its source DOI, related Zettels, and target manuscript section.',
-    icon: <Sparkles className="w-3.5 h-3.5" />,
+    icon: <Layers className="w-3.5 h-3.5" />,
   },
   {
     id: 'experiments',
@@ -116,7 +116,7 @@ const RESEARCHER_QUICK_NAV: Array<{
 }> = [
   { id: 'hub', label: 'Research Hub', accent: 'text-[#2383E2]', icon: <Home className="w-3.5 h-3.5" /> },
   { id: 'manuscripts', label: 'Manuscripts', accent: 'text-[#CA8A04]', icon: <FileText className="w-3.5 h-3.5" /> },
-  { id: 'synthesis', label: 'Synthesis Vault', accent: 'text-[#7C3AED]', icon: <Sparkles className="w-3.5 h-3.5" /> },
+  { id: 'synthesis', label: 'Synthesis Vault', accent: 'text-[#7C3AED]', icon: <Layers className="w-3.5 h-3.5" /> },
   { id: 'experiments', label: 'Experiments', accent: 'text-[#16A34A]', icon: <FlaskConical className="w-3.5 h-3.5" /> },
   { id: 'review', label: 'Peer Review', accent: 'text-[#DC2626]', icon: <MessageSquare className="w-3.5 h-3.5" /> },
   { id: 'inbox', label: 'Capture Inbox', accent: 'text-[#52504A]', icon: <Inbox className="w-3.5 h-3.5" /> },
@@ -144,7 +144,10 @@ const KpiTile: React.FC<{
   </div>
 );
 
-export const ResearcherOsWorkspaceTabs: React.FC = () => {
+export const ResearcherOsWorkspaceTabs: React.FC<{
+  onOpenBuy?: () => void;
+  priceLabel?: string;
+}> = ({ onOpenBuy, priceLabel = 'Duplicate to Notion' }) => {
   const [activeTab, setActiveTab] = useState<ResearcherTabId>('manuscripts');
   const [reviewFilter, setReviewFilter] = useState<'open' | 'paper'>('open');
 
@@ -204,9 +207,22 @@ export const ResearcherOsWorkspaceTabs: React.FC = () => {
               <span>{currentMeta.pageTitle}</span>
             </span>
           </div>
-          <span className="text-[11.5px] font-medium text-[#6E6D68]">
-            Interactive Notion Workspace Preview
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline text-[11.5px] font-medium text-[#6E6D68]">
+              Interactive Preview · Click tabs &amp; filters
+            </span>
+            {onOpenBuy && (
+              <button
+                type="button"
+                data-testid="ros-workspace-buy-btn"
+                onClick={onOpenBuy}
+                className="px-3 py-1 rounded-[7px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[11.5px] font-semibold inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              >
+                <span>{priceLabel}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Main Notion Canvas Interior */}
