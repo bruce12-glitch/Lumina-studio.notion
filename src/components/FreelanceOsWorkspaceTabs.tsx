@@ -235,7 +235,10 @@ const NotionSectionCallout: React.FC<{
   );
 };
 
-export const FreelanceOsWorkspaceTabs: React.FC = () => {
+export const FreelanceOsWorkspaceTabs: React.FC<{
+  onOpenBuy?: () => void;
+  priceLabel?: string;
+}> = ({ onOpenBuy, priceLabel = 'Duplicate to Notion' }) => {
   const [activeTab, setActiveTab] = useState<FreelanceTabId>('clients');
   const [clientsView, setClientsView] = useState<'board' | 'accounts'>('board');
   const [projectsView, setProjectsView] = useState<'board' | 'timeline' | 'risk'>('board');
@@ -317,9 +320,22 @@ export const FreelanceOsWorkspaceTabs: React.FC = () => {
               <span>{currentMeta.pageTitle}</span>
             </span>
           </div>
-          <span className="text-[11.5px] font-medium text-[#6E6D68]">
-            Interactive Notion Workspace Preview
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline text-[11.5px] font-medium text-[#6E6D68]">
+              Interactive Preview · Click tabs &amp; checkboxes
+            </span>
+            {onOpenBuy && (
+              <button
+                type="button"
+                data-testid="fos-workspace-buy-btn"
+                onClick={onOpenBuy}
+                className="px-3 py-1 rounded-[7px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[11.5px] font-semibold inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              >
+                <span>{priceLabel}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Main Notion Canvas Interior */}
