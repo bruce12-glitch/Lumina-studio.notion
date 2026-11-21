@@ -4,7 +4,7 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -51,6 +51,7 @@ import {
 } from './components/SecondaryPages';
 
 const STORAGE_KEY = 'lumina_purchased_deliveries_v1';
+const HERO_ENTRANCE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const HERO_PATHWAY_CARDS: Array<{
   id: 'life' | 'work' | 'idea';
@@ -61,19 +62,19 @@ const HERO_PATHWAY_CARDS: Array<{
   {
     id: 'life',
     title: 'For your life',
-    subtitle: 'Give everyday plans a home.',
+    subtitle: 'Calm daily rhythms that stick.',
     href: '/second-brain',
   },
   {
     id: 'work',
     title: 'For your work',
-    subtitle: 'Connect the moving parts.',
+    subtitle: 'Clients, projects & cash flow.',
     href: '/templates?category=Business',
   },
   {
     id: 'idea',
     title: 'For your next idea',
-    subtitle: 'Make space to create.',
+    subtitle: 'Turn sparks into shipped work.',
     href: '/apps',
   },
 ];
@@ -92,49 +93,49 @@ const HOME_FEATURE_SPLITS: Array<{
 }> = [
   {
     kind: 'second-brain',
-    eyebrow: 'Personal System · PARA',
+    eyebrow: 'Most Popular · Half Off ($39 instead of $79)',
     eyebrowTint: '#EBF3FC',
     eyebrowInk: '#2383E2',
-    title: 'Second Brain',
+    title: 'Your head is for having ideas, not holding them.',
     description:
-      'An all-in-one Notion system to organize your tasks, projects, goals, and notes.',
+      'Every project, half-written note, and stray promise finally gets one quiet address. Stop digging through four apps on Monday morning to remember what mattered last week.',
     bullets: [
-      'Projects, Areas, Resources & Archives (PARA)',
-      'Weekly Review & Daily Quick Capture',
+      'One fast inbox that sorts itself across Projects, Areas & Resources',
+      'A 10-minute Sunday reset that keeps your entire week calm',
     ],
-    ctaLabel: 'Learn More',
+    ctaLabel: 'See Inside Second Brain',
     href: '/second-brain',
   },
   {
     kind: 'finance',
-    eyebrow: 'Clarity & Cash Flow',
+    eyebrow: 'Pays For Itself In One Afternoon',
     eyebrowTint: '#E7F4F0',
     eyebrowInk: '#0F7B6C',
-    title: 'All-In-One Finance Dashboard',
+    title: 'Know where every dollar goes—before the month disappears.',
     description:
-      'Bring your financials in one place to get the big picture.',
+      'Most people don’t have an income problem; they have a visibility problem. Spot forgotten subscriptions, see real cash flow, and watch your savings rate climb in ten minutes a week.',
     bullets: [
-      'Monthly Cash Flow, Budgets & Net Worth',
-      'Subscription Tracker & Savings Targets',
+      'Catches sneaky recurring bills before they renew again',
+      'Monthly cash flow, net worth, and savings goals on one calm page',
     ],
-    ctaLabel: 'Get Finance Tracker',
+    ctaLabel: 'Claim Finance Tracker',
     href: '/finance-tracker',
     mediaFirst: true,
   },
   {
     kind: 'minimalism',
-    eyebrow: 'Free Workspace Collection',
+    eyebrow: 'Start Free — Zero Catch',
     eyebrowTint: '#F1F1EF',
     eyebrowInk: '#37352F',
-    title: 'Become a Digital Minimalist',
+    title: 'Feel the craft before you spend a dollar.',
     description:
-      'Find tutorials, apps, and templates to turn your devices into minimalist tools.',
+      'Not ready for a full operating system yet? Duplicate any of our 22 free Notion workspaces today—habits, reading lists, study notes—and feel how different a quiet tool makes your week.',
     bullets: [
-      '22 Free Notion templates for daily habits, reading & study',
-      'Clean monochrome layouts that work on any device',
+      '22 free Notion systems ready to duplicate in 60 seconds',
+      'Zero paywalls, zero monthly subscriptions—just clean design that works',
     ],
-    ctaLabel: 'Start Here',
-    href: '/blog',
+    ctaLabel: 'Explore Free Collection',
+    href: '/templates',
   },
 ];
 
@@ -166,6 +167,8 @@ export default function App() {
   });
 
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const prefersReducedMotion = useReducedMotion();
 
   const purchasedSlugs = useMemo(
     () => new Set(purchases.map((p) => p.itemSlug)),
@@ -331,8 +334,17 @@ export default function App() {
                 <div className="max-w-[780px] mx-auto text-center space-y-7">
                   {/* Unboxed Notion Editorial Kicker */}
                   <div className="flex justify-center">
-                    <div
+                    <motion.div
                       data-testid="hero-notion-pill"
+                      initial={
+                        prefersReducedMotion ? false : { opacity: 0, y: 10 }
+                      }
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: prefersReducedMotion ? 0 : 0.42,
+                        delay: prefersReducedMotion ? 0 : 0.04,
+                        ease: HERO_ENTRANCE_EASE,
+                      }}
                       className="inline-flex items-center gap-2 text-[13.5px] font-medium text-[#52504A]"
                     >
                       <svg
@@ -365,8 +377,8 @@ export default function App() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <span>Your life. Your work. In Notion.</span>
-                    </div>
+                      <span>Built for minds that outgrew sticky notes.</span>
+                    </motion.div>
                   </div>
 
                   {/* 3-Card Illustration Triptych (Accessible Native Buttons, Single-Surface Stages) */}
@@ -445,46 +457,200 @@ export default function App() {
                   </div>
 
                   {/* Headline & Subtitle */}
-                  <div className="space-y-4">
-                    <h1 className="font-display text-[clamp(44px,6vw,70px)] font-bold tracking-[-0.035em] leading-[1.03] text-[#37352F] text-balance">
-                      Notion{' '}
-                      <span className="font-editorial italic font-medium tracking-[-0.02em]">
-                        Templates
+                  <div className="space-y-5">
+                    <h1
+                      data-testid="hero-headline"
+                      className="font-display text-[clamp(40px,5.8vw,68px)] font-bold tracking-[-0.04em] leading-[1.04] text-[#2F2D28] inline-flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 gap-y-2 pb-1"
+                    >
+                      {/* Authentic Notion Cube Logo Emblem + Wordmark */}
+                      <span className="inline-flex items-center gap-2.5 sm:gap-3.5">
+                        <motion.span
+                          data-testid="hero-notion-logo"
+                          initial={
+                            prefersReducedMotion
+                              ? false
+                              : { opacity: 0, y: 14, rotate: -7, scale: 0.92 }
+                          }
+                          animate={{ opacity: 1, y: 0, rotate: -3, scale: 1 }}
+                          whileHover={
+                            prefersReducedMotion
+                              ? undefined
+                              : { rotate: 0, scale: 1.05, y: -2 }
+                          }
+                          transition={{
+                            duration: prefersReducedMotion ? 0 : 0.48,
+                            delay: prefersReducedMotion ? 0 : 0.12,
+                            ease: HERO_ENTRANCE_EASE,
+                          }}
+                          className="inline-flex items-center justify-center w-[42px] h-[42px] sm:w-[58px] sm:h-[58px] rounded-[13px] sm:rounded-[16px] bg-white border border-[#D8D6CF] shadow-[0_10px_24px_-8px_rgba(47,45,40,0.18),0_2px_6px_-1px_rgba(47,45,40,0.08),inset_0_1px_0_rgba(255,255,255,0.95)] shrink-0 select-none"
+                          aria-hidden="true"
+                        >
+                          <svg
+                            viewBox="0 0 100 100"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-[27px] h-[27px] sm:w-[37px] sm:h-[37px]"
+                          >
+                            {/* Isometric Notion Cube */}
+                            <path
+                              d="M16.5 22.8C19.8 25.4 21.1 25.2 27.3 24.8L78.4 21.7C79.5 21.7 78.6 20.6 78.2 20.4L69.7 14.3C67.4 12.6 64.4 10.6 58.6 11L13.1 14.3C11.4 14.5 11.1 15.5 11.8 16.2L16.5 22.8Z"
+                              fill="#FFFFFF"
+                              stroke="#2F2D28"
+                              strokeWidth="3.6"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M23.5 31.8V82.5C23.5 85.4 24.9 86.5 28.2 86.3L83.4 83.1C86.7 82.9 87.1 80.9 87.1 78.5V28.3C87.1 25.9 86.1 24.7 83.9 24.9L26.9 28.2C24.5 28.4 23.5 29.5 23.5 31.8Z"
+                              fill="#FFFFFF"
+                              stroke="#2F2D28"
+                              strokeWidth="3.6"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M11.6 15.6V73.2C11.6 75.8 12.7 77.6 14.7 79.3L24.5 86.2C23.8 85.2 23.5 84 23.5 82.5V31.8C23.5 29.5 24.5 28.4 26.9 28.2L23.5 25L16.5 22.8L11.6 15.6Z"
+                              fill="#2F2D28"
+                              stroke="#2F2D28"
+                              strokeWidth="3.2"
+                              strokeLinejoin="round"
+                            />
+                            {/* Iconic Serif N Inside Cube */}
+                            <path
+                              d="M40.6 43.2L40.6 71.5M40.6 43.2L68.2 70.6M68.2 41.2V70.6"
+                              stroke="#2F2D28"
+                              strokeWidth="6.4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M35.5 43.4H45.8M63.1 41.2H73.2M35.5 71.6H46.2"
+                              stroke="#2F2D28"
+                              strokeWidth="4.2"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </motion.span>
+
+                        <motion.span
+                          initial={
+                            prefersReducedMotion ? false : { opacity: 0, y: 14 }
+                          }
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: prefersReducedMotion ? 0 : 0.48,
+                            delay: prefersReducedMotion ? 0 : 0.18,
+                            ease: HERO_ENTRANCE_EASE,
+                          }}
+                          className="inline-block"
+                        >
+                          Notion
+                        </motion.span>
                       </span>
+
+                      {/* Sculpted Instrument Serif Accent Word + Refined Architectural Underline */}
+                      <motion.span
+                        data-testid="hero-templates-accent"
+                        initial={
+                          prefersReducedMotion ? false : { opacity: 0, y: 14 }
+                        }
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: prefersReducedMotion ? 0 : 0.52,
+                          delay: prefersReducedMotion ? 0 : 0.25,
+                          ease: HERO_ENTRANCE_EASE,
+                        }}
+                        className="relative inline-block font-hero-accent italic font-normal text-[1.15em] tracking-[-0.01em] text-[#2383E2] leading-none pr-1"
+                      >
+                        <span className="relative z-10">Templates</span>
+                        <svg
+                          viewBox="0 0 240 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          preserveAspectRatio="none"
+                          className="absolute -bottom-3 sm:-bottom-3.5 left-0 w-full h-[9px] sm:h-[11px] pointer-events-none"
+                        >
+                          <motion.path
+                            d="M4 11.5C64 4.2 152 3.2 236 9.8"
+                            stroke="#2383E2"
+                            strokeOpacity="0.34"
+                            strokeWidth="4.2"
+                            strokeLinecap="round"
+                            initial={
+                              prefersReducedMotion
+                                ? { pathLength: 1 }
+                                : { pathLength: 0 }
+                            }
+                            animate={{ pathLength: 1 }}
+                            transition={{
+                              duration: prefersReducedMotion ? 0 : 0.55,
+                              delay: prefersReducedMotion ? 0 : 0.42,
+                              ease: HERO_ENTRANCE_EASE,
+                            }}
+                          />
+                        </svg>
+                      </motion.span>
                     </h1>
-                    <p className="text-[17.5px] sm:text-[19.5px] font-normal leading-[1.55] tracking-[-0.01em] text-[#52504A] max-w-[540px] mx-auto">
-                      Discover 41 minimalist Notion systems to organize your work, academic research, study, and daily life.
-                    </p>
-                  </div>
-
-                  {/* Primary & Secondary CTAs */}
-                  <div className="pt-1 flex flex-wrap items-center justify-center gap-3.5">
-                    <motion.a
-                      href="/templates"
-                      whileHover={{ y: -2, scale: 1.015 }}
-                      whileTap={{ y: 0.5, scale: 0.975 }}
-                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigate('/templates');
+                    <motion.p
+                      initial={
+                        prefersReducedMotion ? false : { opacity: 0, y: 10 }
+                      }
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: prefersReducedMotion ? 0 : 0.46,
+                        delay: prefersReducedMotion ? 0 : 0.3,
+                        ease: HERO_ENTRANCE_EASE,
                       }}
-                      className="btn-motion-primary h-12 px-7 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                      className="text-[17px] sm:text-[19px] font-normal leading-[1.58] tracking-[-0.01em] text-[#52504A] max-w-[590px] mx-auto text-balance"
                     >
-                      <span>Shop Templates</span>
-                      <ArrowRight className="w-4 h-4 btn-arrow-slide" />
-                    </motion.a>
-
-                    <motion.button
-                      type="button"
-                      whileHover={{ y: -2, scale: 1.015 }}
-                      whileTap={{ y: 0.5, scale: 0.975 }}
-                      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                      onClick={() => handleOpenTemplateOrCheckout('second-brain')}
-                      className="btn-motion-secondary h-12 px-6 rounded-[10px] border border-[#D3D1CB] bg-white hover:bg-[#F7F6F3] text-[#37352F] text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
-                    >
-                      <span>Get Second Brain ($39)</span>
-                    </motion.button>
+                      Stop spending Sunday nights fixing broken dashboards. Duplicate a calm, battle-tested Notion system in 60 seconds and wake up tomorrow knowing what actually matters.
+                    </motion.p>
                   </div>
+
+                  {/* Primary & Secondary CTAs + Risk-Reversal Microcopy */}
+                  <motion.div
+                    initial={
+                      prefersReducedMotion ? false : { opacity: 0, y: 8 }
+                    }
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: prefersReducedMotion ? 0 : 0.44,
+                      delay: prefersReducedMotion ? 0 : 0.38,
+                      ease: HERO_ENTRANCE_EASE,
+                    }}
+                    className="pt-1 space-y-3.5"
+                  >
+                    <div className="flex flex-wrap items-center justify-center gap-3.5">
+                      <motion.a
+                        href="/templates"
+                        whileHover={{ y: -2, scale: 1.015 }}
+                        whileTap={{ y: 0.5, scale: 0.975 }}
+                        transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate('/templates');
+                        }}
+                        className="btn-motion-primary h-12 px-7 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                      >
+                        <span>Find Your System</span>
+                        <ArrowRight className="w-4 h-4 btn-arrow-slide" />
+                      </motion.a>
+
+                      <motion.button
+                        type="button"
+                        whileHover={{ y: -2, scale: 1.015 }}
+                        whileTap={{ y: 0.5, scale: 0.975 }}
+                        transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                        onClick={() => handleOpenTemplateOrCheckout('second-brain')}
+                        className="btn-motion-secondary h-12 px-6 rounded-[10px] border border-[#D3D1CB] bg-white hover:bg-[#F7F6F3] text-[#37352F] text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
+                      >
+                        <span>Claim Second Brain — $39</span>
+                      </motion.button>
+                    </div>
+
+                    <p className="text-[12.5px] font-medium text-[#6E6D68]">
+                      Pay once, keep forever · Works on Notion’s free plan · 22 free templates included
+                    </p>
+                  </motion.div>
                 </div>
 
                 {/* 3-Column Hero Pathway Cards */}
@@ -588,10 +754,10 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
                   <div className="space-y-1">
                     <h2 className="font-display text-[24px] sm:text-[28px] font-bold tracking-[-0.025em] text-[#37352F]">
-                      Featured Templates
+                      Start where it hurts most.
                     </h2>
                     <p className="text-[15px] text-[#52504A]">
-                      Our most popular workspaces for personal productivity, finance, and business.
+                      The workspaces freelancers, students, and builders duplicate first—built to run quietly in the background.
                     </p>
                   </div>
                   <a
@@ -690,10 +856,10 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div className="space-y-2">
                     <h2 className="font-display text-[clamp(26px,3.2vw,36px)] font-bold tracking-[-0.025em] leading-[1.15] text-[#37352F]">
-                      Apps by Resonance
+                      Small tools that respect your attention.
                     </h2>
                     <p className="text-[16px] text-[#52504A] leading-[1.6]">
-                      Get things done with apps designed with simplicity in mind.
+                      Companion apps built the same way as our templates—quiet, fast, and allergic to clutter.
                     </p>
                   </div>
 
