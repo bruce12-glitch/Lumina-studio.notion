@@ -412,10 +412,10 @@ export const Footer: React.FC<{
                 <LuminaLogo />
               </a>
               <p className="text-[14.5px] font-medium text-[#37352F]">
-                Productivity meets minimalism.
+                Calm tools for serious work.
               </p>
               <p className="text-[13.5px] text-[#52504A] leading-[1.6] max-w-[360px]">
-                Minimalist Notion templates and web apps built to help you organize your work, finances, and daily routines.
+                Thoughtfully crafted Notion systems and small apps for people who would rather finish their work than fiddle with software.
               </p>
             </div>
           </div>
@@ -705,7 +705,7 @@ export const PromoBanner: React.FC = () => {
         className="group max-w-[1200px] mx-auto px-4 sm:px-6 py-5 flex items-center justify-center gap-2 text-center text-[15px] sm:text-[16px] font-semibold"
       >
         <span className="group-hover:underline underline-offset-4">
-          Get organized in 2026! Enjoy 50% off Second Brain template.
+          Second Brain is half off right now ($39 instead of $79) — pay once, own it for life.
         </span>
         <ArrowUpRight className="w-4 h-4 shrink-0 transition-transform duration-180 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </a>
@@ -855,17 +855,17 @@ export const TestimonialsSection: React.FC<{
       {/* Header Row */}
       <div className="mb-10 sm:mb-12">
         <div className="space-y-2.5 max-w-[580px]">
-          <p className="text-[12px] font-medium text-[#6E6D68]">
-            Creator Reviews
+          <p className="text-[12px] font-semibold text-[#2383E2] uppercase tracking-[0.07em]">
+            Real people · Real hours won back
           </p>
           <h2
             id="testimonials-heading"
             className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#37352F] text-balance"
           >
-            Used by Creators and Teams
+            What happens a week after duplicating.
           </h2>
           <p className="text-[16px] text-[#52504A] leading-[1.6]">
-            How designers, engineers, and studio teams organize their work and finances with Resonance Notion templates.
+            The difference between another pretty template you abandon on Tuesday and a workspace you still trust six months later.
           </p>
         </div>
       </div>

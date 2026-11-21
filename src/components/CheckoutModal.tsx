@@ -156,10 +156,10 @@ export const CheckoutModal: React.FC<{
             <Lock className="w-4 h-4 text-[#37352F]" />
             <span className="text-[14px] font-semibold text-[#37352F]">
               {deliveryPkg
-                ? 'Automated Digital Delivery — Ready'
+                ? 'Your Workspace Is Ready'
                 : finalPrice === 0
-                ? 'Instant Free Template Delivery'
-                : 'Secure Digital Checkout'}
+                ? 'Duplicate Free Workspace'
+                : 'One-Time Access · Instant Duplicate'}
             </span>
           </div>
           <button
@@ -305,7 +305,7 @@ export const CheckoutModal: React.FC<{
                   )}
                 </div>
                 <p className="text-[13px] text-[#6E6D68] mt-0.5">
-                  Instant Notion workspace link + setup blueprint
+                  Instant Notion duplicate link + lifetime updates · Pay once, never monthly
                 </p>
               </div>
               <div className="text-right tabular-nums">
@@ -514,16 +514,19 @@ export const CheckoutModal: React.FC<{
               className="btn-motion-primary w-full h-12 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] disabled:opacity-40 text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 cursor-pointer"
             >
               {submitting ? (
-                <span>Provisioning Notion Workspace...</span>
+                <span>Preparing your Notion workspace...</span>
               ) : finalPrice === 0 ? (
-                <span>Send Free Template & Duplicate Link ($0)</span>
+                <span>Send My Free Duplicate Link ($0)</span>
               ) : (
                 <span>
-                  Pay ${finalPrice} via{' '}
-                  {provider === 'stripe' ? 'Stripe' : 'Lemon Squeezy'} & Unlock Template
+                  Complete &amp; Duplicate {target?.name} (${finalPrice})
                 </span>
               )}
             </motion.button>
+
+            <p className="text-center text-[12px] text-[#6E6D68] leading-[1.45]">
+              Works on Notion’s free plan · Delivered instantly by email · 14-day make-it-right guarantee
+            </p>
           </form>
         )}
       </div>

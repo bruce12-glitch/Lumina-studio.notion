@@ -72,14 +72,14 @@ export const AllAccessPage: React.FC<{
       <section className="py-16 sm:py-22 max-w-[1200px] mx-auto px-4 sm:px-6">
         <div className="max-w-[720px] space-y-5">
           <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
-            Complete PRO Bundle · One-Time Purchase
+            Own The Entire Studio · Pay Once, Never Again
           </p>
           <h1 className="font-display text-[clamp(32px,4.5vw,50px)] font-bold tracking-[-0.03em] leading-[1.08] text-[#37352F] text-balance">
             All Access{' '}
             <span className="font-editorial italic font-medium">Bundle</span>
           </h1>
           <p className="text-[17.5px] text-[#52504A] leading-[1.6]">
-            One purchase, every PRO template. Unlock all {stats.proCount} premium Notion systems (${stats.individualTotal} individual value) plus lifetime updates for {formatPrice(ALL_ACCESS_PRICE)}.
+            Why buy piece by piece when you can own the whole studio? Keep all {stats.proCount} PRO Notion systems (${stats.individualTotal} bought separately) plus every future release we ever ship—for one {formatPrice(ALL_ACCESS_PRICE)} payment.
           </p>
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <motion.button
@@ -103,11 +103,11 @@ export const AllAccessPage: React.FC<{
               }
               className="btn-motion-primary h-12 px-6 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[15px] font-semibold inline-flex items-center gap-2 cursor-pointer"
             >
-              <span>Get All Access — {formatPrice(ALL_ACCESS_PRICE)}</span>
+              <span>Claim All Access — {formatPrice(ALL_ACCESS_PRICE)}</span>
               <ArrowRight className="w-4 h-4 btn-arrow-slide" />
             </motion.button>
             <span className="text-[14px] font-medium text-[#0F7B6C] tabular-nums">
-              Save ${stats.savings} vs buying individually
+              You save ${stats.savings} vs buying separately · Works on Notion Free
             </span>
           </div>
         </div>
