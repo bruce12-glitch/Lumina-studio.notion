@@ -570,13 +570,13 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
       {/* Header Row */}
       <div className="space-y-3">
         <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0F7B6C]">
-          Inside Student OS · Live Interactive Workspace
+          Try It Before You Buy · Live Interactive Desk
         </p>
         <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
-          1 Command Hub, 10 Modules, 12 Interconnected Databases
+          One semester desk. Ten modules. Twelve linked databases.
         </h2>
         <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
-          Test the live academic workspace below—switch between Academics, Study Toolkit, Career, and Wellness to see how every course and exam stays connected.
+          Click around the live workspace below—flip between Courses, Recall Notes, Internships, and Budget to feel what a calm Sunday reset actually looks like.
         </p>
       </div>
 
@@ -595,9 +595,9 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
         compareAt={compareAt}
         isOwned={isOwned}
         onOpenBuy={onOpenBuy}
-        sectionKicker="Guided Product Tour · 4 Academic Pillars"
-        sectionTitle="Every semester workflow, built and ready to use."
-        sectionSubtitle="Step through each interactive slide—toggle checkboxes, inspect weighted 4.0 GPA math, and preview how Student OS replaces scattered school apps."
+        sectionKicker="Guided Tour · 4 Academic Pillars"
+        sectionTitle="Built for the week before midterms—not just week one."
+        sectionSubtitle="Step through each interactive slide—check off deadlines, inspect live weighted 4.0 GPA math, and see how Student OS replaces six fragmented school apps."
         slides={deckSlides}
         controlledSlideId={activeViewFilter}
         onControlledSlideChange={(next) => {

@@ -545,13 +545,13 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
       {/* Header Row */}
       <div className="space-y-3">
         <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
-          Inside Researcher OS · Live Interactive Workspace
+          Try It Before You Buy · Live Research Bench
         </p>
         <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
-          1 Research Hub, 12 Modules, 14 Interconnected Databases
+          One research hub. Twelve modules. Fourteen linked databases.
         </h2>
         <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
-          Explore the live academic workspace below—switch between Manuscripts, Synthesis Vault, Experiments, and Peer Review to inspect every database view.
+          Click through the live bench below—switch between Manuscripts, Zettelkasten Claims, Lab Runs, and Peer Review to see how every citation stays one click from your draft.
         </p>
       </div>
 
@@ -570,9 +570,9 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
         compareAt={compareAt}
         isOwned={isOwned}
         onOpenBuy={onOpenBuy}
-        sectionKicker="Guided Product Tour · 4 Research Pillars"
-        sectionTitle="From raw literature to published manuscript, cleanly linked."
-        sectionSubtitle="Step through each interactive slide to inspect the Zettelkasten claim vault, IMRaD writing tracker, reproducible lab ledger, and reviewer rebuttal workflow."
+        sectionKicker="Guided Tour · 4 Research Pillars"
+        sectionTitle="Spend your mornings writing—not hunting for that one citation."
+        sectionSubtitle="Step through each interactive slide to inspect the Zettelkasten claim vault, IMRaD writing tracker, reproducible lab ledger, and reviewer rebuttal board."
         slides={deckSlides}
         controlledSlideId={activeViewFilter}
         onControlledSlideChange={(next) => {

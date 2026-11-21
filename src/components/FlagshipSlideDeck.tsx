@@ -332,7 +332,7 @@ export const FlagshipSlideDeck: React.FC<FlagshipSlideDeckProps> = ({
                       ))}
                     </div>
                     <span className="text-[12px] text-[#6E6D68] hidden sm:inline">
-                      · Ready to duplicate in 1 click
+                      · Yours in 60 seconds · No paid Notion plan needed
                     </span>
                   </div>
 
@@ -405,7 +405,7 @@ export const FlagshipSlideDeck: React.FC<FlagshipSlideDeckProps> = ({
                   {/* Modules Included in This Slide */}
                   <div className="space-y-1.5">
                     <p className="text-[11px] font-bold uppercase tracking-[0.07em] text-[#6E6D68]">
-                      Included in this workflow
+                      What replaces the chaos
                     </p>
                     <ul className="divide-y divide-[#F1F1EF]">
                       {activeSlide.includedModules.map((mod) => (
@@ -463,7 +463,7 @@ export const FlagshipSlideDeck: React.FC<FlagshipSlideDeckProps> = ({
                         <span>
                           {isOwned
                             ? `Open ${osName}`
-                            : `Get ${osName} — $${price}`}
+                            : `Make ${osName} Yours — $${price}`}
                         </span>
                         <ArrowRight className="w-4 h-4" />
                       </button>

@@ -1073,9 +1073,9 @@ function getTemplateShowcaseData(template: Template): TemplateShowcaseMetadata {
   if (template.slug === 'freelance-os') {
     return {
       ...base,
-      heroHeadline: 'Run your entire freelance studio in one calm workspace.',
+      heroHeadline: 'Run your freelance studio like a $200k agency, without hiring one.',
       heroSubheadline:
-        'Unify client pipelines, project delivery boards, overdue invoice tracking, time sheets, ICE ideation, contracts, and 18 connected databases inside Freelance OS.',
+        'No more digging through old threads for proposals, forgetting warm follow-ups, or chasing late invoices two weeks too late. Every client, deliverable, billable hour, and contract lives inside one calm Notion home.',
       closerLookModules: [
         'Main Hub (Freelancer Business OS)',
         'Clients Dashboard & Pipeline CRM',
@@ -1091,9 +1091,9 @@ function getTemplateShowcaseData(template: Template): TemplateShowcaseMetadata {
   if (template.slug === 'student-os') {
     return {
       ...base,
-      heroHeadline: 'Master every semester in one Notion system.',
+      heroHeadline: 'Walk into finals calm while everyone else pulls all-nighters.',
       heroSubheadline:
-        'Courses, deadlines, Cornell notes, spaced repetition flashcards, exams, and weighted 4.0 GPA math inside 12 linked Notion databases.',
+        'Stop hunting through Canvas, PDF syllabi, and frantic group chats to figure out what is due next. Connect every class, 7-day deadline, Cornell recall note, and live 4.0 GPA formula inside one quiet Notion desk.',
       closerLookModules: [
         'Student Command Hub',
         'Courses & Syllabi Tracker',
@@ -1109,9 +1109,9 @@ function getTemplateShowcaseData(template: Template): TemplateShowcaseMetadata {
   if (template.slug === 'researcher-os') {
     return {
       ...base,
-      heroHeadline: 'From literature matrix to published paper.',
+      heroHeadline: 'Turn hundreds of scattered PDFs into your next published paper.',
       heroSubheadline:
-        'Paper matrices, Zettelkasten claims, hypotheses, lab run logs, datasets, IMRaD drafts, and peer review inside 14 linked Notion databases.',
+        'Keep arXiv triage, side-by-side literature matrices, atomic Zettelkasten claims, reproducible lab logs, IMRaD drafts, and peer-review rebuttals wired together—so your best ideas never disappear in a Downloads folder.',
       closerLookModules: [
         'Research Command Hub',
         'Literature Synthesis Matrix',
@@ -1474,13 +1474,17 @@ export const TemplateShowcasePage: React.FC<{
 
                 <div className="flex flex-wrap items-baseline gap-3 pt-1">
                   <span className="text-[22px] sm:text-[24px] font-bold tracking-[-0.02em] text-[#37352F] tabular-nums">
-                    Premium from {formatPrice(template.price)}
+                    {formatPrice(template.price)}
                   </span>
                   <span className="text-[17px] font-medium text-[#6E6D68] line-through tabular-nums">
                     {formatPrice(displayCompareAt)}
                   </span>
-                  <span className="text-[14px] text-[#6E6D68]">
-                    One-time purchase
+                  <span className="text-[14px] font-medium text-[#52504A]">
+                    {template.slug === 'freelance-os'
+                      ? 'Pay once · Less than one billable hour'
+                      : template.slug === 'student-os'
+                      ? 'Pay once · Less than a single textbook'
+                      : 'Pay once · Own every update for life'}
                   </span>
                 </div>
 
@@ -1497,7 +1501,7 @@ export const TemplateShowcasePage: React.FC<{
                     <span>
                       {isOwned
                         ? `Open ${template.name}`
-                        : `Get ${template.name}`}
+                        : `Make ${template.name} Yours`}
                     </span>
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
@@ -1511,7 +1515,7 @@ export const TemplateShowcasePage: React.FC<{
                     onClick={handleScrollToCloserLook}
                     className="h-12 px-6 rounded-[10px] bg-white hover:bg-[#F7F6F3] text-[#37352F] border border-[#D3D1CB] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(55,53,47,0.04)] transition-colors whitespace-nowrap shrink-0"
                   >
-                    <span>Preview what&apos;s inside</span>
+                    <span>Try the live preview</span>
                   </motion.button>
                 </div>
 
@@ -1566,7 +1570,7 @@ export const TemplateShowcasePage: React.FC<{
             >
               <div className="px-5 py-4 space-y-0.5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
-                  Complete Architecture
+                  40+ Hours Built For You
                 </p>
                 <p className="text-[15px] font-bold text-[#37352F] tabular-nums">
                   {template.slug === 'freelance-os'
@@ -1578,18 +1582,18 @@ export const TemplateShowcasePage: React.FC<{
               </div>
               <div className="px-5 py-4 space-y-0.5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
-                  Notion Plan Compatibility
+                  Zero Monthly Tax
                 </p>
                 <p className="text-[15px] font-bold text-[#37352F]">
-                  100% Notion Free Plan · Desktop &amp; Mobile
+                  Works on Notion&apos;s Free Plan Forever
                 </p>
               </div>
               <div className="px-5 py-4 space-y-0.5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
-                  Delivery &amp; Ownership
+                  Instant Ownership
                 </p>
                 <p className="text-[15px] font-bold text-[#37352F]">
-                  60-Second Duplicate · Free Lifetime Updates
+                  Duplicate in 60 Seconds · Lifetime Updates
                 </p>
               </div>
             </div>
@@ -1657,20 +1661,20 @@ export const TemplateShowcasePage: React.FC<{
                 <div className="flex flex-wrap items-baseline gap-3 pt-1">
                   <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#37352F] tabular-nums">
                     {template.price === 0
-                      ? 'Free Edition $0'
-                      : `Premium from ${formatPrice(template.price)}`}
+                      ? 'Free — $0'
+                      : formatPrice(template.price)}
                   </span>
                   <span className="text-[18px] font-medium text-[#6E6D68] line-through tabular-nums">
                     {formatPrice(displayCompareAt)}
                   </span>
-                  <span className="text-[14px] text-[#6E6D68]">
+                  <span className="text-[14px] font-medium text-[#52504A]">
                     {template.price === 0
-                      ? 'Instant Notion duplicate'
-                      : 'One-time purchase'}
+                      ? 'Zero catch · Duplicate in 60 seconds'
+                      : 'Pay once, keep forever · No subscription'}
                   </span>
                 </div>
 
-                {/* Dual Action Buttons: "Get [Template] →" + "Preview what's inside" */}
+                {/* Dual Action Buttons: "Make [Template] Yours →" + "See inside first" */}
                 <div className="flex flex-wrap items-center gap-3.5 pt-1">
                   <motion.button
                     type="button"
@@ -1684,7 +1688,9 @@ export const TemplateShowcasePage: React.FC<{
                     <span>
                       {isOwned
                         ? `Open ${template.name}`
-                        : `Get ${template.name}`}
+                        : template.price === 0
+                        ? `Duplicate ${template.name} Free`
+                        : `Make ${template.name} Yours`}
                     </span>
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
@@ -1698,7 +1704,7 @@ export const TemplateShowcasePage: React.FC<{
                     onClick={handleScrollToCloserLook}
                     className="h-12 px-6 rounded-[10px] bg-white hover:bg-[#F7F6F3] text-[#37352F] border border-[#D3D1CB] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(55,53,47,0.04)] transition-colors"
                   >
-                    <span>Preview what&apos;s inside</span>
+                    <span>See inside first</span>
                   </motion.button>
                 </div>
 
@@ -1707,11 +1713,11 @@ export const TemplateShowcasePage: React.FC<{
                   <div className="flex items-center gap-2 text-[14px] font-medium text-[#6E6D68]">
                     <VerifiedBadgeIcon className="w-5 h-5 text-[#2383E2] shrink-0" />
                     <span>
-                      {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings
+                      {showcase.rating}/5 from {showcase.reviewsCount} verified readers &amp; builders
                     </span>
                   </div>
                   <p className="text-[13.5px] text-[#6E6D68]">
-                    Choose your edition at checkout. Add it to your Notion workspace.
+                    Works on Notion&apos;s free plan · Instant duplicate link · Every future update included.
                   </p>
                 </div>
               </div>
@@ -2461,7 +2467,7 @@ export const TemplateShowcasePage: React.FC<{
               Included in {template.name} · {template.version}
             </p>
             <h3 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#37352F] text-balance">
-              Ready to duplicate into your Notion workspace in 60 seconds.
+              Save 40+ hours of building—and start using it in 60 seconds.
             </h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {template.whatsInside.map((bullet) => (
@@ -2490,7 +2496,7 @@ export const TemplateShowcasePage: React.FC<{
                 <p className="text-[24px] font-bold text-[#37352F] tabular-nums">
                   {formatPrice(template.price)}
                 </p>
-                <p className="text-[12px] text-[#6E6D68]">Lifetime updates</p>
+                <p className="text-[12px] text-[#6E6D68]">Pay once · Lifetime updates</p>
               </div>
             </div>
 
@@ -2518,18 +2524,25 @@ export const TemplateShowcasePage: React.FC<{
               />
             </div>
 
-            <button
-              type="button"
-              onClick={handleOpenBuy}
-              className="w-full h-12 px-6 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_8px_20px_-6px_rgba(35,131,226,0.45)] cursor-pointer transition-colors"
-            >
-              <span>
-                {isOwned
-                  ? `Open ${template.name} Delivery`
-                  : `Get ${template.name} (${formatPrice(template.price)})`}
-              </span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="space-y-2.5">
+              <button
+                type="button"
+                onClick={handleOpenBuy}
+                className="w-full h-12 px-6 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_8px_20px_-6px_rgba(35,131,226,0.45)] cursor-pointer transition-colors"
+              >
+                <span>
+                  {isOwned
+                    ? `Open ${template.name} Delivery`
+                    : template.price === 0
+                    ? `Duplicate ${template.name} Free`
+                    : `Make ${template.name} Yours (${formatPrice(template.price)})`}
+                </span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <p className="text-center text-[12px] text-[#6E6D68]">
+                One-time payment · Works on Notion Free · Instant duplicate link
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -2589,7 +2602,7 @@ export const TemplateShowcasePage: React.FC<{
                 {template.name}
               </span>
               <span className="hidden sm:inline text-[13px] text-[#6E6D68]">
-                · Instant Notion duplicate · Lifetime updates
+                · Pay once, keep forever · Works on Notion Free
               </span>
             </div>
 
@@ -2611,7 +2624,7 @@ export const TemplateShowcasePage: React.FC<{
                 <span>
                   {isOwned
                     ? `Open ${template.name}`
-                    : `Get ${template.name} — ${formatPrice(template.price)}`}
+                    : `Make ${template.name} Yours — ${formatPrice(template.price)}`}
                 </span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>

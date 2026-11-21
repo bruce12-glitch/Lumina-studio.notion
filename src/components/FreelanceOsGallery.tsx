@@ -953,16 +953,16 @@ export const FreelanceOsGallery: React.FC<{
         >
           <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
             {variant === 'home'
-              ? 'Featured System · Freelancer Business OS'
-              : 'Inside Freelancer Business OS · Live Interactive Workspace'}
+              ? 'Flagship Studio System · Freelance OS'
+              : 'Try It Before You Buy · Live Interactive Workspace'}
           </p>
           <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
             {variant === 'home'
-              ? 'Run Your Entire Freelance Studio in Notion'
-              : '1 Command Hub, 11 Modules, 18 Interconnected Databases'}
+              ? 'Your entire freelance business, finally out of your head.'
+              : 'One studio home. Eleven modules. Eighteen linked databases.'}
           </h2>
           <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
-            Click through all 13 live workspace tabs below—test views, toggle checklists, and inspect how clients, projects, and invoices stay synced.
+            Click through all 13 live tabs below—check off tasks, flip views, and feel how calm Monday morning gets when clients, projects, and unpaid invoices actually talk to each other.
           </p>
 
           {variant === 'home' && onInspectTemplate && (
@@ -975,7 +975,7 @@ export const FreelanceOsGallery: React.FC<{
                 onClick={onInspectTemplate}
                 className="btn-motion-primary h-11 px-5 rounded-[10px] bg-[#37352F] hover:bg-[#2F2D28] text-white text-[14px] font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer"
               >
-                <span>Explore Freelance OS (${price})</span>
+                <span>See Inside Freelance OS (${price})</span>
                 <ArrowRight className="w-4 h-4 btn-arrow-slide" />
               </motion.button>
             </div>
@@ -1016,9 +1016,9 @@ export const FreelanceOsGallery: React.FC<{
         compareAt={compareAt}
         isOwned={isOwned}
         onOpenBuy={onOpenBuy}
-        sectionKicker="Guided Product Tour · 4 Core Pillars"
-        sectionTitle="Walk through every workflow before you buy."
-        sectionSubtitle="Step through each interactive slide—filter SMART goals, toggle live invoices, and inspect how Freelance OS replaces scattered studio apps."
+        sectionKicker="Guided Tour · 4 Core Pillars"
+        sectionTitle="See how it feels before you spend a dollar."
+        sectionSubtitle="Step through each interactive slide—filter SMART goals, mark invoices paid, and see what disappears when one quiet system replaces five noisy apps."
         slides={deckSlides}
         controlledSlideId={activeViewFilter}
         onControlledSlideChange={(next) => {
