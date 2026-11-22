@@ -49,7 +49,7 @@ export interface OsPillarSpec {
 }
 
 export interface OsSystemSpec {
-  slug: 'student-os' | 'researcher-os';
+  slug: 'student-os' | 'researcher-os' | 'nexus-os' | 'book-tracker-os';
   name: string;
   eyebrow: string;
   sectionHeadline: string;
