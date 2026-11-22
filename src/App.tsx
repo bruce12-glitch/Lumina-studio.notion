@@ -830,7 +830,10 @@ export default function App() {
                         slug: 'dopamine-menu',
                         eyebrow: 'Personal Productivity · 3 DBs · 10 views · Free',
                         title: 'Dopamine Menu',
-                        hook: 'Swap doomscrolling for 3-to-60 minute resets ranked by live Pick Score & mood lift.',
+                        hook: 'Today’s Plate, 3-minute Reset cards, Mood Match, and Craving Swaps in one workspace.',
+                        quickWin:
+                          TEMPLATES.find((t) => t.slug === 'dopamine-menu')?.quickWin ??
+                          'Swap doomscrolling for a 3-min reset ranked by real mood lift.',
                         metrics: ['5 Live KPIs', 'Mood Match Kanban', 'Craving Swaps'],
                         tint: 'bg-[#FAF8FD] border-[#E7DFF2]',
                         accent: 'text-[#6940A5]',
@@ -839,7 +842,10 @@ export default function App() {
                         slug: 'travel-planner',
                         eyebrow: 'Travel · 6 DBs · 12 views · Free',
                         title: 'Travel Planner',
-                        hook: 'Control Tower readiness bars, live spend donut, Payment Rails, Packing & offline Vault.',
+                        hook: 'Control Tower readiness bars, spend donut, Payment Rails, Packing, and offline Vault.',
+                        quickWin:
+                          TEMPLATES.find((t) => t.slug === 'travel-planner')?.quickWin ??
+                          'See trip readiness %, spend donut, and visa risk on one screen.',
                         metrics: ['4 Live KPIs', 'Spend & Rails Charts', 'Packing + Vault'],
                         tint: 'bg-[#F5FAF7] border-[#D9EAE1]',
                         accent: 'text-[#0F7B6C]',
@@ -870,14 +876,30 @@ export default function App() {
                             {spot.hook}
                           </p>
                         </div>
-                        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#E9E9E7]/80">
-                          <span className="text-[12px] font-medium text-[#6E6D68]">
-                            {spot.metrics.join(' · ')}
-                          </span>
-                          <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-[#37352F] group-hover:text-[#2383E2] transition-colors">
-                            <span>Open live preview</span>
-                            <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
-                          </span>
+
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-2 pt-2.5 border-t border-[#E9E9E7]/80 text-[12.5px] leading-[1.45]">
+                            <span
+                              aria-hidden="true"
+                              className={`mt-[1px] font-mono text-[11.5px] font-semibold shrink-0 select-none ${spot.accent}`}
+                            >
+                              →
+                            </span>
+                            <p className="text-[#52504A]">
+                              <span className="font-semibold text-[#37352F]">Quick-Win:</span>{' '}
+                              {spot.quickWin}
+                            </p>
+                          </div>
+
+                          <div className="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-[#E9E9E7]/80">
+                            <span className="text-[12px] font-medium text-[#6E6D68]">
+                              {spot.metrics.join(' · ')}
+                            </span>
+                            <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-[#37352F] group-hover:text-[#2383E2] transition-colors">
+                              <span>Open live preview</span>
+                              <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
+                            </span>
+                          </div>
                         </div>
                       </a>
                     ))}
