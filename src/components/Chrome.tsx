@@ -552,25 +552,43 @@ export const TemplateCard: React.FC<{
           </p>
         </div>
 
-        <div className="flex items-center justify-between pt-2.5 border-t border-[#F1F1EF]">
-          <div className="flex items-center gap-1.5 tabular-nums text-[14.5px] font-semibold leading-none">
-            {template.compareAt !== undefined && (
-              <span className="text-[#9B9A97] line-through">
-                {formatPrice(template.compareAt)}
-              </span>
-            )}
-            <span className="text-[#37352F]">{formatPrice(template.price)}</span>
-            {template.pro && (
-              <span className="ml-1 text-[10.5px] font-mono font-semibold uppercase tracking-[0.06em] text-[#2383E2]">
-                · PRO
-              </span>
-            )}
+        <div className="mt-auto space-y-3">
+          <div
+            data-testid={`template-quick-win-${template.slug}`}
+            className="flex items-start gap-2 pt-2.5 border-t border-[#F1F1EF] text-[12.5px] leading-[1.45]"
+          >
+            <span
+              aria-hidden="true"
+              className="mt-[1px] font-mono text-[11.5px] font-semibold text-[#0F7B6C] shrink-0 select-none"
+            >
+              →
+            </span>
+            <p className="text-[#52504A] line-clamp-2">
+              <span className="font-semibold text-[#37352F]">Quick-Win:</span>{' '}
+              {template.quickWin}
+            </p>
           </div>
 
-          <span className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#52504A] group-hover:text-[#37352F] transition-colors">
-            <span>See inside</span>
-            <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
-          </span>
+          <div className="flex items-center justify-between pt-2.5 border-t border-[#F1F1EF]">
+            <div className="flex items-center gap-1.5 tabular-nums text-[14.5px] font-semibold leading-none">
+              {template.compareAt !== undefined && (
+                <span className="text-[#9B9A97] line-through">
+                  {formatPrice(template.compareAt)}
+                </span>
+              )}
+              <span className="text-[#37352F]">{formatPrice(template.price)}</span>
+              {template.pro && (
+                <span className="ml-1 text-[10.5px] font-mono font-semibold uppercase tracking-[0.06em] text-[#2383E2]">
+                  · PRO
+                </span>
+              )}
+            </div>
+
+            <span className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#52504A] group-hover:text-[#37352F] transition-colors">
+              <span>See inside</span>
+              <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
+            </span>
+          </div>
         </div>
       </div>
     </a>
