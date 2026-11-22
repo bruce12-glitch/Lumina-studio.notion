@@ -156,12 +156,14 @@ export const FlagshipSlideDeck: React.FC<FlagshipSlideDeckProps> = ({
           >
             {sectionKicker}
           </p>
-          <h3 className="font-display text-[23px] sm:text-[28px] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
+          <h3 className="font-display text-[22px] sm:text-[26px] font-bold tracking-[-0.03em] leading-[1.14] text-[#37352F] text-balance">
             {sectionTitle}
           </h3>
-          <p className="text-[14.5px] text-[#52504A] leading-[1.55]">
-            {sectionSubtitle}
-          </p>
+          {sectionSubtitle && (
+            <p className="text-[14px] text-[#52504A] leading-[1.5]">
+              {sectionSubtitle}
+            </p>
+          )}
         </div>
 
         {/* Segmented Mode Control (Slide Tour vs View All Slides) */}
@@ -405,7 +407,7 @@ export const FlagshipSlideDeck: React.FC<FlagshipSlideDeckProps> = ({
                   {/* Modules Included in This Slide */}
                   <div className="space-y-1.5">
                     <p className="text-[11px] font-bold uppercase tracking-[0.07em] text-[#6E6D68]">
-                      What replaces the chaos
+                      Inside this view
                     </p>
                     <ul className="divide-y divide-[#F1F1EF]">
                       {activeSlide.includedModules.map((mod) => (
@@ -463,7 +465,7 @@ export const FlagshipSlideDeck: React.FC<FlagshipSlideDeckProps> = ({
                         <span>
                           {isOwned
                             ? `Open ${osName}`
-                            : `Make ${osName} Yours — $${price}`}
+                            : `Get ${osName} — $${price}`}
                         </span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
