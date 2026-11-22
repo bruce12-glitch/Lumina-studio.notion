@@ -337,7 +337,7 @@ test('Nexus OS and Book Tracker OS specification integrity, filters, and Notion 
   );
 });
 
-test('all 43 templates have bespoke psychological hooks, plain-English inside breakdowns, and zero AI-slop clichés', () => {
+test('all 43 templates have bespoke psychological hooks, Quick-Win bullets, plain-English inside breakdowns, and zero AI-slop clichés', () => {
   const BANNED_SLOP_PATTERNS = [
     /a clean .* notion template to track and organize/i,
     /\bpre-configured\b/i,
@@ -347,9 +347,18 @@ test('all 43 templates have bespoke psychological hooks, plain-English inside br
     /\bbattle-tested\b/i,
     /\ballergic to clutter\b/i,
     /\bcalm cockpit\b/i,
+    /\bstreamline\b/i,
+    /\bsupercharge\b/i,
+    /\belevate\b/i,
+    /\brevolutionize\b/i,
+    /\bunleash\b/i,
+    /\bempower\b/i,
+    /\bgame-?changer\b/i,
+    /\bdelve\b/i,
   ];
 
   assert.equal(Object.keys(TEMPLATE_HOOKS).length, TEMPLATES.length);
+  const seenQuickWins = new Set<string>();
 
   for (const tpl of TEMPLATES) {
     assert.ok(
@@ -362,6 +371,17 @@ test('all 43 templates have bespoke psychological hooks, plain-English inside br
       hook.cardHook.length >= 16 && hook.cardHook.length <= 95,
       `cardHook for "${tpl.slug}" should be crisp (16-95 chars), got ${hook.cardHook.length}: "${hook.cardHook}"`
     );
+    assert.equal(tpl.quickWin, hook.quickWin, `Catalog quickWin should match hook for "${tpl.slug}"`);
+    assert.ok(
+      tpl.quickWin.length >= 24 && tpl.quickWin.length <= 85,
+      `quickWin for "${tpl.slug}" should be crisp (24-85 chars), got ${tpl.quickWin.length}: "${tpl.quickWin}"`
+    );
+    assert.ok(
+      !seenQuickWins.has(tpl.quickWin),
+      `Duplicate quickWin detected on "${tpl.slug}": "${tpl.quickWin}"`
+    );
+    seenQuickWins.add(tpl.quickWin);
+
     assert.ok(hook.heroHeadline.length >= 10, `heroHeadline missing for "${tpl.slug}"`);
     assert.ok(hook.heroLead.length >= 20, `heroLead missing for "${tpl.slug}"`);
     assert.ok(hook.painPoint.length >= 12, `painPoint missing for "${tpl.slug}"`);
@@ -378,6 +398,7 @@ test('all 43 templates have bespoke psychological hooks, plain-English inside br
 
     const textFields = [
       tpl.summary,
+      tpl.quickWin,
       ...tpl.description,
       hook.cardHook,
       hook.heroHeadline,
