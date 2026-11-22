@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   BookOpen,
   Check,
+  ChevronDown,
   FileText,
   FlaskConical,
   Layers,
@@ -42,31 +43,28 @@ export const RESEARCHER_OS_SLIDES: ResearcherOsSlide[] = [
     stepNumber: '01',
     shortLabel: 'Research Cockpit',
     label: '01 · Command Hub & Reading Triage',
-    badge: 'Capture -> Screen -> Write',
-    title: 'Keep every paper, reading queue, and',
-    editorialAccent: 'venue deadline aligned.',
+    badge: '6-Stage Pipeline',
+    title: 'Keep papers, reading triage, and',
+    editorialAccent: 'CFP dates aligned.',
     description:
-      'Replace fragmented folders with a structured six-stage academic pipeline connecting your Quick Capture Inbox, screening queue, and upcoming CFP countdowns.',
+      'One six-stage pipeline linking your Quick Capture inbox, screening queue, and venue countdowns.',
     beforeText:
-      'Hundreds of unread arXiv PDFs buried in Downloads with no clear triage order.',
+      'Hundreds of unread arXiv PDFs buried in Downloads with no triage order.',
     afterText:
-      '5-minute paper skims separated cleanly from deep synthesis reads and active drafts.',
+      '5-minute paper skims separated cleanly from deep synthesis and active drafts.',
     highlightMetric: '6-Stage Pipeline · Quick Inbox',
     includedModules: [
       {
-        title: 'Research Command Hub',
-        details:
-          'Capture -> Screen -> Synthesize -> Experiment -> Write -> Review cockpit with CFP countdowns.',
+        title: 'Research Hub',
+        details: 'Capture → Screen → Synthesize → Experiment → Write → Review.',
       },
       {
-        title: 'Quick Capture & Reading Triage',
-        details:
-          'Fast inbox isolating citation checks, ablation ideas, and preprints to screen.',
+        title: 'Reading Triage',
+        details: 'Fast inbox for citation checks, ablation ideas, and preprints.',
       },
       {
-        title: 'Weekly Research Reset',
-        details:
-          'Structured Friday checklist aligning advisor feedback, experiment runs, and writing targets.',
+        title: 'Weekly Reset',
+        details: 'Friday checklist aligning advisor notes, lab runs, and writing targets.',
       },
     ],
   },
@@ -76,30 +74,27 @@ export const RESEARCHER_OS_SLIDES: ResearcherOsSlide[] = [
     shortLabel: 'Atomic Vault',
     label: '02 · Atomic Synthesis & Lit Matrix',
     badge: 'Zettelkasten & BibTeX',
-    title: 'Turn dense literature into citable',
+    title: 'Turn dense papers into citable',
     editorialAccent: 'atomic claims.',
     description:
-      'Compare methodology, baselines, sample sizes, and limitations side-by-side—then distill each insight into one linked atomic claim ready to cite in your draft.',
+      'Compare baselines and limitations side-by-side, then distill each insight into one linked claim card.',
     beforeText:
-      'Re-reading 30-page PDFs to remember which paper proved a specific baseline limitation.',
+      'Re-reading 30-page PDFs to remember which paper proved a specific baseline gap.',
     afterText:
-      'Searchable Literature Matrix + Zettelkasten claim cards linked straight to manuscript sections.',
+      'Searchable Literature Matrix + Zettelkasten claims linked straight to drafts.',
     highlightMetric: 'Lit Matrix · DOIs · Atomic Notes',
     includedModules: [
       {
-        title: 'Literature Review Synthesis Matrix',
-        details:
-          'Compare methodology, datasets, key empirical findings, limitations, DOIs, and BibTeX keys.',
+        title: 'Literature Matrix',
+        details: 'Compare methods, datasets, results, limitations, DOIs, and BibTeX.',
       },
       {
-        title: 'Atomic Synthesis Vault (Zettelkasten)',
-        details:
-          'One modular claim per note tagged by Core Claim, Counter-Argument, or Gap and linked to drafts.',
+        title: 'Atomic Claims Vault',
+        details: 'One claim per note tagged Core Claim, Counter-Argument, or Gap.',
       },
       {
-        title: 'Glossary & Notation Register',
-        details:
-          'Define every symbol, metric, and baseline once so terminology stays consistent across papers.',
+        title: 'Notation Glossary',
+        details: 'Define symbols, metrics, and baselines once across every paper.',
       },
     ],
   },
@@ -108,31 +103,28 @@ export const RESEARCHER_OS_SLIDES: ResearcherOsSlide[] = [
     stepNumber: '03',
     shortLabel: 'Manuscripts',
     label: '03 · Active Manuscripts & IMRaD',
-    badge: 'Section-Level Pacing',
+    badge: 'Section Pacing',
     title: 'Ship submission-ready papers with',
-    editorialAccent: 'calm IMRaD pacing.',
+    editorialAccent: 'clear IMRaD pacing.',
     description:
-      'Track every manuscript in flight from outline to camera-ready—monitor word-count budgets, section readiness, Overleaf links, and co-author sign-offs at a glance.',
+      'Track word-count budgets, section status, Overleaf links, and co-author sign-offs per manuscript.',
     beforeText:
-      'Last-week submission crunch with untracked sections and conflicting co-author edits.',
+      'Last-week submission crunch with untracked sections and messy co-author edits.',
     afterText:
-      'Live section progress bars, target venue deadlines, and clear draft ownership.',
+      'Live section progress bars, venue countdowns, and clear draft ownership.',
     highlightMetric: 'IMRaD Tracker · Word Count Bars',
     includedModules: [
       {
-        title: 'Active Manuscripts Pipeline',
-        details:
-          'Live word-count pacing, submission stage, Overleaf link, and target conference/journal deadlines.',
+        title: 'Manuscripts Pipeline',
+        details: 'Word-count bars, submission stage, Overleaf link, and CFP dates.',
       },
       {
         title: 'IMRaD Section Tracker',
-        details:
-          'Track Abstract, Related Work, Methodology, and Experiments independently from Outline to Polished.',
+        details: 'Track Abstract, Related Work, Method, and Results from Outline to Done.',
       },
       {
-        title: 'Paper Launch Blueprint',
-        details:
-          'Pre-configured checklist covering LaTeX anonymization, ethics statement, and artifact release.',
+        title: 'Submission Checklist',
+        details: 'LaTeX anonymization, ethics statement, and code-artifact checks.',
       },
     ],
   },
@@ -142,30 +134,27 @@ export const RESEARCHER_OS_SLIDES: ResearcherOsSlide[] = [
     shortLabel: 'Lab & Reviews',
     label: '04 · Lab Runs, Rebuttals & Grants',
     badge: 'Reproducibility & 14 DBs',
-    title: 'Connect lab experiments directly to',
+    title: 'Link lab experiments straight to',
     editorialAccent: 'peer-review rebuttals.',
     description:
-      'Log falsifiable hypotheses, versioned lab protocols, dataset hashes, and Git SHAs—then assign reviewer critiques directly to control experiments and draft revisions.',
+      'Log hypotheses, dataset DOIs, and Git SHAs—then tie reviewer critiques directly to control runs.',
     beforeText:
-      'Untraceable experiment spreadsheets and stressful rebuttal periods before reviewer deadlines.',
+      'Untraceable experiment spreadsheets and frantic rebuttal weeks.',
     afterText:
-      'Auditable trial ledger, severity-ranked reviewer action tracker, and funding CFP calendar.',
+      'Auditable trial ledger, severity-ranked rebuttal board, and grant calendar.',
     highlightMetric: 'Protocols · Rebuttals · 14 Linked DBs',
     includedModules: [
       {
-        title: 'Experiments, Protocols & Datasets',
-        details:
-          'Auditable trial runs capturing hyperparameters, metrics, dataset DOIs, and Git commit SHAs.',
+        title: 'Lab Run Ledger',
+        details: 'Hyperparameters, metrics, dataset DOIs, and Git commit SHAs.',
       },
       {
-        title: 'Peer Reviews & Rebuttals',
-        details:
-          'Point-by-point reviewer severity tracker linking each critique to control runs and paper edits.',
+        title: 'Rebuttal Tracker',
+        details: 'Map every reviewer critique to control runs and manuscript edits.',
       },
       {
-        title: 'Grants, CFPs & Collaborators',
-        details:
-          'Funding RFPs, conference submission cutoffs, blind-review policies, and co-author ORCID directory.',
+        title: 'Grants & CFPs',
+        details: 'Funding deadlines, blind-review rules, and co-author ORCID directory.',
       },
     ],
   },
@@ -523,6 +512,8 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
   price = 49,
   compareAt = 69,
 }) => {
+  const [showTemplates, setShowTemplates] = useState(false);
+
   const deckSlides: FlagshipDeckSlideItem[] = RESEARCHER_OS_SLIDES.map(
     (slide) => ({
       id: slide.id,
@@ -541,17 +532,17 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
   );
 
   return (
-    <div data-testid="researcher-os-details-showcase" className="space-y-12">
+    <div data-testid="researcher-os-details-showcase" className="space-y-10">
       {/* Header Row */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
-          Try It Before You Buy · Live Research Bench
+          Interactive Preview
         </p>
-        <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
-          One research hub. Twelve modules. Fourteen linked databases.
+        <h2 className="font-display text-[clamp(24px,3.2vw,34px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
+          Test the live workspace — 12 modules, 14 linked databases.
         </h2>
-        <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
-          Click through the live bench below—switch between Manuscripts, Zettelkasten Claims, Lab Runs, and Peer Review to see how every citation stays one click from your draft.
+        <p className="text-[15px] text-[#52504A] leading-[1.55] max-w-[660px]">
+          Switch between Manuscripts, Zettelkasten Claims, Lab Runs, and Peer Review below before you duplicate.
         </p>
       </div>
 
@@ -570,9 +561,9 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
         compareAt={compareAt}
         isOwned={isOwned}
         onOpenBuy={onOpenBuy}
-        sectionKicker="Guided Tour · 4 Research Pillars"
-        sectionTitle="Spend your mornings writing—not hunting for that one citation."
-        sectionSubtitle="Step through each interactive slide to inspect the Zettelkasten claim vault, IMRaD writing tracker, reproducible lab ledger, and reviewer rebuttal board."
+        sectionKicker="4 Core Views"
+        sectionTitle="Spend mornings writing — not hunting for one citation."
+        sectionSubtitle=""
         slides={deckSlides}
         controlledSlideId={activeViewFilter}
         onControlledSlideChange={(next) => {
@@ -583,46 +574,59 @@ export const ResearcherOsShowcase: React.FC<ResearcherOsShowcaseProps> = ({
         testIdPrefix="researcher-os"
       />
 
-      {/* 8 Ready-to-Use Academic Page Templates Included */}
+      {/* Collapsible 8 Ready-to-Use Academic Page Templates Included */}
       <div
         data-testid="researcher-os-templates-included"
-        className="rounded-[20px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-8 space-y-5"
+        className="rounded-[16px] bg-[#FAF9F6] border border-[#E9E9E7] overflow-hidden"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <p className="text-[11.5px] font-bold uppercase tracking-[0.07em] text-[#2383E2]">
-              One-Click Notion Templates
+        <button
+          type="button"
+          data-testid="researcher-os-templates-toggle"
+          aria-expanded={showTemplates}
+          onClick={() => setShowTemplates((v) => !v)}
+          className="w-full px-5 sm:px-6 py-4 flex items-center justify-between gap-4 text-left hover:bg-[#F4F3F0] transition-colors cursor-pointer"
+        >
+          <div className="space-y-0.5 min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-[0.07em] text-[#2383E2]">
+              One-Click Notion Templates · Free Plan Compatible
             </p>
-            <h4 className="font-display text-[20px] sm:text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
-              8 Ready-to-Use Templates Inside Researcher OS
+            <h4 className="font-display text-[17px] sm:text-[19px] font-bold tracking-[-0.02em] text-[#37352F]">
+              Includes {RESEARCHER_OS_SPEC.readyTemplates.length} ready-to-use academic templates
             </h4>
           </div>
-          <span className="text-[13px] font-medium text-[#6E6D68]">
-            Works on Notion Free plan
+          <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#37352F] shrink-0 whitespace-nowrap">
+            <span>{showTemplates ? 'Hide list' : 'Show all 8'}</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${
+                showTemplates ? 'rotate-180' : ''
+              }`}
+            />
           </span>
-        </div>
+        </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {RESEARCHER_OS_SPEC.readyTemplates.map((tpl) => (
-            <div
-              key={tpl.id}
-              className="rounded-[12px] bg-white border border-[#E9E9E7] hover:border-[#C7C5BE] transition-colors p-4 space-y-1.5"
-            >
-              <div className="flex items-center gap-2 text-[#37352F]">
-                <FileText className="w-4 h-4 text-[#2383E2] shrink-0" />
-                <h5 className="text-[14px] font-semibold leading-snug">
-                  {tpl.title}
-                </h5>
+        {showTemplates && (
+          <div className="px-5 sm:px-6 pb-6 pt-1 border-t border-[#E9E9E7] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {RESEARCHER_OS_SPEC.readyTemplates.map((tpl) => (
+              <div
+                key={tpl.id}
+                className="rounded-[12px] bg-white border border-[#E9E9E7] p-3.5 space-y-1"
+              >
+                <div className="flex items-center gap-2 text-[#37352F]">
+                  <FileText className="w-3.5 h-3.5 text-[#2383E2] shrink-0" />
+                  <h5 className="text-[13.5px] font-semibold leading-snug">
+                    {tpl.title}
+                  </h5>
+                </div>
+                <p className="text-[11px] font-mono text-[#6E6D68]">
+                  In {tpl.triggerContext}
+                </p>
+                <p className="text-[12.5px] text-[#52504A] leading-[1.45]">
+                  {tpl.contains}
+                </p>
               </div>
-              <p className="text-[11.5px] font-mono text-[#6E6D68]">
-                In {tpl.triggerContext}
-              </p>
-              <p className="text-[13px] text-[#52504A] leading-[1.45]">
-                {tpl.contains}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
