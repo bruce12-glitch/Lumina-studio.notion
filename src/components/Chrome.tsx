@@ -71,6 +71,7 @@ const NAV_DIRECTORY_GROUPS: Array<{
     links: [
       { label: 'Second Brain', path: '/second-brain' },
       { label: 'Finance Tracker', path: '/finance-tracker' },
+      { label: 'Custom Builds', path: '/#custom-notion-builds' },
       { label: 'All Access', path: '/all-access', badge: 'Bundle' },
     ],
   },
@@ -164,6 +165,7 @@ export const Header: React.FC<NavigationProps> = ({
             {[
               { label: 'Templates', path: '/templates' },
               { label: 'Second Brain', path: '/second-brain' },
+              { label: 'Custom Builds', path: '/#custom-notion-builds' },
               { label: 'Apps', path: '/apps' },
               { label: 'Blog', path: '/blog' },
             ].map((item) => {
@@ -412,10 +414,10 @@ export const Footer: React.FC<{
                 <LuminaLogo />
               </a>
               <p className="text-[14.5px] font-medium text-[#37352F]">
-                Calm tools for serious work.
+                Built for people who finish what they start.
               </p>
-              <p className="text-[13.5px] text-[#52504A] leading-[1.6] max-w-[360px]">
-                Thoughtfully crafted Notion systems and small apps for people who would rather finish their work than fiddle with software.
+              <p className="text-[13.5px] text-[#52504A] leading-[1.6] max-w-[340px]">
+                Notion systems and small tools that cut setup time to 60 seconds.
               </p>
             </div>
           </div>
@@ -530,21 +532,24 @@ export const TemplateCard: React.FC<{
         illustrationUrl={template.illustrationUrl}
         cardTint={template.cardTint}
       />
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-3">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-[11.5px] font-medium text-[#6E6D68] truncate">
-              {template.category}
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-3.5">
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[11.5px] font-medium text-[#6E6D68] truncate tabular-nums">
+              {template.category} · {template.databaseCount} DBs · {template.viewsCount} views
             </p>
-            <h3 className="text-[16.5px] font-semibold leading-[1.35] tracking-[-0.015em] text-[#37352F] truncate mt-0.5 group-hover:text-[#1F1E1B]">
-              {template.name}
-            </h3>
+            {isPurchased && (
+              <span className="text-[11px] font-semibold text-[#0F7B6C] shrink-0">
+                Owned
+              </span>
+            )}
           </div>
-          {isPurchased && (
-            <span className="text-[11px] font-semibold text-[#0F7B6C] shrink-0">
-              Owned
-            </span>
-          )}
+          <h3 className="text-[16.5px] font-semibold leading-[1.3] tracking-[-0.015em] text-[#37352F] truncate group-hover:text-[#1F1E1B]">
+            {template.name}
+          </h3>
+          <p className="text-[13px] leading-[1.45] text-[#52504A] line-clamp-2">
+            {template.summary}
+          </p>
         </div>
 
         <div className="flex items-center justify-between pt-2.5 border-t border-[#F1F1EF]">
@@ -563,7 +568,7 @@ export const TemplateCard: React.FC<{
           </div>
 
           <span className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#52504A] group-hover:text-[#37352F] transition-colors">
-            <span>Inspect</span>
+            <span>See inside</span>
             <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
           </span>
         </div>
@@ -862,10 +867,10 @@ export const TestimonialsSection: React.FC<{
             id="testimonials-heading"
             className="text-[clamp(26px,3.2vw,36px)] font-[620] tracking-[-0.025em] leading-[1.15] text-[#37352F] text-balance"
           >
-            What happens a week after duplicating.
+            Still open six months later.
           </h2>
-          <p className="text-[16px] text-[#52504A] leading-[1.6]">
-            The difference between another pretty template you abandon on Tuesday and a workspace you still trust six months later.
+          <p className="text-[15.5px] text-[#52504A] leading-[1.55]">
+            Most templates look good on Sunday and get abandoned by Tuesday. Here is what stayed.
           </p>
         </div>
       </div>
