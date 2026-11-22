@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import {
-  ArrowRight,
-  Check,
-  FileText,
-  Folder,
-  Inbox,
-  LayoutGrid,
-  Plus,
-  Search,
-  Target,
-} from 'lucide-react';
-import { TEMPLATES, Template, TemplateCategory } from '../data/catalog';
+import { ArrowRight, Check } from 'lucide-react';
+import { TEMPLATES } from '../data/catalog';
+import { getTemplateHook } from '../data/templateHooks';
 import { formatPrice } from '../utils/storeLogic';
 import { CheckoutTarget } from './CheckoutModal';
 import { TemplateCard } from './Chrome';
 import { BlushAssetImage } from './CoversAndIllustrations';
+import { StandardTemplateWorkspace } from './StandardTemplateWorkspace';
+import {
+  DopamineMenuShowcase,
+  DopamineTabId,
+} from './DopamineMenuShowcase';
+import {
+  TravelPlannerShowcase,
+  TravelTabId,
+} from './TravelPlannerShowcase';
 import {
   FreelanceOsGallery,
   FreelanceStudioFilterId,
@@ -28,1111 +28,21 @@ import {
   ResearcherOsShowcase,
   ResearcherStudioFilterId,
 } from './ResearcherOsShowcase';
+import {
+  NexusOsShowcase,
+  NexusStudioFilterId,
+} from './NexusOsShowcase';
+import {
+  BookTrackerOsShowcase,
+  BookTrackerStudioFilterId,
+} from './BookTrackerOsShowcase';
 import freelancerMascotHeroImg from '../assets/images/freelancer_mascot_hero_1794923265472.jpg';
 import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
 import studentOsMascotHeroImg from '../assets/images/student_os_mascot_hero_1794933584495.jpg';
 import researcherOsMascotHeroImg from '../assets/images/researcher_os_mascot_hero_1794933583291.jpg';
+import nexusOsMascotHeroImg from '../assets/images/nexus_os_mascot_hero_1795351179233.jpg';
+import bookTrackerOsMascotHeroImg from '../assets/images/book_tracker_os_mascot_hero_1795351180939.jpg';
 
-interface TemplateShowcaseMetadata {
-  heroHeadline: string;
-  heroSubheadline: string;
-  rating: string;
-  reviewsCount: number;
-  closerLookModules: string[];
-  showcaseHeading: string;
-  page1Title: string;
-  page1Callout: string;
-  page1Items: {
-    title: string;
-    status: string;
-    date: string;
-    area: string;
-    progress: number;
-  }[];
-  page2Title: string;
-  page2Callout: string;
-  page2References: {
-    title: string;
-    date: string;
-    tags: string[];
-  }[];
-  page2Notes: {
-    title: string;
-    excerpt: string;
-    area: string;
-  }[];
-  page3Title: string;
-  page3Callout: string;
-  page3Projects: {
-    title: string;
-    status: string;
-    date: string;
-    area: string;
-    progress: number;
-  }[];
-  page3Timeline: {
-    title: string;
-    status: string;
-    progress: string;
-    offsetPct: number;
-    widthPct: number;
-  }[];
-  page3WeeklyTasks: {
-    day: string;
-    dateNum: string;
-    isToday?: boolean;
-    taskTitle?: string;
-    priority?: string;
-  }[];
-  lifeAreas: {
-    title: string;
-    projectsCount: string;
-    notesCount: string;
-    pattern: 'spiral' | 'sunburst' | 'vortex' | 'prism' | 'waves' | 'radial';
-  }[];
-}
-
-function getTemplateShowcaseData(template: Template): TemplateShowcaseMetadata {
-  const byCategory: Record<
-    TemplateCategory,
-    Omit<TemplateShowcaseMetadata, 'closerLookModules'> & {
-      defaultModules: string[];
-    }
-  > = {
-    'Personal Productivity': {
-      heroHeadline: 'Make room for the life you want.',
-      heroSubheadline: `Bring your plans, habits, learning, and everyday workflow into ${template.name}. Spend less time keeping track and more time moving forward.`,
-      rating: '4.9',
-      reviewsCount: 174 + (template.id * 7) % 90,
-      defaultModules: [
-        'Goals & Vision',
-        'Projects & Tasks',
-        'Habits Tracker',
-        'Daily Journal',
-        'Learning System',
-        'Weekly Review',
-      ],
-      showcaseHeading: 'Master Your Productivity',
-      page1Title: 'Goals',
-      page1Callout:
-        'Set and track your short-term and long-term goals. Each goal connects directly to active projects and measurable milestones.',
-      page1Items: [
-        {
-          title: 'Achieve a GPA of 3.8 or Higher',
-          status: 'In progress',
-          date: 'July 4, 2026 → July 25, 2026',
-          area: 'School',
-          progress: 50,
-        },
-        {
-          title: 'Visit Three New Countries',
-          status: 'In progress',
-          date: 'July 1, 2026 → August 9, 2026',
-          area: 'Travel & Leisure',
-          progress: 25,
-        },
-      ],
-      page2Title: 'References & Notes',
-      page2Callout:
-        'Store valuable information, resources, and documents that support your ongoing projects and areas of responsibility.',
-      page2References: [
-        {
-          title: "'The Power of Habit' by Charles Duhigg",
-          date: 'July 12, 2026',
-          tags: ['Book'],
-        },
-        {
-          title: 'Goodreads for book recommendations and reviews',
-          date: 'July 11, 2026',
-          tags: ['Book', 'Website'],
-        },
-        {
-          title: "'Your Money or Your Life' by Vicki Robin",
-          date: 'July 1, 2026',
-          tags: ['Book', 'Website'],
-        },
-      ],
-      page2Notes: [
-        {
-          title: 'Experiment with different routines to see what works best',
-          excerpt: 'Start with a simple morning routine and gradually add focus blocks.',
-          area: 'Personal',
-        },
-        {
-          title: 'Use a habit tracker to monitor daily consistency',
-          excerpt: 'Reflect weekly on what is working and make small adjustments.',
-          area: 'Personal',
-        },
-      ],
-      page3Title: 'Projects & Tasks',
-      page3Callout:
-        'Manage your larger endeavors that require multiple tasks. Link projects to related goals and tasks to ensure alignment and progress.',
-      page3Projects: [
-        {
-          title: 'Develop a Study Schedule',
-          status: 'In progress',
-          date: 'July 4, 2026 → July 27, 2026',
-          area: 'School',
-          progress: 35,
-        },
-        {
-          title: 'Plan Trip to Dubai',
-          status: 'In progress',
-          date: 'July 10, 2026 → Aug 2, 2026',
-          area: 'Travel & Leisure',
-          progress: 20,
-        },
-        {
-          title: 'Plan Trip to London, Paris',
-          status: 'In progress',
-          date: 'Aug 5, 2026 → Aug 19, 2026',
-          area: 'Travel & Leisure',
-          progress: 15,
-        },
-      ],
-      page3Timeline: [
-        {
-          title: 'Morning Routine Plan',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 2,
-          widthPct: 38,
-        },
-        {
-          title: 'Implement and Track Morning Routine',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 6,
-          widthPct: 46,
-        },
-        {
-          title: 'Complete Professional Development Course',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 14,
-          widthPct: 50,
-        },
-        {
-          title: 'Demonstrate Leadership and Achieve Metrics',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 44,
-          widthPct: 48,
-        },
-        {
-          title: 'Create a Training Schedule',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 50,
-          widthPct: 42,
-        },
-        {
-          title: 'Develop a Study Schedule',
-          status: 'In progress',
-          progress: '35%',
-          offsetPct: 58,
-          widthPct: 38,
-        },
-      ],
-      page3WeeklyTasks: [
-        { day: 'Sun', dateNum: '21', isToday: true },
-        {
-          day: 'Mon',
-          dateNum: '22',
-          taskTitle: 'Research effective morning routines.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Tue',
-          dateNum: '23',
-          taskTitle: 'Outline desired activities (meditation, exercise).',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Wed',
-          dateNum: '24',
-          taskTitle: 'Review and reflect on each book upon completion.',
-          priority: 'High Priority',
-        },
-        { day: 'Thu', dateNum: '25' },
-        { day: 'Fri', dateNum: '26' },
-      ],
-      lifeAreas: [
-        { title: 'Personal', projectsCount: '2 Projects', notesCount: '12 Notes', pattern: 'spiral' },
-        { title: 'Career', projectsCount: '3 Projects', notesCount: '8 Notes', pattern: 'sunburst' },
-        { title: 'Health & Fitness', projectsCount: '2 Projects', notesCount: '6 Notes', pattern: 'vortex' },
-        { title: 'Travel & Leisure', projectsCount: '2 Projects', notesCount: '5 Notes', pattern: 'prism' },
-        { title: 'Relationships & Social', projectsCount: '1 Project', notesCount: '4 Notes', pattern: 'waves' },
-        { title: 'Finance', projectsCount: '2 Projects', notesCount: '9 Notes', pattern: 'radial' },
-      ],
-    },
-    Finance: {
-      heroHeadline: 'Bring clarity to every dollar you earn.',
-      heroSubheadline: `Consolidate your income, budgets, recurring subscriptions, and savings goals inside ${template.name}. Know exactly where your money goes in minutes a week.`,
-      rating: '4.9',
-      reviewsCount: 192 + (template.id * 5) % 70,
-      defaultModules: [
-        'Income & Cash Flow',
-        'Monthly Budget',
-        'Subscription Radar',
-        'Savings & Sinking Funds',
-        'Net Worth Ledger',
-        'Annual Tax Summary',
-      ],
-      showcaseHeading: 'Master Your Finances',
-      page1Title: 'Savings Goals',
-      page1Callout:
-        'Define target amounts and target dates for emergency reserves, investments, and upcoming purchases with automatic progress bars.',
-      page1Items: [
-        {
-          title: '6-Month Emergency Fund ($18,000)',
-          status: 'In progress',
-          date: 'Jan 1, 2026 → Dec 31, 2026',
-          area: 'Safety Net',
-          progress: 75,
-        },
-        {
-          title: 'Index Portfolio Contribution Target',
-          status: 'In progress',
-          date: 'Q3 2026 → Q4 2026',
-          area: 'Investments',
-          progress: 60,
-        },
-      ],
-      page2Title: 'Subscriptions & Bills',
-      page2Callout:
-        'Monitor every recurring monthly and annual charge in one place so you never pay for forgotten renewals again.',
-      page2References: [
-        {
-          title: 'Notion Plus Workspace Plan ($10/mo)',
-          date: 'Renews 15th',
-          tags: ['Productivity'],
-        },
-        {
-          title: 'Cloud Storage & Backup Suite ($9.99/mo)',
-          date: 'Renews 22nd',
-          tags: ['Utilities', 'Cloud'],
-        },
-        {
-          title: 'Gym & Recovery Membership ($45/mo)',
-          date: 'Renews 1st',
-          tags: ['Health'],
-        },
-      ],
-      page2Notes: [
-        {
-          title: 'Q3 Subscription Audit — Saved $64/mo',
-          excerpt: 'Consolidated duplicate streaming and design tool licenses.',
-          area: 'Cash Flow',
-        },
-        {
-          title: 'Payday 50/30/20 Allocation Rule',
-          excerpt: 'Automate 20% transfer to high-yield savings on the 1st of each month.',
-          area: 'Budgeting',
-        },
-      ],
-      page3Title: 'Budgets & Transactions',
-      page3Callout:
-        'Log income and expenses in seconds. Category rollups automatically calculate your remaining monthly allowance and savings rate.',
-      page3Projects: [
-        {
-          title: 'July Fixed & Variable Budget',
-          status: 'In progress',
-          date: 'July 1, 2026 → July 31, 2026',
-          area: 'Monthly Ledger',
-          progress: 62,
-        },
-        {
-          title: 'Debt-Free Payoff Sprint',
-          status: 'In progress',
-          date: 'July 2026 → Oct 2026',
-          area: 'Liabilities',
-          progress: 80,
-        },
-        {
-          title: 'Tax Deductible Expense Log',
-          status: 'In progress',
-          date: 'FY 2026',
-          area: 'Taxes',
-          progress: 45,
-        },
-      ],
-      page3Timeline: [
-        {
-          title: 'Q1 Cash Flow Reconciliation',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 2,
-          widthPct: 36,
-        },
-        {
-          title: 'Automate High-Yield Savings Transfer',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 10,
-          widthPct: 44,
-        },
-        {
-          title: 'Cancel Unused Annual Subscriptions',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 20,
-          widthPct: 46,
-        },
-        {
-          title: 'Mid-Year Net Worth Review',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 45,
-          widthPct: 44,
-        },
-        {
-          title: 'July Category Cap Check-In',
-          status: 'In progress',
-          progress: '62%',
-          offsetPct: 56,
-          widthPct: 38,
-        },
-      ],
-      page3WeeklyTasks: [
-        { day: 'Sun', dateNum: '21', isToday: true },
-        {
-          day: 'Mon',
-          dateNum: '22',
-          taskTitle: 'Log weekend dining & grocery receipts.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Tue',
-          dateNum: '23',
-          taskTitle: 'Verify upcoming utility auto-pay amounts.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Wed',
-          dateNum: '24',
-          taskTitle: 'Transfer monthly surplus to index fund.',
-          priority: 'High Priority',
-        },
-        { day: 'Thu', dateNum: '25' },
-        { day: 'Fri', dateNum: '26' },
-      ],
-      lifeAreas: [
-        { title: 'Income Streams', projectsCount: '3 Sources', notesCount: '12 Entries', pattern: 'spiral' },
-        { title: 'Fixed Bills', projectsCount: '8 Active', notesCount: 'On Track', pattern: 'sunburst' },
-        { title: 'Daily Spending', projectsCount: '6 Categories', notesCount: '68% Used', pattern: 'vortex' },
-        { title: 'Savings Buckets', projectsCount: '4 Goals', notesCount: '$14.2k', pattern: 'prism' },
-        { title: 'Subscriptions', projectsCount: '9 Active', notesCount: '$84/mo', pattern: 'waves' },
-        { title: 'Net Worth', projectsCount: '+19% YoY', notesCount: 'Updated', pattern: 'radial' },
-      ],
-    },
-    Business: {
-      heroHeadline: 'Run your entire workflow in one place.',
-      heroSubheadline: `Unify client pipelines, active deliverables, SOPs, and revenue tracking inside ${template.name}. Built for calm, high-output solo operators and teams.`,
-      rating: '4.9',
-      reviewsCount: 164 + (template.id * 9) % 85,
-      defaultModules: [
-        'Client CRM & Pipeline',
-        'Projects & Sprints',
-        'Invoices & Retainers',
-        'Content & Distribution',
-        'SOP Knowledge Base',
-        'Quarterly OKRs',
-      ],
-      showcaseHeading: 'Master Your Business Operations',
-      page1Title: 'Quarterly OKRs',
-      page1Callout:
-        'Align every client deliverable and marketing campaign with measurable quarterly objectives and key results.',
-      page1Items: [
-        {
-          title: 'Close $45k in Q3 Retainer Contracts',
-          status: 'In progress',
-          date: 'July 1, 2026 → Sept 30, 2026',
-          area: 'Revenue',
-          progress: 68,
-        },
-        {
-          title: 'Publish 12 Case Studies & Tutorials',
-          status: 'In progress',
-          date: 'July 4, 2026 → Aug 30, 2026',
-          area: 'Growth',
-          progress: 50,
-        },
-      ],
-      page2Title: 'SOPs & Client Wiki',
-      page2Callout:
-        'Standardize onboarding checklists, creative briefs, and reusable templates so every project runs smoothly.',
-      page2References: [
-        {
-          title: 'Client Onboarding & Kickoff Playbook',
-          date: 'Updated July 12',
-          tags: ['SOP'],
-        },
-        {
-          title: 'Proposal & Scope Estimation Framework',
-          date: 'Updated July 10',
-          tags: ['Sales', 'Template'],
-        },
-        {
-          title: 'Weekly Async Sprint Status Report',
-          date: 'Updated July 2',
-          tags: ['Client'],
-        },
-      ],
-      page2Notes: [
-        {
-          title: 'Discovery Call Qualification Checklist',
-          excerpt: 'Confirm budget range, decision timeline, and core KPIs before drafting scope.',
-          area: 'Pipeline',
-        },
-        {
-          title: 'Post-Launch Handoff Protocol',
-          excerpt: 'Send walkthrough Loom video, invoice milestone #2, and request testimonial.',
-          area: 'Delivery',
-        },
-      ],
-      page3Title: 'Client Projects & Tasks',
-      page3Callout:
-        'Track every active client engagement from kickoff to final sign-off with linked tasks, timelines, and invoice status.',
-      page3Projects: [
-        {
-          title: 'Kanso Design System Redesign',
-          status: 'In progress',
-          date: 'July 4, 2026 → July 28, 2026',
-          area: 'Client Retainer',
-          progress: 65,
-        },
-        {
-          title: 'Q3 Product Launch Campaign',
-          status: 'In progress',
-          date: 'July 10, 2026 → Aug 5, 2026',
-          area: 'Marketing',
-          progress: 40,
-        },
-        {
-          title: 'Nordic Editorial Web Migration',
-          status: 'In progress',
-          date: 'July 15, 2026 → Aug 18, 2026',
-          area: 'Development',
-          progress: 25,
-        },
-      ],
-      page3Timeline: [
-        {
-          title: 'Discovery & Architecture Audit',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 2,
-          widthPct: 36,
-        },
-        {
-          title: 'Wireframes & Component Tokens',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 12,
-          widthPct: 44,
-        },
-        {
-          title: 'Client Milestone #1 Sign-Off',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 26,
-          widthPct: 42,
-        },
-        {
-          title: 'Production Build & QA Review',
-          status: 'In progress',
-          progress: '65%',
-          offsetPct: 48,
-          widthPct: 44,
-        },
-        {
-          title: 'Final Handoff & Documentation',
-          status: 'In progress',
-          progress: '20%',
-          offsetPct: 62,
-          widthPct: 34,
-        },
-      ],
-      page3WeeklyTasks: [
-        { day: 'Sun', dateNum: '21', isToday: true },
-        {
-          day: 'Mon',
-          dateNum: '22',
-          taskTitle: 'Send weekly sprint update to Kanso team.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Tue',
-          dateNum: '23',
-          taskTitle: 'Review Q3 retainer proposal with Studio Nair.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Wed',
-          dateNum: '24',
-          taskTitle: 'Publish new case study and newsletter issue.',
-          priority: 'High Priority',
-        },
-        { day: 'Thu', dateNum: '25' },
-        { day: 'Fri', dateNum: '26' },
-      ],
-      lifeAreas: [
-        { title: 'Active Clients', projectsCount: '5 Retainers', notesCount: '14 Docs', pattern: 'spiral' },
-        { title: 'Lead Pipeline', projectsCount: '8 Prospects', notesCount: '$32k Est.', pattern: 'sunburst' },
-        { title: 'Content Hub', projectsCount: '12 Scheduled', notesCount: '4 Channels', pattern: 'vortex' },
-        { title: 'Invoices', projectsCount: '3 Pending', notesCount: '18 Paid', pattern: 'prism' },
-        { title: 'SOP Library', projectsCount: '16 Playbooks', notesCount: 'Updated', pattern: 'waves' },
-        { title: 'OKRs & KPIs', projectsCount: '4 Objectives', notesCount: '72% Avg', pattern: 'radial' },
-      ],
-    },
-    'Health & Fitness': {
-      heroHeadline: 'Build daily habits that actually stick.',
-      heroSubheadline: `Track your workouts, nutrition, daily rituals, and recovery inside ${template.name}. Designed for effortless mobile logging and calm consistency.`,
-      rating: '4.9',
-      reviewsCount: 158 + (template.id * 6) % 80,
-      defaultModules: [
-        'Daily Habits Matrix',
-        'Workout & Split Log',
-        'Meal & Macro Planner',
-        'Grocery & Pantry List',
-        'Sleep & Recovery',
-        'Monthly Check-In',
-      ],
-      showcaseHeading: 'Master Your Daily Wellness',
-      page1Title: 'Wellness Goals',
-      page1Callout:
-        'Set realistic training, nutrition, and consistency targets with automated weekly streak tracking.',
-      page1Items: [
-        {
-          title: 'Complete 4x Weekly Strength & Zone 2 Sessions',
-          status: 'In progress',
-          date: 'July 1, 2026 → Sept 30, 2026',
-          area: 'Fitness',
-          progress: 80,
-        },
-        {
-          title: 'Maintain 8 Hours Sleep & Morning Hydration Streak',
-          status: 'In progress',
-          date: 'July 1, 2026 → July 31, 2026',
-          area: 'Recovery',
-          progress: 70,
-        },
-      ],
-      page2Title: 'Recipes & Training Notes',
-      page2Callout:
-        'Keep your go-to high-protein meals, grocery staples, and progressive overload cues organized in one library.',
-      page2References: [
-        {
-          title: 'High-Protein Mediterranean Bowl Prep (35g Protein)',
-          date: '15 min prep',
-          tags: ['Recipe'],
-        },
-        {
-          title: 'Upper / Lower 4-Day Hypertrophy Split',
-          date: 'Block 2',
-          tags: ['Program', 'Gym'],
-        },
-        {
-          title: '10-Minute Morning Mobility & Spine Routine',
-          date: 'Daily',
-          tags: ['Recovery'],
-        },
-      ],
-      page2Notes: [
-        {
-          title: 'Progressive Overload Log — Incline Press +5 lbs',
-          excerpt: 'Maintained clean tempo across all 3 working sets; ready to progress next week.',
-          area: 'Strength',
-        },
-        {
-          title: 'Sunday Grocery & Meal Prep Checklist',
-          excerpt: 'Batch-cook quinoa, roasted vegetables, and overnight oats in 45 minutes.',
-          area: 'Nutrition',
-        },
-      ],
-      page3Title: 'Workouts & Daily Habits',
-      page3Callout:
-        'Check off daily rituals on mobile or desktop and view your training calendar across the entire month.',
-      page3Projects: [
-        {
-          title: '12-Week Strength & Conditioning Block',
-          status: 'In progress',
-          date: 'July 1, 2026 → Sept 20, 2026',
-          area: 'Training',
-          progress: 55,
-        },
-        {
-          title: '30-Day Whole Foods & Hydration Reset',
-          status: 'In progress',
-          date: 'July 1, 2026 → July 30, 2026',
-          area: 'Nutrition',
-          progress: 75,
-        },
-        {
-          title: 'Half-Marathon Base Mileage Build',
-          status: 'In progress',
-          date: 'July 10, 2026 → Aug 25, 2026',
-          area: 'Endurance',
-          progress: 40,
-        },
-      ],
-      page3Timeline: [
-        {
-          title: 'Morning Hydration & Sunlight Habit',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 2,
-          widthPct: 42,
-        },
-        {
-          title: 'Week 1–3 Strength Baseline Block',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 10,
-          widthPct: 48,
-        },
-        {
-          title: 'Weekly Meal Prep & Grocery System',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 24,
-          widthPct: 46,
-        },
-        {
-          title: '5K Tempo Pace Progression',
-          status: 'In progress',
-          progress: '70%',
-          offsetPct: 48,
-          widthPct: 42,
-        },
-        {
-          title: 'Deload & Mobility Assessment Week',
-          status: 'In progress',
-          progress: '35%',
-          offsetPct: 60,
-          widthPct: 36,
-        },
-      ],
-      page3WeeklyTasks: [
-        { day: 'Sun', dateNum: '21', isToday: true },
-        {
-          day: 'Mon',
-          dateNum: '22',
-          taskTitle: 'Upper Body Strength + 20m Zone 2 walk.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Tue',
-          dateNum: '23',
-          taskTitle: 'Lower Body Session + Evening mobility.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Wed',
-          dateNum: '24',
-          taskTitle: 'Active recovery run & mid-week grocery restock.',
-          priority: 'High Priority',
-        },
-        { day: 'Thu', dateNum: '25' },
-        { day: 'Fri', dateNum: '26' },
-      ],
-      lifeAreas: [
-        { title: 'Daily Habits', projectsCount: '94% Streak', notesCount: '8 Rituals', pattern: 'spiral' },
-        { title: 'Strength Log', projectsCount: '4x / Week', notesCount: '24 Exercises', pattern: 'sunburst' },
-        { title: 'Cardio & Runs', projectsCount: '22 km/wk', notesCount: 'Zone 2', pattern: 'vortex' },
-        { title: 'Meal Planner', projectsCount: '18 Recipes', notesCount: 'Prep Ready', pattern: 'prism' },
-        { title: 'Grocery List', projectsCount: 'Auto-Sorted', notesCount: 'By Aisle', pattern: 'waves' },
-        { title: 'Sleep & Energy', projectsCount: '7.9h Avg', notesCount: 'Tracked', pattern: 'radial' },
-      ],
-    },
-    School: {
-      heroHeadline: 'Master every course and reading note.',
-      heroSubheadline: `Organize lectures, assignments, spaced-repetition flashcards, and research citations inside ${template.name}. Built for deep, distraction-free study.`,
-      rating: '4.9',
-      reviewsCount: 149 + (template.id * 8) % 75,
-      defaultModules: [
-        'Course Hub & Syllabi',
-        'Assignment Deadlines',
-        'Spaced Repetition Queue',
-        'Reading & Citations',
-        'Exam Prep Sprints',
-        'GPA & Grade Calculator',
-      ],
-      showcaseHeading: 'Master Your Academic System',
-      page1Title: 'Semester Goals',
-      page1Callout:
-        'Track target grades, thesis milestones, and reading goals across every enrolled course.',
-      page1Items: [
-        {
-          title: 'Achieve a GPA of 3.8 or Higher',
-          status: 'In progress',
-          date: 'Semester Sprint',
-          area: 'Academics',
-          progress: 75,
-        },
-        {
-          title: 'Complete 24 Research Papers & Book Summaries',
-          status: 'In progress',
-          date: 'July 2026 → Aug 2026',
-          area: 'Literature',
-          progress: 50,
-        },
-      ],
-      page2Title: 'Reading & Lecture Notes',
-      page2Callout:
-        'Capture Cornell-style lecture notes, book highlights, and active recall prompts linked directly to each course.',
-      page2References: [
-        {
-          title: "'How to Take Smart Notes' by Sönke Ahrens",
-          date: 'July 12, 2026',
-          tags: ['Book'],
-        },
-        {
-          title: 'Cognitive Psychology — Memory Consolidation Paper',
-          date: 'July 11, 2026',
-          tags: ['Journal', 'PDF'],
-        },
-        {
-          title: 'Algorithms & Data Structures Problem Set #4',
-          date: 'July 5, 2026',
-          tags: ['Coursework'],
-        },
-      ],
-      page2Notes: [
-        {
-          title: 'Active Recall & Spaced Repetition Schedule',
-          excerpt: 'Review new lecture notes at 1-day, 3-day, 7-day, and 21-day intervals.',
-          area: 'Study Method',
-        },
-        {
-          title: 'Midterm Synthesis & Concept Mapping',
-          excerpt: 'Connect core theorems to practice exam questions before Friday seminar.',
-          area: 'Exam Prep',
-        },
-      ],
-      page3Title: 'Assignments & Study Schedule',
-      page3Callout:
-        'Never miss a submission deadline. View upcoming problem sets, essays, and exam review blocks on one timeline.',
-      page3Projects: [
-        {
-          title: 'Develop a Study Schedule',
-          status: 'In progress',
-          date: 'July 4, 2026 → July 27, 2026',
-          area: 'School',
-          progress: 65,
-        },
-        {
-          title: 'Research Thesis Literature Review',
-          status: 'In progress',
-          date: 'July 8, 2026 → Aug 12, 2026',
-          area: 'Seminar',
-          progress: 45,
-        },
-        {
-          title: 'Final Exam Flashcard Deck Synthesis',
-          status: 'In progress',
-          date: 'July 15, 2026 → Aug 20, 2026',
-          area: 'Revision',
-          progress: 30,
-        },
-      ],
-      page3Timeline: [
-        {
-          title: 'Syllabus & Deadline Import',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 2,
-          widthPct: 36,
-        },
-        {
-          title: 'Problem Set #1–#3 Submissions',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 12,
-          widthPct: 46,
-        },
-        {
-          title: 'Literature Review Annotated Bibliography',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 28,
-          widthPct: 48,
-        },
-        {
-          title: 'Midterm Practice Exam & Review',
-          status: 'In progress',
-          progress: '65%',
-          offsetPct: 50,
-          widthPct: 42,
-        },
-        {
-          title: 'Final Paper Draft & Peer Review',
-          status: 'In progress',
-          progress: '30%',
-          offsetPct: 62,
-          widthPct: 34,
-        },
-      ],
-      page3WeeklyTasks: [
-        { day: 'Sun', dateNum: '21', isToday: true },
-        {
-          day: 'Mon',
-          dateNum: '22',
-          taskTitle: 'Summarize Chapters 4–5 lecture notes.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Tue',
-          dateNum: '23',
-          taskTitle: 'Complete 30 spaced-repetition recall prompts.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Wed',
-          dateNum: '24',
-          taskTitle: 'Draft thesis outline & meet faculty advisor.',
-          priority: 'High Priority',
-        },
-        { day: 'Thu', dateNum: '25' },
-        { day: 'Fri', dateNum: '26' },
-      ],
-      lifeAreas: [
-        { title: 'Courses', projectsCount: '5 Enrolled', notesCount: '42 Lectures', pattern: 'spiral' },
-        { title: 'Assignments', projectsCount: '3 Due Soon', notesCount: '18 Done', pattern: 'sunburst' },
-        { title: 'Reading List', projectsCount: '14 Books', notesCount: '68 Notes', pattern: 'vortex' },
-        { title: 'Flashcards', projectsCount: '120 Cards', notesCount: 'Active Recall', pattern: 'prism' },
-        { title: 'Exams & Labs', projectsCount: '4 Upcoming', notesCount: 'Prep Ready', pattern: 'waves' },
-        { title: 'Grade Tracker', projectsCount: '3.92 GPA', notesCount: 'Updated', pattern: 'radial' },
-      ],
-    },
-    Travel: {
-      heroHeadline: 'Plan every trip without the chaos.',
-      heroSubheadline: `Keep flights, accommodations, day-by-day itineraries, budgets, and packing checklists in one place with ${template.name}. Accessible offline on mobile.`,
-      rating: '4.9',
-      reviewsCount: 142 + (template.id * 9) % 70,
-      defaultModules: [
-        'Trip Itineraries',
-        'Flights & Bookings',
-        'Packing Checklists',
-        'Travel Budget & FX',
-        'Local Spots & Maps',
-        'Travel Journal',
-      ],
-      showcaseHeading: 'Master Your Travel Adventures',
-      page1Title: 'Bucket List & Trips',
-      page1Callout:
-        'Plan upcoming getaways and long-term bucket-list destinations with linked budgets, dates, and travel companions.',
-      page1Items: [
-        {
-          title: 'Visit Three New Countries',
-          status: 'In progress',
-          date: 'July 1, 2026 → August 19, 2026',
-          area: 'International',
-          progress: 65,
-        },
-        {
-          title: 'Autumn Kyoto & Tokyo Cultural Itinerary',
-          status: 'In progress',
-          date: 'Oct 10, 2026 → Oct 24, 2026',
-          area: 'Asia',
-          progress: 40,
-        },
-      ],
-      page2Title: 'Saved Places & Guides',
-      page2Callout:
-        'Clip neighborhood cafes, museums, transit passes, and emergency embassy contacts for instant access on your phone.',
-      page2References: [
-        {
-          title: 'London & Paris High-Speed Eurostar Booking',
-          date: 'Confirmed',
-          tags: ['Transit'],
-        },
-        {
-          title: 'Curated Specialty Coffee & Architecture Walk',
-          date: '14 Pins',
-          tags: ['Guide', 'Map'],
-        },
-        {
-          title: 'Carry-On Only Ultralight Packing Checklist',
-          date: '38 Items',
-          tags: ['Packing'],
-        },
-      ],
-      page2Notes: [
-        {
-          title: 'Airport Transfer & Metro Card Setup',
-          excerpt: 'Load contactless transit pass on phone before landing at terminal.',
-          area: 'Logistics',
-        },
-        {
-          title: 'Passport, Visa & Travel Insurance Vault',
-          excerpt: 'Keep offline PDF copies of boarding passes and hotel confirmations.',
-          area: 'Documents',
-        },
-      ],
-      page3Title: 'Itineraries & Bookings',
-      page3Callout:
-        'Organize every trip day-by-day so flights, check-in times, and reservations flow seamlessly.',
-      page3Projects: [
-        {
-          title: 'Plan Trip to Dubai',
-          status: 'In progress',
-          date: 'July 10, 2026 → July 24, 2026',
-          area: 'Travel & Leisure',
-          progress: 80,
-        },
-        {
-          title: 'Plan Trip to London, Paris',
-          status: 'In progress',
-          date: 'Aug 5, 2026 → Aug 19, 2026',
-          area: 'Travel & Leisure',
-          progress: 55,
-        },
-        {
-          title: 'Weekend Coastal Roadtrip',
-          status: 'In progress',
-          date: 'Sept 4, 2026 → Sept 7, 2026',
-          area: 'Getaway',
-          progress: 30,
-        },
-      ],
-      page3Timeline: [
-        {
-          title: 'Book Flights & Seat Selection',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 2,
-          widthPct: 38,
-        },
-        {
-          title: 'Reserve Boutique Hotels & Airbnbs',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 14,
-          widthPct: 44,
-        },
-        {
-          title: 'Finalize Day-by-Day Museum & Dining Bookings',
-          status: 'Completed',
-          progress: '100%',
-          offsetPct: 28,
-          widthPct: 46,
-        },
-        {
-          title: 'Complete Carry-On Packing Checklist',
-          status: 'In progress',
-          progress: '80%',
-          offsetPct: 52,
-          widthPct: 40,
-        },
-        {
-          title: 'Download Offline Maps & Boarding Passes',
-          status: 'In progress',
-          progress: '50%',
-          offsetPct: 62,
-          widthPct: 34,
-        },
-      ],
-      page3WeeklyTasks: [
-        { day: 'Sun', dateNum: '21', isToday: true },
-        {
-          day: 'Mon',
-          dateNum: '22',
-          taskTitle: 'Confirm hotel check-in times & airport transfer.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Tue',
-          dateNum: '23',
-          taskTitle: 'Pack universal adapter, chargers & travel docs.',
-          priority: 'High Priority',
-        },
-        {
-          day: 'Wed',
-          dateNum: '24',
-          taskTitle: 'Check in online 24h prior to departure flight.',
-          priority: 'High Priority',
-        },
-        { day: 'Thu', dateNum: '25' },
-        { day: 'Fri', dateNum: '26' },
-      ],
-      lifeAreas: [
-        { title: 'Upcoming Trips', projectsCount: '3 Planned', notesCount: '18 Days', pattern: 'spiral' },
-        { title: 'Bookings', projectsCount: '6 Confirmed', notesCount: 'Flights & Stays', pattern: 'sunburst' },
-        { title: 'Packing List', projectsCount: '38 Items', notesCount: '92% Packed', pattern: 'vortex' },
-        { title: 'Trip Budget', projectsCount: '$3,400 Cap', notesCount: 'On Track', pattern: 'prism' },
-        { title: 'Saved Places', projectsCount: '24 Spots', notesCount: 'Cafes & Sights', pattern: 'waves' },
-        { title: 'Travel Log', projectsCount: '11 Countries', notesCount: 'Memories', pattern: 'radial' },
-      ],
-    },
-  };
-
-  const base = byCategory[template.category];
-
-  if (template.slug === 'freelance-os') {
-    return {
-      ...base,
-      heroHeadline: 'Run your freelance studio like a $200k agency, without hiring one.',
-      heroSubheadline:
-        'No more digging through old threads for proposals, forgetting warm follow-ups, or chasing late invoices two weeks too late. Every client, deliverable, billable hour, and contract lives inside one calm Notion home.',
-      closerLookModules: [
-        'Main Hub (Freelancer Business OS)',
-        'Clients Dashboard & Pipeline CRM',
-        'Project Management (Simple, Complete, Advanced)',
-        'Finances, Invoices & Overdue Aging',
-        'Time Sheet & Profitability Logger',
-        'Ideation Hub, Growth, Legals & 18 DBs',
-      ],
-      showcaseHeading: 'Inside Freelancer Business OS',
-    };
-  }
-
-  if (template.slug === 'student-os') {
-    return {
-      ...base,
-      heroHeadline: 'Walk into finals calm while everyone else pulls all-nighters.',
-      heroSubheadline:
-        'Stop hunting through Canvas, PDF syllabi, and frantic group chats to figure out what is due next. Connect every class, 7-day deadline, Cornell recall note, and live 4.0 GPA formula inside one quiet Notion desk.',
-      closerLookModules: [
-        'Student Command Hub',
-        'Courses & Syllabi Tracker',
-        'Assignments & 7-Day Queue',
-        'Cornell Notes & Flashcards',
-        'Exams Sprint & Weighted GPA',
-        'Readings, Aid & 12 Databases',
-      ],
-      showcaseHeading: 'Inside Student OS',
-    };
-  }
-
-  if (template.slug === 'researcher-os') {
-    return {
-      ...base,
-      heroHeadline: 'Turn hundreds of scattered PDFs into your next published paper.',
-      heroSubheadline:
-        'Keep arXiv triage, side-by-side literature matrices, atomic Zettelkasten claims, reproducible lab logs, IMRaD drafts, and peer-review rebuttals wired together—so your best ideas never disappear in a Downloads folder.',
-      closerLookModules: [
-        'Research Command Hub',
-        'Literature Synthesis Matrix',
-        'Zettelkasten Claim Network',
-        'Hypotheses, Runs & Protocols',
-        'Datasets, Code & Manuscripts',
-        'Peer Review, Grants & 14 DBs',
-      ],
-      showcaseHeading: 'Inside Researcher OS',
-    };
-  }
-
-  return {
-    ...base,
-    closerLookModules: base.defaultModules,
-  };
-}
-
-/**
- * Verified Scalloped Blue Check Badge (matching image_d974a805.png & image_3bf9bf89.png)
- */
 const VerifiedBadgeIcon: React.FC<{ className?: string }> = ({
   className = 'w-5 h-5 text-[#2383E2]',
 }) => (
@@ -1159,73 +69,43 @@ const VerifiedBadgeIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-/**
- * Minimalist geometric line-art pattern inside the Tablet mockup's "Life Areas" cards
- * (matching image_d974a805.png)
- */
-const AreaGeometricArt: React.FC<{
-  pattern: 'spiral' | 'sunburst' | 'vortex' | 'prism' | 'waves' | 'radial';
-}> = ({ pattern }) => {
-  return (
-    <svg
-      viewBox="0 0 48 48"
-      fill="none"
-      className="w-8 h-8 sm:w-9 sm:h-9 text-[#37352F]"
-      aria-hidden="true"
-    >
-      {pattern === 'spiral' && (
-        <>
-          <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="1" strokeDasharray="3 2" />
-          <circle cx="24" cy="24" r="13" stroke="currentColor" strokeWidth="1.1" />
-          <circle cx="24" cy="24" r="8" stroke="currentColor" strokeWidth="1.1" strokeDasharray="2 2" />
-          <circle cx="24" cy="24" r="3.5" stroke="currentColor" strokeWidth="1.2" />
-        </>
-      )}
-      {pattern === 'sunburst' && (
-        <>
-          <circle cx="24" cy="24" r="10" stroke="currentColor" strokeWidth="1.1" />
-          <path
-            d="M24 4V10M24 38V44M4 24H10M38 24H44M9.8 9.8L14.2 14.2M33.8 33.8L38.2 38.2M38.2 9.8L33.8 14.2M14.2 33.8L9.8 38.2"
-            stroke="currentColor"
-            strokeWidth="1.1"
-            strokeLinecap="round"
-          />
-        </>
-      )}
-      {pattern === 'vortex' && (
-        <>
-          <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="1.2" />
-          <ellipse cx="24" cy="24" rx="17" ry="9" transform="rotate(30 24 24)" stroke="currentColor" strokeWidth="1" />
-          <ellipse cx="24" cy="24" rx="17" ry="9" transform="rotate(-30 24 24)" stroke="currentColor" strokeWidth="1" />
-          <circle cx="24" cy="24" r="4" fill="currentColor" />
-        </>
-      )}
-      {pattern === 'prism' && (
-        <>
-          <rect x="8" y="8" width="32" height="32" rx="3" stroke="currentColor" strokeWidth="1.2" />
-          <rect x="13" y="13" width="22" height="22" transform="rotate(15 24 24)" stroke="currentColor" strokeWidth="1" />
-          <rect x="17" y="17" width="14" height="14" transform="rotate(30 24 24)" stroke="currentColor" strokeWidth="1" />
-        </>
-      )}
-      {pattern === 'waves' && (
-        <>
-          <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="1.1" />
-          <path d="M9 20C14 15 19 15 24 20C29 25 34 25 39 20" stroke="currentColor" strokeWidth="1.1" />
-          <path d="M9 25C14 20 19 20 24 25C29 30 34 30 39 25" stroke="currentColor" strokeWidth="1.1" />
-          <path d="M11 30C15 26 20 26 24 30C28 34 33 34 37 30" stroke="currentColor" strokeWidth="1.1" />
-        </>
-      )}
-      {pattern === 'radial' && (
-        <>
-          <circle cx="24" cy="24" r="17" stroke="currentColor" strokeWidth="1.1" />
-          <circle cx="24" cy="24" r="12" stroke="currentColor" strokeWidth="1" />
-          <circle cx="24" cy="24" r="6" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="1.2" />
-          <path d="M24 7V41M7 24H41" stroke="currentColor" strokeWidth="0.9" strokeOpacity="0.6" />
-        </>
-      )}
-    </svg>
-  );
-};
+const NotionMarkSvg: React.FC = () => (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    className="shrink-0"
+  >
+    <path
+      d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
+      fill="#FFFFFF"
+      stroke="#37352F"
+      strokeWidth="1.75"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M4.5 6.2L10.2 9.4L20.2 7.2"
+      stroke="#37352F"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10.2 9.4V20.5"
+      stroke="#37352F"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12.7 16.7V11.8L16.8 16.2V11.1"
+      stroke="#37352F"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export const TemplateShowcasePage: React.FC<{
   slug: string;
@@ -1237,7 +117,7 @@ export const TemplateShowcasePage: React.FC<{
     TEMPLATES.find((t) => t.slug === slug) ||
     TEMPLATES.find((t) => t.slug === 'second-brain')!;
 
-  const showcase = getTemplateShowcaseData(template);
+  const hook = getTemplateHook(template.slug);
   const isOwned = purchasedSlugs.has(template.slug);
   const [selectedModuleIndex, setSelectedModuleIndex] = useState<number>(0);
   const [freelanceViewFilter, setFreelanceViewFilter] =
@@ -1246,22 +126,37 @@ export const TemplateShowcasePage: React.FC<{
     useState<StudentStudioFilterId>('hub-career');
   const [researcherViewFilter, setResearcherViewFilter] =
     useState<ResearcherStudioFilterId>('synthesis');
+  const [nexusViewFilter, setNexusViewFilter] =
+    useState<NexusStudioFilterId>('spine');
+  const [bookTrackerViewFilter, setBookTrackerViewFilter] =
+    useState<BookTrackerStudioFilterId>('telemetry');
+  const [dopamineTab, setDopamineTab] = useState<DopamineTabId>('plate');
+  const [travelTab, setTravelTab] = useState<TravelTabId>('control-tower');
   const [showStickyBuyBar, setShowStickyBuyBar] = useState(false);
 
   const isFlagshipOs =
     template.slug === 'freelance-os' ||
     template.slug === 'student-os' ||
-    template.slug === 'researcher-os';
+    template.slug === 'researcher-os' ||
+    template.slug === 'nexus-os' ||
+    template.slug === 'book-tracker-os';
+
+  const isInteractiveSpotlight =
+    template.slug === 'dopamine-menu' || template.slug === 'travel-planner';
 
   useEffect(() => {
     setSelectedModuleIndex(0);
     setFreelanceViewFilter('hub');
     setStudentViewFilter('hub-career');
     setResearcherViewFilter('synthesis');
+    setNexusViewFilter('spine');
+    setBookTrackerViewFilter('telemetry');
+    setDopamineTab('plate');
+    setTravelTab('control-tower');
   }, [template.slug]);
 
   useEffect(() => {
-    if (!isFlagshipOs) {
+    if (!isFlagshipOs && !isInteractiveSpotlight) {
       setShowStickyBuyBar(false);
       return;
     }
@@ -1271,7 +166,7 @@ export const TemplateShowcasePage: React.FC<{
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [isFlagshipOs]);
+  }, [isFlagshipOs, isInteractiveSpotlight]);
 
   const related = TEMPLATES.filter(
     (t) => t.category === template.category && t.slug !== template.slug
@@ -1282,7 +177,9 @@ export const TemplateShowcasePage: React.FC<{
       ? template.compareAt
       : template.price > 0
       ? template.price + 20
-      : 19;
+      : undefined;
+
+  const reviewsCount = 148 + ((template.id * 7) % 90);
 
   const handleOpenBuy = () => {
     onOpenCheckout({
@@ -1302,7 +199,7 @@ export const TemplateShowcasePage: React.FC<{
     }
   };
 
-  const handleSelectCloserLookModule = (index: number) => {
+  const handleSelectInsideModule = (index: number) => {
     setSelectedModuleIndex(index);
     if (template.slug === 'freelance-os') {
       const mapping: FreelanceStudioFilterId[] = [
@@ -1310,8 +207,8 @@ export const TemplateShowcasePage: React.FC<{
         'clients',
         'hub',
         'finances',
+        'hub',
         'growth',
-        'clients',
       ];
       setFreelanceViewFilter(mapping[index] || 'hub');
       document
@@ -1320,11 +217,11 @@ export const TemplateShowcasePage: React.FC<{
     } else if (template.slug === 'student-os') {
       const mapping: StudentStudioFilterId[] = [
         'hub-career',
-        'toolkit-wellness',
         'gpa-courses',
         'toolkit-wellness',
+        'hub-career',
         'career-finance',
-        'all',
+        'career-finance',
       ];
       setStudentViewFilter(mapping[index] || 'hub-career');
       document
@@ -1332,41 +229,118 @@ export const TemplateShowcasePage: React.FC<{
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (template.slug === 'researcher-os') {
       const mapping: ResearcherStudioFilterId[] = [
-        'synthesis',
+        'atomic-vault',
         'atomic-vault',
         'manuscripts',
         'lab-grants',
         'lab-grants',
-        'all',
+        'synthesis',
       ];
       setResearcherViewFilter(mapping[index] || 'synthesis');
       document
         .getElementById('researcher-os-studio-views')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (template.slug === 'nexus-os') {
+      const mapping: NexusStudioFilterId[] = [
+        'spine',
+        'sprints',
+        'portfolio',
+        'capital',
+        'capital',
+        'capital',
+      ];
+      setNexusViewFilter(mapping[index] || 'spine');
+      document
+        .getElementById('nexus-os-studio-views')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (template.slug === 'book-tracker-os') {
+      const mapping: BookTrackerStudioFilterId[] = [
+        'telemetry',
+        'telemetry',
+        'queue',
+        'queue',
+        'library',
+        'timeline',
+      ];
+      setBookTrackerViewFilter(mapping[index] || 'telemetry');
+      document
+        .getElementById('book-tracker-os-studio-views')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (template.slug === 'dopamine-menu') {
+      const mapping: DopamineTabId[] = [
+        'plate',
+        'top-picks',
+        'mood-match',
+        'craving-swaps',
+        'insights',
+      ];
+      setDopamineTab(mapping[index] || 'plate');
+      document
+        .getElementById('standard-preview-stage')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (template.slug === 'travel-planner') {
+      const mapping: TravelTabId[] = [
+        'control-tower',
+        'wallet',
+        'timeline',
+        'packing',
+        'itinerary',
+      ];
+      setTravelTab(mapping[index] || 'control-tower');
+      document
+        .getElementById('standard-preview-stage')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      document
+        .getElementById('standard-preview-stage')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
+  const heroArtSrc =
+    template.slug === 'freelance-os'
+      ? freelancerMascotHeroImg
+      : template.slug === 'student-os'
+      ? studentOsMascotHeroImg
+      : template.slug === 'nexus-os'
+      ? nexusOsMascotHeroImg
+      : template.slug === 'book-tracker-os'
+      ? bookTrackerOsMascotHeroImg
+      : template.slug === 'researcher-os'
+      ? researcherOsMascotHeroImg
+      : template.illustrationUrl;
+
+  const closingArtSrc =
+    template.slug === 'freelance-os'
+      ? freelancerMascotCardImg
+      : heroArtSrc;
+
+  const priceAnchorNote =
+    template.slug === 'freelance-os'
+      ? 'Pay once · Less than one billable hour'
+      : template.slug === 'student-os'
+      ? 'Pay once · Less than one textbook'
+      : template.slug === 'nexus-os'
+      ? 'Pay once · Replaces 5 monthly apps'
+      : template.slug === 'book-tracker-os'
+      ? 'Pay once · Less than two hardcovers'
+      : template.price === 0
+      ? 'Free forever · 60-second duplicate'
+      : 'Pay once, keep forever · No subscription';
 
   return (
     <div data-testid="template-showcase-page" className="pb-24 bg-white">
       {/* =====================================================================
-          1. HERO SECTION & SHOWCASE STAGE
+          1. HERO SECTION — SHARP HOOK, BEFORE/AFTER CONTRAST & SINGLE FOCAL ART
           ===================================================================== */}
-      <section className="bg-gradient-to-b from-[#FAF9F6] via-[#FDFCFB] to-[#FFFFFF] pt-10 sm:pt-16 pb-16 sm:pb-24 border-b border-[#E9E9E7]">
-        <div
-          className={`${
-            template.slug === 'freelance-os' ||
-            template.slug === 'student-os' ||
-            template.slug === 'researcher-os'
-              ? 'max-w-[1200px]'
-              : 'max-w-[960px]'
-          } mx-auto px-4 sm:px-6 space-y-10 sm:space-y-14`}
-        >
+      <section className="bg-gradient-to-b from-[#FAF9F6] via-[#FDFCFB] to-[#FFFFFF] pt-9 sm:pt-14 pb-12 sm:pb-16 border-b border-[#E9E9E7]">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-8 sm:space-y-10">
           {/* Top Breadcrumb + Flagship OS Suite Switcher */}
           <div className="flex flex-wrap items-center justify-between gap-4">
             <nav
               aria-label="Breadcrumb"
               data-testid="template-breadcrumb"
-              className="flex items-center gap-2 text-[14.5px] font-medium text-[#52504A]"
+              className="flex items-center gap-2 text-[14px] font-medium text-[#52504A]"
             >
               <a
                 href="/templates"
@@ -1379,16 +353,20 @@ export const TemplateShowcasePage: React.FC<{
                 All templates
               </a>
               <span className="text-[#9B9A97]">/</span>
-              <span className="text-[#37352F] font-semibold">{template.name}</span>
+              <span className="text-[#37352F] font-semibold">
+                {template.name}
+              </span>
             </nav>
 
             {isFlagshipOs && (
               <div
                 aria-label="Switch flagship OS"
                 data-testid="flagship-os-switcher"
-                className="inline-flex items-center gap-1 p-1 rounded-[10px] bg-white border border-[#E9E9E7]"
+                className="flex flex-wrap items-center gap-1 p-1 rounded-[10px] bg-white border border-[#E9E9E7]"
               >
                 {[
+                  { slug: 'nexus-os', label: 'Nexus OS' },
+                  { slug: 'book-tracker-os', label: 'Book Tracker OS' },
                   { slug: 'freelance-os', label: 'Freelance OS' },
                   { slug: 'student-os', label: 'Student OS' },
                   { slug: 'researcher-os', label: 'Researcher OS' },
@@ -1411,579 +389,267 @@ export const TemplateShowcasePage: React.FC<{
                 })}
               </div>
             )}
+            {isInteractiveSpotlight && (
+              <div
+                aria-label="Switch interactive free template"
+                data-testid="interactive-free-switcher"
+                className="flex flex-wrap items-center gap-1 p-1 rounded-[10px] bg-white border border-[#E9E9E7]"
+              >
+                {[
+                  { slug: 'dopamine-menu', label: 'Dopamine Menu' },
+                  { slug: 'travel-planner', label: 'Travel Planner' },
+                ].map((item) => {
+                  const active = template.slug === item.slug;
+                  return (
+                    <button
+                      key={item.slug}
+                      type="button"
+                      onClick={() => onNavigate(`/templates/${item.slug}`)}
+                      className={`px-3 py-1 rounded-[7px] text-[12.5px] font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                        active
+                          ? 'bg-[#37352F] text-white'
+                          : 'text-[#52504A] hover:text-[#37352F] hover:bg-[#FAF9F6]'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
-          {template.slug === 'freelance-os' ||
-          template.slug === 'student-os' ||
-          template.slug === 'researcher-os' ? (
-            <>
-            {/* Airy Asymmetric 2-Column Hero Split Featuring Flagship OS Mascot */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-center">
-              <div className="md:col-span-6 space-y-6">
-                <div>
-                  <div
-                    data-testid="made-for-notion-badge"
-                    className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-[#52504A]"
-                  >
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      aria-hidden="true"
-                      className="shrink-0"
-                    >
-                      <path
-                        d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
-                        fill="#FFFFFF"
-                        stroke="#37352F"
-                        strokeWidth="1.75"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M4.5 6.2L10.2 9.4L20.2 7.2"
-                        stroke="#37352F"
-                        strokeWidth="1.5"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M10.2 9.4V20.5"
-                        stroke="#37352F"
-                        strokeWidth="1.5"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12.7 16.7V11.8L16.8 16.2V11.1"
-                        stroke="#37352F"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span>Made for Notion</span>
-                  </div>
-                </div>
-
-                <h1 className="font-display text-[clamp(30px,3.4vw,46px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#37352F] text-balance">
-                  {showcase.heroHeadline}
-                </h1>
-
-                <p className="text-[16px] sm:text-[17.5px] leading-[1.65] text-[#52504A] max-w-[520px]">
-                  {showcase.heroSubheadline}
-                </p>
-
-                <div className="flex flex-wrap items-baseline gap-3 pt-1">
-                  <span className="text-[22px] sm:text-[24px] font-bold tracking-[-0.02em] text-[#37352F] tabular-nums">
-                    {formatPrice(template.price)}
-                  </span>
-                  <span className="text-[17px] font-medium text-[#6E6D68] line-through tabular-nums">
-                    {formatPrice(displayCompareAt)}
-                  </span>
-                  <span className="text-[14px] font-medium text-[#52504A]">
-                    {template.slug === 'freelance-os'
-                      ? 'Pay once · Less than one billable hour'
-                      : template.slug === 'student-os'
-                      ? 'Pay once · Less than a single textbook'
-                      : 'Pay once · Own every update for life'}
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3.5 pt-2">
-                  <motion.button
-                    type="button"
-                    data-testid="template-primary-cta"
-                    whileHover={{ y: -2, scale: 1.015 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                    onClick={handleOpenBuy}
-                    className="h-12 px-7 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(35,131,226,0.45)] cursor-pointer transition-colors whitespace-nowrap shrink-0"
-                  >
-                    <span>
-                      {isOwned
-                        ? `Open ${template.name}`
-                        : `Make ${template.name} Yours`}
-                    </span>
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.button>
-
-                  <motion.button
-                    type="button"
-                    data-testid="template-preview-inside-btn"
-                    whileHover={{ y: -2, scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                    onClick={handleScrollToCloserLook}
-                    className="h-12 px-6 rounded-[10px] bg-white hover:bg-[#F7F6F3] text-[#37352F] border border-[#D3D1CB] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(55,53,47,0.04)] transition-colors whitespace-nowrap shrink-0"
-                  >
-                    <span>Try the live preview</span>
-                  </motion.button>
-                </div>
-
-                <div className="flex items-center gap-2 pt-2 text-[14px] font-medium text-[#6E6D68]">
-                  <VerifiedBadgeIcon className="w-5 h-5 text-[#2383E2] shrink-0" />
-                  <span>
-                    {showcase.rating}/5 from {showcase.reviewsCount} Gumroad ratings ·{' '}
-                    {template.slug === 'freelance-os'
-                      ? '11 modules & 18 databases'
-                      : template.slug === 'student-os'
-                      ? '10 modules & 12 databases'
-                      : '12 modules & 14 databases'}
-                  </span>
-                </div>
+          {/* Balanced 2-Column Hero Split (All 43 Templates) */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-14 items-center">
+            <div className="md:col-span-6 space-y-5">
+              <div
+                data-testid="made-for-notion-badge"
+                className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-[#52504A]"
+              >
+                <NotionMarkSvg />
+                <span>
+                  {template.name} · {template.databaseCount} DBs ·{' '}
+                  {template.viewsCount} views
+                </span>
               </div>
 
-              {/* Right Column: Clean Architectural Paper Mascot Stage */}
-              <div className="md:col-span-6">
-                <button
-                  type="button"
-                  data-testid="template-device-mockup"
-                  onClick={handleScrollToCloserLook}
-                  aria-label={`Preview ${template.name} interactive modules and database details`}
-                  className="group w-full rounded-[22px] bg-[#FAF9F6] bg-editorial-grid border border-[#E9E9E7] hover:border-[#C7C5BE] p-6 sm:p-10 transition-colors duration-200 flex items-center justify-center min-h-[280px] sm:min-h-[360px] lg:min-h-[410px] overflow-hidden cursor-pointer"
-                >
-                  <img
-                    src={
-                      template.slug === 'freelance-os'
-                        ? freelancerMascotHeroImg
-                        : template.slug === 'student-os'
-                        ? studentOsMascotHeroImg
-                        : researcherOsMascotHeroImg
-                    }
-                    alt={
-                      template.slug === 'freelance-os'
-                        ? 'Freelance OS studio mascot working with calendar, deliverables, and invoices'
-                        : template.slug === 'student-os'
-                        ? 'Student OS academic mascot studying with class calendar, notes, and textbooks'
-                        : 'Researcher OS scholar mascot analyzing papers, microscope experiments, and datasets'
-                    }
-                    referrerPolicy="no-referrer"
-                    className="w-full max-h-[340px] lg:max-h-[380px] object-contain mix-blend-multiply scale-[1.06] transition-transform duration-300 group-hover:scale-[1.10]"
-                  />
-                </button>
-              </div>
-            </div>
+              <h1 className="font-display text-[clamp(30px,3.6vw,46px)] font-bold tracking-[-0.035em] leading-[1.08] text-[#37352F] text-balance">
+                {hook.heroHeadline}
+              </h1>
 
-            {/* Full-Width 3-Column Architectural Value Proof Strip */}
-            <div
-              data-testid="flagship-value-strip"
-              className="rounded-[14px] bg-white border border-[#E9E9E7] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#E9E9E7]"
-            >
-              <div className="px-5 py-4 space-y-0.5">
-                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
-                  40+ Hours Built For You
-                </p>
-                <p className="text-[15px] font-bold text-[#37352F] tabular-nums">
-                  {template.slug === 'freelance-os'
-                    ? '11 Modules · 18 Connected Databases'
-                    : template.slug === 'student-os'
-                    ? '10 Modules · 12 Connected Databases'
-                    : '12 Modules · 14 Connected Databases'}
-                </p>
-              </div>
-              <div className="px-5 py-4 space-y-0.5">
-                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
-                  Zero Monthly Tax
-                </p>
-                <p className="text-[15px] font-bold text-[#37352F]">
-                  Works on Notion&apos;s Free Plan Forever
-                </p>
-              </div>
-              <div className="px-5 py-4 space-y-0.5">
-                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
-                  Instant Ownership
-                </p>
-                <p className="text-[15px] font-bold text-[#37352F]">
-                  Duplicate in 60 Seconds · Lifetime Updates
-                </p>
-              </div>
-            </div>
-            </>
-          ) : (
-            <>
-              {/* Single-Column Hero Copy Block (Non-Freelance Templates) */}
-              <div className="space-y-6 max-w-[740px]">
-                {/* "Made for Notion" Badge */}
-                <div>
-                  <div
-                    data-testid="made-for-notion-badge"
-                    className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.08em] text-[#52504A]"
-                  >
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      aria-hidden="true"
-                      className="shrink-0"
-                    >
-                      <path
-                        d="M4.5 6.2L14.8 4.2L20.2 7.2V18.8L10.2 20.5L4.5 17.2V6.2Z"
-                        fill="#FFFFFF"
-                        stroke="#37352F"
-                        strokeWidth="1.75"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M4.5 6.2L10.2 9.4L20.2 7.2"
-                        stroke="#37352F"
-                        strokeWidth="1.5"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M10.2 9.4V20.5"
-                        stroke="#37352F"
-                        strokeWidth="1.5"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12.7 16.7V11.8L16.8 16.2V11.1"
-                        stroke="#37352F"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span>Made for Notion</span>
-                  </div>
-                </div>
+              <p className="text-[16px] sm:text-[17px] leading-[1.55] text-[#52504A] max-w-[520px]">
+                {hook.heroLead}
+              </p>
 
-                {/* Benefit Headline */}
-                <h1 className="font-display text-[clamp(36px,4.8vw,56px)] font-bold tracking-[-0.035em] leading-[1.06] text-[#37352F] text-balance">
-                  {showcase.heroHeadline}
-                </h1>
-
-                {/* Subtitle / Description */}
-                <p className="text-[17px] sm:text-[18.5px] leading-[1.6] text-[#52504A] max-w-[660px]">
-                  {showcase.heroSubheadline}
-                </p>
-
-                {/* Pricing Row */}
-                <div className="flex flex-wrap items-baseline gap-3 pt-1">
-                  <span className="text-[21px] sm:text-[23px] font-bold tracking-[-0.02em] text-[#37352F] tabular-nums">
-                    {template.price === 0
-                      ? 'Free — $0'
-                      : formatPrice(template.price)}
+              {/* 2-Second Scannable Contrast Box (Loss Aversion -> Immediate Relief) */}
+              <div
+                data-testid="template-contrast-box"
+                className="rounded-[12px] bg-white border border-[#E9E9E7] divide-y divide-[#F1F1EF] text-[13.5px] max-w-[520px]"
+              >
+                <div className="px-3.5 py-2.5 flex items-start gap-3">
+                  <span className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.05em] text-[#9B9A97] w-16 shrink-0 pt-0.5">
+                    Without
                   </span>
-                  <span className="text-[18px] font-medium text-[#6E6D68] line-through tabular-nums">
-                    {formatPrice(displayCompareAt)}
-                  </span>
-                  <span className="text-[14px] font-medium text-[#52504A]">
-                    {template.price === 0
-                      ? 'Zero catch · Duplicate in 60 seconds'
-                      : 'Pay once, keep forever · No subscription'}
-                  </span>
+                  <p className="text-[#6E6D68] leading-[1.4]">
+                    {hook.painPoint}
+                  </p>
                 </div>
-
-                {/* Dual Action Buttons: "Make [Template] Yours →" + "See inside first" */}
-                <div className="flex flex-wrap items-center gap-3.5 pt-1">
-                  <motion.button
-                    type="button"
-                    data-testid="template-primary-cta"
-                    whileHover={{ y: -2, scale: 1.015 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                    onClick={handleOpenBuy}
-                    className="h-12 px-7 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2.5 shadow-[0_10px_24px_-8px_rgba(35,131,226,0.45)] cursor-pointer transition-colors"
-                  >
-                    <span>
-                      {isOwned
-                        ? `Open ${template.name}`
-                        : template.price === 0
-                        ? `Duplicate ${template.name} Free`
-                        : `Make ${template.name} Yours`}
-                    </span>
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.button>
-
-                  <motion.button
-                    type="button"
-                    data-testid="template-preview-inside-btn"
-                    whileHover={{ y: -2, scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                    onClick={handleScrollToCloserLook}
-                    className="h-12 px-6 rounded-[10px] bg-white hover:bg-[#F7F6F3] text-[#37352F] border border-[#D3D1CB] text-[15px] font-semibold inline-flex items-center justify-center cursor-pointer shadow-[0_1px_3px_rgba(55,53,47,0.04)] transition-colors"
-                  >
-                    <span>See inside first</span>
-                  </motion.button>
-                </div>
-
-                {/* Rating & Edition Note */}
-                <div className="space-y-2.5 pt-2">
-                  <div className="flex items-center gap-2 text-[14px] font-medium text-[#6E6D68]">
-                    <VerifiedBadgeIcon className="w-5 h-5 text-[#2383E2] shrink-0" />
-                    <span>
-                      {showcase.rating}/5 from {showcase.reviewsCount} verified readers &amp; builders
-                    </span>
-                  </div>
-                  <p className="text-[13.5px] text-[#6E6D68]">
-                    Works on Notion&apos;s free plan · Instant duplicate link · Every future update included.
+                <div className="px-3.5 py-2.5 flex items-start gap-3 bg-[#FAF9F6]/70">
+                  <span className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.05em] text-[#0F7B6C] w-16 shrink-0 pt-0.5">
+                    With it
+                  </span>
+                  <p className="text-[#37352F] font-medium leading-[1.4]">
+                    {hook.payoff}
                   </p>
                 </div>
               </div>
 
-              {/* Full-Width Hero Showcase Card Beneath Copy (PDF Pages 1–2 Layout) */}
-              <div>
-                <div
-                  data-testid="template-device-mockup"
-                  className="rounded-[24px] bg-white border border-[#E9E9E7] p-6 sm:p-12 shadow-[0_14px_40px_-14px_rgba(55,53,47,0.07)] relative overflow-hidden"
-                >
-                  <div className="relative mx-auto max-w-[680px] py-2 sm:py-4 pr-8 sm:pr-16">
-                    {/* TABLET LANDSCAPE FRAME (iPad Mockup) */}
-                    <div className="rounded-[20px] bg-[#1F1E1B] p-[9px] sm:p-[12px] shadow-[0_24px_48px_-12px_rgba(55,53,47,0.24)] border border-[#37352F]">
-                      <div className="rounded-[12px] bg-white overflow-hidden border border-[#E9E9E7]">
-                        {/* Notion Top Bar inside Tablet */}
-                        <div className="px-4 pt-3.5 pb-2 border-b border-[#F1F1EF] flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="inline-flex items-center justify-center w-6 h-6 rounded-[6px] bg-[#EBF3FC] text-[#2383E2] font-bold text-[13px]">
-                              ∞
-                            </span>
-                            <span className="text-[14px] sm:text-[15px] font-bold tracking-[-0.02em] text-[#37352F]">
-                              {template.name}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1.5 text-[10px] text-[#6E6D68] font-mono">
-                            <span className="px-1.5 py-0.5 rounded bg-[#F7F6F3] border border-[#E9E9E7]">
-                              {template.databaseCount} DBs
-                            </span>
-                            <span className="px-1.5 py-0.5 rounded bg-[#F7F6F3] border border-[#E9E9E7]">
-                              {template.version}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Tablet Interior: Left Quick-Action Sidebar + Right Life Areas Grid */}
-                        <div className="grid grid-cols-12 p-3 sm:p-4 gap-3 sm:gap-4 bg-white min-h-[250px] sm:min-h-[280px]">
-                          {/* Left Sidebar: Quick Action + Productivity Links */}
-                          <div className="col-span-4 space-y-3 border-r border-[#F1F1EF] pr-2.5">
-                            <div>
-                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#37352F] mb-1.5">
-                                Quick Action
-                              </p>
-                              <div className="space-y-1">
-                                {[
-                                  'New Task',
-                                  'New Note',
-                                  'New Project',
-                                  'New Goal',
-                                  'New Reference',
-                                  'Add Agenda',
-                                ].map((action) => (
-                                  <div
-                                    key={action}
-                                    className="px-2 py-1 rounded-[5px] border border-[#E9E9E7] bg-[#FFFFFF] text-[8.5px] font-medium text-[#52504A] flex items-center gap-1 shadow-[0_1px_1px_rgba(55,53,47,0.02)]"
-                                  >
-                                    <span className="w-2.5 h-2.5 rounded-full bg-[#EBF3FC] text-[#2383E2] inline-flex items-center justify-center text-[7px] font-bold">
-                                      +
-                                    </span>
-                                    <span className="truncate">{action}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-
-                            <div>
-                              <p className="text-[9.5px] font-bold uppercase tracking-[0.04em] text-[#37352F] mb-1.5">
-                                Productivity
-                              </p>
-                              <div className="space-y-1 text-[8.5px] font-medium text-[#52504A]">
-                                {[
-                                  'Inbox',
-                                  'Life Areas',
-                                  'Goals',
-                                  'Projects & Tasks',
-                                  'References & Notes',
-                                ].map((navItem) => (
-                                  <div
-                                    key={navItem}
-                                    className="flex items-center gap-1.5 py-0.5 truncate"
-                                  >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2] shrink-0" />
-                                    <span className="truncate underline decoration-[#D3D1CB] underline-offset-2">
-                                      {navItem}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Right Main Area: Life Areas 3x2 Gallery Grid */}
-                          <div className="col-span-8 space-y-2">
-                            <div className="flex items-center justify-between">
-                              <p className="text-[10px] font-bold text-[#37352F]">
-                                Life Areas
-                              </p>
-                              <span className="text-[8.5px] text-[#6E6D68] font-medium">
-                                ⊞ Areas
-                              </span>
-                            </div>
-
-                            <div className="grid grid-cols-3 gap-2">
-                              {showcase.lifeAreas.map((area) => (
-                                <div
-                                  key={area.title}
-                                  className="rounded-[8px] border border-[#E9E9E7] bg-[#FFFFFF] overflow-hidden shadow-[0_1px_2px_rgba(55,53,47,0.03)]"
-                                >
-                                  <div className="h-12 sm:h-14 bg-[#F7F6F3] border-b border-[#F1F1EF] flex items-center justify-center">
-                                    <AreaGeometricArt pattern={area.pattern} />
-                                  </div>
-                                  <div className="p-1.5 space-y-0.5">
-                                    <p className="text-[8.5px] font-semibold text-[#37352F] truncate">
-                                      {area.title}
-                                    </p>
-                                    <div className="flex flex-col gap-0.5">
-                                      <span className="text-[7px] text-[#2383E2] bg-[#EBF3FC] px-1 rounded w-fit">
-                                        {area.projectsCount}
-                                      </span>
-                                      <span className="text-[7px] text-[#6E6D68] px-1">
-                                        {area.notesCount}
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* OVERLAPPING MOBILE PORTRAIT FRAME (iPhone Mockup on Right) */}
-                    <div className="w-[150px] sm:w-[178px] rounded-[24px] bg-[#1F1E1B] p-[6px] sm:p-[7px] shadow-[-12px_20px_38px_rgba(55,53,47,0.25)] border border-[#37352F] absolute right-0 bottom-0 z-10">
-                      <div className="rounded-[19px] bg-white overflow-hidden border border-[#E9E9E7]">
-                        {/* Phone Status Bar + Dynamic Island */}
-                        <div className="px-3 pt-2 pb-1 flex items-center justify-between text-[8px] font-semibold text-[#37352F]">
-                          <span>11:20</span>
-                          <span className="w-10 h-2.5 rounded-full bg-[#1F1E1B]" />
-                          <span>5G 100%</span>
-                        </div>
-
-                        {/* Mobile Notion Header */}
-                        <div className="px-3 py-1.5 border-b border-[#F1F1EF] flex items-center justify-between text-[8px] text-[#6E6D68]">
-                          <span className="truncate font-medium text-[#37352F]">
-                            ‹ ∞ {template.name}
-                          </span>
-                          <span>•••</span>
-                        </div>
-
-                        {/* Mobile Notion Body */}
-                        <div className="p-3 space-y-2.5">
-                          <p className="text-[11px] font-bold text-[#37352F] leading-tight truncate">
-                            {template.name}
-                          </p>
-
-                          <div className="space-y-1">
-                            <p className="text-[8.5px] font-bold text-[#37352F]">
-                              Quick Action
-                            </p>
-                            {[
-                              'New Task',
-                              'New Note',
-                              'New Project',
-                              'New Goal',
-                              'New Reference',
-                            ].map((act) => (
-                              <div
-                                key={act}
-                                className="px-2 py-1 rounded-[5px] border border-[#E9E9E7] bg-white text-[8px] font-medium text-[#37352F] flex items-center gap-1.5"
-                              >
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#EBF3FC] text-[#2383E2] inline-flex items-center justify-center text-[7px] font-bold">
-                                  +
-                                </span>
-                                <span className="truncate">{act}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <div className="space-y-1 pt-0.5">
-                            <p className="text-[8.5px] font-bold text-[#37352F]">
-                              Productivity
-                            </p>
-                            {['Inbox', 'Life Areas', 'Goals'].map((item) => (
-                              <div
-                                key={item}
-                                className="flex items-center gap-1.5 text-[8px] font-medium text-[#52504A]"
-                              >
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
-                                <span>{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Mobile Bottom Navigation Bar */}
-                        <div className="px-3 py-1.5 border-t border-[#F1F1EF] bg-[#F7F6F3] flex items-center justify-around text-[#6E6D68]">
-                          <LayoutGrid className="w-3 h-3" />
-                          <Search className="w-3 h-3" />
-                          <Inbox className="w-3 h-3 text-[#2383E2]" />
-                          <Plus className="w-3 h-3" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* Price + Behavioral Anchor */}
+              <div className="flex flex-wrap items-baseline gap-2.5 pt-0.5">
+                <span className="text-[22px] sm:text-[24px] font-bold tracking-[-0.02em] text-[#37352F] tabular-nums">
+                  {template.price === 0 ? 'Free ($0)' : formatPrice(template.price)}
+                </span>
+                {displayCompareAt !== undefined && (
+                  <span className="text-[16px] font-medium text-[#9B9A97] line-through tabular-nums">
+                    {formatPrice(displayCompareAt)}
+                  </span>
+                )}
+                <span className="text-[13.5px] font-medium text-[#52504A]">
+                  {priceAnchorNote}
+                </span>
               </div>
-            </>
-          )}
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <motion.button
+                  type="button"
+                  data-testid="template-primary-cta"
+                  whileHover={{ y: -2, scale: 1.015 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                  onClick={handleOpenBuy}
+                  className="h-12 px-6 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(35,131,226,0.45)] cursor-pointer transition-colors whitespace-nowrap shrink-0"
+                >
+                  <span>
+                    {isOwned
+                      ? `Open ${template.name}`
+                      : template.price === 0
+                      ? `Duplicate Free`
+                      : `Get ${template.name} — ${formatPrice(template.price)}`}
+                  </span>
+                  <ArrowRight className="w-4 h-4" />
+                </motion.button>
+
+                <motion.button
+                  type="button"
+                  data-testid="template-preview-inside-btn"
+                  whileHover={{ y: -2, scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                  onClick={handleScrollToCloserLook}
+                  className="h-12 px-5 rounded-[10px] bg-white hover:bg-[#F7F6F3] text-[#37352F] border border-[#D3D1CB] text-[14.5px] font-semibold inline-flex items-center justify-center cursor-pointer transition-colors whitespace-nowrap shrink-0"
+                >
+                  <span>See what&apos;s inside</span>
+                </motion.button>
+              </div>
+
+              <div className="flex items-center gap-2 pt-0.5 text-[13.5px] font-medium text-[#6E6D68]">
+                <VerifiedBadgeIcon className="w-4.5 h-4.5 text-[#2383E2] shrink-0" />
+                <span>
+                  4.9/5 ({reviewsCount} ratings) · {hook.buyerSignal}
+                </span>
+              </div>
+            </div>
+
+            {/* Right Column: Clean Editorial Artwork Stage */}
+            <div className="md:col-span-6">
+              <button
+                type="button"
+                data-testid="template-device-mockup"
+                onClick={handleScrollToCloserLook}
+                aria-label={`Inspect what is inside ${template.name}`}
+                style={{
+                  backgroundColor: isFlagshipOs ? '#FAF9F6' : template.cardTint,
+                }}
+                className="group w-full rounded-[22px] bg-editorial-grid border border-[#E9E9E7] hover:border-[#C7C5BE] p-6 sm:p-10 transition-colors duration-200 flex items-center justify-center min-h-[260px] sm:min-h-[340px] lg:min-h-[390px] overflow-hidden cursor-pointer"
+              >
+                {isFlagshipOs ? (
+                  <img
+                    src={heroArtSrc}
+                    alt={`${template.name} workspace illustration`}
+                    referrerPolicy="no-referrer"
+                    className="w-full max-h-[340px] lg:max-h-[370px] object-contain mix-blend-multiply scale-[1.06] transition-transform duration-300 group-hover:scale-[1.10]"
+                  />
+                ) : (
+                  <BlushAssetImage
+                    src={heroArtSrc}
+                    alt={`${template.name} illustration`}
+                    disableFloat
+                    className="w-full max-h-[290px] lg:max-h-[330px]"
+                    imgClassName="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
+                  />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Full-Width 3-Column Concrete Proof Strip (Zero Fluff) */}
+          <div
+            data-testid="flagship-value-strip"
+            className="rounded-[14px] bg-white border border-[#E9E9E7] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#E9E9E7]"
+          >
+            <div className="px-5 py-3.5 space-y-0.5">
+              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
+                What&apos;s Built In
+              </p>
+              <p className="text-[14.5px] font-bold text-[#37352F] tabular-nums">
+                {hook.insideItems.length} Core Modules · {template.databaseCount}{' '}
+                Databases · {template.viewsCount} Views
+              </p>
+            </div>
+            <div className="px-5 py-3.5 space-y-0.5">
+              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
+                Time To First Use
+              </p>
+              <p className="text-[14.5px] font-bold text-[#37352F]">
+                {hook.setupTime} · Works on Notion Free
+              </p>
+            </div>
+            <div className="px-5 py-3.5 space-y-0.5">
+              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
+                Zero Lock-In
+              </p>
+              <p className="text-[14.5px] font-bold text-[#37352F]">
+                {template.price === 0
+                  ? 'Free Forever · Yours to Customize'
+                  : 'One-Time Payment · Lifetime Updates'}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* =====================================================================
-          2. "TAKE A CLOSER LOOK — Everything has a place." (Horizontal Row Grid)
+          2. WHAT'S ACTUALLY INSIDE (SCANNABLE 4-TO-6 ITEM GRID — ZERO ESSAYS)
           ===================================================================== */}
       <section
         id="template-closer-look"
         data-testid="template-closer-look"
-        className={`scroll-mt-24 pt-14 sm:pt-20 pb-10 sm:pb-14 ${
-          template.slug === 'freelance-os' ||
-          template.slug === 'student-os' ||
-          template.slug === 'researcher-os'
-            ? 'max-w-[1200px]'
-            : 'max-w-[960px]'
-        } mx-auto px-4 sm:px-6`}
+        className="scroll-mt-24 pt-12 sm:pt-16 pb-8 sm:pb-10 max-w-[1200px] mx-auto px-4 sm:px-6"
       >
-        <div className="space-y-3 max-w-[680px] mb-8 sm:mb-10">
-          <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#6E6D68]">
-            TAKE A CLOSER LOOK
-          </p>
-          <h2 className="font-display text-[clamp(30px,3.8vw,44px)] font-bold tracking-[-0.03em] leading-[1.1] text-[#37352F]">
-            Everything has a place.
-          </h2>
-          <p className="text-[16.5px] sm:text-[18px] text-[#52504A] leading-[1.55]">
-            Explore the key parts of the system. Edition details are shown at checkout.
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-7">
+          <div className="space-y-1.5">
+            <p className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
+              What&apos;s Inside {template.name}
+            </p>
+            <h2 className="font-display text-[clamp(24px,3.2vw,34px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F]">
+              Everything you get—in plain English.
+            </h2>
+          </div>
+          <p className="text-[13.5px] text-[#6E6D68] tabular-nums">
+            {isFlagshipOs || isInteractiveSpotlight
+              ? 'Click any module to jump straight to its live view'
+              : `${hook.insideItems.length} core blocks ready out of the box`}
           </p>
         </div>
 
-        {/* Horizontal 3-Column / 2-Column Numbered Module Grid */}
         <div
           data-testid="closer-look-grid"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4"
+          className={`grid grid-cols-1 sm:grid-cols-2 ${
+            hook.insideItems.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'
+          } gap-3.5`}
         >
-          {showcase.closerLookModules.map((moduleTitle, index) => {
-            const isSelected = selectedModuleIndex === index;
+          {hook.insideItems.map((item, index) => {
+            const isSelected =
+              (isFlagshipOs || isInteractiveSpotlight) &&
+              selectedModuleIndex === index;
             const indexLabel = String(index + 1).padStart(2, '0');
             return (
               <button
-                key={moduleTitle}
+                key={item.name}
                 type="button"
-                onClick={() => handleSelectCloserLookModule(index)}
-                className={`w-full h-full text-left rounded-[12px] bg-white border px-4 py-4 flex items-center gap-3.5 transition-all duration-150 cursor-pointer ${
+                onClick={() => handleSelectInsideModule(index)}
+                className={`w-full h-full text-left rounded-[12px] bg-white border p-4 flex items-start gap-3 transition-all duration-150 cursor-pointer ${
                   isSelected
-                    ? 'border-[#2383E2] bg-[#F7FAFE] shadow-[0_6px_18px_-8px_rgba(35,131,226,0.22)]'
+                    ? 'border-[#2383E2] bg-[#F7FAFE]'
                     : 'border-[#E9E9E7] hover:border-[#C7C5BE] hover:bg-[#FAF9F6]'
                 }`}
               >
                 <span
-                  className={`font-mono text-[11.5px] font-semibold tabular-nums shrink-0 ${
+                  className={`font-mono text-[11.5px] font-semibold tabular-nums shrink-0 pt-0.5 ${
                     isSelected ? 'text-[#2383E2]' : 'text-[#6E6D68]'
                   }`}
                 >
                   {indexLabel}
                 </span>
-                <span className="text-[14.5px] sm:text-[15px] font-semibold tracking-[-0.015em] text-[#37352F] leading-snug">
-                  {moduleTitle}
-                </span>
+                <div className="space-y-1 min-w-0">
+                  <p className="text-[15px] font-semibold tracking-[-0.015em] text-[#37352F] leading-snug">
+                    {item.name}
+                  </p>
+                  <p className="text-[13.5px] text-[#52504A] leading-[1.45]">
+                    {item.whatItDoes}
+                  </p>
+                </div>
               </button>
             );
           })}
@@ -1991,12 +657,12 @@ export const TemplateShowcasePage: React.FC<{
       </section>
 
       {/* =====================================================================
-          3. FREELANCE OS GALLERY, STUDENT/RESEARCHER FULL SPECS, OR CASCADING PREVIEW
+          3. LIVE INTERACTIVE PREVIEW (FLAGSHIP OS OR STANDARD TEMPLATE)
           ===================================================================== */}
       {template.slug === 'freelance-os' ? (
         <section
           data-testid="template-cascading-pages"
-          className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
+          className="py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
           <FreelanceOsGallery
             variant="detail"
@@ -2011,7 +677,7 @@ export const TemplateShowcasePage: React.FC<{
       ) : template.slug === 'student-os' ? (
         <section
           data-testid="template-full-specification"
-          className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
+          className="py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
           <StudentOsShowcase
             activeViewFilter={studentViewFilter}
@@ -2025,7 +691,7 @@ export const TemplateShowcasePage: React.FC<{
       ) : template.slug === 'researcher-os' ? (
         <section
           data-testid="template-full-specification"
-          className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6"
+          className="py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6"
         >
           <ResearcherOsShowcase
             activeViewFilter={researcherViewFilter}
@@ -2036,511 +702,213 @@ export const TemplateShowcasePage: React.FC<{
             compareAt={displayCompareAt}
           />
         </section>
-      ) : (
-      <section
-        data-testid="template-cascading-pages"
-        className="py-10 sm:py-14 max-w-[960px] mx-auto px-4 sm:px-6"
-      >
-        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <h2 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#37352F]">
-            {showcase.showcaseHeading}
-          </h2>
-          <p className="text-[14px] text-[#6E6D68]">
-            Inside the <span className="font-semibold text-[#37352F]">{template.name}</span> Notion workspace · {template.databaseCount} interlinked databases & {template.viewsCount} pre-built views
-          </p>
-        </div>
-
-        {/* Warm Notion Stage Container with 3 Overlapping/Cascading Notion Pages */}
-        <div className="rounded-[28px] bg-[#F7F6F3] border border-[#E9E9E7] pt-8 sm:pt-14 px-4 sm:px-8 lg:px-8 pb-8 lg:pb-0 overflow-hidden">
-          <div className="flex flex-col lg:flex-row items-stretch lg:items-end gap-6 lg:gap-0">
-            {/* -----------------------------------------------------------------
-                PAGE 1 (Left / Lower-Left Card): Goals Overview
-               ----------------------------------------------------------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.05 }}
-              className="w-full lg:w-[30%] shrink-0 lg:mt-44 z-10 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E9E9E7] shadow-[0_20px_50px_-15px_rgba(55,53,47,0.12)] p-5 sm:p-6 space-y-4"
-            >
-              {/* Page Icon + Title */}
-              <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center">
-                  <Target className="w-5 h-5" />
-                </div>
-                <h3 className="text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
-                  {showcase.page1Title}
-                </h3>
-              </div>
-
-              {/* Notion Callout Banner */}
-              <div className="rounded-[8px] bg-[#F7F6F3] border border-[#E9E9E7] p-3 flex items-start gap-2 text-[11.5px] leading-[1.5] text-[#52504A]">
-                <span className="text-[#2383E2] font-bold shrink-0 mt-0.5">ⓘ</span>
-                <p>
-                  {showcase.page1Callout}
-                </p>
-              </div>
-
-              {/* Back To Dashboard Button */}
-              <div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-[#E9E9E7] bg-white text-[10.5px] font-medium text-[#52504A]">
-                  <span>↩</span>
-                  <span>Back To Dashboard</span>
-                </span>
-              </div>
-
-              {/* Goals Overview Database */}
-              <div className="space-y-2.5 pt-1">
-                <p className="text-[13.5px] font-bold text-[#37352F]">
-                  {showcase.page1Title} Overview
-                </p>
-
-                {/* Notion View Tabs */}
-                <div className="flex items-center gap-3 border-b border-[#E9E9E7] pb-1.5 text-[10.5px] font-medium text-[#6E6D68]">
-                  <span>📥 Inbox</span>
-                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1.5">
-                    ✔ Active {showcase.page1Title}
-                  </span>
-                  <span>Completed</span>
-                </div>
-
-                {/* 2 Goal Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                  {showcase.page1Items.map((goal) => (
-                    <div
-                      key={goal.title}
-                      className="rounded-[10px] border border-[#E9E9E7] bg-white p-3 space-y-2 shadow-[0_1px_3px_rgba(55,53,47,0.03)]"
-                    >
-                      <p className="text-[11px] font-semibold text-[#37352F] leading-snug">
-                        ◎ {goal.title}
-                      </p>
-                      <div>
-                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#EBF3FC] text-[#2383E2] text-[9.5px] font-medium">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
-                          {goal.status}
-                        </span>
-                      </div>
-                      <p className="text-[9.5px] text-[#6E6D68]">{goal.date}</p>
-                      <div className="flex flex-wrap gap-1">
-                        <span className="px-1.5 py-0.5 rounded bg-[#F7F6F3] border border-[#E9E9E7] text-[9px] text-[#52504A]">
-                          {goal.area}
-                        </span>
-                        <span className="px-1.5 py-0.5 rounded bg-[#FEF3C7]/60 text-[#92400E] text-[9px]">
-                          2 Projects
-                        </span>
-                      </div>
-                      {/* Progress Bar */}
-                      <div className="flex items-center gap-2 pt-1">
-                        <span className="text-[9.5px] font-semibold text-[#52504A] tabular-nums">
-                          {goal.progress}%
-                        </span>
-                        <div className="flex-1 h-1.5 rounded-full bg-[#E9E9E7] overflow-hidden">
-                          <div
-                            style={{ width: `${goal.progress}%` }}
-                            className="h-full rounded-full bg-[#2383E2]"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* -----------------------------------------------------------------
-                PAGE 2 (Center / Middle-Elevated Card): References & Notes
-               ----------------------------------------------------------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.12 }}
-              className="w-full lg:w-[34%] shrink-0 lg:-ml-6 lg:mt-20 z-20 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E9E9E7] shadow-[-10px_20px_50px_-15px_rgba(55,53,47,0.16)] p-5 sm:p-6 space-y-4"
-            >
-              {/* Page Icon + Title */}
-              <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <h3 className="text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
-                  {showcase.page2Title}
-                </h3>
-              </div>
-
-              <div>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] border border-[#E9E9E7] bg-white text-[10.5px] font-medium text-[#52504A]">
-                  <span>↩</span>
-                  <span>Back To Dashboard</span>
-                </span>
-              </div>
-
-              {/* References Overview Database */}
-              <div className="space-y-2.5">
-                <p className="text-[13.5px] font-bold text-[#37352F]">
-                  References Overview
-                </p>
-                <div className="flex items-center gap-2.5 border-b border-[#E9E9E7] pb-1.5 text-[10px] font-medium text-[#6E6D68] overflow-x-auto no-scrollbar">
-                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1.5 whitespace-nowrap">
-                    ⊞ References
-                  </span>
-                  <span className="whitespace-nowrap">Recently</span>
-                  <span className="whitespace-nowrap">On Review</span>
-                  <span className="whitespace-nowrap">Pinned</span>
-                </div>
-
-                {/* 2x2 Reference Cards */}
-                <div className="grid grid-cols-2 gap-2">
-                  {showcase.page2References.map((refItem) => (
-                    <div
-                      key={refItem.title}
-                      className="rounded-[9px] border border-[#E9E9E7] bg-white p-2.5 space-y-1.5"
-                    >
-                      <p className="text-[10px] font-semibold text-[#37352F] leading-snug line-clamp-2">
-                        📄 {refItem.title}
-                      </p>
-                      <p className="text-[9px] text-[#6E6D68]">{refItem.date}</p>
-                      <div className="flex items-center gap-1 text-[9px] text-[#2383E2]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
-                        <span>Inbox</span>
-                      </div>
-                      <div className="flex flex-wrap gap-1">
-                        {refItem.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="px-1.5 py-0.5 rounded bg-[#F1F1EF] text-[8.5px] text-[#52504A]"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                  <div className="rounded-[9px] border border-dashed border-[#D3D1CB] bg-[#F7F6F3] p-2.5 flex items-center justify-center text-[10px] font-medium text-[#6E6D68]">
-                    + New
-                  </div>
-                </div>
-              </div>
-
-              {/* Callout Banner */}
-              <div className="rounded-[8px] bg-[#F7F6F3] border border-[#E9E9E7] p-2.5 flex items-start gap-2 text-[10.5px] leading-[1.45] text-[#52504A]">
-                <span className="text-[#2383E2] font-bold shrink-0">ⓘ</span>
-                <p>{showcase.page2Callout}</p>
-              </div>
-
-              {/* Notes Overview */}
-              <div className="space-y-2 pt-1">
-                <p className="text-[13px] font-bold text-[#37352F]">
-                  Notes Overview
-                </p>
-                <div className="flex items-center gap-2.5 border-b border-[#E9E9E7] pb-1 text-[9.5px] text-[#6E6D68]">
-                  <span>Inbox</span>
-                  <span>In Review</span>
-                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1">
-                    ★ Favourite
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {showcase.page2Notes.map((note) => (
-                    <div
-                      key={note.title}
-                      className="rounded-[8px] border border-[#E9E9E7] bg-[#FFFFFF] p-2.5 space-y-1"
-                    >
-                      <p className="text-[9.5px] text-[#6E6D68] line-clamp-2">
-                        {note.excerpt}
-                      </p>
-                      <p className="text-[9.5px] font-semibold text-[#37352F] line-clamp-2">
-                        📝 {note.title}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* -----------------------------------------------------------------
-                PAGE 3 (Right / Forefront Tallest Card): Projects, Timeline & Weekly Tasks
-               ----------------------------------------------------------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.18 }}
-              className="w-full lg:w-[42%] shrink-0 lg:-ml-6 z-30 rounded-t-[20px] rounded-b-[20px] lg:rounded-b-none bg-white border border-[#E9E9E7] shadow-[-16px_24px_60px_-15px_rgba(55,53,47,0.20)] p-5 sm:p-7 space-y-4"
-            >
-              {/* Page Icon + Title */}
-              <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-[10px] bg-[#EBF3FC] text-[#2383E2] flex items-center justify-center">
-                  <Folder className="w-5 h-5" />
-                </div>
-                <h3 className="text-[23px] font-bold tracking-[-0.02em] text-[#37352F]">
-                  {showcase.page3Title}
-                </h3>
-              </div>
-
-              {/* Action Bar: Back To Dashboard | New Project | New Task */}
-              <div className="grid grid-cols-3 gap-2 pt-0.5">
-                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E9E9E7] bg-white text-[10px] font-medium text-[#52504A] text-center truncate">
-                  ↩ Back To Dashboard
-                </span>
-                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E9E9E7] bg-white text-[10px] font-medium text-[#2383E2] text-center truncate">
-                  📁 New Project
-                </span>
-                <span className="px-2.5 py-1.5 rounded-[6px] border border-[#E9E9E7] bg-white text-[10px] font-medium text-[#2383E2] text-center truncate">
-                  ✔ New Task
-                </span>
-              </div>
-
-              {/* 1. Projects Overview Gallery */}
-              <div className="space-y-2">
-                <p className="text-[13.5px] font-bold text-[#37352F]">
-                  Projects Overview
-                </p>
-                <div className="flex items-center gap-3 border-b border-[#E9E9E7] pb-1.5 text-[10px] font-medium text-[#6E6D68]">
-                  <span>Inbox</span>
-                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1.5">
-                    ⊞ Working On
-                  </span>
-                  <span>Upcoming</span>
-                  <span>☑ Completed</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
-                  {showcase.page3Projects.map((proj) => (
-                    <div
-                      key={proj.title}
-                      className="rounded-[9px] border border-[#E9E9E7] bg-white p-2.5 space-y-1.5"
-                    >
-                      <p className="text-[10px] font-semibold text-[#37352F] leading-snug truncate">
-                        📁 {proj.title}
-                      </p>
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#EBF3FC] text-[#2383E2] text-[8.5px] font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2383E2]" />
-                        {proj.status}
-                      </span>
-                      <p className="text-[8.5px] text-[#6E6D68] truncate">
-                        {proj.date}
-                      </p>
-                      <p className="text-[8.5px] text-[#52504A] font-medium truncate">
-                        ◎ {proj.area}
-                      </p>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-[8.5px] text-[#6E6D68]">
-                          {proj.progress}%
-                        </span>
-                        <div className="flex-1 h-1 rounded-full bg-[#E9E9E7] overflow-hidden">
-                          <div
-                            style={{ width: `${proj.progress}%` }}
-                            className="h-full bg-[#2383E2]"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Callout Block */}
-              <div className="rounded-[8px] bg-[#F7F6F3] border border-[#E9E9E7] p-2.5 flex items-start gap-2 text-[10px] leading-[1.45] text-[#52504A]">
-                <span className="text-[#2383E2] font-bold shrink-0">ⓘ</span>
-                <p>{showcase.page3Callout}</p>
-              </div>
-
-              {/* 2. Projects Timeline (Gantt View matching image_49ed9109.png) */}
-              <div className="space-y-2 pt-1">
-                <div className="flex items-center justify-between">
-                  <p className="text-[13px] font-bold text-[#37352F]">
-                    Projects Timeline
-                  </p>
-                  <span className="text-[9.5px] text-[#6E6D68] px-2 py-0.5 rounded border border-[#E9E9E7] bg-[#F7F6F3]">
-                    📅 Open in Calendar · Month
-                  </span>
-                </div>
-
-                <div className="rounded-[10px] border border-[#E9E9E7] bg-[#FFFFFF] p-3 space-y-2 overflow-hidden">
-                  <div className="flex items-center justify-between text-[9px] font-semibold text-[#6E6D68] border-b border-[#F1F1EF] pb-1.5">
-                    <span>‹ June 2026</span>
-                    <span>July</span>
-                    <span className="font-mono text-[8px] tracking-widest hidden sm:inline">
-                      12 14 16 18 20 22 24 26 28 30
-                    </span>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    {showcase.page3Timeline.map((bar) => (
-                      <div key={bar.title} className="relative h-6 flex items-center">
-                        <div
-                          style={{
-                            marginLeft: `${bar.offsetPct}%`,
-                            width: `${bar.widthPct}%`,
-                          }}
-                          className="px-2 py-1 rounded-[6px] border border-[#E9E9E7] bg-white shadow-[0_1px_2px_rgba(55,53,47,0.04)] flex items-center gap-1.5 truncate"
-                        >
-                          <span className="text-[8.5px] font-semibold text-[#37352F] truncate">
-                            📁 {bar.title}
-                          </span>
-                          <span
-                            className={`px-1 py-0.2 rounded text-[7.5px] font-medium shrink-0 ${
-                              bar.status === 'Completed'
-                                ? 'bg-[#E7F4F0] text-[#0F7B6C]'
-                                : 'bg-[#EBF3FC] text-[#2383E2]'
-                            }`}
-                          >
-                            ● {bar.status}
-                          </span>
-                          <span className="text-[7.5px] text-[#6E6D68] shrink-0">
-                            {bar.progress}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* 3. Tasks Manager Overview (Weekly Calendar Columns) */}
-              <div className="space-y-2 pt-1">
-                <div className="flex items-center justify-between">
-                  <p className="text-[13px] font-bold text-[#37352F]">
-                    Tasks Manager Overview
-                  </p>
-                  <span className="text-[9px] text-[#6E6D68]">July 2026</span>
-                </div>
-
-                <div className="flex items-center gap-3 border-b border-[#E9E9E7] pb-1 text-[9.5px] text-[#6E6D68]">
-                  <span>Inbox</span>
-                  <span>Today&apos;s Tasks</span>
-                  <span className="text-[#37352F] font-semibold border-b-2 border-[#37352F] pb-1 -mb-1">
-                    📅 Weekly Tasks
-                  </span>
-                  <span>☑ Completed</span>
-                </div>
-
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 pt-1">
-                  {showcase.page3WeeklyTasks.map((col) => (
-                    <div
-                      key={col.day}
-                      className="rounded-[8px] border border-[#E9E9E7] bg-[#F7F6F3] p-1.5 min-h-[78px] space-y-1.5"
-                    >
-                      <div className="flex items-center justify-between text-[8.5px] text-[#6E6D68]">
-                        <span>{col.day}</span>
-                        <span
-                          className={
-                            col.isToday
-                              ? 'w-4 h-4 rounded-full bg-[#E03E3E] text-white font-bold inline-flex items-center justify-center text-[8px]'
-                              : 'font-semibold text-[#52504A]'
-                          }
-                        >
-                          {col.dateNum}
-                        </span>
-                      </div>
-
-                      {col.taskTitle && (
-                        <div className="rounded-[6px] bg-white border border-[#E9E9E7] p-1.5 space-y-1 shadow-[0_1px_2px_rgba(55,53,47,0.03)]">
-                          <p className="text-[8px] font-semibold text-[#37352F] leading-tight line-clamp-3">
-                            ✔ {col.taskTitle}
-                          </p>
-                          {col.priority && (
-                            <span className="inline-block px-1 py-0.2 rounded bg-[#FDECEC] text-[#E03E3E] text-[7px] font-medium">
-                              {col.priority}
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+      ) : template.slug === 'nexus-os' ? (
+        <section
+          data-testid="template-full-specification"
+          className="py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6"
+        >
+          <NexusOsShowcase
+            activeViewFilter={nexusViewFilter}
+            onViewFilterChange={setNexusViewFilter}
+            onOpenBuy={handleOpenBuy}
+            isOwned={isOwned}
+            price={template.price}
+            compareAt={displayCompareAt}
+          />
+        </section>
+      ) : template.slug === 'book-tracker-os' ? (
+        <section
+          data-testid="template-full-specification"
+          className="py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6"
+        >
+          <BookTrackerOsShowcase
+            activeViewFilter={bookTrackerViewFilter}
+            onViewFilterChange={setBookTrackerViewFilter}
+            onOpenBuy={handleOpenBuy}
+            isOwned={isOwned}
+            price={template.price}
+            compareAt={displayCompareAt}
+          />
+        </section>
+      ) : template.slug === 'dopamine-menu' ? (
+        <section
+          id="standard-preview-stage"
+          data-testid="template-cascading-pages"
+          className="scroll-mt-24 py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6 space-y-5"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+            <div className="space-y-1">
+              <p className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#6940A5]">
+                Actual Notion Views · Interactive Preview
+              </p>
+              <h2 className="font-display text-[clamp(22px,2.8vw,30px)] font-bold tracking-[-0.025em] text-[#37352F]">
+                Explore every tab inside Dopamine Menu.
+              </h2>
+            </div>
+            <p className="text-[13.5px] text-[#6E6D68]">
+              Switch tabs or click any reset card to watch Orders 7d update live.
+            </p>
           </div>
-        </div>
-      </section>
+
+          <DopamineMenuShowcase
+            activeTab={dopamineTab}
+            onTabChange={setDopamineTab}
+            isOwned={isOwned}
+            onOpenBuy={handleOpenBuy}
+            priceLabel={
+              template.price === 0
+                ? 'Duplicate Free'
+                : `Duplicate for ${formatPrice(template.price)}`
+            }
+          />
+        </section>
+      ) : template.slug === 'travel-planner' ? (
+        <section
+          id="standard-preview-stage"
+          data-testid="template-cascading-pages"
+          className="scroll-mt-24 py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6 space-y-5"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+            <div className="space-y-1">
+              <p className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#0F7B6C]">
+                Actual Notion Views · Interactive Preview
+              </p>
+              <h2 className="font-display text-[clamp(22px,2.8vw,30px)] font-bold tracking-[-0.025em] text-[#37352F]">
+                Explore every tab inside Travel Planner.
+              </h2>
+            </div>
+            <p className="text-[13.5px] text-[#6E6D68]">
+              Log expenses, check off bags, or approve permits to watch KPIs update live.
+            </p>
+          </div>
+
+          <TravelPlannerShowcase
+            activeTab={travelTab}
+            onTabChange={setTravelTab}
+            isOwned={isOwned}
+            onOpenBuy={handleOpenBuy}
+            priceLabel={
+              template.price === 0
+                ? 'Duplicate Free'
+                : `Duplicate for ${formatPrice(template.price)}`
+            }
+          />
+        </section>
+      ) : (
+        <section
+          id="standard-preview-stage"
+          data-testid="template-cascading-pages"
+          className="scroll-mt-24 py-8 sm:py-12 max-w-[1200px] mx-auto px-4 sm:px-6 space-y-5"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+            <div className="space-y-1">
+              <p className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#0F7B6C]">
+                Test Drive Before Duplicating
+              </p>
+              <h2 className="font-display text-[clamp(22px,2.8vw,30px)] font-bold tracking-[-0.025em] text-[#37352F]">
+                Try {template.name} right here.
+              </h2>
+            </div>
+            <p className="text-[13.5px] text-[#6E6D68]">
+              Check off sample items or add your own row below.
+            </p>
+          </div>
+
+          <StandardTemplateWorkspace
+            template={template}
+            hook={hook}
+            isOwned={isOwned}
+            onOpenBuy={handleOpenBuy}
+          />
+        </section>
       )}
 
       {/* =====================================================================
-          4. WHAT'S INCLUDED & INSTANT DUPLICATION SUMMARY CARD
+          4. TIGHT CLOSING DECISION CARD (NO REPETITIVE WALLS OF TEXT)
           ===================================================================== */}
-      <section
-        className={`py-12 sm:py-16 ${
-          isFlagshipOs ? 'max-w-[1200px]' : 'max-w-[960px]'
-        } mx-auto px-4 sm:px-6`}
-      >
-        <div className="rounded-[20px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <section className="py-10 sm:py-14 max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="rounded-[20px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-9 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
-              Included in {template.name} · {template.version}
+            <p className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
+              Ready In 60 Seconds · {template.version}
             </p>
-            <h3 className="font-display text-[clamp(24px,3vw,32px)] font-bold tracking-[-0.025em] text-[#37352F] text-balance">
-              Save 40+ hours of building—and start using it in 60 seconds.
+            <h3 className="font-display text-[clamp(23px,2.8vw,30px)] font-bold tracking-[-0.025em] text-[#37352F] text-balance">
+              Stop building Notion from scratch. Duplicate {template.name} today.
             </h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              {template.whatsInside.map((bullet) => (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              {hook.insideItems.map((item) => (
                 <li
-                  key={bullet}
-                  className="flex items-start gap-2.5 text-[14px] text-[#52504A] leading-[1.5]"
+                  key={item.name}
+                  className="flex items-start gap-2 text-[13.5px] text-[#37352F] font-medium leading-[1.45]"
                 >
                   <Check className="w-4 h-4 text-[#2383E2] shrink-0 mt-0.5" />
-                  <span>{bullet}</span>
+                  <span>{item.name}</span>
                 </li>
               ))}
+              <li className="flex items-start gap-2 text-[13.5px] text-[#52504A] leading-[1.45]">
+                <Check className="w-4 h-4 text-[#0F7B6C] shrink-0 mt-0.5" />
+                <span>Works on Notion Free forever</span>
+              </li>
+              <li className="flex items-start gap-2 text-[13.5px] text-[#52504A] leading-[1.45]">
+                <Check className="w-4 h-4 text-[#0F7B6C] shrink-0 mt-0.5" />
+                <span>
+                  {template.price === 0
+                    ? 'Instant 1-click duplicate link'
+                    : 'Lifetime updates + Circle community'}
+                </span>
+              </li>
             </ul>
           </div>
 
-          <div className="lg:col-span-5 rounded-[16px] bg-white border border-[#E9E9E7] p-6 space-y-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#6E6D68]">
+          <div className="lg:col-span-5 rounded-[16px] bg-white border border-[#E9E9E7] p-5 sm:p-6 space-y-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[11.5px] font-semibold uppercase tracking-[0.06em] text-[#6E6D68]">
                   {template.category}
                 </p>
-                <p className="text-[20px] font-bold text-[#37352F]">
+                <p className="text-[19px] font-bold text-[#37352F] truncate">
                   {template.name}
                 </p>
               </div>
-              <div className="text-right">
-                <p className="text-[24px] font-bold text-[#37352F] tabular-nums">
+              <div className="text-right shrink-0">
+                <p className="text-[23px] font-bold text-[#37352F] tabular-nums">
                   {formatPrice(template.price)}
                 </p>
-                <p className="text-[12px] text-[#6E6D68]">Pay once · Lifetime updates</p>
+                <p className="text-[11.5px] text-[#6E6D68]">
+                  {template.price === 0 ? 'Free forever' : 'One-time payment'}
+                </p>
               </div>
             </div>
 
-            <div className="h-44 sm:h-48 border-y border-[#F1F1EF] py-3 flex items-center justify-center overflow-hidden">
+            <div className="h-36 sm:h-40 border-y border-[#F1F1EF] py-2.5 flex items-center justify-center overflow-hidden">
               <BlushAssetImage
-                src={
-                  template.slug === 'freelance-os'
-                    ? freelancerMascotCardImg
-                    : template.slug === 'student-os'
-                    ? studentOsMascotHeroImg
-                    : template.slug === 'researcher-os'
-                    ? researcherOsMascotHeroImg
-                    : template.illustrationUrl
-                }
-                alt={`${template.name} mascot illustration`}
+                src={closingArtSrc}
+                alt={`${template.name} preview illustration`}
                 disableFloat
                 className="w-full h-full"
                 imgClassName={`max-w-full max-h-full w-auto h-auto object-contain ${
-                  template.slug === 'freelance-os' ||
-                  template.slug === 'student-os' ||
-                  template.slug === 'researcher-os'
-                    ? 'scale-[1.06]'
-                    : ''
+                  isFlagshipOs ? 'scale-[1.06]' : ''
                 }`}
               />
             </div>
 
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               <button
                 type="button"
                 onClick={handleOpenBuy}
-                className="w-full h-12 px-6 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[15px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_8px_20px_-6px_rgba(35,131,226,0.45)] cursor-pointer transition-colors"
+                className="w-full h-11 px-5 rounded-[10px] bg-[#2383E2] hover:bg-[#1B6EC2] text-white text-[14.5px] font-semibold inline-flex items-center justify-center gap-2 shadow-[0_8px_20px_-6px_rgba(35,131,226,0.45)] cursor-pointer transition-colors"
               >
                 <span>
                   {isOwned
                     ? `Open ${template.name} Delivery`
                     : template.price === 0
                     ? `Duplicate ${template.name} Free`
-                    : `Make ${template.name} Yours (${formatPrice(template.price)})`}
+                    : `Get ${template.name} — ${formatPrice(template.price)}`}
                 </span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <p className="text-center text-[12px] text-[#6E6D68]">
-                One-time payment · Works on Notion Free · Instant duplicate link
+                {hook.setupTime} · Instant Notion duplicate link
               </p>
             </div>
           </div>
@@ -2551,18 +919,14 @@ export const TemplateShowcasePage: React.FC<{
           5. RELATED TEMPLATES IN THE SAME CATEGORY
           ===================================================================== */}
       {related.length > 0 && (
-        <section
-          className={`pt-8 ${
-            isFlagshipOs ? 'max-w-[1200px]' : 'max-w-[960px]'
-          } mx-auto px-4 sm:px-6 border-t border-[#E9E9E7]`}
-        >
-          <div className="flex items-center justify-between mb-8 pt-8">
+        <section className="pt-6 max-w-[1200px] mx-auto px-4 sm:px-6 border-t border-[#E9E9E7]">
+          <div className="flex items-center justify-between mb-7 pt-6">
             <div>
-              <h2 className="text-[24px] font-bold tracking-[-0.02em] text-[#37352F]">
+              <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
                 More in {template.category}
               </h2>
-              <p className="text-[14.5px] text-[#6E6D68]">
-                Explore other minimalist Notion systems in this category.
+              <p className="text-[14px] text-[#6E6D68]">
+                Other Notion systems in this category.
               </p>
             </div>
             <button
@@ -2590,8 +954,9 @@ export const TemplateShowcasePage: React.FC<{
           </div>
         </section>
       )}
-      {/* Slim Sticky Purchase Bar for Flagship OS Pages (Appears After Scrolling Past Hero) */}
-      {isFlagshipOs && showStickyBuyBar && (
+
+      {/* Slim Sticky Purchase Bar for Flagship OS & Interactive Spotlight Pages */}
+      {(isFlagshipOs || isInteractiveSpotlight) && showStickyBuyBar && (
         <div
           data-testid="flagship-sticky-buy-bar"
           className="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-[#E9E9E7] shadow-[0_-8px_24px_-12px_rgba(55,53,47,0.12)]"
@@ -2602,18 +967,20 @@ export const TemplateShowcasePage: React.FC<{
                 {template.name}
               </span>
               <span className="hidden sm:inline text-[13px] text-[#6E6D68]">
-                · Pay once, keep forever · Works on Notion Free
+                · {hook.setupTime} · Works on Notion Free
               </span>
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
               <div className="hidden xs:flex items-baseline gap-1.5 tabular-nums">
                 <span className="text-[16px] font-bold text-[#37352F]">
-                  {formatPrice(template.price)}
+                  {template.price === 0 ? 'Free' : formatPrice(template.price)}
                 </span>
-                <span className="text-[13px] text-[#9B9A97] line-through">
-                  {formatPrice(displayCompareAt)}
-                </span>
+                {displayCompareAt !== undefined && (
+                  <span className="text-[13px] text-[#9B9A97] line-through">
+                    {formatPrice(displayCompareAt)}
+                  </span>
+                )}
               </div>
               <button
                 type="button"
@@ -2624,7 +991,9 @@ export const TemplateShowcasePage: React.FC<{
                 <span>
                   {isOwned
                     ? `Open ${template.name}`
-                    : `Make ${template.name} Yours — ${formatPrice(template.price)}`}
+                    : template.price === 0
+                    ? `Duplicate ${template.name} Free`
+                    : `Get ${template.name} — ${formatPrice(template.price)}`}
                 </span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
