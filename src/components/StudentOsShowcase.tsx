@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-  BookOpen,
   Briefcase,
   Calendar,
   Check,
+  ChevronDown,
   FileText,
   GraduationCap,
   Repeat,
@@ -45,31 +45,28 @@ export const STUDENT_OS_SLIDES: StudentOsSlide[] = [
     stepNumber: '01',
     shortLabel: 'Semester Hub',
     label: '01 · Command Hub & Deadlines',
-    badge: 'Daily Academic Cockpit',
-    title: 'See every class and 7-day deadline in',
-    editorialAccent: 'one quiet hub.',
+    badge: '7-Day Radar',
+    title: 'See every class and deadline in',
+    editorialAccent: 'one screen.',
     description:
-      'Open Notion each morning to an automatic 7-day deadline radar, course progress trackers, and a 5-minute Sunday semester reset checklist.',
+      'Open Notion to an automatic 7-day deadline list, course progress bars, and a Sunday reset checklist.',
     beforeText:
       'Digging through Canvas, syllabus PDFs, and group chats to spot due dates.',
     afterText:
-      'Every syllabus weight, lab deadline, and weekly reading rolled up automatically.',
+      'Every syllabus weight, lab deadline, and weekly reading rolled up in one place.',
     highlightMetric: 'Main Hub · 7-Day Radar · Courses',
     includedModules: [
       {
-        title: 'Main Hub (Student OS Pro)',
-        details:
-          'Quick-Nav links, 7-day urgent deadline radar, active course progress, and Sunday weekly review.',
+        title: 'Main Hub',
+        details: '7-day urgent deadline radar, active courses, and Sunday reset.',
       },
       {
-        title: 'Courses & Syllabi Hubs',
-        details:
-          'Dedicated pages per course linking professors, grading weights, readings, and deliverables.',
+        title: 'Course Pages',
+        details: 'Professors, grading weights, readings, and deliverables per class.',
       },
       {
-        title: 'Assignments & Exams Calendar',
-        details:
-          'Unified master schedule switching seamlessly between Kanban, Calendar, and Priority List views.',
+        title: 'Master Calendar',
+        details: 'Switch between Kanban, Calendar, and Priority List views.',
       },
     ],
   },
@@ -78,31 +75,28 @@ export const STUDENT_OS_SLIDES: StudentOsSlide[] = [
     stepNumber: '02',
     shortLabel: 'Recall & Notes',
     label: '02 · Cornell Notes & Spaced Recall',
-    badge: 'Active Study Engine',
-    title: 'Turn lecture notes into effortless',
+    badge: 'Active Study',
+    title: 'Turn lecture notes into',
     editorialAccent: 'exam retention.',
     description:
-      'Capture structured Cornell cues during class and let the built-in 1 · 3 · 7 · 21 day spaced repetition queue tell you exactly what to review today.',
+      'Write Cornell cues in class—the 1·3·7·21-day spaced recall queue surfaces exactly what to review today.',
     beforeText:
       'Re-reading highlighted notes at 2 a.m. the night before midterms.',
     afterText:
-      'Automated Due-for-Review flashcard queue paired with 25/5 Pomodoro focus sprints.',
+      'Auto Due-for-Review recall queue paired with 25/5 Pomodoro sprints.',
     highlightMetric: 'Cornell Notes · 1/3/7/21d Recall',
     includedModules: [
       {
         title: 'Cornell Lecture Notes',
-        details:
-          'Structured cue questions, key takeaways, and First Pass -> Quiz Ready mastery states.',
+        details: 'Cue questions, takeaways, and First Pass → Quiz Ready tags.',
       },
       {
-        title: 'Spaced Repetition Queue',
-        details:
-          'Built-in 1, 3, 7, and 21-day review cadence surfacing only topics due today.',
+        title: 'Spaced Recall Queue',
+        details: 'Auto 1, 3, 7, and 21-day cadence showing only topics due today.',
       },
       {
-        title: 'Study Toolkit & Exam Sprints',
-        details:
-          'Pomodoro session tracker, active-recall rubrics, and 14-day exam readiness checklists.',
+        title: 'Exam Sprint Toolkit',
+        details: 'Pomodoro log, active-recall rubrics, and 14-day exam checklists.',
       },
     ],
   },
@@ -111,31 +105,28 @@ export const STUDENT_OS_SLIDES: StudentOsSlide[] = [
     stepNumber: '03',
     shortLabel: 'Weighted GPA',
     label: '03 · Weighted 4.0 GPA & Gradebook',
-    badge: 'Live Formula Engine',
-    title: 'Know your exact standing with live',
-    editorialAccent: 'weighted GPA math.',
+    badge: 'Live Formulas',
+    title: 'Know your standing with live',
+    editorialAccent: 'weighted GPA.',
     description:
-      'Log assignment and midterm scores once—credit-weighted formulas compute every course percentage, letter grade, and cumulative 4.0 GPA automatically.',
+      'Log assignment and exam scores once—credit-weighted formulas compute your exact term and cumulative 4.0 GPA.',
     beforeText:
-      'Guessing what score you need on the final exam in messy Excel sheets.',
+      'Guessing what score you need on the final exam in messy spreadsheets.',
     afterText:
-      'Live credit-weighted term and cumulative GPA bars updated on every grade entry.',
+      'Live credit-weighted course % and cumulative GPA updated on every entry.',
     highlightMetric: 'Auto 4.0 Scale · Credit Rollups',
     includedModules: [
       {
-        title: 'Weighted Gradebook Formulas',
-        details:
-          'Automatic score weighting across homework, labs, midterms, and final exams per course.',
+        title: 'Weighted Gradebook',
+        details: 'Auto score weighting across homework, labs, midterms, and finals.',
       },
       {
-        title: 'Term & Cumulative GPA Rollup',
-        details:
-          'Credit-hour weighted GPA calculations across semesters with target-grade visibility.',
+        title: 'Cumulative GPA Rollup',
+        details: 'Credit-hour weighted GPA across semesters with target grades.',
       },
       {
-        title: 'Reading List & Revision Index',
-        details:
-          'Link textbook chapters and past papers straight to high-weight exams.',
+        title: 'Revision Index',
+        details: 'Link textbook chapters and past papers straight to high-weight exams.',
       },
     ],
   },
@@ -144,31 +135,28 @@ export const STUDENT_OS_SLIDES: StudentOsSlide[] = [
     stepNumber: '04',
     shortLabel: 'Career & Life',
     label: '04 · Internships, Budget & Wellness',
-    badge: 'Beyond the Classroom',
-    title: 'Land internships while keeping life',
-    editorialAccent: 'calm and balanced.',
+    badge: 'Beyond Class',
+    title: 'Track internships, budget, and',
+    editorialAccent: 'weekly balance.',
     description:
-      'Track summer internship pipelines, faculty office hours, monthly student budgets, scholarships, and daily sleep/habit trends in the exact same workspace.',
+      'Manage summer internship pipelines, professor office hours, monthly spending caps, and sleep habits together.',
     beforeText:
       'Missing internship OA deadlines and losing track of campus spending.',
     afterText:
-      'Internship Kanban, professor directory, scholarship tracker, and sleep check-ins.',
+      'Internship Kanban, faculty directory, scholarship tracker, and monthly caps.',
     highlightMetric: 'Career Kanban · Budget · 12 DBs',
     includedModules: [
       {
-        title: 'Career & Internships Kanban',
-        details:
-          'Track applications across Wishlist, Applied, OA / Challenge, Interviewing, and Offer.',
+        title: 'Internship Kanban',
+        details: 'Track roles from Wishlist → Applied → OA → Interview → Offer.',
       },
       {
-        title: 'Faculty & Recruiter Directory',
-        details:
-          'Office hours, lab locations, email templates, recommendation status, and linked courses.',
+        title: 'Faculty Directory',
+        details: 'Office hours, email templates, and recommendation tracking.',
       },
       {
-        title: 'Student Finance & Wellness',
-        details:
-          'Monthly spending caps, scholarship deadlines, daily sleep logs, and study-life habits.',
+        title: 'Student Budget & Habits',
+        details: 'Monthly spending caps, scholarship deadlines, and sleep check-ins.',
       },
     ],
   },
@@ -550,6 +538,8 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
   price = 39,
   compareAt = 59,
 }) => {
+  const [showTemplates, setShowTemplates] = useState(false);
+
   const deckSlides: FlagshipDeckSlideItem[] = STUDENT_OS_SLIDES.map((slide) => ({
     id: slide.id,
     stepNumber: slide.stepNumber,
@@ -566,17 +556,17 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
   }));
 
   return (
-    <div data-testid="student-os-details-showcase" className="space-y-12">
+    <div data-testid="student-os-details-showcase" className="space-y-10">
       {/* Header Row */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0F7B6C]">
-          Try It Before You Buy · Live Interactive Desk
+          Interactive Preview
         </p>
-        <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
-          One semester desk. Ten modules. Twelve linked databases.
+        <h2 className="font-display text-[clamp(24px,3.2vw,34px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
+          Test the live workspace — 10 modules, 12 linked databases.
         </h2>
-        <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
-          Click around the live workspace below—flip between Courses, Recall Notes, Internships, and Budget to feel what a calm Sunday reset actually looks like.
+        <p className="text-[15px] text-[#52504A] leading-[1.55] max-w-[660px]">
+          Click through Courses, Recall Notes, Internships, and Budget below before you duplicate.
         </p>
       </div>
 
@@ -595,9 +585,9 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
         compareAt={compareAt}
         isOwned={isOwned}
         onOpenBuy={onOpenBuy}
-        sectionKicker="Guided Tour · 4 Academic Pillars"
-        sectionTitle="Built for the week before midterms—not just week one."
-        sectionSubtitle="Step through each interactive slide—check off deadlines, inspect live weighted 4.0 GPA math, and see how Student OS replaces six fragmented school apps."
+        sectionKicker="4 Core Views"
+        sectionTitle="Built for exam week — not just syllabus week."
+        sectionSubtitle=""
         slides={deckSlides}
         controlledSlideId={activeViewFilter}
         onControlledSlideChange={(next) => {
@@ -608,46 +598,59 @@ export const StudentOsShowcase: React.FC<StudentOsShowcaseProps> = ({
         testIdPrefix="student-os"
       />
 
-      {/* 8 Ready-to-Use Page Templates Included */}
+      {/* Collapsible 8 Ready-to-Use Page Templates Included */}
       <div
         data-testid="student-os-templates-included"
-        className="rounded-[20px] bg-[#FAF9F6] border border-[#E9E9E7] p-6 sm:p-8 space-y-5"
+        className="rounded-[16px] bg-[#FAF9F6] border border-[#E9E9E7] overflow-hidden"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <p className="text-[11.5px] font-bold uppercase tracking-[0.07em] text-[#0F7B6C]">
-              One-Click Notion Templates
+        <button
+          type="button"
+          data-testid="student-os-templates-toggle"
+          aria-expanded={showTemplates}
+          onClick={() => setShowTemplates((v) => !v)}
+          className="w-full px-5 sm:px-6 py-4 flex items-center justify-between gap-4 text-left hover:bg-[#F4F3F0] transition-colors cursor-pointer"
+        >
+          <div className="space-y-0.5 min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-[0.07em] text-[#0F7B6C]">
+              One-Click Notion Templates · Free Plan Compatible
             </p>
-            <h4 className="font-display text-[20px] sm:text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
-              8 Ready-to-Use Templates Inside Student OS
+            <h4 className="font-display text-[17px] sm:text-[19px] font-bold tracking-[-0.02em] text-[#37352F]">
+              Includes {STUDENT_OS_SPEC.readyTemplates.length} ready-to-use page templates
             </h4>
           </div>
-          <span className="text-[13px] font-medium text-[#6E6D68]">
-            Works on Notion Free plan
+          <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#37352F] shrink-0 whitespace-nowrap">
+            <span>{showTemplates ? 'Hide list' : 'Show all 8'}</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${
+                showTemplates ? 'rotate-180' : ''
+              }`}
+            />
           </span>
-        </div>
+        </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {STUDENT_OS_SPEC.readyTemplates.map((tpl) => (
-            <div
-              key={tpl.id}
-              className="rounded-[12px] bg-white border border-[#E9E9E7] hover:border-[#C7C5BE] transition-colors p-4 space-y-1.5"
-            >
-              <div className="flex items-center gap-2 text-[#37352F]">
-                <FileText className="w-4 h-4 text-[#0F7B6C] shrink-0" />
-                <h5 className="text-[14px] font-semibold leading-snug">
-                  {tpl.title}
-                </h5>
+        {showTemplates && (
+          <div className="px-5 sm:px-6 pb-6 pt-1 border-t border-[#E9E9E7] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {STUDENT_OS_SPEC.readyTemplates.map((tpl) => (
+              <div
+                key={tpl.id}
+                className="rounded-[12px] bg-white border border-[#E9E9E7] p-3.5 space-y-1"
+              >
+                <div className="flex items-center gap-2 text-[#37352F]">
+                  <FileText className="w-3.5 h-3.5 text-[#0F7B6C] shrink-0" />
+                  <h5 className="text-[13.5px] font-semibold leading-snug">
+                    {tpl.title}
+                  </h5>
+                </div>
+                <p className="text-[11px] font-mono text-[#6E6D68]">
+                  In {tpl.triggerContext}
+                </p>
+                <p className="text-[12.5px] text-[#52504A] leading-[1.45]">
+                  {tpl.contains}
+                </p>
               </div>
-              <p className="text-[11.5px] font-mono text-[#6E6D68]">
-                In {tpl.triggerContext}
-              </p>
-              <p className="text-[13px] text-[#52504A] leading-[1.45]">
-                {tpl.contains}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
