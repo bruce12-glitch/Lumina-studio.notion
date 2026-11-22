@@ -8,6 +8,8 @@ import {
 import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
 import studentOsMascotImg from '../assets/images/student_os_mascot_hero_1794933584495.jpg';
 import researcherOsMascotImg from '../assets/images/researcher_os_mascot_hero_1794933583291.jpg';
+import nexusOsMascotImg from '../assets/images/nexus_os_mascot_hero_1795351179233.jpg';
+import bookTrackerOsMascotImg from '../assets/images/book_tracker_os_mascot_hero_1795351180939.jpg';
 
 export const UltraHdSvgFilter: React.FC = () => (
   <svg
@@ -111,7 +113,9 @@ export const TemplateCover: React.FC<{
   const isCustomMascot =
     slug === 'freelance-os' ||
     slug === 'student-os' ||
-    slug === 'researcher-os';
+    slug === 'researcher-os' ||
+    slug === 'nexus-os' ||
+    slug === 'book-tracker-os';
 
   const resolvedAsset =
     slug === 'freelance-os'
@@ -120,6 +124,10 @@ export const TemplateCover: React.FC<{
       ? studentOsMascotImg
       : slug === 'researcher-os'
       ? researcherOsMascotImg
+      : slug === 'nexus-os'
+      ? nexusOsMascotImg
+      : slug === 'book-tracker-os'
+      ? bookTrackerOsMascotImg
       : illustrationUrl || CATEGORY_BLUSH_ASSET[category];
 
   return (
@@ -138,6 +146,10 @@ export const TemplateCover: React.FC<{
             ? 'Student OS academic mascot illustration'
             : slug === 'researcher-os'
             ? 'Researcher OS lab scholar mascot illustration'
+            : slug === 'nexus-os'
+            ? 'Nexus OS Core-5 command center mascot illustration'
+            : slug === 'book-tracker-os'
+            ? 'Book Tracker OS reading library mascot illustration'
             : `${name} Notion template`
         }
         disableFloat
