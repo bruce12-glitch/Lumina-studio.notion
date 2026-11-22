@@ -20,6 +20,10 @@ export interface TemplateHookProfile {
   }>;
 }
 
+export interface ResolvedTemplateHookProfile extends TemplateHookProfile {
+  quickWin: string;
+}
+
 export const TEMPLATE_HOOKS: Record<string, TemplateHookProfile> = {
   'task-tracker': {
     cardHook: 'Stop staring at 40 tasks wondering what to do first.',
@@ -944,8 +948,57 @@ export const TEMPLATE_HOOKS: Record<string, TemplateHookProfile> = {
   },
 };
 
-export function getTemplateHook(slug: string): TemplateHookProfile {
-  const match = TEMPLATE_HOOKS[slug];
-  if (match) return match;
-  return TEMPLATE_HOOKS['second-brain'];
+export const TEMPLATE_QUICK_WINS: Record<string, string> = {
+  'task-tracker': 'Hide 40 backlog chores and see only today’s 3 real priorities.',
+  'dopamine-menu': 'Pick a 3-min reset matched to your current mood and log real lift.',
+  'travel-planner': 'Spot missing visas, pack-list % ready, and live spend before flying.',
+  'travel-dashboard': 'Link multi-city flights, currency budgets, and saved spots in one hub.',
+  'project-tracker': 'Spot which active projects stalled before a deadline slips.',
+  '12-week-year-planner': 'Grade your weekly execution % every Friday to hit 90-day targets.',
+  'savings-tracker': 'Split savings into named buckets with live % progress bars.',
+  'payday-budget': 'See your true safe-to-spend balance the minute your paycheck hits.',
+  'prompts-library': 'Find and paste your best-tested prompts in 3 seconds, not 40 chats.',
+  'knowledge-base': 'Turn scattered bookmarks into a topic index you actually reopen.',
+  'second-brain': 'Route every capture straight into PARA and clear Sunday review in 10 min.',
+  'habit-tracker': 'Log daily habits in one phone tap with auto weekly % scores.',
+  'wheel-of-life-template': 'Score 8 life areas in 5 minutes and flag the one slipping behind.',
+  'habit-journal': 'Link daily habits with energy scores so you see what fuels good days.',
+  'symptom-tracker': 'Export a clean 30-day symptom and trigger timeline for doctor visits.',
+  'freelance-os': 'Spot unpaid invoices, overdue deliverables, and true hourly rate first.',
+  'book-tracker': 'Keep every current read, rating, and favorite quote on one shelf.',
+  'okrs-tracker': 'Watch quarterly Objective % update live from real Key Results.',
+  'gtd-dashboard': 'Filter Next Actions by @Context and track delegated Waiting-For items.',
+  'grocery-list': 'Shop in one pass with aisle-sorted lists and 1-tap staple restock.',
+  'all-in-one-meal-planner': 'Pick 7 dinners in 5 minutes and auto-build the week’s grocery list.',
+  'expense-tracker': 'Log daily card taps in 10 seconds with automatic monthly category totals.',
+  'budget-tracker': 'See exact dollars left per category before you swipe your card.',
+  'crm-template': 'Open today’s Follow-Up Due queue so warm deals never go cold.',
+  'goal-tracker': 'Break intimidating yearly goals into concrete monthly checkpoints.',
+  'content-calendar': 'Move posts cleanly from Idea to Scheduled across every channel.',
+  'journal': 'Finish a calm 3-minute check-in with pre-filled morning & evening prompts.',
+  'gift-tracker': 'Save offhand gift hints year-round with upcoming birthday countdowns.',
+  'vocabulary-builder': 'Review saved words with hidden-answer active recall flashcards.',
+  'content-os': 'Turn 1 pillar script into 10+ linked clips while tracking sponsor payouts.',
+  'para-dashboard': 'Find any active doc in 2 clicks and archive finished work in 1.',
+  'finance-tracker': 'Audit forgotten renewals and track real net worth across every account.',
+  'running-tracker': 'Track weekly mileage jumps, pace PRs, and running shoe wear.',
+  'workout-tracker-pro': 'See last week’s exact weight & reps right beside today’s working sets.',
+  'workout-tracker': 'Log sets and reps between rests on a clean, zero-clutter mobile card.',
+  'subscription-tracker': 'Convert monthly plans to true yearly burn and cancel before billing day.',
+  'recipe-manager': 'Open ingredients and steps in 2 seconds with zero food-blog clutter.',
+  'student-dashboard': 'See every class and Friday assignment due date on one calm page.',
+  'notes-dashboard': 'Capture rough meeting notes fast and keep top reference docs pinned.',
+  'student-os': 'Log quiz scores once and watch credit-weighted 4.0 GPA update live.',
+  'researcher-os': 'Keep every PDF claim, lab run, and reviewer rebuttal linked to your draft.',
+  'nexus-os': 'Track P1 sprints, active projects, and monthly burn without switching apps.',
+  'book-tracker-os': 'Let Σ Queue Score pick your next read and flag books paused 14+ days.',
+};
+
+export function getTemplateHook(slug: string): ResolvedTemplateHookProfile {
+  const match = TEMPLATE_HOOKS[slug] ?? TEMPLATE_HOOKS['second-brain'];
+  const quickWin = TEMPLATE_QUICK_WINS[slug] ?? match.payoff;
+  return {
+    ...match,
+    quickWin,
+  };
 }
