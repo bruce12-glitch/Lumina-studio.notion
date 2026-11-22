@@ -25,6 +25,7 @@ export interface Template {
   pro: boolean;
   category: TemplateCategory;
   summary: string;
+  quickWin: string;
   description: [string, string];
   whatsInside: string[];
   databaseCount: number;
@@ -302,6 +303,7 @@ export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
     pro,
     category: item.category,
     summary: hook.cardHook,
+    quickWin: hook.quickWin,
     description: [
       hook.heroLead,
       pro
