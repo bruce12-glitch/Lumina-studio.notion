@@ -1,6 +1,9 @@
 import { buildWhatsInsideSummary } from './osSpecTypes';
 import { RESEARCHER_OS_SPEC } from './researcherOsSpec';
 import { STUDENT_OS_SPEC } from './studentOsSpec';
+import { NEXUS_OS_SPEC } from './nexusOsSpec';
+import { BOOK_TRACKER_OS_SPEC } from './bookTrackerOsSpec';
+import { getTemplateHook } from './templateHooks';
 
 export type Category =
   | 'All'
@@ -148,9 +151,16 @@ const RAW_TEMPLATES: Array<{
   { name: 'Notes Dashboard', price: 0, category: 'School' },
   { name: 'Student OS', price: 39, category: 'School' },
   { name: 'Researcher OS', price: 49, category: 'School' },
+  { name: 'Nexus OS', price: 59, category: 'Personal Productivity' },
+  { name: 'Book Tracker OS', price: 29, category: 'School' },
 ];
 
-function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean): string[] {
+function buildWhatsInside(
+  name: string,
+  slug: string,
+  _category: TemplateCategory,
+  pro: boolean
+): string[] {
   if (name === 'Student OS') {
     return buildWhatsInsideSummary(STUDENT_OS_SPEC);
   }
@@ -159,50 +169,20 @@ function buildWhatsInside(name: string, category: TemplateCategory, pro: boolean
     return buildWhatsInsideSummary(RESEARCHER_OS_SPEC);
   }
 
-  const base: Record<TemplateCategory, string[]> = {
-    'Personal Productivity': [
-      `Pre-configured ${name} master database with Today, Upcoming, and Archive views`,
-      'Quick-capture inbox block for zero-friction daily entries',
-      'Automated status rollups and weekly review checklist',
-      'Minimalist monochrome icons and clean mobile-optimized layout',
-    ],
-    'Health & Fitness': [
-      `Daily & weekly ${name} log with automated streak calculation`,
-      'Visual progress rings and habit consistency matrix',
-      'Mobile quick-entry view designed for on-the-go logging',
-      'Monthly reflection prompts and baseline health metrics',
-    ],
-    Business: [
-      `Centralized ${name} workspace with linked client, project, and pipeline databases`,
-      'Executive summary dashboard with filtered KPI views',
-      'Standard operating procedure (SOP) templates and repeatable workflows',
-      'Automated deliverable tracking and deadline alerts',
-    ],
-    School: [
-      `Structured ${name} system organized by semester, course, and topic`,
-      'Spaced-repetition review queue and active recall prompts',
-      'Clean reading and citation database with status tags',
-      'Distraction-free study dashboard for exam preparation',
-    ],
-    Finance: [
-      `Complete ${name} ledger with monthly and annual rollup summaries`,
-      'Automated category breakdowns, savings targets, and cash-flow formulas',
-      'One-click transaction entry with recurring payment reminders',
-      'Visual balance progress bars compatible with Notion Free plan',
-    ],
-    Travel: [
-      `End-to-end ${name} workspace covering itinerary, bookings, and packing lists`,
-      'Day-by-day schedule view with timezone and location notes',
-      'Trip budget estimator with actual vs. planned spend tracking',
-      'Offline-friendly mobile checklist for airport and transit days',
-    ],
-  };
+  if (name === 'Nexus OS') {
+    return buildWhatsInsideSummary(NEXUS_OS_SPEC);
+  }
 
-  const items = [...base[category]];
+  if (name === 'Book Tracker OS') {
+    return buildWhatsInsideSummary(BOOK_TRACKER_OS_SPEC);
+  }
+
+  const hook = getTemplateHook(slug);
+  const items = hook.insideItems.map((entry) => `${entry.name} — ${entry.whatItDoes}`);
   if (pro) {
-    items.push('Lifetime access to future template updates + Private Circle community invite');
+    items.push('Lifetime updates + Private Circle community access');
   } else {
-    items.push('Instant one-click duplication into any free or paid Notion workspace');
+    items.push('1-click duplicate into any free Notion workspace');
   }
   return items;
 }
@@ -301,6 +281,10 @@ function resolveTemplateTint(slug: string, _category: TemplateCategory, idx: num
   if (slug === 'freelance-os') return '#F5F3FA';
   if (slug === 'student-os') return '#EFF5FB';
   if (slug === 'researcher-os') return '#F5F3FA';
+  if (slug === 'nexus-os') return '#EFF5FB';
+  if (slug === 'book-tracker-os') return '#EFF7F3';
+  if (slug === 'dopamine-menu') return '#F5F3FA';
+  if (slug === 'travel-planner') return '#EFF7F3';
   if (slug === 'content-os') return '#EFF5FB';
   return ALL_CARD_TINTS[idx % ALL_CARD_TINTS.length];
 }
@@ -308,6 +292,7 @@ function resolveTemplateTint(slug: string, _category: TemplateCategory, idx: num
 export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
   const pro = item.price > 0;
   const slug = toSlug(item.name);
+  const hook = getTemplateHook(slug);
   return {
     id: idx + 1,
     name: item.name,
@@ -316,39 +301,27 @@ export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
     compareAt: item.compareAt,
     pro,
     category: item.category,
-    summary:
-      item.name === 'Second Brain'
-        ? 'An all-in-one Notion system to organize your tasks, projects, goals, and notes.'
-        : item.name === 'Finance Tracker'
-        ? 'Bring your financials in one place to get the big picture.'
-        : item.name === 'Student OS'
-        ? '10 study modules, 12 linked Notion databases, flashcards & GPA tracker.'
-        : item.name === 'Researcher OS'
-        ? '12 research modules, 14 linked databases, literature matrix & IMRaD pipeline.'
-        : `A clean ${item.category.toLowerCase()} Notion template to track and organize your ${item.name.toLowerCase()}.`,
-    description:
-      item.name === 'Student OS'
-        ? [
-            'Student OS keeps courses, syllabi, deadlines, Cornell notes, spaced-repetition flashcards, and weighted 4.0 GPA rollups in one workspace.',
-            'Includes 10 modules, 12 connected databases, and 8 one-click academic templates—works on Notion Free.',
-          ]
-        : item.name === 'Researcher OS'
-        ? [
-            'Researcher OS links literature synthesis matrices, Zettelkasten notes, hypotheses, reproducible experiment logs, datasets, and manuscripts.',
-            'Built with 12 modules and 14 connected databases covering peer-review rebuttals, CFPs, and grants.',
-          ]
-        : [
-            `${item.name} is a ready-to-use Notion template with pre-linked databases, filtered views, and a clean layout. Duplicate it into your Notion workspace in one click and start organizing right away.`,
-            pro
-              ? `Includes interconnected databases, automated progress rollups, a step-by-step setup guide, and lifetime updates with access to the private Circle community.`
-              : `Works on Notion's free plan across desktop, tablet, and mobile with no complex setup required.`,
-          ],
-    whatsInside: buildWhatsInside(item.name, item.category, pro),
+    summary: hook.cardHook,
+    description: [
+      hook.heroLead,
+      pro
+        ? `${hook.buyerSignal} · Pay once, keep forever, works on Notion Free.`
+        : `${hook.buyerSignal} · Duplicate in 60 seconds on Notion Free.`,
+    ],
+    whatsInside: buildWhatsInside(item.name, slug, item.category, pro),
     databaseCount:
       item.name === 'Student OS'
         ? 12
         : item.name === 'Researcher OS'
         ? 14
+        : item.name === 'Nexus OS'
+        ? 15
+        : item.name === 'Book Tracker OS'
+        ? 8
+        : item.name === 'Dopamine Menu'
+        ? 3
+        : item.name === 'Travel Planner'
+        ? 6
         : pro
         ? item.price >= 39
           ? 8
@@ -359,6 +332,14 @@ export const TEMPLATES: Template[] = RAW_TEMPLATES.map((item, idx) => {
         ? 24
         : item.name === 'Researcher OS'
         ? 28
+        : item.name === 'Nexus OS'
+        ? 32
+        : item.name === 'Book Tracker OS'
+        ? 22
+        : item.name === 'Dopamine Menu'
+        ? 10
+        : item.name === 'Travel Planner'
+        ? 12
         : pro
         ? item.price >= 39
           ? 18
