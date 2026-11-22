@@ -283,4 +283,31 @@ export function getProTemplatesTotalValue(templates: Template[] = TEMPLATES): {
   };
 }
 
+export interface CustomBriefInput {
+  email: string;
+  purpose: string;
+  audience: string;
+  designStyle: string;
+}
+
+export function validateCustomBrief(input: CustomBriefInput): {
+  valid: boolean;
+  error?: string;
+} {
+  if (!input.purpose || input.purpose.trim().length < 12) {
+    return {
+      valid: false,
+      error: 'Tell us briefly what this workspace should help you do (at least 12 characters).',
+    };
+  }
+  if (!input.email || !validateEmail(input.email)) {
+    return {
+      valid: false,
+      error: 'Enter a valid email address so we can send your custom scope plan.',
+    };
+  }
+  return { valid: true };
+}
+
 export { CATEGORIES };
+
