@@ -49,6 +49,7 @@ import {
   StaticInfoPage,
   TemplateDetailPage,
 } from './components/SecondaryPages';
+import { CustomTemplateSection } from './components/CustomTemplateSection';
 
 const STORAGE_KEY = 'lumina_purchased_deliveries_v1';
 const HERO_ENTRANCE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -93,15 +94,15 @@ const HOME_FEATURE_SPLITS: Array<{
 }> = [
   {
     kind: 'second-brain',
-    eyebrow: 'Most Popular · Half Off ($39 instead of $79)',
+    eyebrow: 'Most Popular · Half Off ($39 vs $79)',
     eyebrowTint: '#EBF3FC',
     eyebrowInk: '#2383E2',
     title: 'Your head is for having ideas, not holding them.',
     description:
-      'Every project, half-written note, and stray promise finally gets one quiet address. Stop digging through four apps on Monday morning to remember what mattered last week.',
+      'Empty your head in 5 seconds. Find any project, note, or promise in 3.',
     bullets: [
-      'One fast inbox that sorts itself across Projects, Areas & Resources',
-      'A 10-minute Sunday reset that keeps your entire week calm',
+      'One fast inbox routing straight into Projects, Areas & Resources',
+      '10-minute Sunday reset that clears your week before Monday hits',
     ],
     ctaLabel: 'See Inside Second Brain',
     href: '/second-brain',
@@ -111,30 +112,30 @@ const HOME_FEATURE_SPLITS: Array<{
     eyebrow: 'Pays For Itself In One Afternoon',
     eyebrowTint: '#E7F4F0',
     eyebrowInk: '#0F7B6C',
-    title: 'Know where every dollar goes—before the month disappears.',
+    title: 'See where your money leaks—before the month disappears.',
     description:
-      'Most people don’t have an income problem; they have a visibility problem. Spot forgotten subscriptions, see real cash flow, and watch your savings rate climb in ten minutes a week.',
+      'Spot forgotten subscriptions, real net worth, and monthly savings rate on one private page.',
     bullets: [
-      'Catches sneaky recurring bills before they renew again',
-      'Monthly cash flow, net worth, and savings goals on one calm page',
+      'Catches sneaky annual renewals before they hit your card',
+      'Live savings rate, category caps, and multi-account totals',
     ],
-    ctaLabel: 'Claim Finance Tracker',
+    ctaLabel: 'See Inside Finance Tracker',
     href: '/finance-tracker',
     mediaFirst: true,
   },
   {
     kind: 'minimalism',
-    eyebrow: 'Start Free — Zero Catch',
+    eyebrow: 'Start Free · 22 Free Workspaces',
     eyebrowTint: '#F1F1EF',
     eyebrowInk: '#37352F',
-    title: 'Feel the craft before you spend a dollar.',
+    title: 'Test the build quality before you spend $1.',
     description:
-      'Not ready for a full operating system yet? Duplicate any of our 22 free Notion workspaces today—habits, reading lists, study notes—and feel how different a quiet tool makes your week.',
+      'Duplicate any of our 22 free Notion setups in 60 seconds—zero paywalls, zero subscriptions.',
     bullets: [
-      '22 free Notion systems ready to duplicate in 60 seconds',
-      'Zero paywalls, zero monthly subscriptions—just clean design that works',
+      'Habits, groceries, reading lists, budgets, and class desks included',
+      '100% compatible with Notion’s free plan on desktop & phone',
     ],
-    ctaLabel: 'Explore Free Collection',
+    ctaLabel: 'Browse Free Templates',
     href: '/templates',
   },
 ];
@@ -176,7 +177,27 @@ export default function App() {
   );
 
   const navigate = useCallback((targetUrl: string) => {
-    window.history.pushState({}, '', targetUrl);
+    const [rawPath, hash] = targetUrl.split('#');
+    if (hash) {
+      const currentPath = window.location.pathname || '/';
+      const canStayHere =
+        hash === 'custom-notion-builds' &&
+        (currentPath === '/' || currentPath === '/templates');
+      const nextUrl = canStayHere ? `${currentPath}#${hash}` : targetUrl;
+      window.history.pushState({}, '', nextUrl);
+      if (!canStayHere) {
+        setRouteState(parseLocationState());
+      }
+      window.setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+      return;
+    }
+
+    window.history.pushState({}, '', rawPath || '/');
     setRouteState(parseLocationState());
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, []);
@@ -261,15 +282,15 @@ export default function App() {
     [purchases]
   );
 
-  // Featured templates on the homepage
+  // Featured templates on the homepage (All 6 marquee operating systems)
   const featuredTemplates = useMemo(() => {
     const slugs = [
+      'nexus-os',
+      'book-tracker-os',
       'second-brain',
-      'finance-tracker',
       'freelance-os',
       'student-os',
       'researcher-os',
-      'habit-tracker',
     ];
     return slugs
       .map((s) => TEMPLATES.find((t) => t.slug === s))
@@ -600,9 +621,9 @@ export default function App() {
                         delay: prefersReducedMotion ? 0 : 0.3,
                         ease: HERO_ENTRANCE_EASE,
                       }}
-                      className="text-[17px] sm:text-[19px] font-normal leading-[1.58] tracking-[-0.01em] text-[#52504A] max-w-[590px] mx-auto text-balance"
+                      className="text-[17px] sm:text-[18.5px] font-normal leading-[1.55] tracking-[-0.01em] text-[#52504A] max-w-[540px] mx-auto text-balance"
                     >
-                      Stop spending Sunday nights fixing broken dashboards. Duplicate a calm, battle-tested Notion system in 60 seconds and wake up tomorrow knowing what actually matters.
+                      Stop losing Sunday nights fixing messy dashboards. Duplicate a finished Notion workspace in 60 seconds and start Monday clear.
                     </motion.p>
                   </div>
 
@@ -754,10 +775,10 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
                   <div className="space-y-1">
                     <h2 className="font-display text-[24px] sm:text-[28px] font-bold tracking-[-0.025em] text-[#37352F]">
-                      Start where it hurts most.
+                      Fix your biggest bottleneck first.
                     </h2>
                     <p className="text-[15px] text-[#52504A]">
-                      The workspaces freelancers, students, and builders duplicate first—built to run quietly in the background.
+                      Our 6 flagship systems—click any card to test the live Notion views inside.
                     </p>
                   </div>
                   <a
@@ -782,6 +803,85 @@ export default function App() {
                       isPurchased={purchasedSlugs.has(template.slug)}
                     />
                   ))}
+                </div>
+
+                {/* Interactive Free Spotlight: Dopamine Menu & Travel Planner */}
+                <div
+                  data-testid="home-interactive-free-spotlight"
+                  className="mt-10 pt-10 border-t border-[#EFEFED] space-y-5"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                    <div className="space-y-1">
+                      <p className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-[#0F7B6C]">
+                        Free Interactive Notion Templates · Try Live
+                      </p>
+                      <h3 className="font-display text-[20px] sm:text-[22px] font-bold tracking-[-0.02em] text-[#37352F]">
+                        Test Dopamine Menu &amp; Travel Planner right in your browser.
+                      </h3>
+                    </div>
+                    <p className="text-[13.5px] text-[#6E6D68]">
+                      $0 forever · Live KPIs, formulas &amp; linked views
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {[
+                      {
+                        slug: 'dopamine-menu',
+                        eyebrow: 'Personal Productivity · 3 DBs · 10 views · Free',
+                        title: 'Dopamine Menu',
+                        hook: 'Swap doomscrolling for 3-to-60 minute resets ranked by live Pick Score & mood lift.',
+                        metrics: ['5 Live KPIs', 'Mood Match Kanban', 'Craving Swaps'],
+                        tint: 'bg-[#FAF8FD] border-[#E7DFF2]',
+                        accent: 'text-[#6940A5]',
+                      },
+                      {
+                        slug: 'travel-planner',
+                        eyebrow: 'Travel · 6 DBs · 12 views · Free',
+                        title: 'Travel Planner',
+                        hook: 'Control Tower readiness bars, live spend donut, Payment Rails, Packing & offline Vault.',
+                        metrics: ['4 Live KPIs', 'Spend & Rails Charts', 'Packing + Vault'],
+                        tint: 'bg-[#F5FAF7] border-[#D9EAE1]',
+                        accent: 'text-[#0F7B6C]',
+                      },
+                    ].map((spot) => (
+                      <a
+                        key={spot.slug}
+                        href={`/templates/${spot.slug}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/templates/${spot.slug}`);
+                        }}
+                        className={`group card-editorial-surface rounded-[16px] border p-5 sm:p-6 flex flex-col justify-between gap-4 ${spot.tint}`}
+                      >
+                        <div className="space-y-2">
+                          <p className={`text-[11.5px] font-mono font-semibold ${spot.accent}`}>
+                            {spot.eyebrow}
+                          </p>
+                          <div className="flex items-center justify-between gap-2">
+                            <h4 className="font-display text-[20px] font-bold tracking-[-0.02em] text-[#37352F]">
+                              {spot.title}
+                            </h4>
+                            <span className="font-mono text-[13px] font-bold text-[#37352F]">
+                              $0
+                            </span>
+                          </div>
+                          <p className="text-[14px] text-[#52504A] leading-[1.5]">
+                            {spot.hook}
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#E9E9E7]/80">
+                          <span className="text-[12px] font-medium text-[#6E6D68]">
+                            {spot.metrics.join(' · ')}
+                          </span>
+                          <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-[#37352F] group-hover:text-[#2383E2] transition-colors">
+                            <span>Open live preview</span>
+                            <ArrowRight className="w-3.5 h-3.5 btn-arrow-slide" />
+                          </span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </section>
@@ -850,16 +950,19 @@ export default function App() {
             {/* 5. TESTIMONIALS SECTION BENEATH FEATURE SPLITS */}
             <TestimonialsSection onNavigate={navigate} />
 
+            {/* 5B. CUSTOMIZED NOTION TEMPLATES SECTION */}
+            <CustomTemplateSection id="custom-notion-builds" />
+
             {/* 6. APPS BY RESONANCE */}
             <section className="py-16 sm:py-24 bg-[#F7F6F3] border-t border-[#E9E9E7]">
               <div className="max-w-[1200px] mx-auto px-4 sm:px-6 space-y-10">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div className="space-y-2">
                     <h2 className="font-display text-[clamp(26px,3.2vw,36px)] font-bold tracking-[-0.025em] leading-[1.15] text-[#37352F]">
-                      Small tools that respect your attention.
+                      Small tools built for focus.
                     </h2>
-                    <p className="text-[16px] text-[#52504A] leading-[1.6]">
-                      Companion apps built the same way as our templates—quiet, fast, and allergic to clutter.
+                    <p className="text-[15.5px] text-[#52504A] leading-[1.55]">
+                      Fast companion apps synced directly to your Notion databases.
                     </p>
                   </div>
 
@@ -910,8 +1013,8 @@ export default function App() {
                     Templates
                   </span>
                 </h1>
-                <p className="text-[17px] sm:text-[18px] text-[#52504A] leading-[1.55]">
-                  Get started with ready-made Notion setups to organize your work, research, and daily routines.
+                <p className="text-[16.5px] sm:text-[17.5px] text-[#52504A] leading-[1.5]">
+                  Every card tells you what it fixes and what’s inside—duplicate into Notion Free in 60 seconds.
                 </p>
               </div>
             </section>
@@ -1030,6 +1133,9 @@ export default function App() {
                 </div>
               )}
             </section>
+
+            {/* 3B. CUSTOMIZED NOTION TEMPLATES SECTION */}
+            <CustomTemplateSection id="custom-notion-builds" />
 
             {/* 4. FAQ Accordion */}
             <FaqAccordion />
