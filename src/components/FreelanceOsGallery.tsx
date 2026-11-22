@@ -18,7 +18,12 @@ import {
   FlagshipDeckSlideItem,
   FlagshipSlideDeck,
 } from './FlagshipSlideDeck';
+import { RealScreenshotStrip } from './RealScreenshotStrip';
 import freelancerMascotCardImg from '../assets/images/freelancer_mascot_card_1794923266919.jpg';
+import freelanceHubHd from '../assets/images/freelance_os_hub_hd_1794922765448.jpg';
+import freelanceClientsHd from '../assets/images/freelance_os_clients_hd_1794922767161.jpg';
+import freelanceGrowthHd from '../assets/images/freelance_os_growth_hd_1794922765086.jpg';
+import freelanceFinancesHd from '../assets/images/freelance_os_finances_hd_1794922767056.jpg';
 
 export interface FreelanceOsIncludedModule {
   title: string;
@@ -53,31 +58,28 @@ export const FREELANCE_OS_SLIDES: FreelanceOsSlide[] = [
     stepNumber: '01',
     shortLabel: 'Studio Hub',
     label: '01 · Studio Hub & Execution',
-    badge: 'Command Center',
-    title: 'Run your entire freelance week from one',
-    editorialAccent: 'calm cockpit.',
+    badge: 'Daily Hub',
+    title: 'Run your week from',
+    editorialAccent: 'one clean hub.',
     description:
-      'Start every morning seeing overdue invoice alerts, active client deliverables, weekly billable hours, and your Friday review checklist on one clean Notion page.',
+      'Overdue invoices, active deliverables, and billable hours on one morning page.',
     beforeText:
-      'Checking 6 browser tabs, scattered sticky notes, and forgetting follow-ups.',
+      'Six browser tabs, sticky notes, and forgotten client follow-ups.',
     afterText:
-      'Every deadline, unpaid invoice, and billable session linked in a 5-minute cockpit.',
+      'Every deadline, unpaid invoice, and billable hour linked in one view.',
     highlightMetric: 'Main Hub · Projects · Time Sheet',
     includedModules: [
       {
-        title: 'Main Hub (Freelancer Business OS)',
-        details:
-          'Unpaid invoices, overdue alerts, open proposals, today’s follow-ups, and a Friday review checklist.',
+        title: 'Main Hub',
+        details: 'Unpaid invoices, open proposals, today’s follow-ups, Friday reset.',
       },
       {
-        title: 'Project Management',
-        details:
-          'Multi-mode project boards (Simple, Complete, Advanced), timelines, deadlines, and deliverables.',
+        title: 'Project Boards',
+        details: 'Simple, Complete, and Advanced boards with milestone timelines.',
       },
       {
-        title: 'Time Sheet & Profitability',
-        details:
-          '0.25 h work-session logger rolled up automatically into client margin and utilization.',
+        title: 'Time Sheet',
+        details: '0.25 h work-session log rolling up into client margin.',
       },
     ],
   },
@@ -86,31 +88,28 @@ export const FREELANCE_OS_SLIDES: FreelanceOsSlide[] = [
     stepNumber: '02',
     shortLabel: 'Clients & Legals',
     label: '02 · Clients CRM, Outreach & Legals',
-    badge: 'Pipeline & Relationships',
-    title: 'Close retainers faster with a unified',
+    badge: 'Pipeline & Contracts',
+    title: 'Close retainers with one',
     editorialAccent: 'client pipeline.',
     description:
-      'Track every warm lead, open proposal, segmented outreach list, and MSA/SOW/NDA renewal alert directly beside each client account.',
+      'Keep warm leads, open proposals, outreach lists, and MSA/SOW renewals beside each account.',
     beforeText:
-      'Lost proposal PDFs, cold leads slipping away, and surprise contract renewals.',
+      'Lost proposal PDFs, cold leads slipping away, and surprise renewals.',
     afterText:
-      'Kanban CRM, outreach tracking, and contract clause library connected per client.',
+      'Kanban CRM, outreach cadence, and contract clauses linked per client.',
     highlightMetric: 'Clients CRM · Outreach · Legals',
     includedModules: [
       {
-        title: 'Clients Dashboard',
-        details:
-          'Visual client pipeline, key account briefs, contact directory, and proposal status tracker.',
+        title: 'Clients CRM',
+        details: 'Lead pipeline, account briefs, contacts, and proposal stages.',
       },
       {
-        title: 'Email List & Outreach',
-        details:
-          'Segmented contact directory and outreach or newsletter campaign cadence tracker.',
+        title: 'Outreach Tracker',
+        details: 'Segmented lead directory and follow-up cadence tracker.',
       },
       {
         title: 'Legals & Contracts',
-        details:
-          'MSA, SOW, and NDA registry with renewal alerts and a reusable standard clause library.',
+        details: 'MSA, SOW, and NDA registry with renewal alerts and clause bank.',
       },
     ],
   },
@@ -119,31 +118,28 @@ export const FREELANCE_OS_SLIDES: FreelanceOsSlide[] = [
     stepNumber: '03',
     shortLabel: 'Strategy & Brand',
     label: '03 · Strategy, Ideation & Brand',
-    badge: 'OKRs, Plan & Portfolio',
-    title: 'Turn rough studio ideas into a',
-    editorialAccent: 'repeatable growth plan.',
+    badge: 'Goals & Roadmap',
+    title: 'Turn studio ideas into a',
+    editorialAccent: 'quarterly plan.',
     description:
-      'Track SMART annual goals with live health charts, score ideas with Impact/Confidence/Ease (ICE) math, and map quarterly roadmaps in one clean strategic workspace.',
+      'Score ideas with ICE math, track annual revenue goals, and map your Q1–Q4 roadmap.',
     beforeText:
-      'Feast-or-famine months with unprioritized side ideas and outdated brand assets.',
+      'Feast-or-famine months and half-baked side ideas scattered in notes.',
     afterText:
-      'Quarterly SMART scorecards, live goal health ring, and an interactive annual roadmap.',
+      'SMART revenue scorecards, goal health ring, and a Q1–Q4 roadmap.',
     highlightMetric: 'SMART Goals · Goal Health · Roadmap',
     includedModules: [
       {
         title: 'Growth & Strategy',
-        details:
-          'SMART goals scorecard, visual goal-health breakdown, and quarterly annual roadmap timeline.',
+        details: 'SMART goals scorecard, goal health ring, and quarterly roadmap.',
       },
       {
         title: 'Ideation Hub',
-        details:
-          'Idea capture board with Impact/Confidence/Ease (ICE) scoring and 1-click promotion to projects.',
+        details: 'ICE impact/ease scoring with 1-click promotion to active projects.',
       },
       {
-        title: 'Business Plan & Externals',
-        details:
-          '12-month financial model, offer ladder, risk register, brand guidelines, and portfolio page.',
+        title: 'Business Plan',
+        details: '12-month financial model, offer ladder, and brand kit page.',
       },
     ],
   },
@@ -153,30 +149,27 @@ export const FREELANCE_OS_SLIDES: FreelanceOsSlide[] = [
     shortLabel: 'Finances & Core',
     label: '04 · Finances, Security & System Core',
     badge: 'Cash Flow & 18 DBs',
-    title: 'Stay audit-ready with automated',
-    editorialAccent: 'cash-flow clarity.',
+    title: 'Stay tax-ready with live',
+    editorialAccent: 'cash-flow tracking.',
     description:
-      'Spot late invoices immediately via automatic overdue aging, track tax-ready monthly profit, organize 2FA vault pointers, and duplicate 18 linked databases in 60 seconds.',
+      'Catch late invoices with auto overdue aging, log expenses, and track monthly net margin.',
     beforeText:
-      'Chasing late payments manually and scrambling through bank statements at tax time.',
+      'Chasing late payments by hand and scrambling through bank CSVs in April.',
     afterText:
-      'Automated invoice aging, monthly P&L ledger, and a 1-click SOP & template library.',
+      'Auto invoice aging, monthly P&L ledger, and a 1-click SOP library.',
     highlightMetric: 'Invoices · P&L Ledger · 18 Linked DBs',
     includedModules: [
       {
         title: 'Finances & Invoices',
-        details:
-          'Unpaid invoice tracker with automatic overdue aging, paid ledger, expenses, and monthly P&L.',
+        details: 'Unpaid invoice aging, paid ledger, expenses, and monthly P&L.',
       },
       {
-        title: 'Accounts Access & Security',
-        details:
-          'Catalog of login URLs, 2FA verification status, subscription renewals, and password-vault pointers.',
+        title: 'Access & Subscriptions',
+        details: 'Tool logins, 2FA checklist, and upcoming software renewals.',
       },
       {
-        title: 'System Core & Templates',
-        details:
-          'Quick Actions SOPs, ready-made briefs/proposals/invoices, and all 18 interconnected backend databases.',
+        title: 'System Core',
+        details: 'Ready-made briefs, proposals, invoices, and 18 linked databases.',
       },
     ],
   },
@@ -953,16 +946,16 @@ export const FreelanceOsGallery: React.FC<{
         >
           <p className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#2383E2]">
             {variant === 'home'
-              ? 'Flagship Studio System · Freelance OS'
-              : 'Try It Before You Buy · Live Interactive Workspace'}
+              ? 'Flagship System · Freelance OS'
+              : 'Interactive Preview'}
           </p>
-          <h2 className="font-display text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
+          <h2 className="font-display text-[clamp(24px,3.2vw,34px)] font-bold tracking-[-0.03em] leading-[1.12] text-[#37352F] text-balance">
             {variant === 'home'
-              ? 'Your entire freelance business, finally out of your head.'
-              : 'One studio home. Eleven modules. Eighteen linked databases.'}
+              ? 'Run your freelance business from one Notion page.'
+              : 'Test the live workspace — 13 tabs, 18 linked databases.'}
           </h2>
-          <p className="text-[15.5px] sm:text-[16.5px] text-[#52504A] leading-[1.6] max-w-[700px]">
-            Click through all 13 live tabs below—check off tasks, flip views, and feel how calm Monday morning gets when clients, projects, and unpaid invoices actually talk to each other.
+          <p className="text-[15px] text-[#52504A] leading-[1.55] max-w-[660px]">
+            Click through real tabs below—check off tasks, inspect client retainers, and mark invoices paid before you duplicate.
           </p>
 
           {variant === 'home' && onInspectTemplate && (
@@ -1007,6 +1000,41 @@ export const FreelanceOsGallery: React.FC<{
         priceLabel={isOwned ? 'Open Delivery' : `Duplicate for $${price}`}
       />
 
+      {variant === 'detail' && (
+        <RealScreenshotStrip
+          title="Real previews from inside Freelance OS"
+          subtitle="See the Studio Hub, Clients CRM, Growth & Strategy Scorecard, and Finances P&L views."
+          accentColor="#2383E2"
+          testIdPrefix="freelance-os"
+          items={[
+            {
+              id: 'hub-hd',
+              src: freelanceHubHd,
+              title: 'Studio Command Hub',
+              caption: 'Unpaid invoices, active projects, and weekly hours on one page.',
+            },
+            {
+              id: 'clients-hd',
+              src: freelanceClientsHd,
+              title: 'Clients CRM & Retainers',
+              caption: 'Kanban pipeline, proposals, outreach, and contract renewals.',
+            },
+            {
+              id: 'growth-hd',
+              src: freelanceGrowthHd,
+              title: 'Growth & Strategy',
+              caption: 'SMART goal scorecard, health ring, and annual roadmap.',
+            },
+            {
+              id: 'finances-hd',
+              src: freelanceFinancesHd,
+              title: 'Finances & P&L Ledger',
+              caption: 'Overdue invoice aging, paid log, and tax-ready expenses.',
+            },
+          ]}
+        />
+      )}
+
       {/* Interactive 4-Slide Studio Tour Deck */}
       <FlagshipSlideDeck
         deckId="freelance-os-studio-views"
@@ -1016,9 +1044,9 @@ export const FreelanceOsGallery: React.FC<{
         compareAt={compareAt}
         isOwned={isOwned}
         onOpenBuy={onOpenBuy}
-        sectionKicker="Guided Tour · 4 Core Pillars"
-        sectionTitle="See how it feels before you spend a dollar."
-        sectionSubtitle="Step through each interactive slide—filter SMART goals, mark invoices paid, and see what disappears when one quiet system replaces five noisy apps."
+        sectionKicker="4 Core Views"
+        sectionTitle="Walk through the 4 views you’ll open every week."
+        sectionSubtitle=""
         slides={deckSlides}
         controlledSlideId={activeViewFilter}
         onControlledSlideChange={(next) => {
