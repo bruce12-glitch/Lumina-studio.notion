@@ -7,7 +7,7 @@ coverage/
 .env*
 !.env.example
 .playwright-cli/
+.aistudio/
 public/assets/aistudio/Paste_*
 public/assets/aistudio/image_ab62c3e5.png
 public/assets/aistudio/image_a1e79edb.png
-
